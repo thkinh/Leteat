@@ -1,3 +1,4 @@
 Đồ án LTMCB Nhóm 12
 Thành viên:
 1. Đinh Vũ Tiến Thịnh - 22521403
+2. Phạm Gia Linh - 22520776
