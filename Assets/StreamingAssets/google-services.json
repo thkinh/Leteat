@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "389315140526",
+    "project_id": "let-s-eat-63265",
+    "storage_bucket": "let-s-eat-63265.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389315140526:android:7a6a45c15776e0ccf9463f",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Leteat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8aruU7K0sLGrWxAuLzZXe0j88lGIGOrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

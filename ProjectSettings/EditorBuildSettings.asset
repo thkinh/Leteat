@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Sign in.unity
+    guid: 163415c6a447d9e4db7e55c3ffe47ea8
+  - enabled: 1
+    path: Assets/Scenes/Sign up.unity
+    guid: 4f19ab82d3986b3439b5c4800b1b08a0
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 1a589f22a6497c0429bfd3fbd3dcce33
+  - enabled: 1
+    path: Assets/Scenes/Choose cr or join.unity
+    guid: ea2cc1529f0e2ab43887ae1eb0550a59
+  - enabled: 1
+    path: Assets/Scenes/CreateLobby.unity
+    guid: 664c86c66295c57498951735bb86763b
+  - enabled: 1
+    path: Assets/Scenes/JoinRoom.unity
+    guid: f28c6316180217e4e8be8ff5071742fd
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 0930d91c40fa98441a4bd9379407a240
+  - enabled: 1
+    path: Assets/Scenes/Arrange position.unity
+    guid: 3ecd8ac4d3fc50a469981309ff9543ce
+  - enabled: 1
+    path: Assets/Scenes/Playing.unity
+    guid: a1850f48b9b8c0c49a458ddb0179c115
+  - enabled: 1
+    path: Assets/Scenes/Reset password.unity
+    guid: 631f1a3aefe134b48a6c85de06b8a73b
+  - enabled: 1
+    path: Assets/Scenes/Verification.unity
+    guid: b1894d308e11cfc4d868f06f25dd80de
+  m_configObjects: {}
