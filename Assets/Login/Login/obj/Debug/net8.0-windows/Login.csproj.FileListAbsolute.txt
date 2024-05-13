@@ -1,4 +1,0 @@
-C:\Users\Thuan\source\repos\Login\Login\obj\Debug\net8.0-windows\Login.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Thuan\source\repos\Login\Login\obj\Debug\net8.0-windows\Login.AssemblyInfoInputs.cache
-C:\Users\Thuan\source\repos\Login\Login\obj\Debug\net8.0-windows\Login.AssemblyInfo.cs
-C:\Users\Thuan\source\repos\Login\Login\obj\Debug\net8.0-windows\Login.csproj.CoreCompileInputs.cache
