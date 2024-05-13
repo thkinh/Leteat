@@ -4,7 +4,6 @@ using UnityEngine;
 using Firebase.Firestore;
 using UnityEngine.UI;
 using TMPro;
-using Photon.Realtime;
 using UnityEngine.Tilemaps;
 using System;
 using System.Threading.Tasks;
