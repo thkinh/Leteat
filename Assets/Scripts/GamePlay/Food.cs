@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.GamePlay
 {
-    public class Food
+    public class Food : MonoBehaviour
     {
         public enum FoodName
         {
@@ -52,5 +55,27 @@ namespace Assets.Scripts.GamePlay
             return new Food(name);
         }
 
+
+        [SerializeField] GameObject[] FoodPrefab;
+        [SerializeField] float secondSpawn = 0.5f;
+        [SerializeField] float minTrans;
+        [SerializeField] float maxTrans;
+
+        void Start()
+        {
+            StartCoroutine(FoodSpawn());    
+        }
+
+        IEnumerator FoodSpawn()
+        {
+            while(true)
+            {
+                var wanted = Random.Range(minTrans, maxTrans);
+                var position = new Vector3(wanted, transform.position.y);
+                GameObject gameObject = Instantiate(FoodPrefab[Random.Range(0, FoodPrefab)], position, Quaternion.identity);
+                yield return new WaitForSeconds(secondSpawn);
+                Destroy(gameObject, 5f);
+            }
+        }
     }
 }
