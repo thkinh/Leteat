@@ -184,7 +184,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 535.1632
+  orthographic size: 540
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 190597152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 971, y: 531, z: -10}
+  m_LocalPosition: {x: 960, y: 540, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &454505830
 Canvas:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ Canvas:
   m_GameObject: {fileID: 454505827}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 1
   m_Camera: {fileID: 190597154}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -307,7 +307,7 @@ RectTransform:
   m_GameObject: {fileID: 454505827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1845998831}
@@ -315,15 +315,14 @@ RectTransform:
   - {fileID: 1673559094}
   - {fileID: 1045929607}
   - {fileID: 1371729236}
-  - {fileID: 611902717}
   - {fileID: 899691130}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 960, y: 540}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &454505832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +340,7 @@ MonoBehaviour:
   timer: 0
   previous_time: 0
   new_Food: {fileID: 5527659191568229931, guid: f5aa54b8b835899418882b45289b17d3, type: 3}
---- !u!1 &611902716
+--- !u!1 &765763672
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -349,41 +348,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 611902717}
-  - component: {fileID: 611902718}
-  m_Layer: 5
+  - component: {fileID: 765763673}
+  - component: {fileID: 765763674}
+  m_Layer: 0
   m_Name: Food
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &611902717
+--- !u!224 &765763673
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611902716}
+  m_GameObject: {fileID: 765763672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 6.4160223}
   m_LocalScale: {x: 200, y: 200, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 454505831}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: 729}
+  m_AnchoredPosition: {x: 1011, y: 1271}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &611902718
+--- !u!114 &765763674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611902716}
+  m_GameObject: {fileID: 765763672}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e352062e7ad10e445a876bf4cabf64bb, type: 3}
@@ -399,7 +398,7 @@ MonoBehaviour:
   - {fileID: 880253033069001250, guid: c7332e8471a4962458fb46ac9f1c2c73, type: 3}
   - {fileID: 5445292211916329408, guid: 09644c21c6d96b348b54c78818414737, type: 3}
   - {fileID: 5306990066549655048, guid: 5396ea8b69e42614d9180dcbf6a383fd, type: 3}
-  secondSpawn: 0.5
+  secondSpawn: 1.5
   minTrans: 400
   maxTrans: 1700
 --- !u!1 &899691127
@@ -480,6 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 900935024}
   - component: {fileID: 900935025}
+  - component: {fileID: 900935026}
   m_Layer: 0
   m_Name: TimerController
   m_TagString: Untagged
@@ -517,6 +517,22 @@ MonoBehaviour:
   you_lose_text: {fileID: 1173141814}
   Countdown_foreground: {fileID: 2126735883}
   max_time: 5
+--- !u!114 &900935026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900935023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e352062e7ad10e445a876bf4cabf64bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FoodPrefab: []
+  secondSpawn: 1
+  minTrans: 0
+  maxTrans: 0
 --- !u!1 &1045929606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,3 +1411,4 @@ SceneRoots:
   - {fileID: 190597155}
   - {fileID: 454505831}
   - {fileID: 900935024}
+  - {fileID: 765763673}

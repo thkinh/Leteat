@@ -6,7 +6,7 @@ public class RandomFood : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] GameObject[] FoodPrefab;
-    [SerializeField] float secondSpawn = 1f;
+    [SerializeField] float secondSpawn = 5f;
     [SerializeField] float minTrans;
     [SerializeField] float maxTrans;
 
