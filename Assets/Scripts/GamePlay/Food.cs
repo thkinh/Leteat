@@ -54,28 +54,5 @@ namespace Assets.Scripts.GamePlay
             // Create and return Food object
             return new Food(name);
         }
-
-
-        [SerializeField] GameObject[] FoodPrefab;
-        [SerializeField] float secondSpawn = 0.5f;
-        [SerializeField] float minTrans;
-        [SerializeField] float maxTrans;
-
-        void Start()
-        {
-            StartCoroutine(FoodSpawn());    
-        }
-
-        IEnumerator FoodSpawn()
-        {
-            while(true)
-            {
-                var wanted = Random.Range(minTrans, maxTrans);
-                var position = new Vector3(wanted, transform.position.y);
-                GameObject gameObject = Instantiate(FoodPrefab[Random.Range(0, FoodPrefab)], position, Quaternion.identity);
-                yield return new WaitForSeconds(secondSpawn);
-                Destroy(gameObject, 5f);
-            }
-        }
     }
 }
