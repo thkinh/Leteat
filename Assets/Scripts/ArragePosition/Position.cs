@@ -1,35 +1,40 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using System;
+using Assets.Scripts;
+using UnityEngine.SceneManagement;
 
 public class Position : MonoBehaviour
 {
-    public GameObject[] disk;
+    public GameObject[] G_Object;
+
     public Sprite[] S_Object;
     public static bool m_created = false;
 
 
     public List<int> TakeList = new List<int>();
     private int randomNumber;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        // GameObject newdisk = Instantiate(disk);
-        CreateDisk(4);
-    }
-
-    void CreateDisk(int num)
-    {
-
-        TakeList = new List<int>(new int[disk.Length]);
-        for (int i = 0; i < disk.Length; i++)
+        TakeList = new List<int>(new int[G_Object.Length]);
+        for (int i = 0; i < G_Object.Length; i++)
         {
-            GameObject newdisk = UnityEngine.Object.Instantiate(disk[i]);
-           // randomNumber = UnityEngine.Random.Range(0, (S_Object.Length));
-         
-           //TakeList[i] = randomNumber;
-            disk[i].GetComponent<SpriteRenderer>().sprite = S_Object[TakeList[i]];
+            randomNumber = UnityEngine.Random.Range(0, (S_Object.Length));
+            while (TakeList.Contains(randomNumber))
+            {
+                randomNumber = UnityEngine.Random.Range(0, (S_Object.Length));
+            }
+            TakeList[i] = randomNumber;
+            G_Object[i].GetComponent<SpriteRenderer>().sprite = S_Object[TakeList[i]];
+            Debug.Log(message: "Code Room [" + i + "] is: " + S_Object[TakeList[i]].name);
         }
-        
     }
+    void Createdisk(float num1, float num2)
+    {
+       // GameObject newdisk = Instantiate(disk);
+       // newdisk.transform.position = new Vector3(num1,num2,0f);
+        
+    }    
 }
