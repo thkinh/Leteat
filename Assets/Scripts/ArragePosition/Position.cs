@@ -8,33 +8,32 @@ using UnityEngine.SceneManagement;
 
 public class Position : MonoBehaviour
 {
-    public GameObject[] G_Object;
-
-    public Sprite[] S_Object;
-    public static bool m_created = false;
-
-
-    public List<int> TakeList = new List<int>();
-    private int randomNumber;
+    public GameObject disk;
+    public List<GameObject> TakeList = new List<GameObject>();
+    public List<Transform> availablePositions = new List<Transform>();
     private void Start()
     {
-        TakeList = new List<int>(new int[G_Object.Length]);
-        for (int i = 0; i < G_Object.Length; i++)
+          
+        CreateNewDisk(0);
+        CreateNewDisk(1);
+
+    }
+    public void CreateNewDisk(int i)
+    {
+        if (disk != null && availablePositions.Count > 0)
         {
-            randomNumber = UnityEngine.Random.Range(0, (S_Object.Length));
-            while (TakeList.Contains(randomNumber))
+            Transform spawnPosition = availablePositions[i];
+            GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation);
+            TakeList.Add(newdisk);
+            Debug.Log("Current objects in list:");
+            foreach (GameObject obj in TakeList)
             {
-                randomNumber = UnityEngine.Random.Range(0, (S_Object.Length));
+                Debug.Log(obj.name);
             }
-            TakeList[i] = randomNumber;
-            G_Object[i].GetComponent<SpriteRenderer>().sprite = S_Object[TakeList[i]];
-            Debug.Log(message: "Code Room [" + i + "] is: " + S_Object[TakeList[i]].name);
+        }
+        else
+        {
+            Debug.LogError("Object prefab or spawn position is not assigned.");
         }
     }
-    void Createdisk(float num1, float num2)
-    {
-       // GameObject newdisk = Instantiate(disk);
-       // newdisk.transform.position = new Vector3(num1,num2,0f);
-        
-    }    
 }
