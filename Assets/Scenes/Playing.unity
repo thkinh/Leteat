@@ -212,7 +212,8 @@ Transform:
   m_LocalPosition: {x: 960, y: 540, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 454505831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &190729607
@@ -380,25 +381,24 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454505827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 765763673}
   - {fileID: 1845998831}
   - {fileID: 1345100947}
   - {fileID: 1673559094}
   - {fileID: 1045929607}
   - {fileID: 1371729236}
   - {fileID: 899691130}
-  - {fileID: 726496580}
-  m_Father: {fileID: 0}
+  - {fileID: 640034399}
+  m_Father: {fileID: 190597155}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 960, y: 540}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1564.4258, y: 879.9895}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &454505832
 MonoBehaviour:
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454505827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51946f264c0dbbd4eae5910e594fe5c7, type: 3}
   m_Name: 
@@ -417,7 +417,7 @@ MonoBehaviour:
   timer: 0
   previous_time: 0
   new_Food: {fileID: 5527659191568229931, guid: f5aa54b8b835899418882b45289b17d3, type: 3}
---- !u!1 &726496579
+--- !u!1 &640034398
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -425,21 +425,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 726496580}
+  - component: {fileID: 640034399}
+  - component: {fileID: 640034400}
   m_Layer: 5
-  m_Name: Food1
+  m_Name: Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &726496580
+--- !u!224 &640034399
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726496579}
+  m_GameObject: {fileID: 640034398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -452,54 +453,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &765763672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 765763673}
-  - component: {fileID: 765763674}
-  m_Layer: 0
-  m_Name: Food
-  m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &765763673
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765763672}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -83.58398}
-  m_LocalScale: {x: 15, y: 15, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 454505831}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.5, y: 656}
-  m_SizeDelta: {x: 15, y: 15}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &765763674
+--- !u!114 &640034400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765763672}
+  m_GameObject: {fileID: 640034398}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e352062e7ad10e445a876bf4cabf64bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trashcan: {fileID: 1371729235}
+  SendtoServer: {fileID: 1713648913}
+  Radius: 2.01
   FoodPrefab:
   - {fileID: 5178153293304866494, guid: 416ff76c438f1614a94299cc75994be4, type: 3}
   - {fileID: 1374659709626374516, guid: ce15ef7dd9e712b488a46e0175e18a12, type: 3}
@@ -510,9 +478,8 @@ MonoBehaviour:
   - {fileID: 2686435808543309898, guid: c7332e8471a4962458fb46ac9f1c2c73, type: 3}
   - {fileID: 4260882425553843938, guid: 09644c21c6d96b348b54c78818414737, type: 3}
   - {fileID: 4620399844827212695, guid: 5396ea8b69e42614d9180dcbf6a383fd, type: 3}
-  secondSpawn: 1.5
-  minTrans: 230
-  maxTrans: 1600
+  timer: 0
+  previous_time: 0
 --- !u!1 &899691127
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,8 +542,8 @@ Transform:
   m_GameObject: {fileID: 899691127}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -954, y: -540, z: 0}
+  m_LocalScale: {x: 2.5498, y: 2.5498, z: 2.5498}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 454505831}
@@ -591,7 +558,6 @@ GameObject:
   m_Component:
   - component: {fileID: 900935024}
   - component: {fileID: 900935025}
-  - component: {fileID: 900935026}
   m_Layer: 0
   m_Name: TimerController
   m_TagString: Untagged
@@ -629,22 +595,6 @@ MonoBehaviour:
   you_lose_text: {fileID: 1173141814}
   Countdown_foreground: {fileID: 2126735883}
   max_time: 5
---- !u!114 &900935026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900935023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e352062e7ad10e445a876bf4cabf64bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FoodPrefab: []
-  secondSpawn: 1
-  minTrans: 0
-  maxTrans: 0
 --- !u!1 &1045929606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,5 +1472,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 190597155}
-  - {fileID: 454505831}
   - {fileID: 900935024}

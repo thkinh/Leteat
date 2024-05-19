@@ -1,29 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.GamePlay;
+using UnityEngine.UIElements;
 
 public class RandomFood : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static EntityManager instance;
+    public GameObject trashcan;
+    public GameObject SendtoServer;
+    public float Radius = 1;
     [SerializeField] GameObject[] FoodPrefab;
-    [SerializeField] float secondSpawn = 5f;
-    [SerializeField] float minTrans;
-    [SerializeField] float maxTrans;
+    [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
 
     void Start()
     {
-        StartCoroutine(FoodSpawn());
+        Spawn_Food();
+    }
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer - previous_time > 3)
+        {
+            previous_time = timer;
+            Spawn_Food();
+        }
+    }
+    private void Spawn_Food()
+    {
+        Vector3 position = UnityEngine.Random.insideUnitCircle * Radius;
+        GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
+        nf.name = nf.GetComponent<DragableItem>().food.name.ToString();    }
+
+    public void Spawn_Food(Food food)
+    {
+        Vector3 position = UnityEngine.Random.insideUnitCircle * Radius;
+        GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
+        nf.GetComponent<DragableItem>().food = food;
+        nf.name = nf.GetComponent<DragableItem>().food.name.ToString();    
     }
 
-    IEnumerator FoodSpawn()
+    private void OnDrawGizmos()
     {
-        while (true)
-        {
-            var wanted = UnityEngine.Random.Range(minTrans, maxTrans);
-            var position = new Vector3(wanted, transform.position.y);
-            GameObject gameObject = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, (FoodPrefab.Length))], position, Quaternion.identity);
-            yield return new WaitForSeconds(secondSpawn);
-            //Destroy(gameObject, 2f);
-        }
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position, Radius);
     }
 }
