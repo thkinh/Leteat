@@ -3058,7 +3058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0facf1557a708454989a86118efcbedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnP: []
   disk: {fileID: 7710021891420554695, guid: 0fa29cbfc9dd23c41947d26184e05dc3, type: 3}
   TakeList: []
   availablePositions:
@@ -3068,7 +3067,6 @@ MonoBehaviour:
   - {fileID: 635524638}
   - {fileID: 2005236900}
   - {fileID: 338944979}
-  spawnPosition: {fileID: 76886861}
 --- !u!4 &1744810879
 Transform:
   m_ObjectHideFlags: 0
