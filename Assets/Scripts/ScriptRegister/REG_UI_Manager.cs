@@ -33,7 +33,7 @@ public class REG_UI_Manager : MonoBehaviour
             string mail = $"Hello {username.text}, this is your verification code: {verifi_Code}";
 
             string email_tosend = email.text;
-            client.SendRegisterCode("thkinh2008@gmail.com", email_tosend, mail);
+            client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
             SceneManager.LoadScene("Verification");
         }
     }
@@ -47,20 +47,6 @@ public class REG_UI_Manager : MonoBehaviour
         }
         return true;
     }
-
-    //public string getName()
-    //{
-    //    return username.name;
-    //}
-    //public string getPass()
-    //{
-    //    return password.text;
-    //}
-
-    //public string getEmail()
-    //{
-    //    return email.text;
-    //}
 
 }
 

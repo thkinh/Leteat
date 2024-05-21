@@ -227,7 +227,7 @@ namespace Assets.Scripts
 
         public void SendRegisterCode(string from, string to, string mail)
         {
-            string pass = "iqty gfvx valg hbux";
+            string pass = "chva iuit ksvi ifdv";
             MailMessage message = new MailMessage();
             message.To.Add(to);
             message.From = new MailAddress(from);
