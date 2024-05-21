@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimerCotroller : MonoBehaviour
 {
+    public bool isover = false;
     public GameObject you_lose_text;
     public Image Countdown_foreground;
     float time_remaining;
@@ -13,6 +15,11 @@ public class TimerCotroller : MonoBehaviour
     void Start()
     {
         time_remaining = max_time;
+    }
+
+    bool ISover()
+    {
+        return isover;
     }
 
     // Update is called once per frame
@@ -26,7 +33,7 @@ public class TimerCotroller : MonoBehaviour
         else
         {
             you_lose_text.SetActive(true);
-
+            isover = true;
         }
     }
 }

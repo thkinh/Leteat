@@ -11,17 +11,24 @@ public class Position : MonoBehaviour
     public GameObject disk;
     public List<GameObject> TakeList = new List<GameObject>();
     public List<Transform> availablePositions = new List<Transform>();
-    private void Start()
+
+    private void Awake()
     {
-          
         CreateNewDisk(0);
         CreateNewDisk(1);
         CreateNewDisk(2);
-        //CreateNewDisk(3);
-        //CreateNewDisk(4);
-        //CreateNewDisk(5);
+        CreateNewDisk(3);
+        CreateNewDisk(4);
+        CreateNewDisk(5);
+    }
+
+    private void Start()
+    {
+        
 
     }
+
+
     public void CreateNewDisk(int i)
     {
         if (disk != null && availablePositions.Count > 0)
