@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1972019468996643120}
   - component: {fileID: 7439018753191264043}
-  - component: {fileID: -7081479071831143795}
-  - component: {fileID: 4735705467479876793}
+  - component: {fileID: -4393587323521784312}
+  - component: {fileID: -6457327577929558445}
+  - component: {fileID: -4864132902274884622}
   m_Layer: 0
   m_Name: bacon
   m_TagString: Untagged
@@ -86,7 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &-7081479071831143795
+--- !u!114 &-4393587323521784312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178153293304866494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59864427266f592419e968091e03e115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: {fileID: 0}
+--- !u!60 &-6457327577929558445
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,7 +272,7 @@ PolygonCollider2D:
       - {x: -2.7749999, y: -3.12}
       - {x: -2.685, y: -2.99}
   m_UseDelaunayMesh: 0
---- !u!50 &4735705467479876793
+--- !u!50 &-4864132902274884622
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -270,10 +284,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

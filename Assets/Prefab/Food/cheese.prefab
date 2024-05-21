@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8490658956177093692}
   - component: {fileID: 8533188774383176461}
-  - component: {fileID: -5890001605535538822}
-  - component: {fileID: -1393687713325006002}
+  - component: {fileID: -515518511885486873}
+  - component: {fileID: -1347996737310543462}
+  - component: {fileID: -6802008252395945182}
   m_Layer: 0
   m_Name: cheese
   m_TagString: Untagged
@@ -86,7 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &-5890001605535538822
+--- !u!114 &-515518511885486873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8838422922446759484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59864427266f592419e968091e03e115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: {fileID: 0}
+--- !u!60 &-1347996737310543462
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,7 +275,7 @@ PolygonCollider2D:
       - {x: -3.2649999, y: -3.145}
       - {x: -3.215, y: -3.135}
   m_UseDelaunayMesh: 0
---- !u!50 &-1393687713325006002
+--- !u!50 &-6802008252395945182
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -273,10 +287,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

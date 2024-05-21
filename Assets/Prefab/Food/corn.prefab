@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4262569557642671375}
   - component: {fileID: 4166192409546023242}
-  - component: {fileID: -3442644318434483602}
-  - component: {fileID: 6041071976003159532}
+  - component: {fileID: -7386476911299599481}
+  - component: {fileID: -982176429162433333}
+  - component: {fileID: -4457582640617783645}
   m_Layer: 0
   m_Name: corn
   m_TagString: Untagged
@@ -86,7 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &-3442644318434483602
+--- !u!114 &-7386476911299599481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933556738150138108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59864427266f592419e968091e03e115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: {fileID: 0}
+--- !u!60 &-982176429162433333
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,7 +305,7 @@ PolygonCollider2D:
       - {x: -0.175, y: -3.415}
       - {x: -0.044999998, y: -3.2949998}
   m_UseDelaunayMesh: 0
---- !u!50 &6041071976003159532
+--- !u!50 &-4457582640617783645
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -303,10 +317,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

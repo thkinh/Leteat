@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4120887680595409281}
   - component: {fileID: 9050362462286514204}
-  - component: {fileID: 6721190098568397408}
-  - component: {fileID: 3511847354564144942}
+  - component: {fileID: -7221909654443215891}
+  - component: {fileID: -4504168146406414984}
+  - component: {fileID: -1035757440624443785}
   m_Layer: 0
   m_Name: shrimp
   m_TagString: Untagged
@@ -86,7 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &6721190098568397408
+--- !u!114 &-7221909654443215891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686435808543309898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59864427266f592419e968091e03e115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: {fileID: 0}
+--- !u!60 &-4504168146406414984
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,7 +399,7 @@ PolygonCollider2D:
       - {x: 2.1699998, y: -2.27}
       - {x: 2.3, y: -2.18}
   m_UseDelaunayMesh: 0
---- !u!50 &3511847354564144942
+--- !u!50 &-1035757440624443785
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -397,10 +411,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

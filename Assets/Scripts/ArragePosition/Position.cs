@@ -1,35 +1,65 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using System;
+using Assets.Scripts;
+using UnityEngine.SceneManagement;
 
 public class Position : MonoBehaviour
 {
-    public GameObject[] disk;
-    public Sprite[] S_Object;
-    public static bool m_created = false;
-
-
-    public List<int> TakeList = new List<int>();
-    private int randomNumber;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject disk;
+   // public Sprite[] S_Object;
+    public List<GameObject> TakeList = new List<GameObject>();
+    public List<Transform> availablePositions = new List<Transform>();
+    private void Start()
     {
-        // GameObject newdisk = Instantiate(disk);
-        CreateDisk(4);
+          
+        CreateNewDisk(0);
+        CreateNewDisk(1);
+        CreateNewDisk(2);
+        //CreateNewDisk(3);
+        //CreateNewDisk(4);
+        //CreateNewDisk(5);
+
     }
-
-    void CreateDisk(int num)
+    public void CreateNewDisk(int i)
     {
-
-        TakeList = new List<int>(new int[disk.Length]);
-        for (int i = 0; i < disk.Length; i++)
+        if (disk != null && availablePositions.Count > 0)
         {
-            GameObject newdisk = UnityEngine.Object.Instantiate(disk[i]);
-           // randomNumber = UnityEngine.Random.Range(0, (S_Object.Length));
-         
-           //TakeList[i] = randomNumber;
-            disk[i].GetComponent<SpriteRenderer>().sprite = S_Object[TakeList[i]];
+            Transform spawnPosition = availablePositions[i];
+            GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation);
+            TakeList.Add(newdisk);
+            Debug.Log("Current objects in list:");
+            foreach (GameObject obj in TakeList)
+            {
+                Debug.Log(obj.name);
+            }
         }
-        
+        else
+        {
+            Debug.LogError("Object prefab or spawn position is not assigned.");
+        }
+
+    }
+    public void AddObjectToList(GameObject obj)
+    {
+        if (!TakeList.Contains(obj))
+        {
+            TakeList.Add(obj);
+
+            Debug.Log($"{obj.name} has been added to the list.");
+
+            // In ra danh sách đối tượng hiện tại (chỉ để kiểm tra)
+            Debug.Log("Current objects in list:");
+            foreach (GameObject objInList in TakeList)
+            {
+                Debug.Log(objInList.name);
+            }
+        }
+        else
+        {
+            Debug.Log($"{obj.name} is already in the list.");
+        }
     }
 }

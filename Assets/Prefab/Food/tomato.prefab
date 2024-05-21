@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3332396672958525999}
   - component: {fileID: 8104805081876862412}
-  - component: {fileID: 4942032745085642620}
-  - component: {fileID: 6384513756279219685}
+  - component: {fileID: -6528775546306545111}
+  - component: {fileID: 7911074991271366969}
+  - component: {fileID: 8884532780238017757}
   m_Layer: 0
   m_Name: tomato
   m_TagString: Untagged
@@ -86,7 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4942032745085642620
+--- !u!114 &-6528775546306545111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260882425553843938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59864427266f592419e968091e03e115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: {fileID: 0}
+--- !u!60 &7911074991271366969
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,7 +327,7 @@ PolygonCollider2D:
       - {x: 1.025, y: -3.855}
       - {x: 1.155, y: -3.8349998}
   m_UseDelaunayMesh: 0
---- !u!50 &6384513756279219685
+--- !u!50 &8884532780238017757
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -325,10 +339,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

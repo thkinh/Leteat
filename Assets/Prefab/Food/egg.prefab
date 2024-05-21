@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6286725368856879419}
   - component: {fileID: 3302035946323190033}
-  - component: {fileID: -6769219034006959987}
-  - component: {fileID: 3950653027100127532}
+  - component: {fileID: -5471362833695323251}
+  - component: {fileID: -8189593854873714916}
+  - component: {fileID: -5816908676745199923}
   m_Layer: 0
   m_Name: egg
   m_TagString: Untagged
@@ -86,7 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &-6769219034006959987
+--- !u!114 &-5471362833695323251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174127708830226441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59864427266f592419e968091e03e115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: {fileID: 0}
+--- !u!60 &-8189593854873714916
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +260,7 @@ PolygonCollider2D:
       - {x: 0.545, y: -4.095}
       - {x: 0.695, y: -4.065}
   m_UseDelaunayMesh: 0
---- !u!50 &3950653027100127532
+--- !u!50 &-5816908676745199923
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -258,10 +272,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
