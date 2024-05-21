@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class Position : MonoBehaviour
 {
     public GameObject disk;
-   // public Sprite[] S_Object;
     public List<GameObject> TakeList = new List<GameObject>();
     public List<Transform> availablePositions = new List<Transform>();
     private void Start()
@@ -42,24 +41,5 @@ public class Position : MonoBehaviour
         }
 
     }
-    public void AddObjectToList(GameObject obj)
-    {
-        if (!TakeList.Contains(obj))
-        {
-            TakeList.Add(obj);
-
-            Debug.Log($"{obj.name} has been added to the list.");
-
-            // In ra danh sách đối tượng hiện tại (chỉ để kiểm tra)
-            Debug.Log("Current objects in list:");
-            foreach (GameObject objInList in TakeList)
-            {
-                Debug.Log(objInList.name);
-            }
-        }
-        else
-        {
-            Debug.Log($"{obj.name} is already in the list.");
-        }
-    }
+    
 }
