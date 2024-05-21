@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class Position : MonoBehaviour
 {
     public GameObject disk;
-    public Sprite[] S_Object;
+   // public Sprite[] S_Object;
     public List<GameObject> TakeList = new List<GameObject>();
     public List<Transform> availablePositions = new List<Transform>();
     private void Start()
@@ -17,6 +17,10 @@ public class Position : MonoBehaviour
           
         CreateNewDisk(0);
         CreateNewDisk(1);
+        CreateNewDisk(2);
+        //CreateNewDisk(3);
+        //CreateNewDisk(4);
+        //CreateNewDisk(5);
 
     }
     public void CreateNewDisk(int i)
