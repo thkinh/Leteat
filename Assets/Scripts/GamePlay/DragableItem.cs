@@ -10,8 +10,11 @@ public class DragableItem : MonoBehaviour
     public Food food;
     private void Awake()
     {
-        transform.position = new Vector2(500,600);
-        dragging = false;
+        float randomX = UnityEngine.Random.Range(0.0f, Screen.width);
+        float randomY = UnityEngine.Random.Range(0.0f, Screen.height);
+        Vector3 randomPosition = Camera.main.ScreenToWorldPoint(new Vector3(randomX, randomY, Camera.main.nearClipPlane));
+        randomPosition.z = 0;
+        transform.position = randomPosition; dragging = false;
         original_pos = transform.position;
         offset = new Vector2(0,0);
     }

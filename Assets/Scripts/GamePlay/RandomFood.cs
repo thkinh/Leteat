@@ -9,7 +9,8 @@ public class RandomFood : MonoBehaviour
     public static EntityManager instance;
     public GameObject trashcan;
     public GameObject SendtoServer;
-    public float Radius = 1;
+    [SerializeField] float minTrans;
+    [SerializeField] float maxTrans;
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
 
@@ -28,21 +29,18 @@ public class RandomFood : MonoBehaviour
     }
     private void Spawn_Food()
     {
-        Vector3 position = UnityEngine.Random.insideUnitCircle * Radius;
+        var wanted = UnityEngine.Random.Range(minTrans, maxTrans);
+        var position = new Vector3(wanted, transform.position.y);
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
         nf.name = nf.GetComponent<DragableItem>().food.name.ToString();    }
 
     public void Spawn_Food(Food food)
     {
-        Vector3 position = UnityEngine.Random.insideUnitCircle * Radius;
+        var wanted = UnityEngine.Random.Range(minTrans, maxTrans);
+        var position = new Vector3(wanted, transform.position.y);
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
         nf.GetComponent<DragableItem>().food = food;
         nf.name = nf.GetComponent<DragableItem>().food.name.ToString();    
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.transform.position, Radius);
-    }
 }
