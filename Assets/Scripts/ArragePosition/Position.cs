@@ -12,7 +12,8 @@ public class Position : MonoBehaviour
     public List<GameObject> TakeList = new List<GameObject>();
     public List<Transform> availablePositions = new List<Transform>();
 
-    private void Awake()
+
+    private void Start()
     {
         CreateNewDisk(0);
         CreateNewDisk(1);
@@ -20,12 +21,6 @@ public class Position : MonoBehaviour
         CreateNewDisk(3);
         CreateNewDisk(4);
         CreateNewDisk(5);
-    }
-
-    private void Start()
-    {
-        
-
     }
 
 
@@ -39,7 +34,7 @@ public class Position : MonoBehaviour
             Debug.Log("Current objects in list:");
             foreach (GameObject obj in TakeList)
             {
-                Debug.Log(obj.name);
+                Debug.Log(obj.name + obj.transform.position.ToString());
             }
         }
         else

@@ -479,6 +479,7 @@ MonoBehaviour:
   - {fileID: 2686435808543309898, guid: c7332e8471a4962458fb46ac9f1c2c73, type: 3}
   - {fileID: 4260882425553843938, guid: 09644c21c6d96b348b54c78818414737, type: 3}
   - {fileID: 4620399844827212695, guid: 5396ea8b69e42614d9180dcbf6a383fd, type: 3}
+  disk_positoins: {fileID: 1744810877}
 --- !u!1 &391865981
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +696,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 454488979}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &454488979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,7 +963,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 582208811}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &582208811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,7 +1180,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 648796398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &648796398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,7 +1314,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 707619787}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &707619787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,7 +1635,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 781581614}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &781581614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,7 +1768,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 904929551}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &904929551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1828,7 +1901,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 926468370}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &926468370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2041,7 +2126,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1006476664}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1006476664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,7 +3038,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1681276734}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1681276734
 MonoBehaviour:
   m_ObjectHideFlags: 0
