@@ -197,7 +197,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -415,7 +415,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -425,6 +425,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &357402917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357402920}
+  - component: {fileID: 357402921}
+  m_Layer: 0
+  m_Name: Mgmt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357402920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357402917}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 991.15735, y: 508.33365, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &357402921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357402917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d7532b8a400d443ba7b555be53a60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  list_prefab:
+  - {fileID: 5178153293304866494, guid: 416ff76c438f1614a94299cc75994be4, type: 3}
+  - {fileID: 1374659709626374516, guid: ce15ef7dd9e712b488a46e0175e18a12, type: 3}
+  - {fileID: 8838422922446759484, guid: 60700877c2082c248acc031680b9e569, type: 3}
+  - {fileID: 3933556738150138108, guid: a42e529749087ad40967b70375f5c6a1, type: 3}
+  - {fileID: 5174127708830226441, guid: 23d032b93de4b6e478aab32e4c34eae9, type: 3}
+  - {fileID: 7649158841558806469, guid: 1f1c99f200803d4488ce339687318d25, type: 3}
+  - {fileID: 2686435808543309898, guid: c7332e8471a4962458fb46ac9f1c2c73, type: 3}
+  - {fileID: 4260882425553843938, guid: 09644c21c6d96b348b54c78818414737, type: 3}
+  - {fileID: 4620399844827212695, guid: 5396ea8b69e42614d9180dcbf6a383fd, type: 3}
+  disk_positoins: {fileID: 1744810877}
 --- !u!1 &391865981
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +696,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 454488979}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &454488979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,7 +963,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 582208811}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &582208811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,7 +1088,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1101,7 +1180,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 648796398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &648796398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,7 +1314,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 707619787}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &707619787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,7 +1377,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523e5d3bcc48684295c6b7db3cb187c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {fileID: 1744810878}
+  G_Object: []
+  S_Object: []
+  buttons: []
+  TakeList: 
+  position: {fileID: 0}
 --- !u!1 &736873597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,7 +1635,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 781581614}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &781581614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1649,7 +1768,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 904929551}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &904929551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,7 +1901,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 926468370}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &926468370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,7 +2126,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1006476664}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1006476664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2171,7 +2326,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2389,7 +2544,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2883,7 +3038,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1681276734}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 357402921}
+        m_TargetAssemblyTypeName: Mgmt, Assembly-CSharp
+        m_MethodName: Khi_bam
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1681276734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3076,11 +3243,11 @@ MonoBehaviour:
   TakeList: []
   availablePositions:
   - {fileID: 76886861}
-  - {fileID: 635524638}
   - {fileID: 1487482015}
-  - {fileID: 338944979}
   - {fileID: 1393522783}
+  - {fileID: 635524638}
   - {fileID: 2005236900}
+  - {fileID: 338944979}
 --- !u!4 &1744810879
 Transform:
   m_ObjectHideFlags: 0
@@ -3348,7 +3515,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3638,7 +3805,6 @@ GameObject:
   - component: {fileID: 2051522789}
   - component: {fileID: 2051522788}
   - component: {fileID: 2051522787}
-  - component: {fileID: 2051522791}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3733,19 +3899,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2051522791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2051522786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1523e5d3bcc48684295c6b7db3cb187c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  position: {fileID: 1744810878}
 --- !u!1 &2056919014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3998,3 +4151,4 @@ SceneRoots:
   - {fileID: 2051522790}
   - {fileID: 2056919017}
   - {fileID: 1744810879}
+  - {fileID: 357402920}

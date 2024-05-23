@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class RandomCodeRoom : MonoBehaviour
 {
     public GameObject[] G_Object;
-
     public Sprite[] S_Object;
     public static bool m_created = false;
 
@@ -21,6 +20,7 @@ public class RandomCodeRoom : MonoBehaviour
         TakeList = new List<int>(new int[G_Object.Length]);
         for (int i = 0; i < G_Object.Length; i++)
         {
+            
             randomNumber = UnityEngine.Random.Range(0,(S_Object.Length));
             while (TakeList.Contains(randomNumber))
             {

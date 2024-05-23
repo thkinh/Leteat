@@ -13,6 +13,11 @@ public class RandomFood : MonoBehaviour
     [SerializeField] float maxTrans;
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
+    public GameObject time_control;
+
+    //co san 4 cai dia yeu cau 4 thuc an de bai
+    // moi dia 1 mon an
+    // 
 
     void Start()
     {
@@ -24,7 +29,10 @@ public class RandomFood : MonoBehaviour
         if (timer - previous_time > 3)
         {
             previous_time = timer;
-            Spawn_Food();
+            while(time_control.GetComponent<TimerCotroller>().isover == false)
+            {
+                Spawn_Food();
+            }
         }
     }
     private void Spawn_Food()
@@ -32,15 +40,8 @@ public class RandomFood : MonoBehaviour
         var wanted = UnityEngine.Random.Range(minTrans, maxTrans);
         var position = new Vector3(wanted, transform.position.y);
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
-        nf.name = nf.GetComponent<DragableItem>().food.name.ToString();    }
-
-    public void Spawn_Food(Food food)
-    {
-        var wanted = UnityEngine.Random.Range(minTrans, maxTrans);
-        var position = new Vector3(wanted, transform.position.y);
-        GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
-        nf.GetComponent<DragableItem>().food = food;
-        nf.name = nf.GetComponent<DragableItem>().food.name.ToString();    
+        nf.name = nf.GetComponent<DragableItem>().food.name.ToString();  
     }
+
 
 }
