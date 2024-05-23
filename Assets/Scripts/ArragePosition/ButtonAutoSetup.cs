@@ -23,4 +23,7 @@ public class ButtonAutoSetup : MonoBehaviour
             buttons[i].onClick.AddListener(() => buttonHandler.OnButtonClicked(index));
         }
     }
+
+
+
 }
