@@ -34,5 +34,5 @@ public class TypeCodeRoom : MonoBehaviour
     private void PrintFood()
     {
 
-    }    
+    }
 }
