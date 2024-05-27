@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragDrop : MonoBehaviour
 {
     public GameObject dragableObjectPrefab; // Prefab of the draggable object
     public Transform dragableParent; // Parent object that holds all draggable objects

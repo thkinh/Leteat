@@ -1,40 +1,30 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class Mgmt : MonoBehaviour
 {
+    public Transform[] availablePositions;
     [SerializeField] List<GameObject> list_prefab = new List<GameObject>();
+    //[SerializeField] List<Transform> availablePositions = new List<Transform>();
+
     //[SerializeField] List<GameObject> list_button = new List<GameObject>();
-    public GameObject disk_positoins;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
+    //public GameObject disk_positions;
+    private static int i = 0;
     public void Khi_bam(int index)
     {
-        if (index >= 0 && index < list_prefab.Count)
+        try
         {
             GameObject prefab = list_prefab[index];
-            if (prefab != null)
-            {
-                Instantiate(prefab, disk_positoins.GetComponent<Position>().TakeList[1].transform.position , Quaternion.identity);
-            }
-            else
-            {
-                Debug.LogError("Prefab at index " + index + " is null!");
-            }
+            Transform spawnPosition = availablePositions[i];
+            prefab.transform.position = spawnPosition.position;
+            Instantiate(prefab);
+            i++;
         }
-        else
+        catch (System.Exception ex)
         {
-            Debug.LogError("Invalid prefab index: " + index);
+            Debug.LogError(ex.Message);
         }
     }
 
