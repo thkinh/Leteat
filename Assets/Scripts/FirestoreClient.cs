@@ -28,7 +28,7 @@ public class FirestoreClient : MonoBehaviour
     private void Start()
     {
         db = FirebaseFirestore.DefaultInstance;
-        thisPlayerID = string.Empty;
+        thisPlayerID = "XxbEXW5ZIN2P18EmunDF";
     }
 
     public async void Write(Match match)
@@ -65,6 +65,12 @@ public class FirestoreClient : MonoBehaviour
     //Ham lay list friends
     public async Task<List<Relationship>> FetchUserRelationShips(string userID)
     {
+        if (string.IsNullOrEmpty(userID))
+        {
+            Debug.Log("Alo, bi khung khong?");
+            return null;
+        }
+
         List<Relationship> relationships = new List<Relationship>();
         DocumentReference docRef = FirebaseFirestore.DefaultInstance.Collection("Players").Document(userID);
         QuerySnapshot snapshot = await docRef.Collection("Relationship").GetSnapshotAsync();
@@ -81,41 +87,64 @@ public class FirestoreClient : MonoBehaviour
 
 
     //Ham ket ban
-    public void AddUserRelationship(string userID, string otherUserID, string relationshipType)
-    {
-        DocumentReference userRef = db.Collection("Users").Document(userID).Collection("Relationships").Document(otherUserID);
-        Dictionary<string, object> relationship = new Dictionary<string, object>
-        {
-            { "Type", relationshipType }
-        };
-        userRef.SetAsync(relationship).ContinueWithOnMainThread(task =>
-        {
-            if (task.IsCompleted)
-            {
-                Debug.Log($"Relationship added successfully for {userID} -> {otherUserID}");
-            }
-            else
-            {
-                Debug.LogError("Failed to add relationship: " + task.Exception);
-            }
-        });
+    //public void AddUserRelationship(string userID, string otherUserID, string relationshipType)
+    //{
+    //    DocumentReference userRef = db.Collection("Users").Document(userID).Collection("Relationships").Document(otherUserID);
+    //    Dictionary<string, object> relationship = new Dictionary<string, object>
+    //    {
+    //        { "Type", relationshipType }
+    //    };
+    //    userRef.SetAsync(relationship).ContinueWithOnMainThread(task =>
+    //    {
+    //        if (task.IsCompleted)
+    //        {
+    //            Debug.Log($"Relationship added successfully for {userID} -> {otherUserID}");
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Failed to add relationship: " + task.Exception);
+    //        }
+    //    });
 
-        DocumentReference otherUserRef = db.Collection("Users").Document(otherUserID).Collection("Relationships").Document(userID);
-        Dictionary<string, object> reciprocalRelationship = new Dictionary<string, object>
+    //    DocumentReference otherUserRef = db.Collection("Users").Document(otherUserID).Collection("Relationships").Document(userID);
+    //    Dictionary<string, object> reciprocalRelationship = new Dictionary<string, object>
+    //    {
+    //        { "Type", relationshipType }
+    //    };
+    //    otherUserRef.SetAsync(reciprocalRelationship).ContinueWithOnMainThread(task =>
+    //    {
+    //        if (task.IsCompleted)
+    //        {
+    //            Debug.Log($"Reciprocal relationship added successfully for {otherUserID} -> {userID}");
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Failed to add reciprocal relationship: " + task.Exception);
+    //        }
+    //    });
+    //}
+
+    public async void AddUserRelationship(string userID, Relationship relationship)
+    {
+        CollectionReference coref = db.Collection("Players").Document(userID).Collection("Relationships");
+        QuerySnapshot snapshot = await coref.GetSnapshotAsync();
+        
+
+        //add ben this user
+        DocumentReference userRef = db.Collection("Players").Document(userID).Collection("Relationships").Document($"R{snapshot.Count.ToString()}");
+        Task addUserTask = userRef.SetAsync(relationship);
+
+
+        coref = db.Collection("Players").Document(relationship.playerID).Collection("Relationships");
+        QuerySnapshot napshot = await coref.GetSnapshotAsync();
+        //add ben the other user
+        DocumentReference otherUserRef = db.Collection("Players").Document(relationship.playerID).Collection("Relationships").Document($"R{napshot.Count.ToString()}");
+        Relationship reverse_relationship = new Relationship()
         {
-            { "Type", relationshipType }
+            playerID = userID,
+            type = relationship.type,
         };
-        otherUserRef.SetAsync(reciprocalRelationship).ContinueWithOnMainThread(task =>
-        {
-            if (task.IsCompleted)
-            {
-                Debug.Log($"Reciprocal relationship added successfully for {otherUserID} -> {userID}");
-            }
-            else
-            {
-                Debug.LogError("Failed to add reciprocal relationship: " + task.Exception);
-            }
-        });
+        Task addOtherUserTask = otherUserRef.SetAsync(reverse_relationship);
     }
 
     //Ham check sign in
