@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Assets.Scripts;
 using UnityEngine.SceneManagement;
 
 public class Position : MonoBehaviour
 {
-    public GameObject disk;
+    public Sprite disk;
     public List<GameObject> TakeList = new List<GameObject>();
     public List<RectTransform> availablePositions = new List<RectTransform>();
 
@@ -28,9 +29,13 @@ public class Position : MonoBehaviour
         if (disk != null && availablePositions.Count > 0)
         {
             RectTransform spawnPosition = availablePositions[i];
-            GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation);
-            newdisk.name = "Disk " + i;
-            newdisk.AddComponent<DraggableFood>(); // Thêm thành phần DraggableFood vào đối tượng
+            GameObject newdisk = new GameObject("Disk " + i);
+            Image imageComponent = newdisk.AddComponent<Image>();
+            imageComponent.sprite = disk;
+            newdisk.transform.SetParent(transform);
+            newdisk.GetComponent<RectTransform>().anchoredPosition = spawnPosition.anchoredPosition;
+            newdisk.GetComponent<RectTransform>().rotation = spawnPosition.rotation;
+            newdisk.AddComponent<DraggableFood>();
             TakeList.Add(newdisk);
             Debug.Log("Current objects in list:");
             foreach (GameObject obj in TakeList)
@@ -40,11 +45,10 @@ public class Position : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Object prefab or spawn position is not assigned.");
+            Debug.LogError("Disk sprite or spawn position is not assigned.");
         }
     }
 
-    // Cập nhật danh sách đối tượng khi có đối tượng mới được kéo vào vùng thả
     public void UpdateTakeList()
     {
         TakeList.Clear();

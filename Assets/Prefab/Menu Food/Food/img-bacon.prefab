@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6330415592932862566}
   - component: {fileID: 6798436873697795205}
   - component: {fileID: 2507333799424135339}
-  - component: {fileID: 8787253587496041371}
   m_Layer: 5
   m_Name: img-bacon
   m_TagString: Untagged
@@ -89,29 +88,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  image: {fileID: 6798436873697795205}
   parentAfterDrag: {fileID: 0}
---- !u!114 &8787253587496041371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186223444800088164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
