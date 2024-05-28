@@ -15,7 +15,7 @@ public class EntityManager : MonoBehaviour
     [SerializeField] float maxTrans = 1300;
 
 
-    private int point = 0;
+    //private int point = 0;
     private Food[] take_in;
     private Food[] debai;
     private void Awake()

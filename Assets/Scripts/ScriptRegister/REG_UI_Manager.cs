@@ -1,11 +1,8 @@
 using Assets.Scripts;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 
 public class REG_UI_Manager : MonoBehaviour
 {
@@ -34,7 +31,7 @@ public class REG_UI_Manager : MonoBehaviour
 
             string email_tosend = email.text;
             client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
-            SceneManager.LoadScene("Verification");
+            SceneManager.LoadSceneAsync("Verification");
         }
     }
 
@@ -48,5 +45,10 @@ public class REG_UI_Manager : MonoBehaviour
         return true;
     }
 
+
+    public void Back()
+    {
+        SceneManager.LoadScene("Sign in");
+    }
 }
 
