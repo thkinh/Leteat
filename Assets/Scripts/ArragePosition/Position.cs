@@ -10,11 +10,11 @@ public class Position : MonoBehaviour
 {
     public GameObject disk;
     public List<GameObject> TakeList = new List<GameObject>();
-    public List<Transform> availablePositions = new List<Transform>();
-
+    public List<RectTransform> availablePositions = new List<RectTransform>();
 
     private void Start()
     {
+        // Khởi tạo các đối tượng ban đầu
         CreateNewDisk(0);
         CreateNewDisk(1);
         CreateNewDisk(2);
@@ -23,25 +23,42 @@ public class Position : MonoBehaviour
         CreateNewDisk(5);
     }
 
-
     public void CreateNewDisk(int i)
     {
         if (disk != null && availablePositions.Count > 0)
         {
-            Transform spawnPosition = availablePositions[i];
+            RectTransform spawnPosition = availablePositions[i];
             GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation);
+            newdisk.name = "Disk " + i;
+            newdisk.AddComponent<DraggableFood>(); // Thêm thành phần DraggableFood vào đối tượng
             TakeList.Add(newdisk);
             Debug.Log("Current objects in list:");
             foreach (GameObject obj in TakeList)
             {
-                Debug.Log(obj.name + obj.transform.position.ToString());
+                Debug.Log(obj.name + obj.transform.position);
             }
         }
         else
         {
             Debug.LogError("Object prefab or spawn position is not assigned.");
         }
-
     }
-    
+
+    // Cập nhật danh sách đối tượng khi có đối tượng mới được kéo vào vùng thả
+    public void UpdateTakeList()
+    {
+        TakeList.Clear();
+        foreach (RectTransform pos in availablePositions)
+        {
+            if (pos.childCount > 0)
+            {
+                TakeList.Add(pos.GetChild(0).gameObject);
+            }
+        }
+        Debug.Log("Updated objects in list:");
+        foreach (GameObject obj in TakeList)
+        {
+            Debug.Log(obj.name + obj.transform.position);
+        }
+    }
 }
