@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Assets.Scripts;
 using UnityEngine.SceneManagement;
@@ -27,24 +28,23 @@ public class Position : MonoBehaviour
     {
         if (disk != null && availablePositions.Count > 0)
         {
-            RectTransform spawnPosition = availablePositions[i];
+            RectTransform spawnPosition = availablePositions[i]; 
             GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation);
             newdisk.name = "Disk " + i;
-            newdisk.AddComponent<DraggableFood>(); // Thêm thành phần DraggableFood vào đối tượng
+            newdisk.AddComponent<DraggableFood>();
             TakeList.Add(newdisk);
-            Debug.Log("Current objects in list:");
+            Debug.Log("Current food in list:");
             foreach (GameObject obj in TakeList)
             {
-                Debug.Log(obj.name + obj.transform.position);
+                Debug.Log(obj.name + " " + obj.transform.position.ToString());
             }
         }
         else
         {
-            Debug.LogError("Object prefab or spawn position is not assigned.");
+            Debug.LogError("Disk prefab or spawn position is not assigned.");
         }
     }
 
-    // Cập nhật danh sách đối tượng khi có đối tượng mới được kéo vào vùng thả
     public void UpdateTakeList()
     {
         TakeList.Clear();
