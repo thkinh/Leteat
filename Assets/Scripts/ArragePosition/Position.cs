@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Position : MonoBehaviour
 {
-    public Sprite disk;
+    public GameObject disk;
     public List<GameObject> TakeList = new List<GameObject>();
     public List<RectTransform> availablePositions = new List<RectTransform>();
 
@@ -28,24 +28,20 @@ public class Position : MonoBehaviour
     {
         if (disk != null && availablePositions.Count > 0)
         {
-            RectTransform spawnPosition = availablePositions[i];
-            GameObject newdisk = new GameObject("Disk " + i);
-            Image imageComponent = newdisk.AddComponent<Image>();
-            imageComponent.sprite = disk;
-            newdisk.transform.SetParent(transform);
-            newdisk.GetComponent<RectTransform>().anchoredPosition = spawnPosition.anchoredPosition;
-            newdisk.GetComponent<RectTransform>().rotation = spawnPosition.rotation;
+            RectTransform spawnPosition = availablePositions[i]; 
+            GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation);
+            newdisk.name = "Disk " + i;
             newdisk.AddComponent<DraggableFood>();
             TakeList.Add(newdisk);
-            Debug.Log("Current objects in list:");
+            Debug.Log("Current food in list:");
             foreach (GameObject obj in TakeList)
             {
-                Debug.Log(obj.name + obj.transform.position);
+                Debug.Log(obj.name + " " + obj.transform.position.ToString());
             }
         }
         else
         {
-            Debug.LogError("Disk sprite or spawn position is not assigned.");
+            Debug.LogError("Disk prefab or spawn position is not assigned.");
         }
     }
 
