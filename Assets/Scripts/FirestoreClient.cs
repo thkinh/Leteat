@@ -12,6 +12,10 @@ public class FirestoreClient : MonoBehaviour
     public static FirestoreClient fc_instance;
     private static FirebaseFirestore db;
     public string thisPlayerID;
+
+    public Player thisPlayer;
+    public bool playerisLoaded = false;
+
     void Awake()
     {
         if (fc_instance == null)
@@ -73,7 +77,7 @@ public class FirestoreClient : MonoBehaviour
 
         List<Relationship> relationships = new List<Relationship>();
         DocumentReference docRef = FirebaseFirestore.DefaultInstance.Collection("Players").Document(userID);
-        QuerySnapshot snapshot = await docRef.Collection("Relationship").GetSnapshotAsync();
+        QuerySnapshot snapshot = await docRef.Collection("Relationships").GetSnapshotAsync();
         foreach (DocumentSnapshot document in snapshot.Documents)
         {
             Relationship relationship = document.ConvertTo<Relationship>();
@@ -85,44 +89,7 @@ public class FirestoreClient : MonoBehaviour
     }
 
 
-
-    //Ham ket ban
-    //public void AddUserRelationship(string userID, string otherUserID, string relationshipType)
-    //{
-    //    DocumentReference userRef = db.Collection("Users").Document(userID).Collection("Relationships").Document(otherUserID);
-    //    Dictionary<string, object> relationship = new Dictionary<string, object>
-    //    {
-    //        { "Type", relationshipType }
-    //    };
-    //    userRef.SetAsync(relationship).ContinueWithOnMainThread(task =>
-    //    {
-    //        if (task.IsCompleted)
-    //        {
-    //            Debug.Log($"Relationship added successfully for {userID} -> {otherUserID}");
-    //        }
-    //        else
-    //        {
-    //            Debug.LogError("Failed to add relationship: " + task.Exception);
-    //        }
-    //    });
-
-    //    DocumentReference otherUserRef = db.Collection("Users").Document(otherUserID).Collection("Relationships").Document(userID);
-    //    Dictionary<string, object> reciprocalRelationship = new Dictionary<string, object>
-    //    {
-    //        { "Type", relationshipType }
-    //    };
-    //    otherUserRef.SetAsync(reciprocalRelationship).ContinueWithOnMainThread(task =>
-    //    {
-    //        if (task.IsCompleted)
-    //        {
-    //            Debug.Log($"Reciprocal relationship added successfully for {otherUserID} -> {userID}");
-    //        }
-    //        else
-    //        {
-    //            Debug.LogError("Failed to add reciprocal relationship: " + task.Exception);
-    //        }
-    //    });
-    //}
+    //ham ket ban
 
     public async void AddUserRelationship(string userID, Relationship relationship)
     {
@@ -168,7 +135,7 @@ public class FirestoreClient : MonoBehaviour
 
             // Get the password from the player struct
             pass = player.password;
-            RegisPlayerID(document.Id);
+            RegisPlayerID(document.Id, player);
         }
         else
         {
@@ -179,11 +146,15 @@ public class FirestoreClient : MonoBehaviour
         return pass;
     }
 
-    public void RegisPlayerID(string id)
+    public void RegisPlayerID(string id, Player player)
     {
         this.thisPlayerID = id;
+        playerisLoaded = true;
+        thisPlayer = player;
     }
 
+
+    //Ham tim kiem ban be khong dieu kien
     public async Task<List<Player>> QueryForAllPlayers()
     {
         List<Player> list = new List<Player>();
@@ -199,5 +170,56 @@ public class FirestoreClient : MonoBehaviour
         }
         return list;
     }
+
+    public async Task<Player> GetPlayer(string playerID)
+    {
+        Player player = new Player();
+        DocumentReference doc = db.Collection("Players").Document(playerID);
+        DocumentSnapshot snapshot = await doc.GetSnapshotAsync();
+
+        player = snapshot.ConvertTo<Player>();
+
+        return player;
+    }
+
+
+    //Ham xem ho so thang ban trong list friend
+    public async Task<Player> GetPlayer_byName(string username)
+    {
+        Player player = new Player();
+        CollectionReference col = db.Collection("Players");
+
+        Query query = col.WhereEqualTo("username", username);
+
+        QuerySnapshot snapshots = await query.GetSnapshotAsync();
+        
+        player = snapshots.ConvertTo<Player>();
+        
+
+        return player;
+    }
+     
+    //Ham tim ban be 
+    public async Task<List<Player>> FindPlayers_byName(string username)
+    {
+        List<Player> players = new List<Player>();
+
+        CollectionReference col = db.Collection("Players");
+
+        Query query = col.WhereEqualTo("username", username);
+
+        QuerySnapshot snapshots = await query.GetSnapshotAsync();
+
+        foreach(DocumentSnapshot doc in snapshots.Documents)
+        {
+            Player p = doc.ConvertTo<Player>();
+            players.Add(p);
+        }
+
+        return players;
+    }
+
+    
+
 
 }
