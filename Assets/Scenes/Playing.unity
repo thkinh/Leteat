@@ -469,7 +469,7 @@ MonoBehaviour:
   isover: 0
   you_lose_text: {fileID: 1173141814}
   Countdown_foreground: {fileID: 2126735883}
-  max_time: 10
+  max_time: 20
 --- !u!1 &1045929606
 GameObject:
   m_ObjectHideFlags: 0
