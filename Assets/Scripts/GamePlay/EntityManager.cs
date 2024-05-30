@@ -8,7 +8,7 @@ public class EntityManager : MonoBehaviour
     public static EntityManager instance;
     public GameObject trashcan;
     public GameObject SendtoServer;
-    [SerializeField] GameObject[] FoodPrefab ;
+    [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
     [SerializeField] float minTrans = 200;
@@ -21,7 +21,7 @@ public class EntityManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
-        instance = this; 
+            instance = this;
     }
     // Start is called before the first frame update
     void Start()
