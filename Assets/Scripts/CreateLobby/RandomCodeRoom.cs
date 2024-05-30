@@ -15,6 +15,7 @@ public class RandomCodeRoom : MonoBehaviour
 
     public List<int> TakeList = new List<int>();
     private int randomNumber;
+    private int codeRoom;
     private void Start()
     {
         TakeList = new List<int>(new int[G_Object.Length]);
@@ -27,9 +28,10 @@ public class RandomCodeRoom : MonoBehaviour
                 randomNumber = UnityEngine.Random.Range(0,(S_Object.Length));
             }
             TakeList[i] = randomNumber;
+            codeRoom = codeRoom * 10 + randomNumber;
             G_Object[i].GetComponent<SpriteRenderer>().sprite = S_Object[TakeList[i]];
-            Debug.Log(message: "Code Room [" + i + "] is: " + S_Object[TakeList[i]].name);
-        }    
+        }
+        Debug.Log(message: "Code Room is: " + codeRoom);
     }
 
     public void Send_Code_Room()

@@ -13,7 +13,6 @@ public class DropArea : MonoBehaviour
     public event Action<DraggableFood> OnDropHandler;
 
     private DraggableFood currentDraggable;
-
     public bool Accepts(DraggableFood draggable)
     {
         if (currentDraggable != null)
