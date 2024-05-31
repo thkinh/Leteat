@@ -62,7 +62,6 @@
 //}
 
 
-
 using Assets.Scripts;
 using TMPro;
 using UnityEngine;
@@ -79,8 +78,8 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
     Client client = new Client();
-    CheckMail checkmail = new CheckMail();
-    CheckUsername checkUsername = new CheckUsername();
+    CheckMail checkMail;
+    CheckUsername checkUsername;
 
     public static int verifi_Code = 0;
 
@@ -88,6 +87,8 @@ public class REG_UI_Manager : MonoBehaviour
     {
         instance = this;
         verifi_Code = Random.Range(1000, 10000);
+        checkMail = gameObject.AddComponent<CheckMail>();
+        checkUsername = gameObject.AddComponent<CheckUsername>();
     }
 
     public void Register()
@@ -97,7 +98,7 @@ public class REG_UI_Manager : MonoBehaviour
 
     private IEnumerator RegisterCoroutine()
     {
-        var checkTask = Check_PasswordAndEmail();
+        var checkTask = Check_Password();
         yield return new WaitUntil(() => checkTask.IsCompleted);
 
         if (checkTask.Result)
@@ -110,7 +111,7 @@ public class REG_UI_Manager : MonoBehaviour
         }
     }
 
-    private async Task<bool> Check_PasswordAndEmail()
+    private async Task<bool> Check_Password()
     {
         if (repeat_pass.text != password.text)
         {
@@ -118,7 +119,7 @@ public class REG_UI_Manager : MonoBehaviour
             return false;
         }
 
-        if (await checkmail.IsEmailExists(email.text))
+        if (await checkMail.IsEmailExists(email.text))
         {
             Debug.Log("Email already exists.");
             return false;
@@ -130,9 +131,7 @@ public class REG_UI_Manager : MonoBehaviour
             return false;
         }
 
-            return true;
-
-
+        return true;
     }
 
     public void Back()
