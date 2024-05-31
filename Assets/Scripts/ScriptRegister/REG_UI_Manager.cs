@@ -80,6 +80,7 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField repeat_pass;
     Client client = new Client();
     CheckMail checkmail = new CheckMail();
+    CheckUsername checkUsername = new CheckUsername();
 
     public static int verifi_Code = 0;
 
@@ -123,7 +124,15 @@ public class REG_UI_Manager : MonoBehaviour
             return false;
         }
 
-        return true;
+        if (await checkUsername.IsUsernameExists(username.text))
+        {
+            Debug.Log("Username already exists.");
+            return false;
+        }
+
+            return true;
+
+
     }
 
     public void Back()
