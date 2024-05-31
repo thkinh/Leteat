@@ -75,9 +75,9 @@ public class FriendList_Manager : MonoBehaviour
 
     private async void PersonalPlayer()
     {
+        searchplayer.SetActive(false);
         iswatchingPlayer = !iswatchingPlayer;
         personalplayer.SetActive(iswatchingPlayer);
 
-        personalplayer.SetActive(false);
     }    
 }
