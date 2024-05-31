@@ -14,8 +14,6 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
     Client client = new Client();
-    CheckMail checkMail;
-    CheckUsername checkUsername;
 
     public static int verifi_Code = 0;
 
@@ -23,8 +21,6 @@ public class REG_UI_Manager : MonoBehaviour
     {
         instance = this;
         verifi_Code = Random.Range(1000, 10000);
-        checkMail = gameObject.AddComponent<CheckMail>();
-        checkUsername = gameObject.AddComponent<CheckUsername>();
     }
 
     public void Register()
@@ -55,13 +51,13 @@ public class REG_UI_Manager : MonoBehaviour
             return false;
         }
 
-        if (await checkMail.IsEmailExists(email.text))
+        if (await FirestoreClient.fc_instance.IsEmailExists(email.text))
         {
             Debug.Log("Email already exists.");
             return false;
         }
 
-        if (await checkUsername.IsUsernameExists(username.text))
+        if (await FirestoreClient.fc_instance.IsUsernameExists(username.text))
         {
             Debug.Log("Username already exists.");
             return false;

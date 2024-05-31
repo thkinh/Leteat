@@ -41,7 +41,7 @@ public class SignIn_SceneManager : MonoBehaviour
     public async Task<bool> Check()
     {
         string request_password = await FirestoreClient.fc_instance.ReadPassword_ByEmail(email.text);
-        if (password.text == request_password )
+        if (password.text == Security.Decrypt(request_password) )
         {
             return true;
         }

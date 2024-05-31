@@ -146,6 +146,36 @@ public class FirestoreClient : MonoBehaviour
         return pass;
     }
 
+    public async Task<bool> IsEmailExists(string email)
+    {
+        if (db == null)
+        {
+            Debug.LogError("Firestore is not initialized.");
+            return false;
+
+        }
+
+        CollectionReference playersRef = db.Collection("Players");
+        Query query = playersRef.WhereEqualTo("email", email);
+
+        // Get the snapshot of the query result
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        // Check if there's a matching document
+        return snapshot.Count > 0;
+    }
+
+    public async Task<bool> IsUsernameExists(string username)
+    {
+        CollectionReference playersRef = db.Collection("Players");
+        Query query = playersRef.WhereEqualTo("username", username);
+
+        // Get the snapshot of the query result
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        // Check if there's a matching document
+        return snapshot.Count > 0;
+    }
     public void RegisPlayerID(string id, Player player)
     {
         this.thisPlayerID = id;
@@ -181,6 +211,8 @@ public class FirestoreClient : MonoBehaviour
 
         return player;
     }
+
+
 
 
     //Ham xem ho so thang ban trong list friend

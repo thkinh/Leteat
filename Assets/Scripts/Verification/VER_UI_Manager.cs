@@ -35,7 +35,7 @@ public class VER_UI_Manager : MonoBehaviour
             //password = REG_UI_Manager.instance.password.text,
         };
         FirestoreClient.fc_instance.Write(player);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Sign In");
     }
 
 
