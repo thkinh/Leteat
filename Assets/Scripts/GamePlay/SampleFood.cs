@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using System;
-using Assets.Scripts;
 using UnityEngine.SceneManagement;
 
-public class RandomCodeRoom : MonoBehaviour
+public class SampleFood : MonoBehaviour
 {
     public GameObject[] Position;
     public Sprite[] Food;
@@ -21,17 +18,17 @@ public class RandomCodeRoom : MonoBehaviour
         TakeList = new List<int>(new int[Position.Length]);
         for (int i = 0; i < Position.Length; i++)
         {
-            
-            randomNumber = UnityEngine.Random.Range(0,(Food.Length));
+
+            randomNumber = UnityEngine.Random.Range(0, (Food.Length));
             while (TakeList.Contains(randomNumber))
             {
-                randomNumber = UnityEngine.Random.Range(0,(Food.Length));
+                randomNumber = UnityEngine.Random.Range(0, (Food.Length));
             }
             TakeList[i] = randomNumber;
             codeRoom = codeRoom * 10 + randomNumber;
             Position[i].GetComponent<SpriteRenderer>().sprite = Food[TakeList[i]];
+            Debug.Log(message: "Code Room is: " + Food[TakeList[i]].name);
         }
-        Debug.Log(message: "Code Room is: " + codeRoom);
     }
 
     public void Send_Code_Room()
@@ -46,6 +43,4 @@ public class RandomCodeRoom : MonoBehaviour
             SceneManager.LoadScene("Arrange position");
         }
     }
-
 }
-

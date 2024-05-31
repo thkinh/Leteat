@@ -434,13 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f099a7a5b7960a84fa78a6ac625d20bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  G_Object:
+  Position:
   - {fileID: 1575122558}
   - {fileID: 1216337909}
   - {fileID: 1677623988}
   - {fileID: 1977655826}
   - {fileID: 2106392740}
-  S_Object:
+  Food:
   - {fileID: 21300000, guid: 76c6f6e75d9906b44ac9e0c6a6cea1c2, type: 3}
   - {fileID: 21300000, guid: ba33867d880456049905f5e01369b52f, type: 3}
   - {fileID: 21300000, guid: b389ac0b00dc93048bb7f69dce7b3faa, type: 3}
@@ -1606,6 +1606,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86009f6834232a43a8578776c42db9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UserData: {fileID: 0}
+  id: {fileID: 0}
+  username: {fileID: 0}
+  email: {fileID: 0}
 --- !u!114 &1859899669
 MonoBehaviour:
   m_ObjectHideFlags: 0
