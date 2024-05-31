@@ -9,6 +9,12 @@ public class FriendList_Manager : MonoBehaviour
     public Transform contentHolder; // Assign the Content GameObject in the Inspector
     private List<Relationship> friendlist = new List<Relationship>();
     private List<Player> playerlist = new List<Player>();
+    public GameObject searchplayer;
+    public GameObject allfriend;
+    public GameObject personalplayer;
+    bool iswatchingSearch = false;
+    bool iswatchingFriend = false;
+    bool iswatchingPlayer = false;
     public void QueryForRelations()
     {
         asyncQuery1();
@@ -17,7 +23,10 @@ public class FriendList_Manager : MonoBehaviour
     {
         asyncQuery2();
     }
-
+    public void QueryForPersonlPlayer()
+    {
+        PersonalPlayer();
+    }
     public void AddRelation_user1_user2()
     {
         Relationship relationship = new Relationship
@@ -32,6 +41,8 @@ public class FriendList_Manager : MonoBehaviour
 
     private async void asyncQuery1() 
     {
+        iswatchingFriend = !iswatchingFriend;
+        allfriend.SetActive(iswatchingFriend);
         foreach (Transform child in contentHolder.transform)
         {
             Destroy(child.gameObject);
@@ -47,6 +58,8 @@ public class FriendList_Manager : MonoBehaviour
 
     private async void asyncQuery2()
     {
+        iswatchingSearch = !iswatchingSearch;
+        searchplayer.SetActive(iswatchingSearch);
         foreach (Transform child in contentHolder.transform)
         {
             Destroy(child.gameObject);
@@ -60,5 +73,11 @@ public class FriendList_Manager : MonoBehaviour
         }
     }
 
+    private async void PersonalPlayer()
+    {
+        iswatchingPlayer = !iswatchingPlayer;
+        personalplayer.SetActive(iswatchingPlayer);
 
+        personalplayer.SetActive(false);
+    }    
 }

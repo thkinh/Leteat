@@ -23,10 +23,6 @@ public class RandomCodeRoom : MonoBehaviour
         {
             
             randomNumber = UnityEngine.Random.Range(0,(Food.Length));
-            while (TakeList.Contains(randomNumber))
-            {
-                randomNumber = UnityEngine.Random.Range(0,(Food.Length));
-            }
             TakeList[i] = randomNumber;
             codeRoom = codeRoom * 10 + randomNumber;
             Position[i].GetComponent<SpriteRenderer>().sprite = Food[TakeList[i]];
