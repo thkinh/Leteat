@@ -25,11 +25,14 @@ public class VER_UI_Manager : MonoBehaviour
             return;
         }
 
+        string encryptedPassword = Security.Encrypt(REG_UI_Manager.instance.password.text);
+
         Player player = new Player
         {
             email = REG_UI_Manager.instance.email.text,
             username = REG_UI_Manager.instance.username.text,
-            password = REG_UI_Manager.instance.password.text,
+            password = encryptedPassword,
+            //password = REG_UI_Manager.instance.password.text,
         };
         FirestoreClient.fc_instance.Write(player);
         SceneManager.LoadScene("Menu");
