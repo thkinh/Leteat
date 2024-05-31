@@ -11,8 +11,8 @@ public class EntityManager : MonoBehaviour
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
-    [SerializeField] float minTrans = 200;
-    [SerializeField] float maxTrans = 1300;
+    float minTrans = 400;
+    float maxTrans = 1300;
 
 
     //private int point = 0;

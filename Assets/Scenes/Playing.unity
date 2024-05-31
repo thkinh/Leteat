@@ -437,8 +437,6 @@ MonoBehaviour:
   timer: 0
   previous_time: 0
   time_control: {fileID: 900935023}
-  minTrans: 0
-  maxTrans: 0
 --- !u!1 &585414900
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,14 +937,14 @@ RectTransform:
   m_GameObject: {fileID: 1173141814}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1673559094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56, y: -208}
+  m_AnchoredPosition: {x: 37, y: -335.02}
   m_SizeDelta: {x: 561.3903, y: 124.955}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1173141816
@@ -971,7 +969,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: TIME'S UP
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 94545532a797e4e4c844d22375d77f79, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9ad269c99dcf42b7aedefd83dd5a7b9d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -979,7 +977,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0.5019608, b: 0.42352945, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -991,7 +989,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 2426
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1003,8 +1001,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1035,7 +1033,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1173141817
@@ -1717,9 +1715,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1861870549}
   - component: {fileID: 1861870551}
+  - component: {fileID: 1861870552}
   - component: {fileID: 1861870550}
   m_Layer: 0
-  m_Name: Position
+  m_Name: SampleFood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1754,16 +1753,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861870548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f099a7a5b7960a84fa78a6ac625d20bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  G_Object:
+  Position:
   - {fileID: 771293370}
   - {fileID: 104278256}
   - {fileID: 585414900}
-  S_Object:
+  Food:
   - {fileID: 21300000, guid: 76c6f6e75d9906b44ac9e0c6a6cea1c2, type: 3}
   - {fileID: 21300000, guid: ba33867d880456049905f5e01369b52f, type: 3}
   - {fileID: 21300000, guid: b389ac0b00dc93048bb7f69dce7b3faa, type: 3}
@@ -1798,6 +1797,33 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
+--- !u!114 &1861870552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861870548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c05584b834a9cc4c92f00a7455350d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position:
+  - {fileID: 771293370}
+  - {fileID: 104278256}
+  - {fileID: 585414900}
+  Food:
+  - {fileID: 21300000, guid: 76c6f6e75d9906b44ac9e0c6a6cea1c2, type: 3}
+  - {fileID: 21300000, guid: ba33867d880456049905f5e01369b52f, type: 3}
+  - {fileID: 21300000, guid: b389ac0b00dc93048bb7f69dce7b3faa, type: 3}
+  - {fileID: 21300000, guid: d12c1c87ab4dddc4299e71e16ecc8576, type: 3}
+  - {fileID: 21300000, guid: 9efd1f0bceaeb204f925e62c8afd8117, type: 3}
+  - {fileID: 21300000, guid: 6907373abda67d74aa27b729647d3750, type: 3}
+  - {fileID: 21300000, guid: 7c5449aaa939f4a45a32d764a45ad6fd, type: 3}
+  - {fileID: 21300000, guid: 83983126a13c7444e860146524dacffb, type: 3}
+  - {fileID: 21300000, guid: f61ded511cfb4614da425f170de4575c, type: 3}
+  TakeList: 
 --- !u!1 &2086663470
 GameObject:
   m_ObjectHideFlags: 0
