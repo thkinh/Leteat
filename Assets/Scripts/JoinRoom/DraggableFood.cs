@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Assets.Scripts.GamePlay;
 
 public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [Header("UI")]
     public Image image;
 
     [HideInInspector] public Transform parentAfterDrag;
@@ -12,14 +12,11 @@ public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Canvas canvas;
     private GameObject placeholder;
     private DropArea originalDropArea;
-
-
     private void Start()
     {
         parentAfterDrag = transform.parent; // Đảm bảo rằng biến parentAfterDrag được thiết lập
         canvas = GetComponentInParent<Canvas>();
     }
-
     public void OnBeginDrag(PointerEventData eventData)
     {
         image.raycastTarget = false;
@@ -65,6 +62,7 @@ public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 }
             }
         }
+
 
         if (!droppedInValidArea)
         {

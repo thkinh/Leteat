@@ -12,15 +12,15 @@ namespace Assets.Scripts.GamePlay
     {
         public enum FoodName
         {
-            Bacon,
-            Bread,
-            Cheese,
-            Corn,
-            Egg,
-            Fish,
-            Shrimp,
-            Tomato,
-            Watermelon
+            bacon,
+            bread,
+            cheese,
+            corn,
+            egg,
+            fish,
+            shrimp,
+            tomato,
+            watermelon
         }
         public FoodName name { get; set; }
 

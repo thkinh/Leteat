@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Assets.Scripts.GamePlay;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Assets.Scripts.GamePlay.Food;
 
 public abstract class DropCondition : ScriptableObject
 {
@@ -11,8 +13,9 @@ public class DropArea : MonoBehaviour
 {
     public List<DropCondition> DropConditions = new List<DropCondition>();
     public event Action<DraggableFood> OnDropHandler;
-
     private DraggableFood currentDraggable;
+    int codeJoinRoom;
+
     public bool Accepts(DraggableFood draggable)
     {
         if (currentDraggable != null)
@@ -24,12 +27,19 @@ public class DropArea : MonoBehaviour
 
     public void Drop(DraggableFood draggable)
     {
+
         // Chỉ nhận đối tượng nếu vùng này chưa có đối tượng nào
         if (currentDraggable == null)
         {
             currentDraggable = draggable;
             OnDropHandler?.Invoke(draggable);
+            Debug.Log($"Object '{draggable.name}' has been dropped in {name}");
         }
+        if (currentDraggable.name == "d1")
+        {
+            //codeJoinRoom = 
+        }
+        Debug.Log(message: "Code Join Room: " + codeJoinRoom);
     }
 
     // Hàm để loại bỏ đối tượng khi cần thiết
@@ -37,4 +47,5 @@ public class DropArea : MonoBehaviour
     {
         currentDraggable = null;
     }
+
 }
