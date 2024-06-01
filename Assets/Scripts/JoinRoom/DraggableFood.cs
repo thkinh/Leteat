@@ -8,7 +8,6 @@ public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image image;
 
     [HideInInspector] public Transform parentAfterDrag;
-
     private Canvas canvas;
     private GameObject placeholder;
     private DropArea originalDropArea;
@@ -17,6 +16,8 @@ public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         parentAfterDrag = transform.parent; // Đảm bảo rằng biến parentAfterDrag được thiết lập
         canvas = GetComponentInParent<Canvas>();
     }
+
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         image.raycastTarget = false;

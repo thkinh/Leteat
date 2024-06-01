@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Assets.Scripts.GamePlay.Food;
+using static UnityEditor.PlayerSettings;
 
 public abstract class DropCondition : ScriptableObject
 {
@@ -14,7 +16,8 @@ public class DropArea : MonoBehaviour
     public List<DropCondition> DropConditions = new List<DropCondition>();
     public event Action<DraggableFood> OnDropHandler;
     private DraggableFood currentDraggable;
-    int codeJoinRoom;
+    private int codeJoinRoom = 0;
+    private List<int> indexFoods = new List<int>();
 
     public bool Accepts(DraggableFood draggable)
     {
@@ -27,19 +30,26 @@ public class DropArea : MonoBehaviour
 
     public void Drop(DraggableFood draggable)
     {
-
         // Chỉ nhận đối tượng nếu vùng này chưa có đối tượng nào
         if (currentDraggable == null)
         {
             currentDraggable = draggable;
             OnDropHandler?.Invoke(draggable);
-            Debug.Log($"Object '{draggable.name}' has been dropped in {name}");
+            int indexFood = (int)Enum.Parse(typeof(Food.FoodName), draggable.name);
+            indexFoods.Add(indexFood);
+            Debug.Log($"Object '{draggable.name}' with index '{indexFood}' has been dropped in {name}");
         }
-        if (currentDraggable.name == "d1")
+    }
+
+    public void TypeRoom()
+    {
+        codeJoinRoom = 0;
+        for (int i = 0; i < indexFoods.Count; i++)
         {
-            //codeJoinRoom = 
+            codeJoinRoom = codeJoinRoom * 10 + indexFoods[i];
         }
-        Debug.Log(message: "Code Join Room: " + codeJoinRoom);
+
+        Debug.Log(message: "Code Join Room is: " + codeJoinRoom);
     }
 
     // Hàm để loại bỏ đối tượng khi cần thiết
@@ -47,5 +57,6 @@ public class DropArea : MonoBehaviour
     {
         currentDraggable = null;
     }
+
 
 }

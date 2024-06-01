@@ -10,6 +10,8 @@ namespace Assets.Scripts.GamePlay
 {
     public class Food : MonoBehaviour
     {
+        public string foodName;
+        public int foodIndex;
         public enum FoodName
         {
             bacon,
@@ -33,6 +35,13 @@ namespace Assets.Scripts.GamePlay
         {
             this.name = (FoodName)nameIndex;
         }
+
+        public Food(string name)
+        {
+            this.foodName = name;
+            this.foodIndex = (int)(FoodName)Enum.Parse(typeof(FoodName), name);
+
+        }  
 
         public byte[] Convert_to_Data()
         {

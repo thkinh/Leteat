@@ -2157,6 +2157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86009f6834232a43a8578776c42db9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UserData: {fileID: 0}
+  id: {fileID: 0}
+  username: {fileID: 0}
+  email: {fileID: 0}
 --- !u!224 &1151743394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1502640797054533600, guid: 33d9bf1a431057e45882067446d154be, type: 3}
