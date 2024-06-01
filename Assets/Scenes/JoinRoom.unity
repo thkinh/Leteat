@@ -563,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 1268468370}
     - target: {fileID: 1734557207077270055, guid: a50aa610f39444b4bb4ed99d2fce0549, type: 3}
       propertyPath: m_Name
-      value: img-tomato
+      value: tomato
       objectReference: {fileID: 0}
     - target: {fileID: 2215153110763252428, guid: a50aa610f39444b4bb4ed99d2fce0549, type: 3}
       propertyPath: m_Pivot.x
@@ -909,7 +909,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1186223444800088164, guid: 33d9bf1a431057e45882067446d154be, type: 3}
       propertyPath: m_Name
-      value: img-bacon
+      value: bacon
       objectReference: {fileID: 0}
     - target: {fileID: 1502640797054533600, guid: 33d9bf1a431057e45882067446d154be, type: 3}
       propertyPath: m_Pivot.x
@@ -1355,7 +1355,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 492286891651805819, guid: 517021a361e971e4d90f36470e7beaca, type: 3}
       propertyPath: m_Name
-      value: img-cheese
+      value: cheese
       objectReference: {fileID: 0}
     - target: {fileID: 4207848234298680189, guid: 517021a361e971e4d90f36470e7beaca, type: 3}
       propertyPath: m_Pivot.x
@@ -1615,7 +1615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9102896759256025061, guid: 4dc1a71a9fcb85441b53163c6585ff9b, type: 3}
       propertyPath: m_Name
-      value: img-fish
+      value: fish
       objectReference: {fileID: 0}
     - target: {fileID: 9181515152851740032, guid: 4dc1a71a9fcb85441b53163c6585ff9b, type: 3}
       propertyPath: image
@@ -1750,7 +1750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4956484748190184767, guid: cd961fa7303b72f4693e99c4d9886dc5, type: 3}
       propertyPath: m_Name
-      value: img-bread
+      value: bread
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2531,7 +2531,7 @@ PrefabInstance:
       objectReference: {fileID: 1190117015}
     - target: {fileID: 5663971567669295174, guid: 323c1f6d3fea3864e889bea8ccaa9bd6, type: 3}
       propertyPath: m_Name
-      value: img-watermelon
+      value: watermelon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2582,7 +2582,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4061143052471368423, guid: 77ef35d7d4391964fa294637c406b14e, type: 3}
       propertyPath: m_Name
-      value: img-egg
+      value: egg
       objectReference: {fileID: 0}
     - target: {fileID: 5077685835053980778, guid: 77ef35d7d4391964fa294637c406b14e, type: 3}
       propertyPath: m_Pivot.x
@@ -3600,7 +3600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5856074995473302636, guid: da5700189b426dc4995d6c46698a1f45, type: 3}
       propertyPath: m_Name
-      value: img-corn
+      value: corn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3758,7 +3758,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4410803323066831939, guid: 9b0319b3f4e25394ea7fd8eccfe1766e, type: 3}
       propertyPath: m_Name
-      value: img-shrimp
+      value: shrimp
       objectReference: {fileID: 0}
     - target: {fileID: 6143950380363949295, guid: 9b0319b3f4e25394ea7fd8eccfe1766e, type: 3}
       propertyPath: image

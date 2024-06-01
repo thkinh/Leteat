@@ -11,8 +11,8 @@ public class EntityManager : MonoBehaviour
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
-    float minTrans = 400;
-    float maxTrans = 1300;
+    float minTrans = 200;
+    float maxTrans = 1500;
 
 
     //private int point = 0;
@@ -50,6 +50,7 @@ public class EntityManager : MonoBehaviour
         var position = new Vector2(wanted_x, wanted_y);
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
         nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
+        Debug.Log("Spawn: " + nf.name);
     }
 
     public void Spawn_Food(Food food)
