@@ -2580,6 +2580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisPlayerID: 
+  playerisLoaded: 0
 --- !u!4 &910685797
 Transform:
   m_ObjectHideFlags: 0

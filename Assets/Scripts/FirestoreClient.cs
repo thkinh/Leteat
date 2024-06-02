@@ -6,6 +6,7 @@ using Firebase.Extensions;
 using System.Threading.Tasks;
 using System.Linq;
 using Unity.VisualScripting;
+using System;
 
 public class FirestoreClient : MonoBehaviour
 {
@@ -212,46 +213,103 @@ public class FirestoreClient : MonoBehaviour
         return player;
     }
 
+    public async Task<string> GetPlayerID(string username)
+    {
+        string playerId = null;
+        
+        Query query = db.Collection("Players").WhereEqualTo("username", username);
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
 
+        if (snapshot.Count > 0)
+        {
+            // Get the first document (assuming username is unique)
+            DocumentSnapshot document = snapshot.FirstOrDefault();
+
+            // Get the document ID
+            playerId = document.Id;
+        }
+        else
+        {
+            Debug.LogWarning("No player found with username: " + username);
+        }
+        return playerId;
+    }
 
 
     //Ham xem ho so thang ban trong list friend
-    public async Task<Player> GetPlayer_byName(string username)
+  
+    public async Task<Player> FindPlayer_byName(string username)
     {
         Player player = new Player();
+
         CollectionReference col = db.Collection("Players");
 
         Query query = col.WhereEqualTo("username", username);
 
         QuerySnapshot snapshots = await query.GetSnapshotAsync();
-        
-        player = snapshots.ConvertTo<Player>();
-        
 
+        DocumentSnapshot document = snapshots.FirstOrDefault();
+        
+        player = document.ConvertTo<Player>();
         return player;
     }
-     
-    //Ham tim ban be 
-    public async Task<List<Player>> FindPlayers_byName(string username)
+
+    public async void SendRequest(string username)
     {
-        List<Player> players = new List<Player>();
+        string toID = await GetPlayerID(username);
 
-        CollectionReference col = db.Collection("Players");
+        CollectionReference colRef = db.Collection("Requests");
 
-        Query query = col.WhereEqualTo("username", username);
-
-        QuerySnapshot snapshots = await query.GetSnapshotAsync();
-
-        foreach(DocumentSnapshot doc in snapshots.Documents)
+        Request request = new Request
         {
-            Player p = doc.ConvertTo<Player>();
-            players.Add(p);
-        }
+            from = FirestoreClient.fc_instance.thisPlayerID,
+            to = toID,
+            accepted = false,
+        };
 
-        return players;
+        await colRef.AddAsync(request);
     }
 
-    
+    //Lay ve list request, check xem accepted co true hay khong de tao object
+    public async Task<List<Request>> RetrieveAllRequests()
+    {
+        List<Request> requests = new List<Request>();
 
+        CollectionReference colRef = db.Collection("Requests");
 
+        Query query = colRef.WhereEqualTo("from", FirestoreClient.fc_instance.thisPlayerID);
+
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        foreach (DocumentSnapshot doc in snapshot.Documents)
+        {
+            Request request = doc.ConvertTo<Request>();
+            requests.Add(request);
+        }
+
+        return requests;
+    }
+
+    public async void Accept (string username)
+    {
+        string from = await  GetPlayerID(username);
+
+        Relationship relationship = new Relationship
+        {
+            playerID = from,
+            type = "friend",
+        };
+
+        AddUserRelationship(from, relationship);
+
+        Query query = db.Collection("Requests").WhereEqualTo("to", FirestoreClient.fc_instance.thisPlayerID).WhereEqualTo("from", from);
+
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        DocumentSnapshot doc = snapshot.FirstOrDefault();
+
+        await doc.Reference.DeleteAsync();
+        Debug.Log("Deleted document with ID: " + doc.Id);
+
+    }
 }

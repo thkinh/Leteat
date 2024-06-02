@@ -15,18 +15,8 @@ public class FriendList_Manager : MonoBehaviour
     bool iswatchingSearch = false;
     bool iswatchingFriend = false;
     bool iswatchingPlayer = false;
-    public void QueryForRelations()
-    {
-        asyncQuery1();
-    }
-    public void QueryForPlayers()
-    {
-        asyncQuery2();
-    }
-    public void QueryForPersonlPlayer()
-    {
-        PersonalPlayer();
-    }
+    
+
     public void AddRelation_user1_user2()
     {
         Relationship relationship = new Relationship
@@ -73,7 +63,7 @@ public class FriendList_Manager : MonoBehaviour
         }
     }
 
-    private async void PersonalPlayer()
+    private void PersonalPlayer()
     {
         searchplayer.SetActive(false);
         iswatchingPlayer = !iswatchingPlayer;

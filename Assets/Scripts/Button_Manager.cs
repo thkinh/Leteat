@@ -9,10 +9,12 @@ public class Button_Clickable : MonoBehaviour
     private string previous_Scene = "Menu";
     public GameObject UserData;
     bool iswatchingUser = false;
+    
 
     public TMP_Text id;
     public TMP_Text username;
     public TMP_Text email;
+
 
     public void Play()
     {
@@ -64,5 +66,9 @@ public class Button_Clickable : MonoBehaviour
         SceneManager.LoadScene("Sign up");
     }
 
+    public void LoadFriends()
+    {
+        SceneManager.LoadScene("FriendList");
+    }
     
 }

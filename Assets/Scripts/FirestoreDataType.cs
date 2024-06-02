@@ -49,3 +49,17 @@ public struct Relationship
     [FirestoreProperty]
     public string type { get; set; }
 }
+
+
+[FirestoreData]
+public struct Request
+{
+    [FirestoreProperty]
+    public string from { get; set; }
+
+    [FirestoreProperty]
+    public string to { get; set; }
+
+    [FirestoreProperty]
+    public bool accepted { get; set; }
+}
