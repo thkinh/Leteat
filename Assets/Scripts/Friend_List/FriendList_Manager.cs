@@ -67,13 +67,11 @@ public class FriendList_Manager : MonoBehaviour
         }
     }
    
-    private void PersonalPlayer()
+    public void PersonalPlayer()
     {
-        searchplayer.SetActive(false);
         iswatchingPlayer = !iswatchingPlayer;
         personalplayer.SetActive(iswatchingPlayer);
-
-    }    
+    }
 
     public void AddFriend()
     {   
