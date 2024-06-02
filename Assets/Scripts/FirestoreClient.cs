@@ -147,6 +147,19 @@ public class FirestoreClient : MonoBehaviour
         return pass;
     }
 
+    public async Task<string> ReadUsernameByID(string id)
+    {
+        string username = null;
+        DocumentReference docRef = db.Collection("Players").Document(id);
+        DocumentSnapshot doc = await docRef.GetSnapshotAsync();
+
+        Player player = doc.ConvertTo<Player>();
+
+        username = player.username;
+        
+        return username;
+    }
+
     public async Task<bool> IsEmailExists(string email)
     {
         if (db == null)
@@ -275,7 +288,7 @@ public class FirestoreClient : MonoBehaviour
     {
         List<Request> requests = new List<Request>();
 
-        CollectionReference colRef = db.Collection("Requests");
+        CollectionReference colRef = db.Collection("Requests"); 
 
         Query query = colRef.WhereEqualTo("from", FirestoreClient.fc_instance.thisPlayerID);
 

@@ -8,6 +8,7 @@ public class FriendList_Manager : MonoBehaviour
 {
     public GameObject friendEntryPrefab; // Assign the friend entry prefab in the Inspector
     public Transform contentHolder; // Assign the Content GameObject in the Inspector
+    public Transform allfriend_contentHolder;
     private List<Relationship> friendlist = new List<Relationship>();
     private List<Player> playerlist = new List<Player>();
     public GameObject searchplayer;
@@ -41,16 +42,29 @@ public class FriendList_Manager : MonoBehaviour
     {
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
         GameObject friend = Instantiate(friendEntryPrefab, contentHolder);
-        friend.AddComponent<TMP_Text>();
-        friend.GetComponent<TMP_Text>().text = searchbar.text;
-        Debug.Log(player.email);
+        TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>() ;
+
+        // Set the text to the player's username
+        if (friendText != null)
+        {
+            friendText.text = player.username + "-" + player.email;
+        }
     }
     
-    public void AllFriend()
+    public async void AllFriend()
     {
         iswatchingFriend =!iswatchingFriend;
         allfriend.SetActive(iswatchingFriend);
-        PersonalPlayer();
+        List<Relationship> relationships = await FirestoreClient.fc_instance.FetchUserRelationShips(FirestoreClient.fc_instance.thisPlayerID);
+        foreach (Relationship relationship in relationships)
+        {
+            GameObject friend = Instantiate(friendEntryPrefab, allfriend_contentHolder);
+            TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
+            if (friendText != null)
+            {
+                friendText.text = relationship.playerID + ":" + relationship.type;
+            }
+        }
     }
    
     private void PersonalPlayer()
@@ -62,7 +76,7 @@ public class FriendList_Manager : MonoBehaviour
     }    
 
     public void AddFriend()
-    {
+    {   
         isaddfriend = !isaddfriend;
         addfriend.SetActive(isaddfriend);
     }
