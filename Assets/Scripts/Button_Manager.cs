@@ -68,7 +68,7 @@ public class Button_Clickable : MonoBehaviour
 
     public void LoadFriends()
     {
-        SceneManager.LoadScene("FriendList");
+        SceneManager.LoadScene("Friends");
     }
     
 }

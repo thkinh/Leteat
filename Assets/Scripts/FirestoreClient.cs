@@ -312,4 +312,20 @@ public class FirestoreClient : MonoBehaviour
         Debug.Log("Deleted document with ID: " + doc.Id);
 
     }
+
+    public async void Reject (string username)
+    {
+        string from = await GetPlayerID(username);
+        Query query = db.Collection("Requests").WhereEqualTo("to", FirestoreClient.fc_instance.thisPlayerID).WhereEqualTo("from", from);
+
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        DocumentSnapshot doc = snapshot.FirstOrDefault();
+
+        await doc.Reference.DeleteAsync();
+        Debug.Log("Deleted document with ID: " + doc.Id);
+    }
+
+
+
 }

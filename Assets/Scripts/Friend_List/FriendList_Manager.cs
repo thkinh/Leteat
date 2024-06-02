@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,22 +13,31 @@ public class FriendList_Manager : MonoBehaviour
     public GameObject searchplayer;
     public GameObject allfriend;
     public GameObject personalplayer;
+    public TMP_InputField searchbar;
     bool iswatchingSearch = false;
     bool iswatchingFriend = false;
     bool iswatchingPlayer = false;
-    
 
-    public void AddRelation_user1_user2()
+    public void Update()
     {
-        Relationship relationship = new Relationship
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            playerID = "KpOBKxv0ZgZIc6vj5DpB",
-            type = "Close_friend",
-        };
-        FirestoreClient.fc_instance.AddUserRelationship(FirestoreClient.fc_instance.thisPlayerID, relationship);
+            Search();
+        }
     }
 
+    public void SearchForPlayer()
+    {
+        iswatchingSearch = !iswatchingSearch;
+        searchplayer.SetActive(iswatchingSearch);
+    
+    }
 
+    private async void Search()
+    {
+        Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
+        Debug.Log(player.email);
+    }
 
     private async void asyncQuery1() 
     {
@@ -70,4 +80,6 @@ public class FriendList_Manager : MonoBehaviour
         personalplayer.SetActive(iswatchingPlayer);
 
     }    
+
+
 }
