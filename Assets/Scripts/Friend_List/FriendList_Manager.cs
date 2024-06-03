@@ -17,12 +17,13 @@ public class FriendList_Manager : MonoBehaviour
     public GameObject addfriend;
     public GameObject requestfriend;
     public TMP_InputField searchbar;
-    bool iswatchingSearch = false;
-    bool iswatchingFriend = false;
-    bool iswatchingPlayer = false;
-    bool isaddfriend = false;
-    bool isrequestfriend = false;
-    
+    private GameObject currentpanel;
+
+    public void Start()
+    {
+        searchplayer.SetActive(true);
+        currentpanel = searchplayer;
+    }
 
     public void Update()
     {
@@ -32,10 +33,12 @@ public class FriendList_Manager : MonoBehaviour
         }
     }
 
+
     public void SearchForPlayer()
     {
-        iswatchingSearch = !iswatchingSearch;
-        searchplayer.SetActive(iswatchingSearch);
+        currentpanel.SetActive(false);
+        currentpanel = searchplayer;
+        searchplayer.SetActive(true);
     
     }
 
@@ -55,8 +58,9 @@ public class FriendList_Manager : MonoBehaviour
     
     public async void AllFriend()
     {
-        iswatchingFriend =!iswatchingFriend;
-        allfriend.SetActive(iswatchingFriend);
+        currentpanel.SetActive(false);
+        currentpanel = allfriend;
+        allfriend.SetActive(true);
         List<Relationship> relationships = await FirestoreClient.fc_instance.FetchUserRelationShips(FirestoreClient.fc_instance.thisPlayerID);
         foreach (Relationship relationship in relationships)
         {
@@ -72,20 +76,24 @@ public class FriendList_Manager : MonoBehaviour
    
     public void PersonalPlayer()
     {
+        currentpanel.SetActive(false);
+        currentpanel = personalplayer;
         personalplayer.SetActive(true);
         Debug.Log("ok");
     }
 
 
     public void AddFriend()
-    {   
-        isaddfriend = !isaddfriend;
-        addfriend.SetActive(isaddfriend);
+    {
+        currentpanel.SetActive(false);
+        currentpanel = addfriend;
+        addfriend.SetActive(true);
     }
 
     public void RequestFriend()
     {
-        isrequestfriend = !isrequestfriend;
-        requestfriend.SetActive(isrequestfriend);
+        currentpanel.SetActive(false);
+        currentpanel = requestfriend;
+        requestfriend.SetActive(true);
     }
 }
