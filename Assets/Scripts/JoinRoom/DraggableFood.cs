@@ -6,7 +6,7 @@ using Assets.Scripts.GamePlay;
 public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image image;
-
+    public int foodNumber;
     [HideInInspector] public Transform parentAfterDrag;
     private Canvas canvas;
     private GameObject placeholder;

@@ -42,8 +42,7 @@ public class DropArea : MonoBehaviour
         {
             currentDraggable = draggable;
             OnDropHandler?.Invoke(draggable);
-            IndexFood = (int)Enum.Parse(typeof(Food.FoodName), draggable.name);
-            Debug.Log($"Object '{draggable.name}' with index '{indexFood}' has been dropped in {name}");
+            IndexFood = draggable.foodNumber;
             DropAreaManager.Instance.UpdateIndexFood(this, indexFood);
             DropAreaManager.Instance.GetIndexFoods();
             DropAreaManager.Instance.CodeJoinRoom();
@@ -56,6 +55,7 @@ public class DropArea : MonoBehaviour
     {
         if (currentDraggable != null)
         {
+            IndexFood = -1;
             currentDraggable = null;
         }
     }

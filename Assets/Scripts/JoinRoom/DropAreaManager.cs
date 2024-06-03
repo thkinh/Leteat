@@ -6,7 +6,7 @@ using UnityEngine;
 public class DropAreaManager : MonoBehaviour
 {
     private static DropAreaManager _instance;
-    public int codeJoinRoom = 0;
+    int codeJoinRoom = 0;
     public static DropAreaManager Instance
     {
         get
@@ -29,17 +29,13 @@ public class DropAreaManager : MonoBehaviour
 
     public void UpdateIndexFood(DropArea dropArea, int newIndexFood)
     {
-        if (indexFoods.Contains(dropArea.IndexFood))
-        {
-            indexFoods.Remove(dropArea.IndexFood);
-        }
         indexFoods.Add(newIndexFood);
     }
 
 
     public List<int> GetIndexFoods()
     {
-        Debug.Log($"Current indexFoods: {string.Join(", ", indexFoods)}");
+        string.Join(", ", indexFoods);
         return new List<int>(indexFoods);
     }
 

@@ -562,7 +562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6d41ec20fecab4a8794ab919859686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codeJoinRoom: 0
 --- !u!1001 &169104800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,6 +574,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 1268468370}
+    - target: {fileID: 1094594453895247570, guid: a50aa610f39444b4bb4ed99d2fce0549, type: 3}
+      propertyPath: foodNumber
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1734557207077270055, guid: a50aa610f39444b4bb4ed99d2fce0549, type: 3}
       propertyPath: m_Name
       value: tomato
@@ -714,41 +717,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!1 &238677030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 238677031}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &238677031
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238677030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 997195470}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &246595069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1506,6 +1474,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 1449902458}
+    - target: {fileID: 6897337564435406484, guid: 517021a361e971e4d90f36470e7beaca, type: 3}
+      propertyPath: foodNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1670,6 +1642,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 1854839381}
+    - target: {fileID: 9181515152851740032, guid: 4dc1a71a9fcb85441b53163c6585ff9b, type: 3}
+      propertyPath: foodNumber
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1717,6 +1693,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1280189735}
     m_Modifications:
+    - target: {fileID: 623993380316131520, guid: cd961fa7303b72f4693e99c4d9886dc5, type: 3}
+      propertyPath: foodNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3952298948112452828, guid: cd961fa7303b72f4693e99c4d9886dc5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2175,7 +2155,6 @@ RectTransform:
   - {fileID: 858009322}
   - {fileID: 469012386}
   - {fileID: 157516847}
-  - {fileID: 238677031}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2579,6 +2558,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 1190117015}
+    - target: {fileID: 3332332431814039694, guid: 323c1f6d3fea3864e889bea8ccaa9bd6, type: 3}
+      propertyPath: foodNumber
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5663971567669295174, guid: 323c1f6d3fea3864e889bea8ccaa9bd6, type: 3}
       propertyPath: m_Name
       value: watermelon
@@ -2734,6 +2717,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 1432525198}
+    - target: {fileID: 5188979218208555321, guid: 77ef35d7d4391964fa294637c406b14e, type: 3}
+      propertyPath: foodNumber
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3552,6 +3539,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 860356638}
+    - target: {fileID: 2997663169465123854, guid: da5700189b426dc4995d6c46698a1f45, type: 3}
+      propertyPath: foodNumber
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4498448591570834614, guid: da5700189b426dc4995d6c46698a1f45, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3814,6 +3805,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 1622776219}
+    - target: {fileID: 6143950380363949295, guid: 9b0319b3f4e25394ea7fd8eccfe1766e, type: 3}
+      propertyPath: foodNumber
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8832718864709399151, guid: 9b0319b3f4e25394ea7fd8eccfe1766e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
