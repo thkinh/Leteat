@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
@@ -16,6 +16,8 @@ public class SignIn_SceneManager : MonoBehaviour
 
     public TMP_InputField email;
     public TMP_InputField password;
+    public Button showPasswordButton; // Thêm một Button để hiển thị mật khẩu
+
 
     private void Awake()
     {
