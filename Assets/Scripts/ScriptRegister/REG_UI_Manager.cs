@@ -46,11 +46,11 @@ public class REG_UI_Manager : MonoBehaviour
     private async Task<bool> Check_Password()
     {
 
-        ////kiểm tra password phải đủ 8 kí tự trở lên
-        //if (!CheckFormatPassword.IsPasswordValid(password.text))
-        //{
-        //    return false;
-        //}
+        //kiểm tra password phải đủ 8 kí tự trở lên
+        if (!CheckFormatPassword.IsPasswordValid(password.text))
+        {
+            return false;
+        }
 
         ////kiểm tra đúng format của email
         //if (!CheckFormatPassword.IsValidEmailFormat(email.text))
