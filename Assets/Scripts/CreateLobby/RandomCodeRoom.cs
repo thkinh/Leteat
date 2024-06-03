@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,13 +21,29 @@ public class RandomCodeRoom : MonoBehaviour
         TakeList = new List<int>(new int[Position.Length]);
         for (int i = 0; i < Position.Length; i++)
         {
-            
-            randomNumber = UnityEngine.Random.Range(0,(Food.Length));
+            int randomNumber = UnityEngine.Random.Range(0, Food.Length);
             TakeList[i] = randomNumber;
-            codeRoom = codeRoom * 10 + randomNumber;
+            if (i == 0 && randomNumber == 0)
+            {
+                codeRoom = 0;
+            }
+            else
+            {
+                codeRoom = codeRoom * 10 + randomNumber;
+            }
             Position[i].GetComponent<SpriteRenderer>().sprite = Food[TakeList[i]];
         }
-        Debug.Log(message: "Code Room is: " + codeRoom);
+        Debug.Log("Code Room is: " + CodeRoomToString(codeRoom));
+    }
+    private string CodeRoomToString(int code)
+    {
+        string codeString = code.ToString();
+        // Thêm số 0 đằng trước nếu mã phòng có ít hơn 5 chữ số
+        while (codeString.Length < 5)
+        {
+            codeString = "0" + codeString;
+        }
+        return codeString;
     }
 
     public void Send_Code_Room()

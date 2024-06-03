@@ -16,9 +16,16 @@ public class DropArea : MonoBehaviour
     public List<DropCondition> DropConditions = new List<DropCondition>();
     public event Action<DraggableFood> OnDropHandler;
     private DraggableFood currentDraggable;
-    private int codeJoinRoom = 0;
-    private List<int> indexFoods = new List<int>();
+    private int indexFood = -1;
 
+    public int IndexFood
+    {
+        get => indexFood;
+        private set
+        {
+            indexFood = value;
+        }
+    }
     public bool Accepts(DraggableFood draggable)
     {
         if (currentDraggable != null)
@@ -35,28 +42,21 @@ public class DropArea : MonoBehaviour
         {
             currentDraggable = draggable;
             OnDropHandler?.Invoke(draggable);
-            int indexFood = (int)Enum.Parse(typeof(Food.FoodName), draggable.name);
-            indexFoods.Add(indexFood);
+            IndexFood = (int)Enum.Parse(typeof(Food.FoodName), draggable.name);
             Debug.Log($"Object '{draggable.name}' with index '{indexFood}' has been dropped in {name}");
+            DropAreaManager.Instance.UpdateIndexFood(this, indexFood);
+            DropAreaManager.Instance.GetIndexFoods();
+            DropAreaManager.Instance.CodeJoinRoom();
         }
     }
 
-    public void TypeRoom()
-    {
-        codeJoinRoom = 0;
-        for (int i = 0; i < indexFoods.Count; i++)
-        {
-            codeJoinRoom = codeJoinRoom * 10 + indexFoods[i];
-        }
-
-        Debug.Log(message: "Code Join Room is: " + codeJoinRoom);
-    }
 
     // Hàm để loại bỏ đối tượng khi cần thiết
     public void RemoveDraggable()
     {
-        currentDraggable = null;
+        if (currentDraggable != null)
+        {
+            currentDraggable = null;
+        }
     }
-
-
 }
