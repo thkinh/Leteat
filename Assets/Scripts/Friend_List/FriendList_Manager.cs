@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -22,7 +22,7 @@ public class FriendList_Manager : MonoBehaviour
 
     public void Start()
     {
-        searchplayer.SetActive(true);
+        searchplayer.SetActive(false);
         currentpanel = searchplayer;
     }
 
@@ -47,8 +47,12 @@ public class FriendList_Manager : MonoBehaviour
     {
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
         GameObject friend = Instantiate(friendEntryPrefab, contentHolder);
-        friend.GetComponent<Button>().onClick.AddListener(PersonalPlayer);
-        TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>() ;
+        Button friendButton = friend.GetComponent<Button>();
+        if (friendButton != null)
+        {
+            friendButton.onClick.AddListener(PersonalPlayer);
+        }
+        TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
 
         // Set the text to the player's username
         if (friendText != null)
@@ -66,7 +70,11 @@ public class FriendList_Manager : MonoBehaviour
         foreach (Relationship relationship in relationships)
         {
             GameObject friend = Instantiate(friendEntryPrefab, allfriend_contentHolder);
-            friend.GetComponent<Button>().onClick.AddListener(PersonalPlayer);
+            Button friendButton = friend.GetComponent<Button>();
+            if (friendButton != null)
+            {
+                friendButton.onClick.AddListener(PersonalPlayer);
+            }
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
             if (friendText != null)
             {
@@ -84,22 +92,14 @@ public class FriendList_Manager : MonoBehaviour
     }
 
 
-<<<<<<< HEAD
-    public async void AddFriend()
-    {   
-        isaddfriend = !isaddfriend;
-        addfriend.SetActive(isaddfriend);
-       
-=======
     public void AddFriend()
     {
         currentpanel.SetActive(false);
         currentpanel = addfriend;
         addfriend.SetActive(true);
->>>>>>> cd213004434519111c45d9e6459db2d81cd79e43
     }
 
-    public async void RequestFriend()
+    public void RequestFriend()
     {
         currentpanel.SetActive(false);
         currentpanel = requestfriend;
