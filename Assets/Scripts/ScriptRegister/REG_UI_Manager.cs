@@ -1,4 +1,4 @@
-using Assets.Scripts;
+﻿using Assets.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -45,12 +45,30 @@ public class REG_UI_Manager : MonoBehaviour
 
     private async Task<bool> Check_Password()
     {
+
+        ////kiểm tra password phải đủ 8 kí tự trở lên
+        //if (!CheckFormatPassword.IsPasswordValid(password.text))
+        //{
+        //    return false;
+        //}
+
+        ////kiểm tra đúng format của email
+        //if (!CheckFormatPassword.IsValidEmailFormat(email.text))
+        //{
+        //    Debug.Log("Invalid email format.");
+        //    return false;
+        //}
+
+
+        //kiểm tra password = repeat password
         if (repeat_pass.text != password.text)
         {
             Debug.Log($"Passwords do not match: {repeat_pass.text} != {password.text}");
             return false;
         }
 
+
+        //kiểm tra email đã tồn tại trên firestore hay chưa
         if (await FirestoreClient.fc_instance.IsEmailExists(email.text))
         {
             Debug.Log("Email already exists.");
