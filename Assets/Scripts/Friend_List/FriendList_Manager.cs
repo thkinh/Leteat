@@ -22,6 +22,7 @@ public class FriendList_Manager : MonoBehaviour
     bool iswatchingPlayer = false;
     bool isaddfriend = false;
     bool isrequestfriend = false;
+    
 
     public void Update()
     {
@@ -42,6 +43,7 @@ public class FriendList_Manager : MonoBehaviour
     {
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
         GameObject friend = Instantiate(friendEntryPrefab, contentHolder);
+        friend.GetComponent<Button>().onClick.AddListener(PersonalPlayer);
         TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>() ;
 
         // Set the text to the player's username
@@ -59,6 +61,7 @@ public class FriendList_Manager : MonoBehaviour
         foreach (Relationship relationship in relationships)
         {
             GameObject friend = Instantiate(friendEntryPrefab, allfriend_contentHolder);
+            friend.GetComponent<Button>().onClick.AddListener(PersonalPlayer);
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
             if (friendText != null)
             {
@@ -69,9 +72,10 @@ public class FriendList_Manager : MonoBehaviour
    
     public void PersonalPlayer()
     {
-        iswatchingPlayer = !iswatchingPlayer;
-        personalplayer.SetActive(iswatchingPlayer);
+        personalplayer.SetActive(true);
+        Debug.Log("ok");
     }
+
 
     public void AddFriend()
     {   
