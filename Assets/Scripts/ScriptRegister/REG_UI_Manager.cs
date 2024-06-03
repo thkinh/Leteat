@@ -52,12 +52,12 @@ public class REG_UI_Manager : MonoBehaviour
             return false;
         }
 
-        ////kiểm tra đúng format của email
-        //if (!CheckFormatPassword.IsValidEmailFormat(email.text))
-        //{
-        //    Debug.Log("Invalid email format.");
-        //    return false;
-        //}
+        //kiểm tra đúng format của email
+        if (!CheckFormatPassword.IsValidEmailFormat(email.text))
+        {
+            Debug.Log("Invalid email format.");
+            return false;
+        }
 
 
         //kiểm tra password = repeat password
