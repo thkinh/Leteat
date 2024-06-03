@@ -14,11 +14,7 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
-    public Button showPasswordButton; // Button to toggle password visibility
-
-    private bool isPasswordVisible = false; // To track the visibility state of passwords
-    private string actualPassword; // Store the actual password
-    private string actualRepeatPassword; // Store the actual repeat password
+    private bool is_showing_password = false;
 
 
     Client client = new Client();
@@ -29,20 +25,6 @@ public class REG_UI_Manager : MonoBehaviour
     {
         instance = this;
         verifi_Code = Random.Range(1000, 10000);
-
-        //if (showPasswordButton != null)
-        //{
-        //    showPasswordButton.onClick.AddListener(TogglePasswordVisibility);
-
-        //}
-    }
-
-    public void Show()
-    {
-        if (showPasswordButton != null)
-        {
-            showPasswordButton.onClick.AddListener(TogglePasswordVisibility);
-        }
     }
 
     public void Register()
@@ -106,25 +88,23 @@ public class REG_UI_Manager : MonoBehaviour
         return true;
     }
 
-
-    public void TogglePasswordVisibility()
+    public void Show()
     {
-        isPasswordVisible = !isPasswordVisible;
-
-        if (isPasswordVisible)
+        is_showing_password = !is_showing_password;
+        var whatsonthescreen = password.GetComponent<TMP_InputField>();
+        if (is_showing_password  && whatsonthescreen != null)
         {
-            password.text = actualPassword; // Show actual password
-            repeat_pass.text = actualRepeatPassword; // Show actual repeat password
+            whatsonthescreen.contentType = TMP_InputField.ContentType.Standard;
         }
-
-        else
+        if(!is_showing_password && whatsonthescreen != null) 
         {
-            actualPassword = password.text; // Store actual password
-            actualRepeatPassword = repeat_pass.text; // Store actual repeat password
-
-            password.text = new string('*', actualPassword.Length); // Show masked password
-            repeat_pass.text = new string('*', actualRepeatPassword.Length); // Show masked repeat password
+            whatsonthescreen.contentType = TMP_InputField.ContentType.Password;
         }
+        
+
+        password.ForceLabelUpdate();
+        password.Select();
+        password.ActivateInputField();
     }
 
     public void Back()
