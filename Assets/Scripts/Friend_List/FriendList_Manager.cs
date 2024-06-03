@@ -10,6 +10,7 @@ public class FriendList_Manager : MonoBehaviour
     public Transform contentHolder; // Assign the Content GameObject in the Inspector
     public Transform allfriend_contentHolder;
     private List<Relationship> friendlist = new List<Relationship>();
+    private List<Request> requestlist = new List<Request>();
     private List<Player> playerlist = new List<Player>();
     public GameObject searchplayer;
     public GameObject allfriend;
@@ -77,13 +78,14 @@ public class FriendList_Manager : MonoBehaviour
     }
 
 
-    public void AddFriend()
+    public async void AddFriend()
     {   
         isaddfriend = !isaddfriend;
         addfriend.SetActive(isaddfriend);
+       
     }
 
-    public void RequestFriend()
+    public async void RequestFriend()
     {
         isrequestfriend = !isrequestfriend;
         requestfriend.SetActive(isrequestfriend);
