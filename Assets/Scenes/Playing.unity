@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51946f264c0dbbd4eae5910e594fe5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  submit: {fileID: 0}
   trashcan: {fileID: 1371729235}
   SendtoServer: {fileID: 1713648913}
   FoodPrefab:
