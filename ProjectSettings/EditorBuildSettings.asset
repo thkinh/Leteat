@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Friends.unity
     guid: f5b49bffc7807cb45bac7de752e4bcdb
+  - enabled: 1
+    path: Assets/Scenes/ForgottenPassword.unity
+    guid: 108924d6a203bec4281411bea065f874
   m_configObjects: {}

@@ -14,6 +14,7 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
+    public GameObject showpass;
     private bool is_showing_password = false;
 
 
@@ -88,7 +89,7 @@ public class REG_UI_Manager : MonoBehaviour
         return true;
     }
 
-    public void Show()
+    public void Showpass()
     {
         is_showing_password = !is_showing_password;
         var whatsonthescreen = password.GetComponent<TMP_InputField>();
@@ -105,6 +106,24 @@ public class REG_UI_Manager : MonoBehaviour
         password.ForceLabelUpdate();
         password.Select();
         password.ActivateInputField();
+    }
+    public void Showrepeatpass()
+    {
+        is_showing_password = !is_showing_password;
+        var whatsonthescreen = repeat_pass.GetComponent<TMP_InputField>();
+        if (is_showing_password && whatsonthescreen != null)
+        {
+            whatsonthescreen.contentType = TMP_InputField.ContentType.Standard;
+        }
+        if (!is_showing_password && whatsonthescreen != null)
+        {
+            whatsonthescreen.contentType = TMP_InputField.ContentType.Password;
+        }
+
+
+        repeat_pass.ForceLabelUpdate();
+        repeat_pass.Select();
+        repeat_pass.ActivateInputField();
     }
 
     public void Back()

@@ -82,6 +82,10 @@ public class SignIn_SceneManager : MonoBehaviour
         SceneManager.LoadScene("Sign Up");
     }
 
+    public void Button_Forgotten_Password()
+    {
+        SceneManager.LoadScene("ForgottenPassword");
+    }    
 }
 
 
