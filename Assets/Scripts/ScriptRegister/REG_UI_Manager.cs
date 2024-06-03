@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class REG_UI_Manager : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
+    public Button showPasswordButton; // Button to toggle password visibility
+
+    private bool isPasswordVisible = false; // To track the visibility state of passwords
+    private string actualPassword; // Store the actual password
+    private string actualRepeatPassword; // Store the actual repeat password
+
+
     Client client = new Client();
 
     public static int verifi_Code = 0;
@@ -21,6 +29,20 @@ public class REG_UI_Manager : MonoBehaviour
     {
         instance = this;
         verifi_Code = Random.Range(1000, 10000);
+
+        //if (showPasswordButton != null)
+        //{
+        //    showPasswordButton.onClick.AddListener(TogglePasswordVisibility);
+
+        //}
+    }
+
+    public void Show()
+    {
+        if (showPasswordButton != null)
+        {
+            showPasswordButton.onClick.AddListener(TogglePasswordVisibility);
+        }
     }
 
     public void Register()
@@ -82,6 +104,27 @@ public class REG_UI_Manager : MonoBehaviour
         }
 
         return true;
+    }
+
+
+    public void TogglePasswordVisibility()
+    {
+        isPasswordVisible = !isPasswordVisible;
+
+        if (isPasswordVisible)
+        {
+            password.text = actualPassword; // Show actual password
+            repeat_pass.text = actualRepeatPassword; // Show actual repeat password
+        }
+
+        else
+        {
+            actualPassword = password.text; // Store actual password
+            actualRepeatPassword = repeat_pass.text; // Store actual repeat password
+
+            password.text = new string('*', actualPassword.Length); // Show masked password
+            repeat_pass.text = new string('*', actualRepeatPassword.Length); // Show masked repeat password
+        }
     }
 
     public void Back()
