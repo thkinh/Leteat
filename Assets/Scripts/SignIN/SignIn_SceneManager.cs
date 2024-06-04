@@ -17,20 +17,11 @@ public class SignIn_SceneManager : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public Button showPasswordButton; // Thêm một Button để hiển thị mật khẩu
-    private bool isPasswordVisible = false; // To track the visibility state
+    private bool is_showing_password = false; // To track the visibility state
 
     private void Awake()
     {
         instance = this;
-    }
-
-    public void Show()
-    {
-        if (showPasswordButton != null)
-        {
-            showPasswordButton.onClick.AddListener(TogglePasswordVisibility);
-
-        }
     }
 
 
@@ -59,21 +50,23 @@ public class SignIn_SceneManager : MonoBehaviour
         return false;
     }
 
-    private void TogglePasswordVisibility()
+    public void TogglePasswordVisibility()
     {
-        if (isPasswordVisible)
+        is_showing_password = !is_showing_password;
+        var whatsonthescreen = password.GetComponent<TMP_InputField>();
+        if (is_showing_password && whatsonthescreen != null)
         {
-            // Hide the password
-            password.text = new string('*', password.text.Length);
-            isPasswordVisible = false;
+            whatsonthescreen.contentType = TMP_InputField.ContentType.Standard;
+        }
+        if (!is_showing_password && whatsonthescreen != null)
+        {
+            whatsonthescreen.contentType = TMP_InputField.ContentType.Password;
         }
 
-        else
-        {
-            // Show the password
-            password.text = password.text;
-            isPasswordVisible = true;
-        }
+
+        password.ForceLabelUpdate();
+        password.Select();
+        password.ActivateInputField();
     }
 
 

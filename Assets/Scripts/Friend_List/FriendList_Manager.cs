@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FriendList_Manager : MonoBehaviour
@@ -104,5 +106,11 @@ public class FriendList_Manager : MonoBehaviour
         currentpanel.SetActive(false);
         currentpanel = requestfriend;
         requestfriend.SetActive(true);
+    }
+
+    public void Back()
+    {
+        Destroy(EventSystem.current.gameObject);
+        SceneManager.LoadScene("Menu");
     }
 }
