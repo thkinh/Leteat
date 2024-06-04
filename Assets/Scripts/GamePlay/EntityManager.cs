@@ -24,8 +24,6 @@ public class EntityManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        sampleFood = FindObjectOfType<SampleFood>();
-
     }
     // Start is called before the first frame update
     void Start()
@@ -46,7 +44,7 @@ public class EntityManager : MonoBehaviour
             }
         }
     }
-
+    
     private void Spawn_Food()
     {
         var wanted_x = UnityEngine.Random.Range(minTrans, maxTrans);

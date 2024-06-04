@@ -8,7 +8,7 @@ public class DragableItem : MonoBehaviour
 {
     private bool dragging;
     private Vector2 offset, original_pos;
-    [HideInInspector] public Food food;
+    public Food food;
     private void Awake()
     {
         float randomX = UnityEngine.Random.Range(0.0f, Screen.width);
@@ -51,12 +51,12 @@ public class DragableItem : MonoBehaviour
 
         if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
-            List<int> takeList = EntityManager.instance.sampleFood.TakeList;
-            if (takeList.Contains(this.food.foodIndex))
-            {
+            //List<int> takeList = EntityManager.instance.sampleFood.TakeList;
+            //if (takeList.Contains(this.food.foodIndex))
+            //{
                 Debug.Log("Destroy this food");
                 Destroy(this.GameObject());
-            }
+            //}
         }
     }
 
