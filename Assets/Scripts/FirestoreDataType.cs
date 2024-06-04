@@ -47,6 +47,9 @@ public struct Relationship
     [FirestoreProperty]
     public string playerID { get; set; }
     [FirestoreProperty]
+    public string username { get; set; }
+
+    [FirestoreProperty]
     public string type { get; set; }
 }
 

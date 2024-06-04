@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 using System.Linq;
 using Unity.VisualScripting;
 using System;
+using Unity.Mathematics;
 
 public class FirestoreClient : MonoBehaviour
 {
     public static FirestoreClient fc_instance;
     private static FirebaseFirestore db;
     public string thisPlayerID;
-
+    private List<Relationship> friendlist   = new List<Relationship>();
     public Player thisPlayer;
     public bool playerisLoaded = false;
+    public bool friendsisLoaded = false;
 
     void Awake()
     {
@@ -65,15 +67,20 @@ public class FirestoreClient : MonoBehaviour
         return snapshot.Documents.Count();
     }
 
+    public void Reload()
+    {
+        friendsisLoaded = false;
+        FetchUserRelationShips();
+    }
 
 
     //Ham lay list friends
     public async Task<List<Relationship>> FetchUserRelationShips(string userID)
     {
-        if (string.IsNullOrEmpty(userID))
+        if (string.IsNullOrEmpty(userID) || friendsisLoaded)
         {
-            Debug.Log("Alo, bi khung khong?");
-            return null;
+            Debug.Log("Loaded friendlist");
+            return friendlist;
         }
 
         List<Relationship> relationships = new List<Relationship>();
@@ -85,8 +92,32 @@ public class FirestoreClient : MonoBehaviour
             relationships.Add(relationship);
             Debug.Log($"User: {relationship.playerID}, Relationship Type: {relationship.type}");
         }
-
+        friendsisLoaded = true;
+        friendlist = relationships;
         return relationships;
+    }
+
+    //Ham update list friend
+    public async void FetchUserRelationShips()
+    {
+        if (string.IsNullOrEmpty(thisPlayerID) || friendsisLoaded)
+        {
+            Debug.Log("Alo, bi khung khong?");
+            return;
+        }
+
+        List<Relationship> relationships = new List<Relationship>();
+        DocumentReference docRef = FirebaseFirestore.DefaultInstance.Collection("Players").Document(thisPlayerID);
+        QuerySnapshot snapshot = await docRef.Collection("Relationships").GetSnapshotAsync();
+        foreach (DocumentSnapshot document in snapshot.Documents)
+        {
+            Relationship relationship = document.ConvertTo<Relationship>();
+            relationships.Add(relationship);
+            Debug.Log($"User: {relationship.playerID}, Relationship Type: {relationship.type}");
+        }
+        friendsisLoaded = true;
+        friendlist = relationships;
+        return;
     }
 
 
@@ -220,8 +251,12 @@ public class FirestoreClient : MonoBehaviour
         Player player = new Player();
         DocumentReference doc = db.Collection("Players").Document(playerID);
         DocumentSnapshot snapshot = await doc.GetSnapshotAsync();
+        
+        if(snapshot!=null)
+        {
+            player = snapshot.ConvertTo<Player>();
 
-        player = snapshot.ConvertTo<Player>();
+        }
 
         return player;
     }
@@ -253,7 +288,10 @@ public class FirestoreClient : MonoBehaviour
   
     public async Task<Player> FindPlayer_byName(string username)
     {
-        Player player = new Player();
+        Player player = new Player
+        {
+            username = null,
+        };
 
         CollectionReference col = db.Collection("Players");
 
@@ -263,7 +301,11 @@ public class FirestoreClient : MonoBehaviour
 
         DocumentSnapshot document = snapshots.FirstOrDefault();
         
-        player = document.ConvertTo<Player>();
+        if(document != null)
+        {
+            player = document.ConvertTo<Player>();
+        }
+
         return player;
     }
 
@@ -339,6 +381,16 @@ public class FirestoreClient : MonoBehaviour
         Debug.Log("Deleted document with ID: " + doc.Id);
     }
 
-
+    public async Task<bool> IsFriended(string username)
+    {
+        foreach (Relationship relationship in friendlist)
+        {
+            if(relationship.username == username)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
