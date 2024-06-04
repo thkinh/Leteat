@@ -23,7 +23,6 @@ public class SampleFood : MonoBehaviour
             }
             TakeList[i] = randomNumber;
             Position[i].GetComponent<SpriteRenderer>().sprite = Food[TakeList[i]];
-            Debug.Log(message: "Code Room is: " + Food[TakeList[i]].name);
         }
     }
 

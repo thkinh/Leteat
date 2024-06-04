@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +10,7 @@ public class FriendList_Manager : MonoBehaviour
     public Transform contentHolder; // Assign the Content GameObject in the Inspector
     public Transform allfriend_contentHolder;
     private List<Relationship> friendlist = new List<Relationship>();
+    private List<Request> requestlist = new List<Request>();
     private List<Player> playerlist = new List<Player>();
     public GameObject searchplayer;
     public GameObject allfriend;
@@ -21,7 +22,7 @@ public class FriendList_Manager : MonoBehaviour
 
     public void Start()
     {
-        searchplayer.SetActive(true);
+        searchplayer.SetActive(false);
         currentpanel = searchplayer;
     }
 
@@ -46,8 +47,12 @@ public class FriendList_Manager : MonoBehaviour
     {
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
         GameObject friend = Instantiate(friendEntryPrefab, contentHolder);
-        friend.GetComponent<Button>().onClick.AddListener(PersonalPlayer);
-        TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>() ;
+        Button friendButton = friend.GetComponent<Button>();
+        if (friendButton != null)
+        {
+            friendButton.onClick.AddListener(PersonalPlayer);
+        }
+        TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
 
         // Set the text to the player's username
         if (friendText != null)
@@ -65,7 +70,11 @@ public class FriendList_Manager : MonoBehaviour
         foreach (Relationship relationship in relationships)
         {
             GameObject friend = Instantiate(friendEntryPrefab, allfriend_contentHolder);
-            friend.GetComponent<Button>().onClick.AddListener(PersonalPlayer);
+            Button friendButton = friend.GetComponent<Button>();
+            if (friendButton != null)
+            {
+                friendButton.onClick.AddListener(PersonalPlayer);
+            }
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
             if (friendText != null)
             {
