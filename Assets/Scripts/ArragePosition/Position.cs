@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class Position : MonoBehaviour
 {
     public GameObject disk;
+    public Transform parent;
     public List<GameObject> TakeList = new List<GameObject>();
     public List<RectTransform> availablePositions = new List<RectTransform>();
 
@@ -29,7 +30,7 @@ public class Position : MonoBehaviour
         if (disk != null && availablePositions.Count > 0)
         {
             RectTransform spawnPosition = availablePositions[i]; 
-            GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation);
+            GameObject newdisk = Instantiate(disk, spawnPosition.position, spawnPosition.rotation, parent);
             newdisk.name = "Disk " + i;
             newdisk.AddComponent<DraggableFood>();
             TakeList.Add(newdisk);
