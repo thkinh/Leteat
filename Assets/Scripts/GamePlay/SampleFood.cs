@@ -8,21 +8,21 @@ public class SampleFood : MonoBehaviour
     public GameObject[] Position;
     public Sprite[] Food;
 
-    public List<int> TakeList = new List<int>();
+    public List<int> TakeList { get; private set; }
     private int randomNumber;
+
     private void Start()
     {
         TakeList = new List<int>(new int[Position.Length]);
         for (int i = 0; i < Position.Length; i++)
         {
-
-            randomNumber = UnityEngine.Random.Range(0, (Food.Length));
             while (TakeList.Contains(randomNumber))
             {
                 randomNumber = UnityEngine.Random.Range(0, (Food.Length));
             }
             TakeList[i] = randomNumber;
             Position[i].GetComponent<SpriteRenderer>().sprite = Food[TakeList[i]];
+            Debug.Log(message: "Food " + TakeList[i] + " is in disk " + Position[i]);
         }
     }
 
