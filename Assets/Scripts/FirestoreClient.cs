@@ -332,7 +332,7 @@ public class FirestoreClient : MonoBehaviour
 
         CollectionReference colRef = db.Collection("Requests"); 
 
-        Query query = colRef.WhereEqualTo("from", FirestoreClient.fc_instance.thisPlayerID);
+        Query query = colRef.WhereEqualTo("to", FirestoreClient.fc_instance.thisPlayerID);
 
         QuerySnapshot snapshot = await query.GetSnapshotAsync();
 
@@ -381,7 +381,7 @@ public class FirestoreClient : MonoBehaviour
         Debug.Log("Deleted document with ID: " + doc.Id);
     }
 
-    public async Task<bool> IsFriended(string username)
+    public bool IsFriended(string username)
     {
         foreach (Relationship relationship in friendlist)
         {

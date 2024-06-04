@@ -131,7 +131,7 @@ public class FriendList_Manager : MonoBehaviour
 
         foreach (Player player in playerlist) 
         {
-            if(await FirestoreClient.fc_instance.IsFriended(player.username))
+            if(FirestoreClient.fc_instance.IsFriended(player.username))
             {
                 continue;
             }
@@ -178,7 +178,7 @@ public class FriendList_Manager : MonoBehaviour
             TMP_Text friendText = r.GetComponentInChildren<TMP_Text>();
             if (friendText != null)
             {
-                friendText.text = await FirestoreClient.fc_instance.GetPlayerID(request.from);
+                friendText.text = await FirestoreClient.fc_instance.ReadUsernameByID(request.from);
             }
         }
 
