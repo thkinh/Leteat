@@ -61,6 +61,7 @@ public class FriendList_Manager : MonoBehaviour
         {
             friendText.text = player.username + "-" + player.email;
         }
+
     }
     
     public async void AllFriend()
