@@ -51,12 +51,12 @@ public class DragableItem : MonoBehaviour
 
         if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
-            //List<int> takeList = EntityManager.instance.sampleFood.TakeList;
-            //if (takeList.Contains(this.food.foodIndex))
-            //{
-                Debug.Log("Destroy this food");
+            var takeList = SampleFood.instance.TakeList; // Access the TakeList from SampleFood instance
+            if (takeList.Contains(food.foodIndex)) // Assuming food has an 'id' field
+            {
+                Debug.Log("Submit this food");
                 Destroy(this.GameObject());
-            //}
+            }
         }
     }
 

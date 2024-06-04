@@ -5,12 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class SampleFood : MonoBehaviour
 {
+    public static SampleFood instance;
+
     public GameObject[] Position;
     public Sprite[] Food;
 
-    public List<int> TakeList { get; private set; }
+    public List<int> TakeList = new List<int>();
     private int randomNumber;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         TakeList = new List<int>(new int[Position.Length]);
