@@ -1,8 +1,7 @@
-using Assets.Scripts.GamePlay;
-
+﻿using Assets.Scripts.GamePlay;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class EntityManager : MonoBehaviour
 {
@@ -15,15 +14,18 @@ public class EntityManager : MonoBehaviour
     public GameObject time_control;
     float minTrans = 200;
     float maxTrans = 1500;
-    private static int idCounter = 0;
 
-    //private int point = 0;
     private Food[] take_in;
     private Food[] debai;
+
+    public SampleFood sampleFood;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
+        sampleFood = FindObjectOfType<SampleFood>();
+
     }
     // Start is called before the first frame update
     void Start()
@@ -51,18 +53,16 @@ public class EntityManager : MonoBehaviour
         var wanted_y = UnityEngine.Random.Range(minTrans, maxTrans);
         var position = new Vector2(wanted_x, wanted_y);
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
-        idCounter++; // Increment the counter for each new prefab
-        nf.name = "Food_" + idCounter; // Assign a unique name with the ID
-        nf.GetComponent<DragableItem>().food.foodIndex = idCounter; // Assuming the Food class has an 'id' field
-        Debug.Log("Spawn: " +nf.name);
+        nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
+        Debug.Log("Spawn: " + nf.name);
     }
 
     public void Spawn_Food(Food food)
     {
-        //GameObject nf = Instantiate(new_Food, new Vector2(2,3), Quaternion.identity) as GameObject;
-        //nf.GetComponent<DragableItem>().food = food;
-        //nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
-        //nf.GetComponent<SpriteRenderer>().color = UIManager.LoadColor(nf.GetComponent<DragableItem>().food);
+    //    //GameObject nf = Instantiate(new_Food, new Vector2(2,3), Quaternion.identity) as GameObject;
+    //    //nf.GetComponent<DragableItem>().food = food;
+    //    //nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
+    //    //nf.GetComponent<SpriteRenderer>().color = UIManager.LoadColor(nf.GetComponent<DragableItem>().food);
     }
 
     public void Take_in()

@@ -31,9 +31,9 @@ namespace Assets.Scripts.GamePlay
             this.name = name;
         }
 
-        public Food(int nameIndex)
+        public Food(int name)
         {
-            this.name = (FoodName)nameIndex;
+            this.name = (FoodName)name;
         }
 
         public Food(string name)

@@ -1,5 +1,6 @@
-using Assets.Scripts;
+﻿using Assets.Scripts;
 using Assets.Scripts.GamePlay;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class DragableItem : MonoBehaviour
 {
     private bool dragging;
     private Vector2 offset, original_pos;
-    public Food food;
+    [HideInInspector] public Food food;
     private void Awake()
     {
         float randomX = UnityEngine.Random.Range(0.0f, Screen.width);
@@ -48,10 +49,14 @@ public class DragableItem : MonoBehaviour
             Destroy(this.GameObject());
         }
 
-        if (EntityManager.instance.SendtoServer.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
+        if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
-            Destroy(this.gameObject);
-            ClientManager.client.SendPacket(this.food, true);
+            List<int> takeList = EntityManager.instance.sampleFood.TakeList;
+            if (takeList.Contains(this.food.foodIndex))
+            {
+                Debug.Log("Destroy this food");
+                Destroy(this.GameObject());
+            }
         }
     }
 
