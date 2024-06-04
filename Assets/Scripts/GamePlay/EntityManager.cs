@@ -18,19 +18,19 @@ public class EntityManager : MonoBehaviour
     private Food[] take_in;
     private Food[] debai;
 
-    public SampleFood sampleFood;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
     }
+
+
     // Start is called before the first frame update
     void Start()
     {
         Spawn_Food();
     }
-
     // Update is called once per frame
     void Update()
     {
