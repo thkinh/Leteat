@@ -1315,6 +1315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d7532b8a400d443ba7b555be53a60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disk: {fileID: 0}
+  parent: {fileID: 0}
+  TakeList: []
   availablePositions:
   - {fileID: 0}
   - {fileID: 0}
@@ -1322,16 +1325,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  list_prefab:
-  - {fileID: 5178153293304866494, guid: 416ff76c438f1614a94299cc75994be4, type: 3}
-  - {fileID: 1374659709626374516, guid: ce15ef7dd9e712b488a46e0175e18a12, type: 3}
-  - {fileID: 8838422922446759484, guid: 60700877c2082c248acc031680b9e569, type: 3}
-  - {fileID: 3933556738150138108, guid: a42e529749087ad40967b70375f5c6a1, type: 3}
-  - {fileID: 5174127708830226441, guid: 23d032b93de4b6e478aab32e4c34eae9, type: 3}
-  - {fileID: 7649158841558806469, guid: 1f1c99f200803d4488ce339687318d25, type: 3}
-  - {fileID: 2686435808543309898, guid: c7332e8471a4962458fb46ac9f1c2c73, type: 3}
-  - {fileID: 4260882425553843938, guid: 09644c21c6d96b348b54c78818414737, type: 3}
-  - {fileID: 4620399844827212695, guid: 5396ea8b69e42614d9180dcbf6a383fd, type: 3}
 --- !u!1001 &416779678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1759,16 +1752,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0facf1557a708454989a86118efcbedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disk: {fileID: 7710021891420554695, guid: 0fa29cbfc9dd23c41947d26184e05dc3, type: 3}
-  parent: {fileID: 351700977}
-  TakeList: []
-  availablePositions:
-  - {fileID: 76886861}
-  - {fileID: 1487482015}
-  - {fileID: 1393522783}
-  - {fileID: 635524638}
-  - {fileID: 2005236900}
-  - {fileID: 338944979}
+  disk:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &766313504
 GameObject:
   m_ObjectHideFlags: 0

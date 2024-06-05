@@ -25,6 +25,7 @@ namespace Assets.Scripts.GamePlay
             watermelon
         }
         public FoodName name { get; set; }
+        public int FoodIndex { get; private set; }
 
         public Food(FoodName name)
         {
