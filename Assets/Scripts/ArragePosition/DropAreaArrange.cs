@@ -43,7 +43,6 @@ public class DropAreaArrange : MonoBehaviour
             IndexFood = draggable.foodNumber;
             DropAreaManagerArrange.Instance.UpdateIndexFood(this, indexFood);
             DropAreaManagerArrange.Instance.GetIndexFoods();
-            DropAreaManagerArrange.Instance.PlayerCode();
         }
     }
 

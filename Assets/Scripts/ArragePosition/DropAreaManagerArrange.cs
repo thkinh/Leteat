@@ -38,9 +38,4 @@ public class DropAreaManagerArrange : MonoBehaviour
         return new List<int>(indexFoods);
     }
 
-    public string PlayerCode()
-    {
-        Debug.Log(indexFoods.ToString());
-        return indexFoods.ToString();
-    }
 }

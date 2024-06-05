@@ -37,7 +37,6 @@ public class DropArea : MonoBehaviour
 
     public void Drop(DraggableFood draggable)
     {
-        // Chỉ nhận đối tượng nếu vùng này chưa có đối tượng nào
         if (currentDraggable == null)
         {
             currentDraggable = draggable;
@@ -49,8 +48,6 @@ public class DropArea : MonoBehaviour
         }
     }
 
-
-    // Hàm để loại bỏ đối tượng khi cần thiết
     public void RemoveDraggable()
     {
         if (currentDraggable != null)

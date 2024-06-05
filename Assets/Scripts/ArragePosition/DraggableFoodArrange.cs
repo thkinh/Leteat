@@ -23,7 +23,6 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
     {
         image.raycastTarget = false;
 
-        // Tạo placeholder tại vị trí hiện tại
         placeholder = Instantiate(gameObject, transform.position, transform.rotation, parentAfterDrag);
         placeholder.GetComponent<Image>().raycastTarget = true;
 
@@ -34,7 +33,7 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
         }
 
         parentAfterDrag = transform.parent;
-        transform.SetParent(canvas.transform, true);// Sử dụng SetParent với worldPositionStays để giữ nguyên vị trí
+        transform.SetParent(canvas.transform, true);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -46,7 +45,6 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
     {
         image.raycastTarget = true;
 
-        // Kiểm tra tất cả các DropArea trong canvas
         DropAreaArrange[] dropAreas = canvas.GetComponentsInChildren<DropAreaArrange>();
         bool droppedInValidArea = false;
 
@@ -62,26 +60,25 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
             }
         }
 
+        if (placeholder != null)
+        {
+            Destroy(placeholder);
+        }
 
         if (!droppedInValidArea)
         {
-            // Nếu không thả vào vùng hợp lệ, trả về vị trí ban đầu và phá hủy placeholder
-            Destroy(placeholder);
-
-            // Nếu không thả vào vùng hợp lệ, trả về vị trí ban đầu và không khôi phục vị trí cũ
             if (originalDropArea != null)
             {
-                // Nếu có vùng gốc, giữ nguyên vị trí hiện tại
                 originalDropArea.Drop(this);
                 transform.SetParent(originalDropArea.transform);
                 transform.localPosition = Vector3.zero;
             }
             else
             {
-                // Nếu không có vùng gốc, trả về vị trí ban đầu
                 transform.SetParent(parentAfterDrag);
                 transform.localPosition = Vector3.zero;
             }
         }
+        Debug.Log("Food " + foodNumber);
     }
 }
