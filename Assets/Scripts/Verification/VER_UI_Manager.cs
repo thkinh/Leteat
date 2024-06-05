@@ -11,9 +11,6 @@ using TMPro;
 
 public class VER_UI_Manager : MonoBehaviour
 {
-    public static VER_UI_Manager instance;
-
-
     public TMP_InputField verifi_Code;
 
 

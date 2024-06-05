@@ -33,17 +33,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Playing.unity
     guid: a1850f48b9b8c0c49a458ddb0179c115
   - enabled: 1
-    path: Assets/Scenes/Reset password.unity
-    guid: 631f1a3aefe134b48a6c85de06b8a73b
-  - enabled: 1
     path: Assets/Scenes/Verification.unity
     guid: b1894d308e11cfc4d868f06f25dd80de
   - enabled: 1
-    path: Assets/Scenes/FriendList.unity
-    guid: 37c09f5cde1a2f84bac52de6ddc93e69
-  - enabled: 1
     path: Assets/Scenes/Friends.unity
     guid: f5b49bffc7807cb45bac7de752e4bcdb
+  - enabled: 1
+    path: Assets/Scenes/ChangePass.unity
+    guid: 2b797a207a1038049b695dbd2dd76885
   - enabled: 1
     path: Assets/Scenes/ForgottenPassword.unity
     guid: 108924d6a203bec4281411bea065f874

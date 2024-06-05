@@ -283,6 +283,29 @@ public class FirestoreClient : MonoBehaviour
         return playerId;
     }
 
+    public async Task<string> GetPlayerID_byMail(string email)
+    {
+        string playerId = null;
+
+        Query query = db.Collection("Players").WhereEqualTo("email", email);
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        if (snapshot.Count > 0)
+        {
+            // Get the first document (assuming username is unique)
+            DocumentSnapshot document = snapshot.FirstOrDefault();
+
+            // Get the document ID
+            playerId = document.Id;
+        }
+        else
+        {
+            Debug.LogWarning("No player found with email: " + email);
+        }
+        return playerId;
+
+    }
+
 
     //Ham xem ho so thang ban trong list friend
   
@@ -408,6 +431,21 @@ public class FirestoreClient : MonoBehaviour
         }
 
         return false;
+    }
+
+    public async void ChangePass(string userID, string newpass)
+    {
+        // Reference to the Firestore document for the specific user
+        DocumentReference docRef = db.Collection("Players").Document(userID);
+
+        // Create a dictionary with the field to update
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "password", newpass }
+        };
+
+        // Update the document
+        await docRef.UpdateAsync(updates);
     }
 
 }

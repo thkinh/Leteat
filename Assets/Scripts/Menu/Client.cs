@@ -102,7 +102,7 @@ namespace Assets.Scripts
             }
         }
 
-        private async Task ListenToServer() 
+        private async void ListenToServer() 
         {
             while (tcpClient.Connected)
             {
@@ -232,6 +232,29 @@ namespace Assets.Scripts
             message.To.Add(to);
             message.From = new MailAddress(from);
             message.Subject = "Let's Eat - Verification code: ";
+            message.Body = mail;
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+            smtpClient.EnableSsl = true;
+            smtpClient.Port = 587;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.Credentials = new NetworkCredential(from, pass);
+            try
+            {
+                smtpClient.Send(message);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
+        }
+
+        public void SendForgetPassCode(string from, string to, string mail)
+        {
+            string pass = "chva iuit ksvi ifdv";
+            MailMessage message = new MailMessage();
+            message.To.Add(to);
+            message.From = new MailAddress(from);
+            message.Subject = "Let's Eat - Change Your Password: ";
             message.Body = mail;
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
             smtpClient.EnableSsl = true;
