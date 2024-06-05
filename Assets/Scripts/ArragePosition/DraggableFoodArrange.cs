@@ -79,6 +79,5 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
                 transform.localPosition = Vector3.zero;
             }
         }
-        Debug.Log("Food " + foodNumber);
     }
 }
