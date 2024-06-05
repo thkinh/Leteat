@@ -51,8 +51,6 @@ public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         foreach (DropArea dropArea in dropAreas)
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(dropArea.GetComponent<RectTransform>(), Input.mousePosition))
-            {
                 if (dropArea.Accepts(this))
                 {
                     dropArea.Drop(this);
@@ -61,7 +59,6 @@ public class DraggableFood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     droppedInValidArea = true;
                     break;
                 }
-            }
         }
 
 
