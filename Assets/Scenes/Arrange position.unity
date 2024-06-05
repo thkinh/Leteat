@@ -944,7 +944,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 338046177}
-  - component: {fileID: 338046178}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -972,18 +971,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &338046178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338046176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a2424b3240a59c4e8fdd01333723813, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &338944978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,60 +1258,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &357402917
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 357402920}
-  - component: {fileID: 357402921}
-  m_Layer: 0
-  m_Name: Mgmt
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &357402920
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357402917}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 991.15735, y: 508.33365, z: 90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &357402921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357402917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d7532b8a400d443ba7b555be53a60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disk: {fileID: 0}
-  parent: {fileID: 0}
-  TakeList: []
-  availablePositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1001 &416779678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3968,7 +3901,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JOIN
+  m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94545532a797e4e4c844d22375d77f79, type: 2}
   m_sharedMaterial: {fileID: 938141250696205998, guid: 94545532a797e4e4c844d22375d77f79, type: 2}
@@ -4234,7 +4167,7 @@ GameObject:
   - component: {fileID: 2091325362}
   - component: {fileID: 2091325365}
   m_Layer: 5
-  m_Name: Join
+  m_Name: Play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4304,13 +4237,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2091325362}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: 
+      - m_Target: {fileID: 736873599}
+        m_TargetAssemblyTypeName: Position, Assembly-CSharp
+        m_MethodName: Send_StartPacket
         m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 2091325363}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4403,4 +4336,3 @@ SceneRoots:
   - {fileID: 948844133}
   - {fileID: 2051522790}
   - {fileID: 2056919017}
-  - {fileID: 357402920}

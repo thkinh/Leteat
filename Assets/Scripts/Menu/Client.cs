@@ -22,6 +22,9 @@ namespace Assets.Scripts
         int port = 9999;
         public int id = 90;
         private readonly Queue<Action> _mainThreadActions = new Queue<Action>();
+        private bool isHost = false;
+        private bool isClient = false;
+
         public Client()
         {
 
@@ -41,7 +44,7 @@ namespace Assets.Scripts
                     byte[] first_data = new byte[1024];
                     await stream.ReadAsync(first_data,0,first_data.Length);
                     SceneManager.LoadScene("CreateLobby");
-
+                    isHost = true;
 
                     WelcomeReceived(first_data, first_data.Length);
                     await Task.Run(() => { ListenToServer(); });
@@ -68,8 +71,9 @@ namespace Assets.Scripts
                     SendPacket("Hello server");
                     byte[] first_data = new byte[1024];
                     await stream.ReadAsync(first_data, 0, first_data.Length);
-                    SceneManager.LoadScene("Playing");
+                    SceneManager.LoadScene("JoinRoom");
                     WelcomeReceived(first_data, first_data.Length);
+                    isClient = true;
                     await Task.Run(() => { ListenToServer(); });
                 }
             }
@@ -137,22 +141,31 @@ namespace Assets.Scripts
                 }
                 else if (lenght == 1)  //received a confirm lobby creation packet
                 {
-                    //UnityMainThreadDispatcher.Enqueue(() =>
-                    //{
-                    //    Debug.Log("Chuyen scene o day");
-                    //    SceneManager.LoadScene("Playing");
-                    //});
-                    //if (SceneManager.GetActiveScene().name == "CreateLobby")
-                    //{
-                    //    RandomCodeRoom.m_created = packet.ReadBool();
-                    //    Debug.Log("Chuyen sang play - create");
-                    //}
-                    //else if (SceneManager.GetActiveScene().name == "JoinRoom")
-                    //{
-                    //    JoinRoom_Manager.Can_join = packet.ReadBool();
-                    //    Debug.Log("Chuyen sang play - join");
-                    //}
+                    if(isHost)
+                    {
+                        RandomCodeRoom.m_created = true;
+                    }
+                    else if (isClient)
+                    {
+                        JoinRoom_Manager.Can_join = true;
+                    }
                 }
+                else
+                {
+                    string signal = packet.ReadString();
+                    if (signal == "Start")
+                    {
+                        if (isHost)
+                        {
+                            Position.play = true;
+                        }
+                        else if (isClient)
+                        {
+                            JoinRoom_Manager.Can_play = true;
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {

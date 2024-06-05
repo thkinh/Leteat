@@ -1,15 +1,34 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class JoinRoom_Manager : MonoBehaviour
 {
     public static bool Can_join;
-    private int[] roomId;
-    List<int> roomIDs = new List<int>();
-    
+    public static bool Can_play;
 
+    List<int> roomID = new List<int>();
+    public GameObject loading_panel;
+
+    public void JoinClick()
+    {
+        string id = DropAreaManager.Instance.CodeJoinRoom();
+        foreach (char number in id)
+        {
+            roomID.Add(number.ConvertTo<int>());
+        }
+        if (roomID.Count != 5)
+        {
+            //Chuoi ma ID phong phai la 5 so
+            Debug.Log("Anonymous string");
+            return;
+        }
+        roomID.Add(0);
+        ClientManager.client.SendPacket(roomID.ToArray());
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +41,11 @@ public class JoinRoom_Manager : MonoBehaviour
     {
         if (Can_join)
         {
-            SceneManager.LoadScene("Playing");
+            loading_panel.SetActive(true);
+        }
+        if (Can_play)
+        {
+            SceneManager.LoadSceneAsync("Playing");
         }
     }
 

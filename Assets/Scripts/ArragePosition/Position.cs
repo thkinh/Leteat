@@ -11,7 +11,7 @@ public class Position : MonoBehaviour
 {
     public List<GameObject> disk = new List<GameObject>();
     bool iswatchingdisk = false;
-
+    public static bool play = false;
     public void Start()
     {
         NewDisk(0);
@@ -22,6 +22,15 @@ public class Position : MonoBehaviour
         NewDisk(5);
 
     }
+
+    public void Update()
+    {
+        if (play)
+        {
+            SceneManager.LoadScene("Playing");
+        }
+    }
+
     public void NewDisk(int i)
     {
        
@@ -29,5 +38,12 @@ public class Position : MonoBehaviour
         disk[i].name = "Player " + i;
         Debug.Log(disk[i].name);
     }
-    
+
+    public void Send_StartPacket()
+    {
+        int signal_start = 100;
+        ClientManager.client.SendPacket(signal_start);
+
+    }
+
 }
