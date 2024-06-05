@@ -20,8 +20,9 @@ public class Position : MonoBehaviour
     public void NewDisk(int i)
     {
        
-            disk[i].SetActive(true);
-        
+        disk[i].SetActive(true);
+        disk[i].name = "Player " + i;
+        Debug.Log(disk[i].name);
     }
     
 }
