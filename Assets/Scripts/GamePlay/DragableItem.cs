@@ -8,14 +8,16 @@ public class DragableItem : MonoBehaviour
 {
     private bool dragging;
     private Vector2 offset, original_pos;
-    public Food food;
+    public int idFood;
+
     private void Awake()
     {
         float randomX = UnityEngine.Random.Range(0.0f, Screen.width);
         float randomY = UnityEngine.Random.Range(0.0f, Screen.height);
         Vector3 randomPosition = Camera.main.ScreenToWorldPoint(new Vector3(randomX, randomY, Camera.main.nearClipPlane));
         randomPosition.z = 0;
-        transform.position = randomPosition; dragging = false;
+        transform.position = randomPosition; 
+        dragging = false;
         original_pos = transform.position;
         offset = new Vector2(0,0);
     }
@@ -45,17 +47,22 @@ public class DragableItem : MonoBehaviour
 
         if (EntityManager.instance.trashcan.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
-            Debug.Log("Destroy this food");
-            Destroy(this.GameObject());
+            Debug.Log("Destroy food " + idFood);
+            Destroy(gameObject);
         }
 
         if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
-            var takeList = SampleFood.instance.TakeList; // Access the TakeList from SampleFood instance
-            if (takeList.Contains(food.foodIndex)) // Assuming food has an 'id' field
+            for (int i = 0; i < SampleFood.instance.TakeList.Count; i++)
             {
-                Debug.Log("Submit this food");
-                Destroy(this.GameObject());
+                if (idFood == SampleFood.instance.TakeList[i])
+                {
+                    Debug.Log("Submit food " + idFood);
+                    Destroy(gameObject);
+                    Destroy(SampleFood.instance.Position[i]);
+                    SampleFood.instance.TakeList.RemoveAt(i);
+                    break;
+                }
             }
         }
     }

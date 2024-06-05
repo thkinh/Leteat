@@ -13,7 +13,7 @@ public class EntityManager : MonoBehaviour
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
     float minTrans = 200;
-    float maxTrans = 1500;
+    float maxTrans = 700;
 
     private Food[] take_in;
     private Food[] debai;
@@ -38,7 +38,7 @@ public class EntityManager : MonoBehaviour
         if (timer - previous_time > 3)
         {
             previous_time = timer;
-            while (time_control.GetComponent<TimerCotroller>().isover == false)
+            if (time_control.GetComponent<TimerCotroller>().isover == false)
             {
                 Spawn_Food();
             }
@@ -51,22 +51,20 @@ public class EntityManager : MonoBehaviour
         var wanted_y = UnityEngine.Random.Range(minTrans, maxTrans);
         var position = new Vector2(wanted_x, wanted_y);
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
-        nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
+        nf.name = nf.GetComponent<DragableItem>().idFood.ToString();
         Debug.Log("Spawn: " + nf.name);
     }
 
     public void Spawn_Food(Food food)
     {
-    //    //GameObject nf = Instantiate(new_Food, new Vector2(2,3), Quaternion.identity) as GameObject;
-    //    //nf.GetComponent<DragableItem>().food = food;
-    //    //nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
-    //    //nf.GetComponent<SpriteRenderer>().color = UIManager.LoadColor(nf.GetComponent<DragableItem>().food);
+        //GameObject nf = Instantiate(new_Food, new Vector2(2,3), Quaternion.identity) as GameObject;
+        //nf.GetComponent<DragableItem>().food = food;
+        //nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
+        //nf.GetComponent<SpriteRenderer>().color = UIManager.LoadColor(nf.GetComponent<DragableItem>().food);
     }
 
     public void Take_in()
     {
 
     }
-
-
 }

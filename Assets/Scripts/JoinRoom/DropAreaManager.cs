@@ -6,7 +6,6 @@ using UnityEngine;
 public class DropAreaManager : MonoBehaviour
 {
     private static DropAreaManager _instance;
-    int codeJoinRoom = 0;
     public static DropAreaManager Instance
     {
         get
