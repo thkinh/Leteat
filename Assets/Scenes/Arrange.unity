@@ -1853,7 +1853,7 @@ GameObject:
   - component: {fileID: 1249155335}
   - component: {fileID: 1249155334}
   m_Layer: 5
-  m_Name: Join
+  m_Name: play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Join
+  m_text: Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94545532a797e4e4c844d22375d77f79, type: 2}
   m_sharedMaterial: {fileID: 938141250696205998, guid: 94545532a797e4e4c844d22375d77f79, type: 2}

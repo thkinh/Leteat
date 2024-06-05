@@ -23,8 +23,11 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
     {
         image.raycastTarget = false;
 
+
         placeholder = Instantiate(gameObject, transform.position, transform.rotation, parentAfterDrag);
+        Destroy(placeholder);
         placeholder.GetComponent<Image>().raycastTarget = true;
+        
 
         originalDropArea = parentAfterDrag.GetComponent<DropAreaArrange>();
         if (originalDropArea != null)
@@ -73,11 +76,12 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
                 transform.SetParent(originalDropArea.transform);
                 transform.localPosition = Vector3.zero;
             }
-            else
+            else if (parentAfterDrag != null)
             {
                 transform.SetParent(parentAfterDrag);
                 transform.localPosition = Vector3.zero;
             }
         }
+        Debug.Log("Player" + "Food " + foodNumber);
     }
 }

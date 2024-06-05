@@ -53,14 +53,16 @@ public class DragableItem : MonoBehaviour
 
         if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
+            int count = 0;
             for (int i = 0; i < SampleFood.instance.TakeList.Count; i++)
             {
-                if (idFood == SampleFood.instance.TakeList[i])
+                if (idFood == SampleFood.instance.TakeList[i] && count == 0)
                 {
+                    Debug.Log(i);
                     Debug.Log("Submit food " + idFood);
                     Destroy(gameObject);
                     Destroy(SampleFood.instance.Position[i]);
-                    SampleFood.instance.TakeList.RemoveAt(i);
+                    count = 1;
                     break;
                 }
             }
