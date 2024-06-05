@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 66143478}
   - component: {fileID: 66143480}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: d5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 72749716}
   - component: {fileID: 72749718}
   m_Layer: 5
-  m_Name: Image
+  m_Name: d1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 227094835}
   - component: {fileID: 227094837}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: d2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 638364315}
   - component: {fileID: 638364317}
   m_Layer: 5
-  m_Name: Image
+  m_Name: corn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -903,11 +903,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 638364313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f7e01d014bb847aa210337a78e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 638364315}
-  foodNumber: 3
+  foodNumber: 0
   parentAfterDrag: {fileID: 0}
 --- !u!1 &699366842
 GameObject:
@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 813296630}
   - component: {fileID: 813296632}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: d4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1248,7 +1248,7 @@ GameObject:
   - component: {fileID: 950791802}
   - component: {fileID: 950791804}
   m_Layer: 5
-  m_Name: Image
+  m_Name: tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1320,11 +1320,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 950791800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f7e01d014bb847aa210337a78e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 950791802}
-  foodNumber: 7
+  foodNumber: 0
   parentAfterDrag: {fileID: 0}
 --- !u!1 &967448859
 GameObject:
@@ -1339,7 +1339,7 @@ GameObject:
   - component: {fileID: 967448861}
   - component: {fileID: 967448863}
   m_Layer: 5
-  m_Name: Image
+  m_Name: cheese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1411,11 +1411,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 967448859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f7e01d014bb847aa210337a78e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 967448861}
-  foodNumber: 2
+  foodNumber: 0
   parentAfterDrag: {fileID: 0}
 --- !u!1 &1049227518
 GameObject:
@@ -1430,7 +1430,7 @@ GameObject:
   - component: {fileID: 1049227520}
   - component: {fileID: 1049227522}
   m_Layer: 5
-  m_Name: Image
+  m_Name: egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,11 +1502,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1049227518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f7e01d014bb847aa210337a78e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1049227520}
-  foodNumber: 4
+  foodNumber: 0
   parentAfterDrag: {fileID: 0}
 --- !u!1 &1078341247
 GameObject:
@@ -1610,7 +1610,7 @@ GameObject:
   - component: {fileID: 1125785177}
   - component: {fileID: 1125785179}
   m_Layer: 5
-  m_Name: Image
+  m_Name: watermelon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1682,11 +1682,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1125785175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f7e01d014bb847aa210337a78e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1125785177}
-  foodNumber: 8
+  foodNumber: 0
   parentAfterDrag: {fileID: 0}
 --- !u!1 &1153933764
 GameObject:
@@ -2050,7 +2050,7 @@ GameObject:
   - component: {fileID: 1684909501}
   - component: {fileID: 1684909503}
   m_Layer: 5
-  m_Name: Image
+  m_Name: bacon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2351,7 +2351,7 @@ GameObject:
   - component: {fileID: 1773745118}
   - component: {fileID: 1773745120}
   m_Layer: 5
-  m_Name: Image
+  m_Name: shrimp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2423,11 +2423,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773745116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f7e01d014bb847aa210337a78e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1773745118}
-  foodNumber: 6
+  foodNumber: 0
   parentAfterDrag: {fileID: 0}
 --- !u!1 &1813464147
 GameObject:
@@ -2568,7 +2568,7 @@ GameObject:
   - component: {fileID: 1839519458}
   - component: {fileID: 1839519460}
   m_Layer: 5
-  m_Name: Image
+  m_Name: bread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2734,7 +2734,7 @@ GameObject:
   - component: {fileID: 2008449787}
   - component: {fileID: 2008449789}
   m_Layer: 5
-  m_Name: Image
+  m_Name: fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2806,11 +2806,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2008449785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73460dca97b8bdc45a2e4cf2c7758bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f7e01d014bb847aa210337a78e7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2008449787}
-  foodNumber: 5
+  foodNumber: 0
   parentAfterDrag: {fileID: 0}
 --- !u!1 &2051175013
 GameObject:
@@ -2955,7 +2955,7 @@ GameObject:
   - component: {fileID: 2085477650}
   - component: {fileID: 2085477652}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: d3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

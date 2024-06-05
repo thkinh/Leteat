@@ -16,6 +16,11 @@ public class Position : MonoBehaviour
     {
         NewDisk(0);
         NewDisk(1);
+        NewDisk(2);
+        NewDisk(3);
+        NewDisk(4);
+        NewDisk(5);
+
     }
     public void NewDisk(int i)
     {
