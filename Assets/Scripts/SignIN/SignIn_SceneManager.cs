@@ -32,6 +32,7 @@ public class SignIn_SceneManager : MonoBehaviour
         bool check = await Check();
         if ( check )
         {
+            FirestoreClient.fc_instance.Reload();
             SceneManager.LoadScene("Menu");
         }
         else {

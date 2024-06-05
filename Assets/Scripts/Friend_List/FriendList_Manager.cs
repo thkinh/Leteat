@@ -86,6 +86,7 @@ public class FriendList_Manager : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
+
         currentpanel.SetActive(false);
         currentpanel = allfriend;
         allfriend.SetActive(true);
@@ -131,7 +132,8 @@ public class FriendList_Manager : MonoBehaviour
 
         foreach (Player player in playerlist) 
         {
-            if(FirestoreClient.fc_instance.IsFriended(player.username))
+            if(FirestoreClient.fc_instance.IsFriended(player.username) || player.username == FirestoreClient.fc_instance.thisPlayer.username 
+                                                                       || await FirestoreClient.fc_instance.Requested(player.username))
             {
                 continue;
             }
@@ -143,7 +145,6 @@ public class FriendList_Manager : MonoBehaviour
             {
                 add_btn.onClick.AddListener(() =>
                 {
-                    
                     FriendRequest(player.username);
                     Image img = add_btn.gameObject.GetComponent<Image>();
                     img.sprite = Resources.Load<Sprite>("Button/x1");
@@ -180,8 +181,23 @@ public class FriendList_Manager : MonoBehaviour
             {
                 friendText.text = await FirestoreClient.fc_instance.ReadUsernameByID(request.from);
             }
-        }
 
+            Button add_btn = r.transform.GetChild(0).GetComponent<Button>();
+            if (add_btn != null)
+            {
+                add_btn.onClick.AddListener(() =>
+                {
+                    Accept_btn(request.from);
+                    Destroy(r.gameObject);
+                });
+            }
+        }
+    }
+
+
+    public async void Accept_btn(string userID)
+    {
+        FirestoreClient.fc_instance.Accept(await FirestoreClient.fc_instance.ReadUsernameByID(userID));
     }
 
     public void Back()

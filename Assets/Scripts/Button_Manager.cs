@@ -63,7 +63,7 @@ public class Button_Clickable : MonoBehaviour
 
     public void LoadSignUp()
     {
-        SceneManager.LoadScene("Sign up");
+        SceneManager.LoadScene("Sign in");
     }
 
     public void LoadFriends()

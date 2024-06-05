@@ -18,7 +18,6 @@ public class FirestoreClient : MonoBehaviour
     public Player thisPlayer;
     public bool playerisLoaded = false;
     public bool friendsisLoaded = false;
-
     void Awake()
     {
         if (fc_instance == null)
@@ -35,7 +34,7 @@ public class FirestoreClient : MonoBehaviour
     private void Start()
     {
         db = FirebaseFirestore.DefaultInstance;
-        thisPlayerID = "XxbEXW5ZIN2P18EmunDF";
+        thisPlayerID = "zF8UEMEnafmj5l3xnPDB";
     }
 
     public async void Write(Match match)
@@ -142,6 +141,7 @@ public class FirestoreClient : MonoBehaviour
         {
             playerID = userID,
             type = relationship.type,
+            username = thisPlayer.username,
         };
         Task addOtherUserTask = otherUserRef.SetAsync(reverse_relationship);
     }
@@ -353,9 +353,10 @@ public class FirestoreClient : MonoBehaviour
         {
             playerID = from,
             type = "friend",
+            username = username
         };
 
-        AddUserRelationship(from, relationship);
+        AddUserRelationship(thisPlayerID, relationship);
 
         Query query = db.Collection("Requests").WhereEqualTo("to", FirestoreClient.fc_instance.thisPlayerID).WhereEqualTo("from", from);
 
@@ -390,6 +391,22 @@ public class FirestoreClient : MonoBehaviour
                 return true;
             }
         }
+        return false;
+    }
+
+    public async Task<bool> Requested(string username)
+    {
+        string to = await GetPlayerID(username);
+        Query query = db.Collection("Requests")
+                        .WhereEqualTo("from", FirestoreClient.fc_instance.thisPlayerID)
+                        .WhereEqualTo("to", to);
+
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+        if (snapshot.Documents.Count() > 0)
+        {
+            return true;
+        }
+
         return false;
     }
 
