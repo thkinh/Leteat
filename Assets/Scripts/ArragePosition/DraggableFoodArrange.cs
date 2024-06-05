@@ -60,10 +60,10 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
             }
         }
 
-        if (placeholder != null)
-        {
-            Destroy(placeholder);
-        }
+        //if (placeholder != null)
+        //{
+        //    Destroy(placeholder);
+        //}
 
         if (!droppedInValidArea)
         {
