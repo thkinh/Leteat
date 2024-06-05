@@ -62,14 +62,18 @@ public class FriendList_Manager : MonoBehaviour
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
         if (player.username != null)
         {
+
+            //else, neu la friend roi
             GameObject friend = Instantiate(friendPrefab, contentHolder);
             Button friendButton = friend.GetComponent<Button>();
             if (friendButton != null)
             {
-                friendButton.onClick.AddListener(PersonalPlayer);
+                friendButton.onClick.AddListener(() => { 
+                    PersonalPlayer(player.username);
+                
+                });
             }
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
-
             // Set the text to the player's username
             if (friendText != null)
             {
@@ -98,7 +102,10 @@ public class FriendList_Manager : MonoBehaviour
             Button friendButton = friend.GetComponent<Button>();
             if (friendButton != null)
             {
-                friendButton.onClick.AddListener(PersonalPlayer);
+                friendButton.onClick.AddListener(() => { 
+                    PersonalPlayer(relationship.username);
+                
+                });
             }
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
             if (friendText != null)
@@ -108,11 +115,24 @@ public class FriendList_Manager : MonoBehaviour
         }
     }
    
-    public void PersonalPlayer()
+    public async void PersonalPlayer(string username)
     {
-        currentpanel.SetActive(false);
-        currentpanel = personalplayer;
+        if (personalplayer.activeSelf)
+        {
+            personalplayer.SetActive(false);
+            return;
+        }
+
+
         personalplayer.SetActive(true);
+
+        Player player = await FirestoreClient.fc_instance.FindPlayer_byName(username);
+        TMP_Text personal_username = personalplayer.transform.GetChild(2).GetComponent<TMP_Text>();
+        TMP_Text personal_email = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
+        personal_username.text = $"Username:  {player.username}";
+        personal_email.text = $"Email:  {player.email}";
+
+        //TMP_Text personal_exp = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
         Debug.Log("ok");
     }
 

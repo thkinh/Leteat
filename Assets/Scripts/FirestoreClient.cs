@@ -89,9 +89,10 @@ public class FirestoreClient : MonoBehaviour
         {
             Relationship relationship = document.ConvertTo<Relationship>();
             relationships.Add(relationship);
-            Debug.Log($"User: {relationship.playerID}, Relationship Type: {relationship.type}");
+            //Debug.Log($"User: {relationship.playerID}, Relationship Type: {relationship.type}");
         }
         friendsisLoaded = true;
+        Debug.Log("Friendlist updated");
         friendlist = relationships;
         return relationships;
     }
@@ -112,9 +113,10 @@ public class FirestoreClient : MonoBehaviour
         {
             Relationship relationship = document.ConvertTo<Relationship>();
             relationships.Add(relationship);
-            Debug.Log($"User: {relationship.playerID}, Relationship Type: {relationship.type}");
+            //Debug.Log($"User: {relationship.playerID}, Relationship Type: {relationship.type}");
         }
         friendsisLoaded = true;
+        Debug.Log("Friendlist updated");
         friendlist = relationships;
         return;
     }
@@ -323,10 +325,11 @@ public class FirestoreClient : MonoBehaviour
         QuerySnapshot snapshots = await query.GetSnapshotAsync();
 
         DocumentSnapshot document = snapshots.FirstOrDefault();
-        
-        if(document != null)
+
+        if (document != null)
         {
             player = document.ConvertTo<Player>();
+
         }
 
         return player;
