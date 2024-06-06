@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DropAreaManagerArrange : MonoBehaviour
 {
-    private static DropAreaManagerArrange _instance;
+    public static DropAreaManagerArrange _instance;
     public static DropAreaManagerArrange Instance
     {
         get
@@ -38,10 +38,6 @@ public class DropAreaManagerArrange : MonoBehaviour
         return new List<int>(indexFoods);
     }
 
-    public string PlayerCode()
-    {
-        string i = string.Join("", indexFoods.ToArray());
-        Debug.Log(i);
-        return i;
-    }
+
+
 }

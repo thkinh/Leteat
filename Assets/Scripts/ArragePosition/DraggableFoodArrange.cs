@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Assets.Scripts.GamePlay;
+using System.Collections.Generic;
 
 
 public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -82,6 +83,6 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
                 transform.localPosition = Vector3.zero;
             }
         }
-        Debug.Log("Player" + "Food " + foodNumber);
+        //Debug.Log("Food " + foodNumber);
     }
 }

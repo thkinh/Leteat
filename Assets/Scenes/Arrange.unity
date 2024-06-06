@@ -212,6 +212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropConditions: []
+  IsValidDropPosition: 0
+  FoodList: 
 --- !u!1 &72749713
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropConditions: []
+  IsValidDropPosition: 0
+  FoodList: 
 --- !u!1 &166315808
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropConditions: []
+  IsValidDropPosition: 0
+  FoodList: 
 --- !u!1 &233185245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropConditions: []
+  IsValidDropPosition: 0
+  FoodList: 
 --- !u!1 &894294387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,6 +1605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropConditions: []
+  IsValidDropPosition: 0
+  FoodList: 
 --- !u!1 &1125785175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,7 +1932,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1249155335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1813464153}
+        m_TargetAssemblyTypeName: Position, Assembly-CSharp
+        m_MethodName: StartPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1249155335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,13 +2570,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0facf1557a708454989a86118efcbedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disk:
+  disks:
   - {fileID: 72749713}
   - {fileID: 227094832}
   - {fileID: 2085477648}
   - {fileID: 813296628}
   - {fileID: 66143476}
   - {fileID: 1078341247}
+  TakeList: []
+  dropHandlers: []
 --- !u!1 &1839519456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,6 +3055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropConditions: []
+  IsValidDropPosition: 0
+  FoodList: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
