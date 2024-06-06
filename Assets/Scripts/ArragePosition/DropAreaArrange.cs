@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Assets.Scripts.GamePlay.Food;
-using static UnityEditor.PlayerSettings;
 public abstract class DropConditionArrange : ScriptableObject
 {
     public abstract bool Check(DraggableFoodArrange draggable);
@@ -74,6 +73,7 @@ public class DropAreaArrange : MonoBehaviour
     {
         FoodList.AddRange(droppedFoodNumbers);
         droppedFoodNumbers.Clear(); // Clear the list after adding to FoodList
+        Debug.Log($"Food list is: {FoodList.ToArray().ToString()}");
     }
 
 }

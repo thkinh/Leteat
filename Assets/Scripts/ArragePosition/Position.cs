@@ -51,11 +51,12 @@ public class Position : MonoBehaviour
     }
     public void StartPlay()
     {
-
         foreach (DropAreaArrange dropHandler in dropHandlers)
         {
             dropHandler.AddDroppedFoodsToFoodList();
         }
+        //bam vo cai nut, thi no add dong food vo mot cai list
+        // return cai list 
     }
 
 }

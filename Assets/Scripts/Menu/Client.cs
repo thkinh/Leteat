@@ -8,7 +8,6 @@ using System;
 using UnityEngine.SceneManagement;
 using Assets.Scripts.GamePlay;
 using Unity.VisualScripting;
-using static UnityEditor.ShaderData;
 using System.Collections.Generic;
 
 namespace Assets.Scripts
@@ -18,8 +17,8 @@ namespace Assets.Scripts
         public TcpClient tcpClient;
         public SmtpClient smtpClient;
         NetworkStream stream;
-        string address = "127.0.0.1";
-        int port = 9999;
+        private readonly string address = "127.0.0.1";
+        private readonly int port = 9999;
         public int id = 90;
         private readonly Queue<Action> _mainThreadActions = new Queue<Action>();
         private bool isHost = false;
@@ -232,7 +231,7 @@ namespace Assets.Scripts
             {
                 packet.Write(ClientManager.client.id);
                 packet.Write(next_or_prev);
-                packet.Write((int)food.name);
+                packet.Write((int)food.fname);
                 packet.WriteLength();
                 stream.WriteAsync(packet.ToArray(),0,packet.Length());
             }
