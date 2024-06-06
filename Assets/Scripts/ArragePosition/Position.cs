@@ -50,23 +50,11 @@ public class Position : MonoBehaviour
     }
     public void PlayClick()
     {
-<<<<<<< HEAD
         string id = DropAreaManagerArrange.Instance.IndexListofFood();
         foreach (char number in id)
-=======
-        foreach (DropAreaArrange dropHandler in dropHandlers)
->>>>>>> a6d0887ce3eeaf19027064bbb3ae321c67c46606
         {
             FoodList.Add(number.ConvertTo<int>());
         }
-<<<<<<< HEAD
-        
-    }    
-=======
-        //bam vo cai nut, thi no add dong food vo mot cai list
-        // return cai list 
     }
->>>>>>> a6d0887ce3eeaf19027064bbb3ae321c67c46606
-
 }
 
