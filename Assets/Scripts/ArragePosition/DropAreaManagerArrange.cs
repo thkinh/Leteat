@@ -6,6 +6,11 @@ using UnityEngine;
 public class DropAreaManagerArrange : MonoBehaviour
 {
     public static DropAreaManagerArrange _instance;
+    private Position pos;
+    public void Start()
+    {
+        pos = GetComponent<Position>();
+    }
     public static DropAreaManagerArrange Instance
     {
         get
@@ -38,6 +43,11 @@ public class DropAreaManagerArrange : MonoBehaviour
         return new List<int>(indexFoods);
     }
 
-
+    public string IndexListofFood()
+    {
+        string indexfoodlist = string.Join("", indexFoods.ToArray());
+        Debug.Log($"Food List: {indexfoodlist}");
+        return indexfoodlist;
+    }    
 
 }

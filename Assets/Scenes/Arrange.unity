@@ -915,6 +915,8 @@ MonoBehaviour:
   image: {fileID: 638364315}
   foodNumber: 3
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &699366842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,6 +1336,8 @@ MonoBehaviour:
   image: {fileID: 950791802}
   foodNumber: 7
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &967448859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,6 +1429,8 @@ MonoBehaviour:
   image: {fileID: 967448861}
   foodNumber: 2
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &1049227518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1522,8 @@ MonoBehaviour:
   image: {fileID: 1049227520}
   foodNumber: 4
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &1078341247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1706,8 @@ MonoBehaviour:
   image: {fileID: 1125785177}
   foodNumber: 8
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &1153933764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,7 +1945,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813464153}
         m_TargetAssemblyTypeName: Position, Assembly-CSharp
-        m_MethodName: StartPlay
+        m_MethodName: PlayClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2150,6 +2160,8 @@ MonoBehaviour:
   image: {fileID: 1684909501}
   foodNumber: 0
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &1701731719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,6 +2463,8 @@ MonoBehaviour:
   image: {fileID: 1773745118}
   foodNumber: 6
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &1813464147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,7 +2592,6 @@ MonoBehaviour:
   - {fileID: 66143476}
   - {fileID: 1078341247}
   TakeList: []
-  dropHandlers: []
 --- !u!1 &1839519456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,6 +2683,8 @@ MonoBehaviour:
   image: {fileID: 1839519458}
   foodNumber: 1
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &1931248298
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,6 +2851,8 @@ MonoBehaviour:
   image: {fileID: 2008449787}
   foodNumber: 5
   parentAfterDrag: {fileID: 0}
+  pos: {fileID: 0}
+  FoodList: 
 --- !u!1 &2051175013
 GameObject:
   m_ObjectHideFlags: 0

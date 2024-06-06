@@ -12,18 +12,17 @@ public class Position : MonoBehaviour
 {
     public List<GameObject> disks = new List<GameObject>();
     public List<GameObject> TakeList = new List<GameObject>();
-    public List<DropAreaArrange> dropHandlers;
-    private DropAreaArrange dropArea;
-    private DraggableFoodArrange drag;
-    private DropAreaManagerArrange currentDropManager;
-    bool iswatchingdisk = false;
     public static bool play = false;
+    public List<int> FoodList = new List<int>();
+
     private int i = 0;
     public void Start()
     {
-       NewDisk();
         NewDisk();
         NewDisk();
+        NewDisk();
+        NewDisk();
+
     }
 
     public void Update()
@@ -49,14 +48,15 @@ public class Position : MonoBehaviour
         ClientManager.client.SendPacket(signal_start);
 
     }
-    public void StartPlay()
+    public void PlayClick()
     {
-
-        foreach (DropAreaArrange dropHandler in dropHandlers)
+        string id = DropAreaManagerArrange.Instance.IndexListofFood();
+        foreach (char number in id)
         {
-            dropHandler.AddDroppedFoodsToFoodList();
+            FoodList.Add(number.ConvertTo<int>());
         }
-    }
+        
+    }    
 
 }
 

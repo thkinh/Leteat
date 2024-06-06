@@ -13,10 +13,13 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
     private Canvas canvas;
     private GameObject placeholder;
     private DropAreaArrange originalDropArea;
+    private Position pos;
+
     private void Start()
     {
         parentAfterDrag = transform.parent; // Đảm bảo rằng biến parentAfterDrag được thiết lập
         canvas = GetComponentInParent<Canvas>();
+        pos = GetComponentInParent<Position>();
     }
 
 
@@ -83,6 +86,7 @@ public class DraggableFoodArrange : MonoBehaviour, IBeginDragHandler, IDragHandl
                 transform.localPosition = Vector3.zero;
             }
         }
-        //Debug.Log("Food " + foodNumber);
+        pos.FoodList.Add(foodNumber);
+        //Debug.Log(pos.FoodList.Count);
     }
 }

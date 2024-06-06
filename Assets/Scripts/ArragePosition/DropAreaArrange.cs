@@ -19,7 +19,6 @@ public class DropAreaArrange : MonoBehaviour
     private int indexFood = -1;
     public bool IsValidDropPosition = false;
     public List<int> FoodList = new List<int>();
-    private List<int> droppedFoodNumbers = new List<int>();
 
     public int IndexFood
     {
@@ -35,11 +34,8 @@ public class DropAreaArrange : MonoBehaviour
         {
             return false;
         }
-        else 
-        {
+        return 
             DropConditions.TrueForAll(cond => cond.Check(draggable));
-            return IsValidDropPosition = true;
-        }
     }
 
     public void Drop(DraggableFoodArrange draggable)
@@ -53,13 +49,8 @@ public class DropAreaArrange : MonoBehaviour
             DropAreaManagerArrange.Instance.UpdateIndexFood(this, indexFood);
             DropAreaManagerArrange.Instance.GetIndexFoods();
         }
-        if (draggable != null)
-        {
-            int foodNumber = draggable.foodNumber;
-            droppedFoodNumbers.Add(foodNumber);
-        }
+        
     }
-
 
     // Hàm để loại bỏ đối tượng khi cần thiết
     public void RemoveDraggable()
@@ -70,10 +61,6 @@ public class DropAreaArrange : MonoBehaviour
             currentDraggable = null;
         }
     }
-    public void AddDroppedFoodsToFoodList()
-    {
-        FoodList.AddRange(droppedFoodNumbers);
-        droppedFoodNumbers.Clear(); // Clear the list after adding to FoodList
-    }
+    
 
 }
