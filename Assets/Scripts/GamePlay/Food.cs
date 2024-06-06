@@ -24,19 +24,25 @@ namespace Assets.Scripts.GamePlay
             tomato,
             watermelon
         }
-        public FoodName name { get; set; }
+        public FoodName fname { get; set; }
         public int FoodIndex { get; private set; }
 
         public Food(FoodName name)
         {
-            this.name = name;
+            this.fname = name;
         }
 
         public Food(int name)
         {
-            this.name = (FoodName)name;
+            this.fname = (FoodName)name;
         }
+        public static string getName(int nameIndex)
+        {
+            FoodName foodName = (FoodName)nameIndex;
 
+            // Convert the enum value to lowercase string
+            return foodName.ToString();
+        }
         public Food(string name)
         {
             this.foodName = name;
@@ -44,15 +50,7 @@ namespace Assets.Scripts.GamePlay
 
         }  
 
-        public byte[] Convert_to_Data()
-        {
-            return Encoding.UTF8.GetBytes(this.name.ToString());
-        }
 
-        public static byte[] Convert_to_Data(FoodName _name)
-        {
-            return Encoding.UTF8.GetBytes(_name.ToString());
-        }
 
         public static Food Convert_to_Food(byte[] raw_data)
         {

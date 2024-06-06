@@ -29,6 +29,7 @@ public class Button_Clickable : MonoBehaviour
         previous_Scene = "Choose cr or join";
         ClientManager.client.ConnectToServer();
         
+
     }
 
     public void JoinLobby()

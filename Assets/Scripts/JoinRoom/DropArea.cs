@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Assets.Scripts.GamePlay.Food;
-using static UnityEditor.PlayerSettings;
 
 public abstract class DropCondition : ScriptableObject
 {

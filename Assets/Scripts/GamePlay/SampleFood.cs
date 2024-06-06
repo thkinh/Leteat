@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.GamePlay;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,10 +41,10 @@ public class SampleFood : MonoBehaviour
 
     public void CreateNewFood(int index)
     {
-        do
+        while (TakeList.Contains(randomNumber))
         {
             randomNumber = UnityEngine.Random.Range(0, Food.Length);
-        } while (TakeList.Contains(randomNumber));
+        }
 
         TakeList[index] = randomNumber;
 
