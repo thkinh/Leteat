@@ -18,7 +18,6 @@ public class EntityManager : MonoBehaviour
     private Food[] take_in;
     private Food[] debai;
 
-
     private void Awake()
     {
         if (instance == null)
@@ -38,7 +37,7 @@ public class EntityManager : MonoBehaviour
         if (timer - previous_time > 3)
         {
             previous_time = timer;
-            if (time_control.GetComponent<TimerCotroller>().isover == false)
+            if (!time_control.GetComponent<TimerCotroller>().isover)
             {
                 Spawn_Food();
             }
@@ -54,6 +53,7 @@ public class EntityManager : MonoBehaviour
         nf.name = nf.GetComponent<DragableItem>().idFood.ToString();
         Debug.Log("Spawn: " + nf.name);
     }
+
 
     public void Spawn_Food(Food food)
     {

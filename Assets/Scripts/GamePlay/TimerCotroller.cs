@@ -14,15 +14,16 @@ public class TimerCotroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        time_remaining = max_time;
+        ResetTimer();
     }
 
-    bool ISover()
+    public void ResetTimer()
     {
-        return isover;
+        time_remaining = max_time;
+        isover = false;
+        you_lose_text.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (time_remaining > 0)
@@ -34,6 +35,14 @@ public class TimerCotroller : MonoBehaviour
         {
             you_lose_text.SetActive(true);
             isover = true;
+        }
+    }
+    public void AddTime(float time)
+    {
+        time_remaining += time;
+        if (time_remaining > max_time)
+        {
+            time_remaining = max_time;
         }
     }
 }

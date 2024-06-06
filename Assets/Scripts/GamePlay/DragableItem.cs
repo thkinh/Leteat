@@ -58,11 +58,13 @@ public class DragableItem : MonoBehaviour
             {
                 if (idFood == SampleFood.instance.TakeList[i] && count == 0)
                 {
-                    Debug.Log(i);
                     Debug.Log("Submit food " + idFood);
                     Destroy(gameObject);
-                    Destroy(SampleFood.instance.Position[i]);
                     count = 1;
+                    //Cộng thêm 3s mỗi lần nộp đúng thức ăn
+                    EntityManager.instance.time_control.GetComponent<TimerCotroller>().AddTime(3.0f);
+                    // Tạo đề bài mới
+                    SampleFood.instance.CreateNewFood(i);
                     break;
                 }
             }
