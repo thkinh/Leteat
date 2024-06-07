@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 
 public class Server : MonoBehaviour
 {
-    private readonly static int Max_Players = 6;
+    //private readonly static int Max_Players = 6;
     private readonly static int PORT = 9999;
+    private readonly static string IP = "26.124.193.147";
     private static TcpListener listener;
     private readonly List<TcpClient> clients_list = new List<TcpClient>();
     private readonly Dictionary<int, TcpClient> clients_Dict = new Dictionary<int, TcpClient>();
@@ -41,13 +42,24 @@ public class Server : MonoBehaviour
     public void Start()
     {
         listener = new TcpListener(IPAddress.Any, PORT);
+        
+    }
+    public void StartServer()
+    {
         listener.Start();
-        Debug.Log($"Server started on {PORT}");
+        Debug.Log($"Server started on {PORT}, server ip is {listener.Server.AddressFamily}");
 
         Thread listen = new Thread(Listen);
         listen.Start();
     }
-
+    public void EndServer()
+    {
+        listener?.Stop();
+        foreach(TcpClient client in clients_list)
+        {
+            client?.Close();
+        }
+    }
 
     private async void HandleClient(TcpClient client)
     {
@@ -252,5 +264,5 @@ public class Server : MonoBehaviour
         }
     }
 
-
+    
 }

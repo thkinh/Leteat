@@ -6,7 +6,6 @@ public class ClientManager : MonoBehaviour
     public ClientManager instance;
     public GameObject button;
     public static Client client = new Client();
-    public static Server server = new Server();
 
     private void Awake()
     {
@@ -16,10 +15,5 @@ public class ClientManager : MonoBehaviour
     public void ConnectToServer()
     {
         client.ConnectToServer();
-    }
-
-    public void CreateServer()
-    {
-        server.Start();
     }
 }

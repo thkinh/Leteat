@@ -17,7 +17,7 @@ namespace Assets.Scripts
         public TcpClient tcpClient;
         public SmtpClient smtpClient;
         NetworkStream stream;
-        private readonly string address = "127.0.0.1";
+        private readonly string address = "26.124.193.147";
         private readonly int port = 9999;
         public int id = 90;
         private readonly Queue<Action> _mainThreadActions = new Queue<Action>();
@@ -35,6 +35,7 @@ namespace Assets.Scripts
             {
                 tcpClient = new TcpClient();
                 await tcpClient.ConnectAsync(IPAddress.Parse(address), port);
+                Debug.Log("Connecting to server...");
 
                 if (tcpClient.Connected)
                 {

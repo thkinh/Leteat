@@ -18,10 +18,6 @@ public class Position : MonoBehaviour
     private int i = 0;
     public void Start()
     {
-        NewDisk();
-        NewDisk();
-        NewDisk();
-        NewDisk();
 
     }
 
@@ -31,6 +27,12 @@ public class Position : MonoBehaviour
         {
             SceneManager.LoadScene("Playing");
         }
+    }
+
+    public void Back_toPrevious()
+    {
+        Server.server_instance?.EndServer();
+        SceneManager.LoadScene("Choose cr or join");
     }
 
     public void NewDisk()
@@ -50,6 +52,7 @@ public class Position : MonoBehaviour
     }
     public void PlayClick()
     {
+        Send_StartPacket();
         string id = DropAreaManagerArrange.Instance.IndexListofFood();
         foreach (char number in id)
         {

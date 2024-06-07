@@ -55,7 +55,7 @@ public class RandomCodeRoom : MonoBehaviour
     {
         if (m_created)
         {
-            SceneManager.LoadSceneAsync("Arrange position");
+            SceneManager.LoadSceneAsync("Arrange");
         }
     }
 

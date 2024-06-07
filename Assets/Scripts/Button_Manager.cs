@@ -27,6 +27,7 @@ public class Button_Clickable : MonoBehaviour
     {
         //To do: Create a server here
         previous_Scene = "Choose cr or join";
+        Server.server_instance.StartServer();
         ClientManager.client.ConnectToServer();
         
 
