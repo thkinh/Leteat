@@ -73,15 +73,6 @@ public class Server : MonoBehaviour
             {
                 int client_id = clients_Dict.FirstOrDefault(x => x.Value == client).Key;
                 string message = HandlePacket(buffer, bytesRead, client);
-                //Debug.Log($"Message from player {client_id.ToString()}: ");
-                // Broadcast lại cho may thằng client khác
-                //foreach (TcpClient otherClient in clients_list)
-                //{
-                //    if (otherClient != client)
-                //    {
-                //        await otherClient.GetStream().WriteAsync(buffer, 0, bytesRead);
-                //    }
-                //}
                 Debug.Log(message);
             }
         }
@@ -142,10 +133,23 @@ public class Server : MonoBehaviour
             {
                 foreach (TcpClient client in clients_list)
                 {
-                    SendStartPacket(client);
+                    SendStartPacket(client,true);
                     //Send start packet to all clients
                 }
                 return $"Sent a start signal to all player";
+            }
+        }
+        else if (packet.ReadString() == "Arranged")
+        {
+            //Recived arranged list
+            foreach(TcpClient client in clients_Dict.Values)
+            {
+                //Check food da dung chua
+                if (client == null || packet.ReadInt() != clients_Dict.FirstOrDefault(x => x.Value == client).Key)
+                {
+                    SendStartPacket(this_client,false);
+                    return $"There's a mistake when arranged";
+                }
             }
         }
         return $"Packet's length is unknowed {len}, this type of packet doesn't exists";
@@ -191,7 +195,7 @@ public class Server : MonoBehaviour
         int id = packet.ReadInt();
         string msg = packet.ReadString();
         Debug.Log($"Received hello packet from a client: {id}/ {msg}");
-        Debug.Log($"Setting this client's id = {attending}\n");
+        Debug.Log($"Setting this client's id = {new Food(attending-1).fname}\n");
         packet.Dispose();
         return;
     }
@@ -207,10 +211,18 @@ public class Server : MonoBehaviour
         packet.Dispose();
     }
 
-    public void SendStartPacket(TcpClient client)
+
+    public void SendStartPacket(TcpClient client, bool canplay)
     {
         Packet packet = new Packet();
-        packet.Write("Start");
+        if(canplay)
+        {
+            packet.Write("Start");
+        }
+        else
+        {
+            packet.Write("Cannot");
+        }
         packet.WriteLength();
         client.GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
         packet.Dispose();

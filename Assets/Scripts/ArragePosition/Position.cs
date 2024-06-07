@@ -7,6 +7,7 @@ using System;
 using Assets.Scripts;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Assets.Scripts.GamePlay;
 
 public class Position : MonoBehaviour
 {
@@ -14,11 +15,12 @@ public class Position : MonoBehaviour
     public List<GameObject> TakeList = new List<GameObject>();
     public static bool play = false;
     public List<int> FoodList = new List<int>();
-
+    public GameObject ID;
     private int i = 0;
     public void Start()
     {
-
+        int id = ClientManager.client.id;
+        ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
     }
 
     public void Update()
@@ -50,9 +52,14 @@ public class Position : MonoBehaviour
         ClientManager.client.SendPacket(signal_start);
 
     }
+
+    public void SendArrangeList()
+    {
+        ClientManager.client.SendPacket_of_Arrange(FoodList.ToArray());
+    }
+
     public void PlayClick()
     {
-        Send_StartPacket();
         string id = DropAreaManagerArrange.Instance.IndexListofFood();
         foreach (char number in id)
         {

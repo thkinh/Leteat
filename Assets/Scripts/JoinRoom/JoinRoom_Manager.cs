@@ -1,8 +1,10 @@
 using Assets.Scripts;
+using Assets.Scripts.GamePlay;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class JoinRoom_Manager : MonoBehaviour
@@ -12,7 +14,7 @@ public class JoinRoom_Manager : MonoBehaviour
 
     List<int> roomID = new List<int>();
     public GameObject loading_panel;
-
+    public GameObject ID;
     public void JoinClick()
     {
         string id = DropAreaManager.Instance.CodeJoinRoom();
@@ -42,6 +44,8 @@ public class JoinRoom_Manager : MonoBehaviour
         if (Can_join)
         {
             loading_panel.SetActive(true);
+            int id = ClientManager.client.id;
+            ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
         }
         if (Can_play)
         {

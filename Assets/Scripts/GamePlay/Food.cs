@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.GamePlay
 {
-    public class Food : MonoBehaviour
+    public class Food 
     {
         public string foodName;
         public int foodIndex;

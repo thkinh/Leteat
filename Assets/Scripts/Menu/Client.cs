@@ -95,7 +95,7 @@ namespace Assets.Scripts
                 int len = packet.ReadInt();
                 this.id = packet.ReadInt();
                 string msg = packet.ReadString();
-                Debug.Log($"This client's ID has been set: {id}/ {msg}");
+                Debug.Log($"This client's ID has been set: {new Food(id).fname}/ {msg}");
                 return;
             }
             catch
@@ -164,8 +164,12 @@ namespace Assets.Scripts
                             JoinRoom_Manager.Can_play = true;
                         }
                     }
+                    if (signal == "Cannot")
+                    {
+                        Debug.Log("Arrange sai roi");
+                        Position.play = false;
+                    }
                 }
-
             }
             catch (Exception ex)
             {
@@ -221,6 +225,28 @@ namespace Assets.Scripts
                 packet.Write(data);
                 packet.WriteLength();
                 stream.WriteAsync(packet.ToArray(), 0, packet.Length());
+            }
+        }
+
+        public void SendPacket_of_Arrange(int[] data)
+        {
+            try
+            {
+                using (Packet packet = new Packet())
+                {
+                    packet.Write("Arranged");
+                    foreach (int code in data)
+                    {
+                        packet.Write(code);
+                    }
+                    packet.WriteLength();
+                    stream.WriteAsync(packet.ToArray(), 0, packet.Length());
+
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
             }
         }
 
