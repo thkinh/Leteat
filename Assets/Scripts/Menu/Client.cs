@@ -20,7 +20,6 @@ namespace Assets.Scripts
         private readonly string address = "26.124.193.147";
         private readonly int port = 9999;
         public int id = 90;
-        private readonly Queue<Action> _mainThreadActions = new Queue<Action>();
         private bool isHost = false;
         private bool isClient = false;
 
@@ -49,8 +48,6 @@ namespace Assets.Scripts
                     WelcomeReceived(first_data, first_data.Length);
                     await Task.Run(() => { ListenToServer(); });
                 }
-
-
             }
             catch(Exception e)
             {
@@ -71,7 +68,6 @@ namespace Assets.Scripts
                     SendPacket("Hello server");
                     byte[] first_data = new byte[1024];
                     await stream.ReadAsync(first_data, 0, first_data.Length);
-                    SceneManager.LoadScene("JoinRoom");
                     WelcomeReceived(first_data, first_data.Length);
                     isClient = true;
                     await Task.Run(() => { ListenToServer(); });
@@ -100,6 +96,7 @@ namespace Assets.Scripts
             }
             catch
             {
+                tcpClient.Close();
                 Debug.Log("Loi khi nhan goi tin welcome");
                 return;
                 //Debug.Log(ex.Message.ToString());
@@ -119,6 +116,7 @@ namespace Assets.Scripts
                 catch 
                 {
                     Debug.Log("Loi khi nhan packet");
+                    tcpClient.Close();
                     //Debug.Log(ex.Message.ToString());
                 }
             }
@@ -132,6 +130,11 @@ namespace Assets.Scripts
                 Packet packet = new Packet(data);
                 int lenght = packet.ReadInt();
                 Debug.Log($"Received a packet from server, len = {lenght}");
+                if (lenght == 0)
+                {
+                    Debug.Log("Connect stopped");
+                    tcpClient.Close();
+                }
 
                 if (lenght == 4) //received a packet of only data of food
                 {
@@ -158,16 +161,21 @@ namespace Assets.Scripts
                         if (isHost)
                         {
                             Position.play = true;
+                            Debug.Log("Play is true");
                         }
                         else if (isClient)
                         {
                             JoinRoom_Manager.Can_play = true;
                         }
                     }
-                    if (signal == "Cannot")
+                    else if (signal == "Cannot")
                     {
                         Debug.Log("Arrange sai roi");
                         Position.play = false;
+                    }
+                    else if(signal == "Player Joined")
+                    {
+                        Position.number_of_player++;
                     }
                 }
             }

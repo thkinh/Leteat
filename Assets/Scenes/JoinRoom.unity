@@ -2262,7 +2262,7 @@ GameObject:
   - component: {fileID: 986349832}
   - component: {fileID: 986349831}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2447,7 +2447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loading_panel: {fileID: 503147906}
-  ID: {fileID: 0}
+  ID: {fileID: 986349829}
 --- !u!114 &997195472
 MonoBehaviour:
   m_ObjectHideFlags: 0

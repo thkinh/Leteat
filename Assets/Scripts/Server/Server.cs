@@ -14,11 +14,12 @@ public class Server : MonoBehaviour
     //private readonly static int Max_Players = 6;
     private readonly static int PORT = 9999;
     private readonly static string IP = "26.124.193.147";
-    private static TcpListener listener;
+    public TcpListener listener;
     private readonly List<TcpClient> clients_list = new List<TcpClient>();
     private readonly Dictionary<int, TcpClient> clients_Dict = new Dictionary<int, TcpClient>();
     private int attending = 0;
-    private readonly int[] lobby_id = { 5, 6, 7, 8, 9 };
+    private readonly int[] lobby_id = {99,99,99,99,99};
+    public bool started = false;
 
     public static Server server_instance;
 
@@ -42,13 +43,12 @@ public class Server : MonoBehaviour
     public void Start()
     {
         listener = new TcpListener(IPAddress.Any, PORT);
-        
     }
     public void StartServer()
     {
         listener.Start();
         Debug.Log($"Server started on {PORT}, server ip is {listener.Server.AddressFamily}");
-
+        started = true;
         Thread listen = new Thread(Listen);
         listen.Start();
     }
@@ -92,7 +92,7 @@ public class Server : MonoBehaviour
     {
         Packet packet = new Packet(_packet);
         int len = packet.ReadInt();
-
+        Debug.Log($"Server received a packet have a len of {len}");
 
         if (len == 9) //packet of food delivery
         {
@@ -124,7 +124,8 @@ public class Server : MonoBehaviour
 
             //Send packet lobby acept
             SendPacket(true, this_client);
-            return $"Lobby's id is correct, getting this player into lobby";
+            Send_Announce_for_join(clients_Dict[0]);
+            return $"Lobby's id is correct, telling the host to create one more disk";
         }
         else if (len == 4) // packet of signal
         {
@@ -148,9 +149,16 @@ public class Server : MonoBehaviour
                 if (client == null || packet.ReadInt() != clients_Dict.FirstOrDefault(x => x.Value == client).Key)
                 {
                     SendStartPacket(this_client,false);
+                    Debug.Log($"{packet.ReadInt()} ! = {clients_Dict.FirstOrDefault(x => x.Value == client).Key}");
                     return $"There's a mistake when arranged";
                 }
             }
+            foreach (TcpClient client in clients_list)
+            {
+                SendStartPacket(client, true);
+                //Send start packet to all clients
+            }
+            return $"Sent a start signal to all player";
         }
         return $"Packet's length is unknowed {len}, this type of packet doesn't exists";
     }
@@ -211,6 +219,14 @@ public class Server : MonoBehaviour
         packet.Dispose();
     }
 
+    public void Send_Announce_for_join(TcpClient client)
+    {
+        Packet packet = new Packet();
+        packet.Write("Player Joined");
+        packet.WriteLength();
+        client.GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+        packet.Dispose();
+    }
 
     public void SendStartPacket(TcpClient client, bool canplay)
     {

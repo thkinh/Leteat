@@ -14,6 +14,7 @@ public class Position : MonoBehaviour
     public List<GameObject> disks = new List<GameObject>();
     public List<GameObject> TakeList = new List<GameObject>();
     public static bool play = false;
+    public static int number_of_player = 0;
     public List<int> FoodList = new List<int>();
     public GameObject ID;
     private int i = 0;
@@ -21,6 +22,8 @@ public class Position : MonoBehaviour
     {
         int id = ClientManager.client.id;
         ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
+        NewDisk();
+        number_of_player = 1; //there's a host in here
     }
 
     public void Update()
@@ -29,6 +32,11 @@ public class Position : MonoBehaviour
         {
             SceneManager.LoadScene("Playing");
         }
+        if (number_of_player > i)
+        {
+            NewDisk();
+        }
+
     }
 
     public void Back_toPrevious()
@@ -65,6 +73,7 @@ public class Position : MonoBehaviour
         {
             FoodList.Add(number.ConvertTo<int>());
         }
+        SendArrangeList();
     }
 }
 
