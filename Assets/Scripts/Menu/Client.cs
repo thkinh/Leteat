@@ -17,6 +17,7 @@ namespace Assets.Scripts
         public TcpClient tcpClient;
         public SmtpClient smtpClient;
         public UdpClient udpClient;
+        public UdpClient udplistener;
 
         NetworkStream stream;
         private readonly string address = "192.168.0.5";
@@ -82,30 +83,13 @@ namespace Assets.Scripts
             }
         }
 
-        public static byte[] SerializeAudio(float[] samples)
-        {
-            byte[] byteArray = new byte[samples.Length * 4];
-            Buffer.BlockCopy(samples, 0, byteArray, 0, byteArray.Length);
-            return byteArray;
-        }
-
-        public static float[] DeserializeAudio(byte[] byteArray)
-        {
-            float[] samples = new float[byteArray.Length / 4];
-            Buffer.BlockCopy(byteArray, 0, samples, 0, byteArray.Length);
-            return samples;
-        }
 
         public void StartUdpClient()
         {
             udpClient = new UdpClient();
             try {
 
-                udpClient.Connect(new IPEndPoint(IPAddress.Parse(address), port));
-                while(true)
-                {
-                    udpClient.ReceiveAsync();
-                }
+                udpClient.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), udp_port));
             }
             catch {
                 Debug.Log("Udp client: falied to initialize");

@@ -69,6 +69,12 @@ public class Button_Clickable : MonoBehaviour
         SceneManager.LoadScene("Sign in");
     }
 
+    public void LoadSetting()
+    {
+        SceneManager.LoadScene("Setting");
+    }
+
+
     public void LoadFriends()
     {
         SceneManager.LoadScene("Friends");
