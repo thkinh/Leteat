@@ -8,6 +8,7 @@ using Assets.Scripts;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using Assets.Scripts.GamePlay;
+using TMPro;
 
 public class Position : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Position : MonoBehaviour
     public static int number_of_player = 0;
     public List<int> FoodList = new List<int>();
     public GameObject ID;
+    public Button playbutton;
     private int i = 0;
     public void Start()
     {
@@ -72,6 +74,17 @@ public class Position : MonoBehaviour
         foreach (char number in id)
         {
             FoodList.Add(number.ConvertTo<int>());
+
+        }
+        if (playbutton != null)
+        {
+            playbutton.onClick.AddListener(() =>
+            {
+                Image img = playbutton.gameObject.GetComponent<Image>();
+               // img.sprite = Resources.Load<Sprite>("Button/yellow");
+                TMP_Text text = playbutton.gameObject.GetComponent<TMP_Text>();
+               // text.spriteAsset = Scene.
+            });
         }
         SendArrangeList();
     }
