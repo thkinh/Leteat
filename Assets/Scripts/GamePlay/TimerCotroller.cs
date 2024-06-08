@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,7 @@ public class TimerCotroller : MonoBehaviour
         }
         else
         {
+            you_lose_text.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = $"Diem cua ban la: {EntityManager.instance.score}";
             you_lose_text.SetActive(true);
             isover = true;
         }

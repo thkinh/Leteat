@@ -17,6 +17,7 @@ public class EntityManager : MonoBehaviour
 
     private Food[] take_in;
     private Food[] debai;
+    public int score;
 
     private void Awake()
     {

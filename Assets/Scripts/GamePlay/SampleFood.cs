@@ -61,4 +61,22 @@ public class SampleFood : MonoBehaviour
         }
         Debug.Log("Food " + randomNumber + " is in disk " + Position[index]);
     }
+    public void SubmitFood(int positionIndex)
+    {
+        for (int i = 0; i < TakeList.Count; i++)
+        {
+            if (Position[positionIndex] != null)
+            {
+                Position[positionIndex].GetComponent<SpriteRenderer>().sprite = null;
+                TakeList.RemoveAt(positionIndex);
+                break;
+            }
+        }
+        if (TakeList.Count == 0)
+        {
+            EntityManager.instance.score += 100;
+            //Lay diem + vo
+            InitializeFood();
+        }
+    }
 }

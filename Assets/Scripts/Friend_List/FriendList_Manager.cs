@@ -208,7 +208,7 @@ public class FriendList_Manager : MonoBehaviour
                 add_btn.onClick.AddListener(() =>
                 {
                     Accept_btn(request.from);
-                    Destroy(r.gameObject);
+                    //Destroy(r.gameObject);
                 });
             }
         }

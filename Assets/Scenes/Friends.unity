@@ -3693,7 +3693,7 @@ MonoBehaviour:
   contentHolder: {fileID: 1126261480}
   allfriend_contentHolder: {fileID: 585573999}
   addfriend_contenHolder: {fileID: 886026336}
-  requestfriend_contentHolder: {fileID: 0}
+  requestfriend_contentHolder: {fileID: 682900652}
   searchplayer: {fileID: 1361557771}
   allfriend: {fileID: 2106253300}
   personalplayer: {fileID: 1283961917}
@@ -5047,7 +5047,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.54960644}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.1201, y: 20}
+  m_AnchoredPosition: {x: 0.12010002, y: 20}
   m_SizeDelta: {x: 17.9458, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2028996222

@@ -53,18 +53,14 @@ public class DragableItem : MonoBehaviour
 
         if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
-            int count = 0;
             for (int i = 0; i < SampleFood.instance.TakeList.Count; i++)
             {
-                if (idFood == SampleFood.instance.TakeList[i] && count == 0)
+                if (idFood == SampleFood.instance.TakeList[i])
                 {
                     Debug.Log("Submit food " + idFood);
                     Destroy(gameObject);
-                    count = 1;
-                    //Cộng thêm 3s mỗi lần nộp đúng thức ăn
+                    SampleFood.instance.SubmitFood(i);
                     EntityManager.instance.time_control.GetComponent<TimerCotroller>().AddTime(3.0f);
-                    // Tạo đề bài mới
-                    SampleFood.instance.CreateNewFood(i);
                     break;
                 }
             }
