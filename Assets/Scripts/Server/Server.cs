@@ -13,10 +13,11 @@ public class Server : MonoBehaviour
 {
     //private readonly static int Max_Players = 6;
     private readonly static int PORT = 9999;
-    private readonly static string IP = "26.124.193.147";
+    private readonly static string IP = "192.168.0.5";
     public TcpListener listener;
     private readonly List<TcpClient> clients_list = new List<TcpClient>();
     private readonly Dictionary<int, TcpClient> clients_Dict = new Dictionary<int, TcpClient>();
+    private readonly List<TcpClient> arranged_list = new List<TcpClient>();
     private int attending = 0;
     private readonly int[] lobby_id = {99,99,99,99,99};
     public bool started = false;
@@ -42,12 +43,12 @@ public class Server : MonoBehaviour
     }
     public void Start()
     {
-        listener = new TcpListener(IPAddress.Any, PORT);
+        listener = new TcpListener(IPAddress.Parse(IP), PORT);
     }
     public void StartServer()
     {
         listener.Start();
-        Debug.Log($"Server started on {PORT}, server ip is {listener.Server.AddressFamily}");
+        Debug.Log($"Server started on {listener.LocalEndpoint}");
         started = true;
         Thread listen = new Thread(Listen);
         listen.Start();
@@ -99,7 +100,7 @@ public class Server : MonoBehaviour
             int player_id = packet.ReadInt();
             bool next_or_prev = packet.ReadBool();
             int foodname = packet.ReadInt();
-            SendPacket(foodname, next_or_prev, this_client);
+            SendPacket(foodname, this_client, next_or_prev);
             packet.Dispose();
             return $"{player_id} : {Food.getName(foodname)} / {next_or_prev} / data_len = {len}";
         }
@@ -142,23 +143,18 @@ public class Server : MonoBehaviour
         }
         else if (packet.ReadString() == "Arranged")
         {
-            //Recived arranged list
-            foreach(TcpClient client in clients_Dict.Values)
+            for(int i = 0; i < attending; i ++)
             {
-                //Check food da dung chua
-                if (client == null || packet.ReadInt() != clients_Dict.FirstOrDefault(x => x.Value == client).Key)
-                {
-                    SendStartPacket(this_client,false);
-                    Debug.Log($"{packet.ReadInt()} ! = {clients_Dict.FirstOrDefault(x => x.Value == client).Key}");
-                    return $"There's a mistake when arranged";
-                }
+                int food = packet.ReadInt();
+                arranged_list.Add(clients_Dict[food]);
             }
+            Debug.Log("Arranged");
             foreach (TcpClient client in clients_list)
             {
                 SendStartPacket(client, true);
                 //Send start packet to all clients
             }
-            return $"Sent a start signal to all player";
+            return $"Sent a start signal to all players";
         }
         return $"Packet's length is unknowed {len}, this type of packet doesn't exists";
     }
@@ -244,53 +240,89 @@ public class Server : MonoBehaviour
         packet.Dispose();
     }
 
-
-    //<sumary> Transfering food between players
-    public void SendPacket(int foodname, bool next, TcpClient this_client)
+    //<sumary> Transfering food between players using ArrangedList
+    public void SendPacket(int foodname, TcpClient this_client, bool next)
     {
-        int client_key_to_send = clients_Dict.FirstOrDefault(x => x.Value == this_client).Key;
-
-        if (clients_Dict.Count == 1)
+        int this_client_position = arranged_list.IndexOf(this_client);
+        if (this_client_position == -1)
         {
-            Debug.Log("Chi co 1 player trong phong choi");
+            //Khong ton tai player
             return;
         }
-
         if (next)
         {
             Packet packet = new Packet();
             packet.Write(foodname);
             packet.WriteLength();
-            client_key_to_send += 1;
-            if (client_key_to_send >= clients_Dict.Count)
+            this_client_position++;
+            if(this_client_position > arranged_list.Count)
             {
-                client_key_to_send = 0;
+                this_client_position = 0;
             }
-            Debug.Log($"Transfering this food to player {client_key_to_send}");
-            clients_Dict[client_key_to_send].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+            clients_list[this_client_position].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
             packet.Dispose();
             return;
         }
-        else if (!next)
+        if(!next)
         {
             Packet packet = new Packet();
             packet.Write(foodname);
             packet.WriteLength();
-            client_key_to_send -= 1;
-            if (client_key_to_send < 0)
+            this_client_position--;
+            if(this_client_position < 0)
             {
-                Debug.Log($"Transfering this food to player {client_key_to_send}");
-
-                clients_Dict.Values.Last().GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
-                packet.Dispose();
-                return;
+                this_client_position = arranged_list.Count - 1;
             }
-            Debug.Log($"Transfering this food to player {client_key_to_send}");
-            clients_Dict[client_key_to_send].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+            clients_list[this_client_position].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
             packet.Dispose();
             return;
         }
     }
 
-    
+    ////<sumary> Transfering food between players using Dict
+    //public void SendPacket(int foodname, bool next, TcpClient this_client)
+    //{
+    //    int client_key_to_send = clients_Dict.FirstOrDefault(x => x.Value == this_client).Key;
+
+    //    if (clients_Dict.Count == 1)
+    //    {
+    //        Debug.Log("Chi co 1 player trong phong choi");
+    //        return;
+    //    }
+
+    //    if (next)
+    //    {
+    //        Packet packet = new Packet();
+    //        packet.Write(foodname);
+    //        packet.WriteLength();
+    //        client_key_to_send += 1;
+    //        if (client_key_to_send >= clients_Dict.Count)
+    //        {
+    //            client_key_to_send = 0;
+    //        }
+    //        Debug.Log($"Transfering this food to player {client_key_to_send}");
+    //        clients_Dict[client_key_to_send].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+    //        packet.Dispose();
+    //        return;
+    //    }
+    //    else if (!next)
+    //    {
+    //        Packet packet = new Packet();
+    //        packet.Write(foodname);
+    //        packet.WriteLength();
+    //        client_key_to_send -= 1;
+    //        if (client_key_to_send < 0)
+    //        {
+    //            Debug.Log($"Transfering this food to player {client_key_to_send}");
+
+    //            clients_Dict.Values.Last().GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+    //            packet.Dispose();
+    //            return;
+    //        }
+    //        Debug.Log($"Transfering this food to player {client_key_to_send}");
+    //        clients_Dict[client_key_to_send].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+    //        packet.Dispose();
+    //        return;
+    //    }
+    //}
 }

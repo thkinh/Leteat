@@ -17,7 +17,7 @@ namespace Assets.Scripts
         public TcpClient tcpClient;
         public SmtpClient smtpClient;
         NetworkStream stream;
-        private readonly string address = "26.124.193.147";
+        private readonly string address = "192.168.0.5";
         private readonly int port = 9999;
         public int id = 90;
         private bool isHost = false;

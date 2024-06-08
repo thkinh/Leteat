@@ -10,10 +10,13 @@ public class ClientManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
-    }
-    public void ConnectToServer()
-    {
-        client.ConnectToServer();
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 }
