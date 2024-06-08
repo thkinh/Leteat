@@ -47,13 +47,9 @@ public class Audio : MonoBehaviour
 
         waveIn.DataAvailable += WaveIn_DataAvailable;
         waveIn.DeviceNumber = 0;
-        //for (int i = 0; i < WaveIn.DeviceCount; i++)
-        //{
-        //    var deviceInfo = WaveIn.GetCapabilities(i);
-        //}
-
-
     }
+
+
     public void OpenMic()
     {
         if (waveIn == null)
