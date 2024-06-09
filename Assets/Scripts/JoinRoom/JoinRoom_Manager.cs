@@ -52,7 +52,6 @@ public class JoinRoom_Manager : MonoBehaviour
         {
             SceneManager.LoadSceneAsync("Playing");
         }
-        if ()
     }
 
 
