@@ -1,23 +1,29 @@
 ﻿using Assets.Scripts.GamePlay;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
+using TMPro;
+
 
 public class EntityManager : MonoBehaviour
 {
     public static EntityManager instance;
     public GameObject submit;
     public GameObject trashcan;
+    public TMP_Text scoreText;
     public GameObject SendtoServer;
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
+    public int score = 0;
+
+
     float minTrans = 200;
     float maxTrans = 700;
 
     private Food[] take_in;
     private Food[] debai;
-    public int score;
 
     private void Awake()
     {
@@ -43,6 +49,7 @@ public class EntityManager : MonoBehaviour
                 Spawn_Food();
             }
         }
+        scoreText.text = "Score: " + score;
     }
     
     private void Spawn_Food()
@@ -64,8 +71,21 @@ public class EntityManager : MonoBehaviour
         //nf.GetComponent<SpriteRenderer>().color = UIManager.LoadColor(nf.GetComponent<DragableItem>().food);
     }
 
-    public void Take_in()
+    public void UpdateScore()
     {
-
+        float submissionTime = time_control.GetComponent<TimerCotroller>().max_time - ((int)timer);
+        float totalTimeAllowed = time_control.GetComponent<TimerCotroller>().max_time;
+        if (submissionTime >= (2 * totalTimeAllowed) / 3)
+        {
+            score += 100;
+        }
+        else if (submissionTime >= totalTimeAllowed / 3)
+        {
+            score += 60;
+        }
+        else
+        {
+            score += 30;
+        }
     }
 }
