@@ -11,10 +11,11 @@ public class JoinRoom_Manager : MonoBehaviour
 {
     public static bool Can_join;
     public static bool Can_play;
-
     List<int> roomID = new List<int>();
     public GameObject loading_panel;
     public GameObject ID;
+    public GameObject joinbutton;
+
     public void JoinClick()
     {
         string id = DropAreaManager.Instance.CodeJoinRoom();
@@ -51,6 +52,7 @@ public class JoinRoom_Manager : MonoBehaviour
         {
             SceneManager.LoadSceneAsync("Playing");
         }
+        if ()
     }
 
 

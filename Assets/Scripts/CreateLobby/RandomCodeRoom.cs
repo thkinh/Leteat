@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Assets.Scripts;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class RandomCodeRoom : MonoBehaviour
 {
     public GameObject[] Position;
     public Sprite[] Food;
     public static bool m_created = false;
-
-
+    public GameObject nextbutton;
+    public static int number_of_player = 0;
     public List<int> TakeList = new List<int>();
     private int randomNumber;
     private int codeRoom;
@@ -34,7 +36,9 @@ public class RandomCodeRoom : MonoBehaviour
             Position[i].GetComponent<SpriteRenderer>().sprite = Food[TakeList[i]];
         }
         Debug.Log("Code Room is: " + CodeRoomToString(codeRoom));
+        number_of_player = 1; //host
     }
+
     private string CodeRoomToString(int code)
     {
         string codeString = code.ToString();
@@ -57,7 +61,20 @@ public class RandomCodeRoom : MonoBehaviour
         {
             SceneManager.LoadSceneAsync("Arrange");
         }
+        if (number_of_player > 1)
+        {
+            ChangeButtonColor("#00806C");
+        }    
     }
-
+    private void ChangeButtonColor(string hexColor)
+    {
+        Image img = nextbutton.gameObject.GetComponent<Image>();
+        img.sprite = Resources.Load<Sprite>("Button/yellow");
+        TextMeshProUGUI buttonText = nextbutton.GetComponentInChildren<TextMeshProUGUI>();
+        if (UnityEngine.ColorUtility.TryParseHtmlString(hexColor, out Color newColor))
+        {
+            buttonText.color = newColor;
+        }
+    }
 }
 

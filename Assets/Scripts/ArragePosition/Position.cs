@@ -24,7 +24,6 @@ public class Position : MonoBehaviour
     {
         int id = ClientManager.client.id;
         ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
-        NewDisk();
         number_of_player = 1; //there's a host in here
     }
 
@@ -37,8 +36,13 @@ public class Position : MonoBehaviour
         if (number_of_player > i)
         {
             NewDisk();
-        }
 
+        }
+        if (FoodList.Count == number_of_player)
+        {
+            ChangeButtonColor("#00806C");
+            
+        }
     }
 
     public void Back_toPrevious()
@@ -76,17 +80,17 @@ public class Position : MonoBehaviour
             FoodList.Add(number.ConvertTo<int>());
 
         }
-        if (playbutton != null)
-        {
-            playbutton.onClick.AddListener(() =>
-            {
-                Image img = playbutton.gameObject.GetComponent<Image>();
-               // img.sprite = Resources.Load<Sprite>("Button/yellow");
-                TMP_Text text = playbutton.gameObject.GetComponent<TMP_Text>();
-               // text.spriteAsset = Scene.
-            });
-        }
         SendArrangeList();
     }
+    private void ChangeButtonColor(string hexColor)
+    {
+        Image img = playbutton.gameObject.GetComponent<Image>();
+        img.sprite = Resources.Load<Sprite>("Button/yellow");
+        TextMeshProUGUI buttonText = playbutton.GetComponentInChildren<TextMeshProUGUI>();
+        if (UnityEngine.ColorUtility.TryParseHtmlString(hexColor, out Color newColor))
+        {
+            buttonText.color = newColor;
+        }
+    }    
 }
 
