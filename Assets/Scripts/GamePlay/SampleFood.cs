@@ -63,20 +63,18 @@ public class SampleFood : MonoBehaviour
     }
     public void SubmitFood(int positionIndex)
     {
-        for (int i = 0; i < TakeList.Count; i++)
+        if (Position[positionIndex] != null)
         {
-            if (Position[positionIndex] != null)
-            {
-                Position[positionIndex].GetComponent<SpriteRenderer>().sprite = null;
-                TakeList.RemoveAt(positionIndex);
-                break;
-            }
+            TakeList.RemoveAt(positionIndex);
+            Position[positionIndex].GetComponent<SpriteRenderer>().sprite = null;
         }
+
         if (TakeList.Count == 0)
         {
-            EntityManager.instance.score += 100;
-            //Lay diem + vo
+            EntityManager.instance.UpdateScore();
+            Debug.Log("Score: " + EntityManager.instance.score);
             InitializeFood();
         }
+
     }
 }
