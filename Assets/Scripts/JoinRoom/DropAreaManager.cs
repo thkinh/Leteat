@@ -6,6 +6,7 @@ using UnityEngine;
 public class DropAreaManager : MonoBehaviour
 {
     private static DropAreaManager _instance;
+    public string coderoom;
     public static DropAreaManager Instance
     {
         get
@@ -41,6 +42,7 @@ public class DropAreaManager : MonoBehaviour
     public string CodeJoinRoom()
     {
         string roomCodeString = string.Join("", indexFoods.ToArray());
+        coderoom = string.Join("", indexFoods.ToArray());
         while (roomCodeString.Length < 5)
         {
             roomCodeString = "0" + roomCodeString;

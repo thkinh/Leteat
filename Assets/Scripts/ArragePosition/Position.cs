@@ -24,7 +24,7 @@ public class Position : MonoBehaviour
     {
         int id = ClientManager.client.id;
         ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
-        number_of_player = 1; //there's a host in here
+        number_of_player = ClientManager.client.number_of_players; //host included
     }
 
     public void Update()

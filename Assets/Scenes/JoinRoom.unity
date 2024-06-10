@@ -2448,6 +2448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loading_panel: {fileID: 503147906}
   ID: {fileID: 986349829}
+  joinbutton: {fileID: 469012385}
 --- !u!114 &997195472
 MonoBehaviour:
   m_ObjectHideFlags: 0
