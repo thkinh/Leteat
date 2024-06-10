@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class SampleFood : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SampleFood : MonoBehaviour
     public GameObject[] Food;
 
     public List<int> TakeList = new List<int>();
+    private int submittedCount;
     private int randomNumber;
 
     private void Awake()
@@ -65,16 +67,24 @@ public class SampleFood : MonoBehaviour
     {
         if (Position[positionIndex] != null)
         {
-            TakeList.RemoveAt(positionIndex);
             Position[positionIndex].GetComponent<SpriteRenderer>().sprite = null;
         }
-
-        if (TakeList.Count == 0)
+        submittedCount++;
+        bool allCleared = true;
+        foreach (var pos in Position)
+        {
+            if (pos != null && pos.GetComponent<SpriteRenderer>().sprite != null)
+            {
+                allCleared = false;
+                break;
+            }
+        }
+        if (allCleared)
         {
             EntityManager.instance.UpdateScore();
             Debug.Log("Score: " + EntityManager.instance.score);
+            TakeList.Clear();
             InitializeFood();
         }
-
     }
 }
