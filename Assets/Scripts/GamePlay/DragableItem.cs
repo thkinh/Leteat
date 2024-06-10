@@ -50,7 +50,18 @@ public class DragableItem : MonoBehaviour
             Debug.Log("Destroy food " + idFood);
             Destroy(gameObject);
         }
-
+        if (EntityManager.instance.sendnext.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
+        {
+            Debug.Log("Send to next food " + idFood);
+            Destroy(gameObject);
+            ClientManager.client.SendPacket(new Food(idFood), true);
+        }
+        if (EntityManager.instance.sendprevious.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
+        {
+            Debug.Log("Send to previous food " + idFood);
+            Destroy(gameObject);
+            ClientManager.client.SendPacket(new Food(idFood), false);
+        }
         if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
             for (int i = 0; i < 3; i++)

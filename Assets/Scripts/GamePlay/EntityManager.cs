@@ -12,7 +12,8 @@ public class EntityManager : MonoBehaviour
     public GameObject submit;
     public GameObject trashcan;
     public TMP_Text scoreText;
-    public GameObject SendtoServer;
+    public GameObject sendnext;
+    public GameObject sendprevious;
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
