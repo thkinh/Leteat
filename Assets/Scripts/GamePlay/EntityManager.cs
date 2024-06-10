@@ -17,9 +17,10 @@ public class EntityManager : MonoBehaviour
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
     public int score = 0;
+    public GameObject foodParent;
 
 
-    float minTrans = 200;
+    float minTrans = 300;
     float maxTrans = 700;
 
     private Food[] take_in;
@@ -57,7 +58,20 @@ public class EntityManager : MonoBehaviour
         var wanted_x = UnityEngine.Random.Range(minTrans, maxTrans);
         var wanted_y = UnityEngine.Random.Range(minTrans, maxTrans);
         var position = new Vector2(wanted_x, wanted_y);
-        GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
+
+        // Instantiate FoodPrefab và thiết lập parent của nó là foodParent
+        GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], foodParent.transform);
+
+        // Thiết lập vị trí và kích thước tương đối trong Canvas
+        RectTransform rectTransform = nf.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            rectTransform.anchoredPosition = position;
+        }
+        else
+        {
+            Debug.LogWarning("The spawned food item does not have a RectTransform component.");
+        }
         nf.name = nf.GetComponent<DragableItem>().idFood.ToString();
         Debug.Log("Spawn: " + nf.name);
     }
