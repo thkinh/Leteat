@@ -80,6 +80,7 @@ public class Server : MonoBehaviour
     {
         listener?.Stop();
         started = false;
+        RandomCodeRoom.m_created = false;
         FirestoreClient.fc_instance.ChangeLobbyState(IP, false); 
         foreach(TcpClient client in clients_list)
         {
@@ -123,8 +124,8 @@ public class Server : MonoBehaviour
         if (len == 9) //packet of food delivery
         {
             int player_id = packet.ReadInt();
-            bool next_or_prev = packet.ReadBool();
             int foodname = packet.ReadInt();
+            bool next_or_prev = packet.ReadBool();
             SendPacket(foodname, this_client, next_or_prev);
             packet.Dispose();
             return $"{player_id} : {Food.getName(foodname)} / {next_or_prev} / data_len = {len}";
@@ -212,6 +213,7 @@ public class Server : MonoBehaviour
         string msg = packet.ReadString();
         Debug.Log($"Received hello packet from a client: {id}/ {msg}");
         Debug.Log($"Setting this client's id = {new Food(attending-1).fname}\n");
+        Send_Announce_for_join(clients_Dict[0]);
         packet.Dispose();
         return;
     }
@@ -263,6 +265,7 @@ public class Server : MonoBehaviour
         }
         if (next)
         {
+            Debug.Log($"Send from: {this_client_position} to {this_client_position + 1}");
             Packet packet = new Packet();
             packet.Write(foodname);
             packet.WriteLength();
@@ -277,6 +280,7 @@ public class Server : MonoBehaviour
         }
         if(!next)
         {
+            Debug.Log($"Send from: {this_client_position} to {this_client_position - 1}");
             Packet packet = new Packet();
             packet.Write(foodname);
             packet.WriteLength();
@@ -290,51 +294,4 @@ public class Server : MonoBehaviour
             return;
         }
     }
-
-    ////<sumary> Transfering food between players using Dict
-    //public void SendPacket(int foodname, bool next, TcpClient this_client)
-    //{
-    //    int client_key_to_send = clients_Dict.FirstOrDefault(x => x.Value == this_client).Key;
-
-    //    if (clients_Dict.Count == 1)
-    //    {
-    //        Debug.Log("Chi co 1 player trong phong choi");
-    //        return;
-    //    }
-
-    //    if (next)
-    //    {
-    //        Packet packet = new Packet();
-    //        packet.Write(foodname);
-    //        packet.WriteLength();
-    //        client_key_to_send += 1;
-    //        if (client_key_to_send >= clients_Dict.Count)
-    //        {
-    //            client_key_to_send = 0;
-    //        }
-    //        Debug.Log($"Transfering this food to player {client_key_to_send}");
-    //        clients_Dict[client_key_to_send].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
-    //        packet.Dispose();
-    //        return;
-    //    }
-    //    else if (!next)
-    //    {
-    //        Packet packet = new Packet();
-    //        packet.Write(foodname);
-    //        packet.WriteLength();
-    //        client_key_to_send -= 1;
-    //        if (client_key_to_send < 0)
-    //        {
-    //            Debug.Log($"Transfering this food to player {client_key_to_send}");
-
-    //            clients_Dict.Values.Last().GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
-    //            packet.Dispose();
-    //            return;
-    //        }
-    //        Debug.Log($"Transfering this food to player {client_key_to_send}");
-    //        clients_Dict[client_key_to_send].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
-    //        packet.Dispose();
-    //        return;
-    //    }
-    //}
 }

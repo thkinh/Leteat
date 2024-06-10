@@ -30,6 +30,7 @@ public class FirestoreClient : MonoBehaviour
     private void Start()
     {
         db = FirebaseFirestore.DefaultInstance;
+        db.Settings.PersistenceEnabled = false;
         thisPlayerID = "r18lDv36Rzaynt5jyyp8";
     }
 

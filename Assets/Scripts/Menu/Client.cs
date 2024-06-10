@@ -20,12 +20,13 @@ namespace Assets.Scripts
         public UdpClient udplistener;
 
         NetworkStream stream;
-        public string address = "127.0.0.1";
+        public string address = "192.168.1.3";
         private readonly int port = 9999;
         private readonly int udp_port = 11333;
         public int id = 90;
         private bool isHost = false;
         private bool isClient = false;
+        public int number_of_players = 0;
 
         public Client()
         {
@@ -74,10 +75,11 @@ namespace Assets.Scripts
                     await stream.ReadAsync(first_data, 0, first_data.Length);
                     WelcomeReceived(first_data, first_data.Length);
                     isClient = true;
+                    JoinRoom_Manager.joined = true;
                     await Task.Run(() => { ListenToServer(); });
                 }
             }
-            catch (Exception e)
+            catch (Exception e )
             {
                 Debug.Log(e.Message);
             }
@@ -179,14 +181,9 @@ namespace Assets.Scripts
                             JoinRoom_Manager.Can_play = true;
                         }
                     }
-                    else if (signal == "Cannot")
-                    {
-                        Debug.Log("Arrange sai roi");
-                        Position.play = false;
-                    }
                     else if(signal == "Player Joined")
                     {
-                        Position.number_of_player++;
+                        number_of_players++;
                     }
                 }
             }
@@ -276,8 +273,8 @@ namespace Assets.Scripts
             using (Packet packet = new Packet())
             {
                 packet.Write(ClientManager.client.id);
-                packet.Write(next_or_prev);
                 packet.Write((int)food.fname);
+                packet.Write(next_or_prev);
                 packet.WriteLength();
                 stream.WriteAsync(packet.ToArray(),0,packet.Length());
             }

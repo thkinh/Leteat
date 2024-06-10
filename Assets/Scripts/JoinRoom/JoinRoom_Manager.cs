@@ -11,23 +11,21 @@ using TMPro;
 
 public class JoinRoom_Manager : MonoBehaviour
 {
-    public static bool joined;
-    public static bool Can_play;
+    public static bool joined = false;
+    public static bool Can_play = false;
+    public bool notloaded = true;
     List<int> roomID = new List<int>();
     public GameObject loading_panel;
     public GameObject ID;
-
     public GameObject joinbutton;
 
     public async void JoinClick()
     {
         string foodid = DropAreaManager.Instance.CodeJoinRoom();
         string ipfound = await FirestoreClient.fc_instance.GetLoobyIP(foodid);
+        Debug.Log(ipfound);
         if (ipfound != null) {
             ClientManager.client.Join_ConnectToServer();
-            loading_panel.SetActive(true);
-            int id = ClientManager.client.id;
-            ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
             return;
         }
         Debug.Log($"Khong tim thay server nao voi id: {foodid}");
@@ -36,12 +34,19 @@ public class JoinRoom_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (joined && notloaded)
+        {
+            loading_panel.SetActive(true);
+            int id = ClientManager.client.id;
+            ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
+            notloaded = false;
+        }
         if (Can_play)
         {
             SceneManager.LoadSceneAsync("Playing");
