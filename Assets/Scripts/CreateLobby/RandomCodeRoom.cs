@@ -16,7 +16,6 @@ public class RandomCodeRoom : MonoBehaviour
     public GameObject nextbutton;
     public static int number_of_player = 0;
     public List<int> TakeList = new List<int>();
-    private int randomNumber;
     private int codeRoom;
     private void Start()
     {
@@ -35,8 +34,15 @@ public class RandomCodeRoom : MonoBehaviour
             }
             Position[i].GetComponent<SpriteRenderer>().sprite = Food[TakeList[i]];
         }
-        Debug.Log("Code Room is: " + CodeRoomToString(codeRoom));
-        number_of_player = 1; //host
+        Lobby lobby = new Lobby
+        {
+            ip = Server.server_instance.IP,
+            foodid = CodeRoomToString(codeRoom),
+            hostname = FirestoreClient.fc_instance.thisPlayer.username,
+            isactive = true
+        };
+        FirestoreClient.fc_instance.Write(lobby);
+
     }
 
     private string CodeRoomToString(int code)
@@ -50,10 +56,6 @@ public class RandomCodeRoom : MonoBehaviour
         return codeString;
     }
 
-    public void Send_Code_Room()
-    {
-        ClientManager.client.SendPacket(TakeList.ToArray());
-    }
 
     private void Update()
     {

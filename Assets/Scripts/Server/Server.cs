@@ -8,12 +8,14 @@ using System.Net;
 using System.Threading;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 
 public class Server : MonoBehaviour
 {
     //private readonly static int Max_Players = 6;
     private readonly static int PORT = 9999;
-    private readonly static string IP = "192.168.0.5";
+    public string IP;
     public TcpListener listener;
     private readonly List<TcpClient> clients_list = new List<TcpClient>();
     private readonly Dictionary<int, TcpClient> clients_Dict = new Dictionary<int, TcpClient>();
@@ -43,10 +45,31 @@ public class Server : MonoBehaviour
     }
     public void Start()
     {
-        listener = new TcpListener(IPAddress.Parse(IP), PORT);
+
     }
+    public List<string> GetLocalIPAddresses()
+    {
+        try
+        {
+            string hostName = Dns.GetHostName();
+            IPHostEntry hostEntry = Dns.GetHostEntry(hostName);
+            List<string> ipAddresses = hostEntry.AddressList
+                .Where(ip => ip.AddressFamily == AddressFamily.InterNetwork && !IPAddress.IsLoopback(ip))
+                .Select(ip => ip.ToString())
+                .ToList();
+
+            return ipAddresses;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred: " + ex.Message);
+        }
+        return null;
+    }
+
     public void StartServer()
     {
+        listener = new TcpListener(IPAddress.Parse(IP), PORT);
         listener.Start();
         Debug.Log($"Server started on {listener.LocalEndpoint}");
         started = true;
@@ -56,9 +79,11 @@ public class Server : MonoBehaviour
     public void EndServer()
     {
         listener?.Stop();
+        started = false;
+        FirestoreClient.fc_instance.ChangeLobbyState(IP, false); 
         foreach(TcpClient client in clients_list)
         {
-            client?.Close();
+            client.Close();
         }
     }
 
@@ -114,19 +139,6 @@ public class Server : MonoBehaviour
             //Send packet lobby acept
             SendPacket(true, this_client);
             return $"Lobby created, getting this player into lobby";
-        }
-        else if (len == 24) //packet of request join lobby
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                lobby_id[i] = packet.ReadInt();
-                Debug.Log($"A player want to join lobby with id {i} is : {Food.getName(lobby_id[i])}");
-            }
-
-            //Send packet lobby acept
-            SendPacket(true, this_client);
-            Send_Announce_for_join(clients_Dict[0]);
-            return $"Lobby's id is correct, telling the host to create one more disk";
         }
         else if (len == 4) // packet of signal
         {

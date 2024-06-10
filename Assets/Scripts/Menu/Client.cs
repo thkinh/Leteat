@@ -20,7 +20,7 @@ namespace Assets.Scripts
         public UdpClient udplistener;
 
         NetworkStream stream;
-        private readonly string address = "192.168.0.5";
+        public string address = "127.0.0.1";
         private readonly int port = 9999;
         private readonly int udp_port = 11333;
         public int id = 90;
@@ -161,10 +161,7 @@ namespace Assets.Scripts
                     if(isHost)
                     {
                         RandomCodeRoom.m_created = true;
-                    }
-                    else if (isClient)
-                    {
-                        JoinRoom_Manager.Can_join = true;
+                        return;
                     }
                 }
                 else

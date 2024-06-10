@@ -6,16 +6,4 @@ public class ClientManager : MonoBehaviour
     public static ClientManager instance;
     public static Client client = new Client();
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 }

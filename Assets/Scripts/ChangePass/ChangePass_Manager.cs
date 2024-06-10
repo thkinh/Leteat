@@ -11,7 +11,6 @@ public class ChangePass_Manager : MonoBehaviour
     public TMP_InputField newpass;
     public TMP_InputField confirm_newpass;
     public GameObject createbutton;
-    private bool checkpass = false;
     private void Update()
     {
         if (Check_Password() == true)
