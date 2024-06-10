@@ -55,7 +55,10 @@ public class RandomCodeRoom : MonoBehaviour
         }
         return codeString;
     }
-
+    public void Send_Code_Room()
+    {
+        ClientManager.client.SendPacket(TakeList.ToArray());
+    }
 
     private void Update()
     {

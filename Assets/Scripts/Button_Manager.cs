@@ -32,6 +32,10 @@ public class Button_Clickable : MonoBehaviour
     {
         iswatchingUser = !iswatchingUser;
         UserData.SetActive(iswatchingUser);
+        if (FirestoreClient.fc_instance == null)
+        {
+            return;
+        }
         if (!FirestoreClient.fc_instance.playerisLoaded)
         {
             Player this_player = await FirestoreClient.fc_instance.GetPlayer(FirestoreClient.fc_instance.thisPlayerID);
