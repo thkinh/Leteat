@@ -26,6 +26,7 @@ public class EntityManager : MonoBehaviour
     }
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +67,6 @@ public class EntityManager : MonoBehaviour
 
     public void Take_in()
     {
-
+        
     }
 }

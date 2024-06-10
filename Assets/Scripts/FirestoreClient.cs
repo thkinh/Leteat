@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
-using Firebase.Extensions;
 using System.Threading.Tasks;
 using System.Linq;
-using Unity.VisualScripting;
-using System;
-using Unity.Mathematics;
 
 public class FirestoreClient : MonoBehaviour
 {
@@ -34,7 +30,7 @@ public class FirestoreClient : MonoBehaviour
     private void Start()
     {
         db = FirebaseFirestore.DefaultInstance;
-        thisPlayerID = "zF8UEMEnafmj5l3xnPDB";
+        thisPlayerID = "r18lDv36Rzaynt5jyyp8";
     }
 
     public async void Write(Match match)
@@ -46,7 +42,7 @@ public class FirestoreClient : MonoBehaviour
 
     public async void Write(Lobby lobby)
     {
-        DocumentReference lobbyRef = db.Collection("Matches").Document(lobby.id.ToString());
+        DocumentReference lobbyRef = db.Collection("Lobbies").Document(lobby.ip.ToString());
         await lobbyRef.SetAsync(lobby);
         Debug.Log("Match added with ID: " + lobbyRef.Id);
     }
@@ -254,7 +250,7 @@ public class FirestoreClient : MonoBehaviour
         DocumentReference doc = db.Collection("Players").Document(playerID);
         DocumentSnapshot snapshot = await doc.GetSnapshotAsync();
         
-        if(snapshot!=null)
+        if(snapshot.Exists)
         {
             player = snapshot.ConvertTo<Player>();
 
@@ -449,6 +445,20 @@ public class FirestoreClient : MonoBehaviour
 
         // Update the document
         await docRef.UpdateAsync(updates);
+    }
+
+    public async Task<string> GetLoobyIP(string foodid)
+    {
+        CollectionReference colRef = db.Collection("Lobby");
+        Query query = colRef.WhereEqualTo("foodid", foodid).WhereEqualTo("isactive", true);
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        if (snapshot.Documents.Count() > 0)
+        {
+            Lobby lobbyfound  = snapshot.Documents.FirstOrDefault().ConvertTo<Lobby>();
+            return lobbyfound.ip;
+        }
+        return null;
     }
 
 }

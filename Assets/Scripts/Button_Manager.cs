@@ -22,27 +22,9 @@ public class Button_Clickable : MonoBehaviour
         SceneManager.LoadScene("Choose cr or join");
     }
 
-
-    public void Create_Lobby()
-    {
-        //To do: Create a server here
-        previous_Scene = "Choose cr or join";
-        Server.server_instance.StartServer();
-        if (Server.server_instance.started)
-        {
-            ClientManager.client.ConnectToServer();
-        }
-    }
-
-    public void JoinLobby()
-    {
-        previous_Scene = "Choose cr or join";
-        SceneManager.LoadSceneAsync("JoinRoom");
-        ClientManager.client.Join_ConnectToServer();
-    }
-
     public void Back_To_Previous()
     {
+        Server.server_instance?.EndServer();
         SceneManager.LoadScene(previous_Scene);
     }
 

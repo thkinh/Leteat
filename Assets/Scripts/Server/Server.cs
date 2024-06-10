@@ -8,12 +8,14 @@ using System.Net;
 using System.Threading;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 
 public class Server : MonoBehaviour
 {
     //private readonly static int Max_Players = 6;
     private readonly static int PORT = 9999;
-    private readonly static string IP = "192.168.0.5";
+    public string IP;
     public TcpListener listener;
     private readonly List<TcpClient> clients_list = new List<TcpClient>();
     private readonly Dictionary<int, TcpClient> clients_Dict = new Dictionary<int, TcpClient>();
@@ -43,10 +45,35 @@ public class Server : MonoBehaviour
     }
     public void Start()
     {
-        listener = new TcpListener(IPAddress.Parse(IP), PORT);
+        IP = GetLocalIPAddresses().FirstOrDefault();
+        if(IP == null)
+        {
+            IP = "127.0.0.1";
+        }
     }
+    public List<string> GetLocalIPAddresses()
+    {
+        try
+        {
+            string hostName = Dns.GetHostName();
+            IPHostEntry hostEntry = Dns.GetHostEntry(hostName);
+            List<string> ipAddresses = hostEntry.AddressList
+                .Where(ip => ip.AddressFamily == AddressFamily.InterNetwork && !IPAddress.IsLoopback(ip))
+                .Select(ip => ip.ToString())
+                .ToList();
+
+            return ipAddresses;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred: " + ex.Message);
+        }
+        return null;
+    }
+
     public void StartServer()
     {
+        listener = new TcpListener(IPAddress.Parse(IP), PORT);
         listener.Start();
         Debug.Log($"Server started on {listener.LocalEndpoint}");
         started = true;
@@ -56,6 +83,7 @@ public class Server : MonoBehaviour
     public void EndServer()
     {
         listener?.Stop();
+        started = false;
         foreach(TcpClient client in clients_list)
         {
             client?.Close();

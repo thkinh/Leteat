@@ -36,9 +36,14 @@ public struct Match
 public struct Lobby
 {
     [FirestoreProperty]
-    public int id { get; set; }
+    public string ip { get; set; }
     [FirestoreProperty]
-    public string host { get; set; }
+    public string foodid { get; set; }
+    [FirestoreProperty]
+    public string hostname { get; set; }
+    [FirestoreProperty]
+    public bool isactive { get; set; }
+    
 }
 
 
