@@ -4,9 +4,6 @@ public class ClientManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static ClientManager instance;
-    public static Client client;
-    private void Awake()
-    {
-        client = new Client();
-    }
+    public static Client client = new Client();
+
 }

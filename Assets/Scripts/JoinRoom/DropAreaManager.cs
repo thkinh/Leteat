@@ -45,7 +45,6 @@ public class DropAreaManager : MonoBehaviour
         {
             roomCodeString = "0" + roomCodeString;
         }
-        Debug.Log($"Room code: {roomCodeString}");
         return roomCodeString;
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TimerCotroller : MonoBehaviour
 {
     public bool isover = false;
-    public GameObject you_lose_text;
+    public GameObject ScoreBoard;
     public Image Countdown_foreground;
     float time_remaining;
     public float max_time = 5.0f;
@@ -21,7 +21,7 @@ public class TimerCotroller : MonoBehaviour
     {
         time_remaining = max_time;
         isover = false;
-        you_lose_text.SetActive(false);
+        ScoreBoard.SetActive(false);
     }
 
     void Update()
@@ -33,9 +33,18 @@ public class TimerCotroller : MonoBehaviour
         }
         else
         {
-            you_lose_text.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = $"Diem cua ban la: {EntityManager.instance.score}";
-            you_lose_text.SetActive(true);
+            ScoreBoard.transform.GetChild(1).gameObject.GetComponent<TMP_Text>().text = $"{EntityManager.instance.score}";
+            ScoreBoard.SetActive(true);
             isover = true;
+            ClearFood();
+        }
+    }
+
+    void ClearFood()
+    {
+        foreach (Transform child in EntityManager.instance.foodParent.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
     public void AddTime(float time)

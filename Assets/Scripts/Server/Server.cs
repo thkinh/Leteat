@@ -45,11 +45,7 @@ public class Server : MonoBehaviour
     }
     public void Start()
     {
-        IP = GetLocalIPAddresses().FirstOrDefault();
-        if(IP == null)
-        {
-            IP = "127.0.0.1";
-        }
+
     }
     public List<string> GetLocalIPAddresses()
     {
@@ -84,9 +80,10 @@ public class Server : MonoBehaviour
     {
         listener?.Stop();
         started = false;
+        FirestoreClient.fc_instance.ChangeLobbyState(IP, false); 
         foreach(TcpClient client in clients_list)
         {
-            client?.Close();
+            client.Close();
         }
     }
 
@@ -142,19 +139,6 @@ public class Server : MonoBehaviour
             //Send packet lobby acept
             SendPacket(true, this_client);
             return $"Lobby created, getting this player into lobby";
-        }
-        else if (len == 24) //packet of request join lobby
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                lobby_id[i] = packet.ReadInt();
-                Debug.Log($"A player want to join lobby with id {i} is : {Food.getName(lobby_id[i])}");
-            }
-
-            //Send packet lobby acept
-            SendPacket(true, this_client);
-            Send_Announce_for_join(clients_Dict[0]);
-            return $"Lobby's id is correct, telling the host to create one more disk";
         }
         else if (len == 4) // packet of signal
         {

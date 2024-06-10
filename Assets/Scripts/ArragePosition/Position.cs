@@ -8,6 +8,7 @@ using Assets.Scripts;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using Assets.Scripts.GamePlay;
+using TMPro;
 
 public class Position : MonoBehaviour
 {
@@ -17,12 +18,12 @@ public class Position : MonoBehaviour
     public static int number_of_player = 0;
     public List<int> FoodList = new List<int>();
     public GameObject ID;
+    public Button playbutton;
     private int i = 0;
     public void Start()
     {
         int id = ClientManager.client.id;
         ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
-        NewDisk();
         number_of_player = 1; //there's a host in here
     }
 
@@ -35,8 +36,13 @@ public class Position : MonoBehaviour
         if (number_of_player > i)
         {
             NewDisk();
-        }
 
+        }
+        if (FoodList.Count == number_of_player)
+        {
+            ChangeButtonColor("#00806C");
+            
+        }
     }
 
     public void Back_toPrevious()
@@ -72,8 +78,19 @@ public class Position : MonoBehaviour
         foreach (char number in id)
         {
             FoodList.Add(number.ConvertTo<int>());
+
         }
         SendArrangeList();
     }
+    private void ChangeButtonColor(string hexColor)
+    {
+        Image img = playbutton.gameObject.GetComponent<Image>();
+        img.sprite = Resources.Load<Sprite>("Button/yellow");
+        TextMeshProUGUI buttonText = playbutton.GetComponentInChildren<TextMeshProUGUI>();
+        if (UnityEngine.ColorUtility.TryParseHtmlString(hexColor, out Color newColor))
+        {
+            buttonText.color = newColor;
+        }
+    }    
 }
 

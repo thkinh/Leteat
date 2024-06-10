@@ -1,23 +1,30 @@
 ﻿using Assets.Scripts.GamePlay;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
+using TMPro;
+
 
 public class EntityManager : MonoBehaviour
 {
     public static EntityManager instance;
     public GameObject submit;
     public GameObject trashcan;
+    public TMP_Text scoreText;
     public GameObject SendtoServer;
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
-    float minTrans = 200;
+    public int score = 0;
+    public GameObject foodParent;
+
+
+    float minTrans = 300;
     float maxTrans = 700;
 
     private Food[] take_in;
     private Food[] debai;
-    public int score;
 
     private void Awake()
     {
@@ -44,6 +51,7 @@ public class EntityManager : MonoBehaviour
                 Spawn_Food();
             }
         }
+        scoreText.text = "Score: " + score;
     }
     
     private void Spawn_Food()
@@ -51,7 +59,20 @@ public class EntityManager : MonoBehaviour
         var wanted_x = UnityEngine.Random.Range(minTrans, maxTrans);
         var wanted_y = UnityEngine.Random.Range(minTrans, maxTrans);
         var position = new Vector2(wanted_x, wanted_y);
-        GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], position, Quaternion.identity);
+
+        // Instantiate FoodPrefab và thiết lập parent của nó là foodParent
+        GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], foodParent.transform);
+
+        // Thiết lập vị trí và kích thước tương đối trong Canvas
+        RectTransform rectTransform = nf.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            rectTransform.anchoredPosition = position;
+        }
+        else
+        {
+            Debug.LogWarning("The spawned food item does not have a RectTransform component.");
+        }
         nf.name = nf.GetComponent<DragableItem>().idFood.ToString();
         Debug.Log("Spawn: " + nf.name);
     }
@@ -65,8 +86,21 @@ public class EntityManager : MonoBehaviour
         //nf.GetComponent<SpriteRenderer>().color = UIManager.LoadColor(nf.GetComponent<DragableItem>().food);
     }
 
-    public void Take_in()
+    public void UpdateScore()
     {
-        
+        float submissionTime = time_control.GetComponent<TimerCotroller>().max_time - ((int)timer);
+        float totalTimeAllowed = time_control.GetComponent<TimerCotroller>().max_time;
+        if (submissionTime >= (2 * totalTimeAllowed) / 3)
+        {
+            score += 100;
+        }
+        else if (submissionTime >= totalTimeAllowed / 3)
+        {
+            score += 60;
+        }
+        else
+        {
+            score += 30;
+        }
     }
 }

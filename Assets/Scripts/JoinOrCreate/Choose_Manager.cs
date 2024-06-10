@@ -36,7 +36,7 @@ public class Choose_Manager : MonoBehaviour
     {
         int selected = dropDown.value;
         Server.server_instance.IP = dropDown.options[selected].text;
-        Debug.Log($"Selected option is : {Server.server_instance.IP}");
+        ClientManager.client.address = dropDown.options[selected].text;
     }
 
     public void StartServer()
@@ -46,6 +46,7 @@ public class Choose_Manager : MonoBehaviour
         {
             SceneManager.LoadScene("CreateLobby");
         }
+        ClientManager.client.ConnectToServer();
     }
 
     private void Update()

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ForgottenPass_Manager : MonoBehaviour
@@ -11,6 +12,8 @@ public class ForgottenPass_Manager : MonoBehaviour
     public TMP_InputField verifycode_input;
 
     public GameObject Verify_panel;
+    public GameObject sendbutton;
+   
 
     private string email;
     Client client = new Client();
@@ -24,6 +27,7 @@ public class ForgottenPass_Manager : MonoBehaviour
             Debug.Log("Email not found");
             return;
         }
+           
 
         //else
         try
@@ -45,12 +49,12 @@ public class ForgottenPass_Manager : MonoBehaviour
     {
         if (verifycode_input.text == verifi_Code.ToString())
         {
+            //sentverify = true;
             FirestoreClient.fc_instance.thisPlayerID = await FirestoreClient.fc_instance.GetPlayerID_byMail(email);
             SceneManager.LoadScene("ChangePass");
         }
     }
-
-
+      
     // Start is called before the first frame update
     void Start()
     {
@@ -62,4 +66,5 @@ public class ForgottenPass_Manager : MonoBehaviour
     {
         
     }
+  
 }

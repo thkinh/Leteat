@@ -44,7 +44,7 @@ public class FirestoreClient : MonoBehaviour
     {
         DocumentReference lobbyRef = db.Collection("Lobbies").Document(lobby.ip.ToString());
         await lobbyRef.SetAsync(lobby);
-        Debug.Log("Match added with ID: " + lobbyRef.Id);
+        Debug.Log("Lobby added with ID: " + lobbyRef.Id);
     }
 
     public async void Write(Player player)
@@ -449,7 +449,7 @@ public class FirestoreClient : MonoBehaviour
 
     public async Task<string> GetLoobyIP(string foodid)
     {
-        CollectionReference colRef = db.Collection("Lobby");
+        CollectionReference colRef = db.Collection("Lobbies");
         Query query = colRef.WhereEqualTo("foodid", foodid).WhereEqualTo("isactive", true);
         QuerySnapshot snapshot = await query.GetSnapshotAsync();
 
@@ -459,6 +459,21 @@ public class FirestoreClient : MonoBehaviour
             return lobbyfound.ip;
         }
         return null;
+    }
+
+    public async void ChangeLobbyState(string serverip, bool state)
+    {
+        // Reference to the Firestore document for the specific lobby
+        DocumentReference docRef = db.Collection("Lobbies").Document(serverip);
+
+        // Create a dictionary with the field to update
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "isactive", state}
+        };
+
+        // Update the document
+        await docRef.UpdateAsync(updates);
     }
 
 }
