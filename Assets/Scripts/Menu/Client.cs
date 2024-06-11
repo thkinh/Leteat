@@ -156,7 +156,6 @@ namespace Assets.Scripts
                 {
                     int foodname = packet.ReadInt();
                     EntityManager.instance.foodlist.Add(new Food(foodname));
-                    Debug.Log($"recived a {new Food(foodname).fname} from server");
                 }
                 else if (lenght == 1)  //received a confirm lobby creation packet
                 {
