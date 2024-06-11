@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine.UI;
-using UnityEditor.VersionControl;
 
 public class REG_UI_Manager : MonoBehaviour
 {

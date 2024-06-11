@@ -41,7 +41,7 @@ public class Choose_Manager : MonoBehaviour
     {
         int selected = dropDown.value;
         Server.server_instance.IP = dropDown.options[selected].text;
-        ClientManager.client.address = dropDown.options[selected].text;
+        ClientManager.client.server_address = dropDown.options[selected].text;
     }
 
     public void StartServer()

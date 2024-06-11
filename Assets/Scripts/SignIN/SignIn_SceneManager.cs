@@ -13,7 +13,6 @@ using System.Linq;
 public class SignIn_SceneManager : MonoBehaviour
 {
     public static SignIn_SceneManager instance;
-
     public TMP_InputField email;
     public TMP_InputField password;
     public GameObject panel;
@@ -22,7 +21,6 @@ public class SignIn_SceneManager : MonoBehaviour
     {
         instance = this;
     }
-
 
     public async void SignIN()
     {
