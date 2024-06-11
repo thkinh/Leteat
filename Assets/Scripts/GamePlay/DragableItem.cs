@@ -33,8 +33,12 @@ public class DragableItem : MonoBehaviour
     void Update()
     {
         if (!dragging) return;
+        if (Vector2.Distance(this.transform.position, EntityManager.instance.transform.position) < 5 && spawned_by_server)
+        {
+            this.transform.position += (Vector3)velo;
+        }
         var mousepos = GetMousePos();
-        transform.position = velo ;
+        this.transform.position = mousepos;
     }
 
     void OnMouseDown()

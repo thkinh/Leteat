@@ -25,9 +25,6 @@ public class EntityManager : MonoBehaviour
     float minTrans = 300;
     float maxTrans = 700;
 
-    private Food[] take_in;
-    private Food[] debai;
-
     private void Awake()
     {
         if (instance == null)
@@ -88,7 +85,7 @@ public class EntityManager : MonoBehaviour
 
     public void Spawn_Food(Food food)
     {
-        GameObject nf = Instantiate(FoodPrefab[food.FoodIndex], new Vector2(0,0), Quaternion.identity);
+        GameObject nf = Instantiate(FoodPrefab[foodlist.LastOrDefault().foodIndex], new Vector2(0,0), Quaternion.identity);
         Debug.Log($"instantiated {food.foodIndex}");
         nf.AddComponent<RectTransform>();
         nf.AddComponent<DragableItem>();

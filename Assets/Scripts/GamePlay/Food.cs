@@ -30,11 +30,13 @@ namespace Assets.Scripts.GamePlay
         public Food(FoodName name)
         {
             this.fname = name;
+            foodIndex = (int)name;
         }
 
         public Food(int name)
         {
             this.fname = (FoodName)name;
+            this.foodIndex = name;
         }
         public static string getName(int nameIndex)
         {
