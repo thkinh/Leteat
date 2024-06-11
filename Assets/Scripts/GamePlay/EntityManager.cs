@@ -65,6 +65,7 @@ public class EntityManager : MonoBehaviour
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], foodParent.transform);
 
         // Thiết lập vị trí và kích thước tương đối trong Canvas
+        nf.AddComponent<RectTransform>();
         RectTransform rectTransform = nf.GetComponent<RectTransform>();
         if (rectTransform != null)
         {
