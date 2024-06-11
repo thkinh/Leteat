@@ -5,18 +5,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class ChangePass_Manager : MonoBehaviour
 {
     public TMP_InputField newpass;
     public TMP_InputField confirm_newpass;
     public GameObject createbutton;
+    public GameObject panel;
+    public GameObject panel2;
+
     private void Update()
     {
-        if (Check_Password() == true)
-        {
-            ChangeButtonColor("#00806C");
-        }
+        //if (Check_Password() == true)
+        //{
+        //    ChangeButtonColor("#00806C");
+        //}
     }
     public void Submit()
     {
@@ -33,11 +37,14 @@ public class ChangePass_Manager : MonoBehaviour
         //kiểm tra password phải đủ 8 kí tự trở lên
         if (!CheckFormatPassword.IsPasswordValid(newpass.text))
         {
+            panel.SetActive(true);
             return false;
         }
         //kiểm tra password = repeat password
         if (newpass.text != confirm_newpass.text)
         {
+            panel.SetActive(false);
+            panel2.SetActive(true);
             //Debug.Log($"Passwords do not match: {confirm_newpass.text} != {newpass.text}");
             return false;
         }

@@ -14,6 +14,8 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
+    public GameObject panel;
+    public TMP_Text text;
 
     Client client = new Client();
 
@@ -43,14 +45,18 @@ public class REG_UI_Manager : MonoBehaviour
             client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
             SceneManager.LoadSceneAsync("Verification");
         }
+        if (checkTask.IsCompleted) 
+        {
+        }    
     }
 
-    private async Task<bool> Check_Password()
+    public async Task<bool> Check_Password()
     {
 
         //kiểm tra password phải đủ 8 kí tự trở lên
         if (!CheckFormatPassword.IsPasswordValid(password.text))
         {
+           
             return false;
         }
 
@@ -79,7 +85,8 @@ public class REG_UI_Manager : MonoBehaviour
 
         if (await FirestoreClient.fc_instance.IsUsernameExists(username.text))
         {
-            Debug.Log("Username already exists.");
+            text.text = "Username already exists.";
+           Debug.Log("Username already exists.");
             return false;
         }
 
@@ -89,5 +96,15 @@ public class REG_UI_Manager : MonoBehaviour
     public void Back()
     {
         SceneManager.LoadScene("Sign in");
+    }
+    public void Update()
+    {
+
+    }
+    private string Mess(string message)
+    {
+        panel.SetActive(true);
+        message += message;
+        return message;
     }
 }
