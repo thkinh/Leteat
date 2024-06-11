@@ -22,8 +22,10 @@ public class JoinRoom_Manager : MonoBehaviour
     {
         string foodid = DropAreaManager.Instance.CodeJoinRoom();
         string ipfound = await FirestoreClient.fc_instance.GetLoobyIP(foodid);
+        ClientManager.client.address = ipfound;
         Debug.Log(ipfound);
-        if (ipfound != null) {
+        if (ipfound != null)
+        {
             ClientManager.client.Join_ConnectToServer();
             return;
         }
