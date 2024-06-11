@@ -285,7 +285,7 @@ public class Server : MonoBehaviour
             packet.Write(foodname);
             packet.WriteLength();
             this_client_position--;
-            if(this_client_position <= 0)
+            if(this_client_position < 0)
             {
                 this_client_position = arranged_list.Count - 1;
             }

@@ -22,8 +22,8 @@ public class EntityManager : MonoBehaviour
     int current_food_count;
     public List<Food> foodlist = new List<Food>();
 
-    float minTrans = 300;
-    float maxTrans = 700;
+    float minTrans = -300;
+    float maxTrans = 300;
 
     private void Awake()
     {
@@ -85,12 +85,15 @@ public class EntityManager : MonoBehaviour
 
     public void Spawn_Food(Food food)
     {
-        GameObject nf = Instantiate(FoodPrefab[foodlist.LastOrDefault().foodIndex], new Vector2(0,0), Quaternion.identity);
+        var wanted_x = UnityEngine.Random.Range(minTrans, maxTrans);
+        var wanted_y = UnityEngine.Random.Range(minTrans, maxTrans);
+        var position = new Vector2(wanted_x, wanted_y);
+        GameObject nf = Instantiate(FoodPrefab[foodlist.LastOrDefault().foodIndex], position, Quaternion.identity);
         Debug.Log($"instantiated {food.foodIndex}");
         nf.AddComponent<RectTransform>();
         nf.AddComponent<DragableItem>();
         var drag = nf.GetComponent<DragableItem>();
-        drag= new DragableItem(new Vector2(960,540).normalized*2);
+        //drag= new DragableItem(new Vector2(960,540).normalized*2);
         
     }
 

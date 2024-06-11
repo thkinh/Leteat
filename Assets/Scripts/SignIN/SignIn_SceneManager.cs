@@ -25,8 +25,6 @@ public class SignIn_SceneManager : MonoBehaviour
 
     public async void SignIN()
     {
-        Debug.Log($"email : {email.text}");
-
         bool check = await Check();
         if ( check )
         {
