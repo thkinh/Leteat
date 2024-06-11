@@ -103,7 +103,7 @@ public class FriendList_Manager : MonoBehaviour
             if (friendButton != null)
             {
                 friendButton.onClick.AddListener(() => { 
-                    PersonalPlayer(relationship.username);
+                    PersonalPlayer(relationship.playerID);
                 
                 });
             }
@@ -115,7 +115,7 @@ public class FriendList_Manager : MonoBehaviour
         }
     }
    
-    public async void PersonalPlayer(string username)
+    public async void PersonalPlayer(string id)
     {
         if (personalplayer.activeSelf)
         {
@@ -126,7 +126,7 @@ public class FriendList_Manager : MonoBehaviour
 
         personalplayer.SetActive(true);
 
-        Player player = await FirestoreClient.fc_instance.FindPlayer_byName(username);
+        Player player = await FirestoreClient.fc_instance.GetPlayer(id);
         TMP_Text personal_username = personalplayer.transform.GetChild(2).GetComponent<TMP_Text>();
         TMP_Text personal_email = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
         personal_username.text = $"Username:  {player.username}";
@@ -204,6 +204,15 @@ public class FriendList_Manager : MonoBehaviour
         foreach (Request request in requestlist)
         {
             GameObject r = Instantiate(requestPrefab, requestfriend_contentHolder);
+            Button friendButton = r.GetComponent<Button>();
+            if (friendButton != null)
+            {
+
+                friendButton.onClick.AddListener(() => {
+                    PersonalPlayer(request.from);
+
+                });
+            }
             TMP_Text friendText = r.GetComponentInChildren<TMP_Text>();
             if (friendText != null)
             {
@@ -216,7 +225,7 @@ public class FriendList_Manager : MonoBehaviour
                 add_btn.onClick.AddListener(() =>
                 {
                     Accept_btn(request.from);
-                    //Destroy(r.gameObject);
+                    Destroy(r.gameObject);
                 });
             }
         }
