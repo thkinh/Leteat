@@ -999,7 +999,7 @@ MonoBehaviour:
   isover: 0
   ScoreBoard: {fileID: 963961619}
   Countdown_foreground: {fileID: 2126735883}
-  max_time: 60
+  max_time: 10
 --- !u!1 &963961619
 GameObject:
   m_ObjectHideFlags: 0

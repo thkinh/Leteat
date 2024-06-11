@@ -20,6 +20,10 @@ public class JoinRoom_Manager : MonoBehaviour
     public GameObject joinbutton;
     public async void JoinClick()
     {
+        if (ClientManager.client.tcpClient.Connected)
+        {
+            return;
+        }
         string foodid = DropAreaManager.Instance.CodeJoinRoom();
         string ipfound = await FirestoreClient.fc_instance.GetLoobyIP(foodid);
         ClientManager.client.server_address = ipfound;

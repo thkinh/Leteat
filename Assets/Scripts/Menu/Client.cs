@@ -24,13 +24,14 @@ namespace Assets.Scripts
         private readonly int port = 9999;
         private readonly int udp_port = 11333;
         public int id = 90;
-        private bool isHost = false;
-        private bool isClient = false;
+        public bool isHost { get; set; }
+        public bool isClient { get; set; }
         public int number_of_players = 0;
 
         public Client()
         {
-
+            isHost = false;
+            isClient = false;
         }
 
         public async void ConnectToServer()
@@ -125,7 +126,20 @@ namespace Assets.Scripts
             number_of_players = 0;
             isHost = false;
             isClient = false;
-    }
+        }
+
+        public void Reset()
+        {
+            number_of_players = 1;
+            isClient = false;
+            if(isHost)
+            {
+                SceneManager.LoadScene("CreateLobby");
+                return;
+            }
+            tcpClient.Dispose();
+        }
+
 
         private async void ListenToServer() 
         {
