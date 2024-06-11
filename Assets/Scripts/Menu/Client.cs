@@ -20,7 +20,7 @@ namespace Assets.Scripts
         public UdpClient udplistener;
 
         NetworkStream stream;
-        public string address = "192.168.1.3";
+        public string address = "192.168.67.245";
         private readonly int port = 9999;
         private readonly int udp_port = 11333;
         public int id = 90;
@@ -62,11 +62,11 @@ namespace Assets.Scripts
 
         public async void Join_ConnectToServer()
         {
+            Debug.Log($"Connecting to {address}");
             try
             {
                 tcpClient = new TcpClient();
                 await tcpClient.ConnectAsync(IPAddress.Parse(address), port);
-
                 if (tcpClient.Connected)
                 {
                     stream = tcpClient.GetStream();
@@ -155,8 +155,8 @@ namespace Assets.Scripts
                 if (lenght == 4) //received a packet of only data of food
                 {
                     int foodname = packet.ReadInt();
-                    Food food = new Food(foodname);
-                    EntityManager.instance.Spawn_Food(food);
+                    EntityManager.instance.foodlist.Add(new Food(foodname));
+                    Debug.Log($"recived a {new Food(foodname).fname} from server");
                 }
                 else if (lenght == 1)  //received a confirm lobby creation packet
                 {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 using TMPro;
-
+using System.Linq;
 
 public class EntityManager : MonoBehaviour
 {
@@ -19,7 +19,8 @@ public class EntityManager : MonoBehaviour
     public GameObject time_control;
     public int score = 0;
     public GameObject foodParent;
-
+    int current_food_count;
+    public List<Food> foodlist = new List<Food>();
 
     float minTrans = 300;
     float maxTrans = 700;
@@ -33,16 +34,21 @@ public class EntityManager : MonoBehaviour
             instance = this;
     }
 
-
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        current_food_count = foodlist.Count;
         Spawn_Food();
     }
     // Update is called once per frame
     void Update()
     {
+        if (foodlist.Count > current_food_count)
+        {
+            Spawn_Food(foodlist[current_food_count++]);
+        }
         timer += Time.deltaTime;
         if (timer - previous_time > 3)
         {
@@ -65,6 +71,7 @@ public class EntityManager : MonoBehaviour
         GameObject nf = Instantiate(FoodPrefab[UnityEngine.Random.Range(0, FoodPrefab.Length)], foodParent.transform);
 
         // Thiết lập vị trí và kích thước tương đối trong Canvas
+        nf.AddComponent<RectTransform>();
         RectTransform rectTransform = nf.GetComponent<RectTransform>();
         if (rectTransform != null)
         {
@@ -81,10 +88,13 @@ public class EntityManager : MonoBehaviour
 
     public void Spawn_Food(Food food)
     {
-        //GameObject nf = Instantiate(new_Food, new Vector2(2,3), Quaternion.identity) as GameObject;
-        //nf.GetComponent<DragableItem>().food = food;
-        //nf.name = nf.GetComponent<DragableItem>().food.name.ToString();
-        //nf.GetComponent<SpriteRenderer>().color = UIManager.LoadColor(nf.GetComponent<DragableItem>().food);
+        GameObject nf = Instantiate(FoodPrefab[food.FoodIndex], new Vector2(0,0), Quaternion.identity);
+        Debug.Log($"instantiated {food.foodIndex}");
+        nf.AddComponent<RectTransform>();
+        nf.AddComponent<DragableItem>();
+        var drag = nf.GetComponent<DragableItem>();
+        drag= new DragableItem(new Vector2(960,540).normalized*2);
+        
     }
 
     public void UpdateScore()

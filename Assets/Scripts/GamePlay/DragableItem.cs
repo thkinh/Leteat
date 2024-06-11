@@ -9,6 +9,14 @@ public class DragableItem : MonoBehaviour
     private bool dragging;
     private Vector2 offset, original_pos;
     public int idFood;
+    public Vector2 velo;
+    public bool spawned_by_server = false;
+
+    public DragableItem(Vector2 v)
+    {
+        velo = v;
+        spawned_by_server=true;
+    }
 
     private void Awake()
     {
@@ -25,9 +33,8 @@ public class DragableItem : MonoBehaviour
     void Update()
     {
         if (!dragging) return;
-
         var mousepos = GetMousePos();
-        transform.position = mousepos - offset;
+        transform.position = velo ;
     }
 
     void OnMouseDown()
