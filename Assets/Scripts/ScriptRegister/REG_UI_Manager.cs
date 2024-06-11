@@ -39,7 +39,12 @@ public class REG_UI_Manager : MonoBehaviour
 
         if (checkTask.Result)
         {
-            string mail = $"Hello {username.text}, this is your verification code: {verifi_Code}";
+            string mail = $"Let Eat Verification Code \n" +
+                $"Hello {username.text}, this is your verification code to verify: \n" +
+                $"{verifi_Code} \n" +
+                $"This code can only be used once and will expire in 5 minutes. Return to the app and enter this code to verify your email address. Please don’t share this code with others. " +
+                $"To get a new verification code, proceed to the app and enter your email again." +
+                $"This is an auto generated message. If you require assistance, please contact our support team through this email!";
 
             string email_tosend = email.text;
             client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
