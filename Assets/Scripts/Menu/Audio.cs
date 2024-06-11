@@ -6,48 +6,76 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
-    private WaveInEvent waveIn;
-    private WaveOutEvent waveOut;
-    private BufferedWaveProvider waveProvider;
+    public static Audio instance;
+    public WaveInEvent waveIn;
+    public WaveOutEvent waveOut;
+    public BufferedWaveProvider waveProvider;
     private CancellationTokenSource cts;
     public bool isCapturing;
 
-    // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         isCapturing = false;
         InitializeAudio();
+    }
+
+    public void StartListener()
+    {
         StartVoiceListener();
     }
 
     private void InitializeAudio()
     {
-        waveIn = new WaveInEvent
+        try
         {
-            WaveFormat = new WaveFormat(),
-            DeviceNumber = 0
-        };
+            waveIn = new WaveInEvent
+            {
+                WaveFormat = new WaveFormat(),
+                DeviceNumber = 0
+            };
 
-        waveIn.DataAvailable += WaveIn_DataAvailable;
+            var deviceCapabilities = WaveInEvent.GetCapabilities(waveIn.DeviceNumber);
+            Debug.Log($"Selected Device: {deviceCapabilities.ProductName}");
+
+            waveIn.DataAvailable += WaveIn_DataAvailable;
+            waveIn.RecordingStopped += WaveIn_RecordingStopped;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error initializing WaveInEvent: {ex.Message}");
+        }
     }
 
     private void StartVoiceListener()
     {
-        cts = new CancellationTokenSource();
-        waveOut = new WaveOutEvent();
-        waveProvider = new BufferedWaveProvider(new WaveFormat());
-        waveOut.Init(waveProvider);
-        waveOut.Play();
+        try
+        {
+            cts = new CancellationTokenSource();
+            waveOut = new WaveOutEvent();
+            waveProvider = new BufferedWaveProvider(new WaveFormat());
+            waveOut.Init(waveProvider);
+            waveOut.Play();
 
-        ClientManager.udpserver.StartUdpListener();
-        Task.Run(() => ReceiveAudio(cts.Token), cts.Token);
+            ConnectVoice();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error starting voice listener: {ex.Message}");
+        }
+    }
 
-        ConnectVoice();
+    public void StartVoiceChatServer()
+    {
+        ClientManager.server.Start();
     }
 
     public void ConnectVoice()
     {
-        ClientManager.udpserver.StartUdpClient();
+        ClientManager.udp_Client.Start();
     }
 
     public void OpenMic()
@@ -61,32 +89,45 @@ public class Audio : MonoBehaviour
         isCapturing = !isCapturing;
         if (isCapturing)
         {
+            Debug.Log("Started recording");
             waveIn.StartRecording();
         }
         else
         {
+            Debug.Log("Stopped recording");
             waveIn.StopRecording();
         }
     }
 
     private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
     {
-        ClientManager.udpserver.client.SendAsync(e.Buffer, e.BytesRecorded);
+        try
+        {
+            // Check if UDP client is connected before sending data
+            if (ClientManager.udp_Client.IsConnected)
+            {
+                ClientManager.udp_Client.Send(e.Buffer, e.BytesRecorded);
+            }
+            else
+            {
+                Debug.LogWarning("UDP client is not connected. Cannot send audio data.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in WaveIn_DataAvailable: {ex.Message}");
+        }
     }
 
-    private async Task ReceiveAudio(CancellationToken token)
+    private void WaveIn_RecordingStopped(object sender, StoppedEventArgs e)
     {
-        while (!token.IsCancellationRequested)
+        if (e.Exception != null)
         {
-            try
-            {
-                var receivedResults = await ClientManager.udpserver.udplistener.ReceiveAsync();
-                waveProvider.AddSamples(receivedResults.Buffer, 0, receivedResults.Buffer.Length);
-            }
-            catch (Exception ex)
-            {
-                Debug.Log($"ReceiveAudio exception: {ex.Message}");
-            }
+            Debug.LogError($"Recording stopped due to an error: {e.Exception.Message}");
+        }
+        else
+        {
+            Debug.Log("Recording stopped");
         }
     }
 
@@ -95,6 +136,5 @@ public class Audio : MonoBehaviour
         cts?.Cancel();
         waveIn?.Dispose();
         waveOut?.Dispose();
-        ClientManager.udpserver?.Dispose();
     }
 }

@@ -20,7 +20,7 @@ namespace Assets.Scripts
         //public UdpClient udplistener;
 
         NetworkStream stream;
-        public string address = "192.168.67.245";
+        public string server_address = "127.0.0.1";
         private readonly int port = 9999;
         private readonly int udp_port = 11333;
         public int id = 90;
@@ -38,7 +38,7 @@ namespace Assets.Scripts
             try
             {
                 tcpClient = new TcpClient();
-                await tcpClient.ConnectAsync(IPAddress.Parse(address), port);
+                await tcpClient.ConnectAsync(IPAddress.Parse(server_address), port);
                 Debug.Log("Connecting to server...");
 
                 if (tcpClient.Connected)
@@ -62,11 +62,11 @@ namespace Assets.Scripts
 
         public async void Join_ConnectToServer()
         {
-            Debug.Log($"Connecting to {address}");
+            Debug.Log($"Connecting to {server_address}");
             try
             {
                 tcpClient = new TcpClient();
-                await tcpClient.ConnectAsync(IPAddress.Parse(address), port);
+                await tcpClient.ConnectAsync(IPAddress.Parse(server_address), port);
                 if (tcpClient.Connected)
                 {
                     stream = tcpClient.GetStream();

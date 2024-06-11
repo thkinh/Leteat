@@ -1,48 +1,69 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 
 public class UdpServer
 {
-    private const int port = 11333;
     private const int listening_port = 10080;
-    public UdpClient client;
-    public UdpClient udplistener;
+    public UdpClient udp_server;
+    private List<IPEndPoint> clients;
+
 
     public UdpServer()
     {
-        client = new UdpClient();
-        udplistener = new UdpClient();
+        udp_server = new UdpClient(new IPEndPoint(IPAddress.Any, listening_port));
+        clients = new List<IPEndPoint>();
     }
 
-    public void StartUdpClient()
+    public void Start()
+    {
+        udp_server.BeginReceive(OnReceive, null);
+        Debug.Log("UDP Server started.");
+    }
+
+    private void OnReceive(IAsyncResult ar)
     {
         try
         {
-            client.Connect(new IPEndPoint(IPAddress.Parse(ClientManager.client.address), port));
+            IPEndPoint clientEndpoint = new IPEndPoint(IPAddress.Any, 0);
+            byte[] data = udp_server.EndReceive(ar, ref clientEndpoint);
+            if (!clients.Contains(clientEndpoint))
+            {
+                clients.Add(clientEndpoint);
+                Debug.Log($"New client connected: {clientEndpoint}");
+            }
+            Broadcast(data, clientEndpoint);
+
+            udp_server.BeginReceive(OnReceive, null); // Continue receiving
         }
         catch (Exception ex)
         {
-            Debug.Log($"Udp client: failed to initialize - {ex.Message}");
+            Debug.Log($"UDP Server receive error: {ex.Message}");
         }
     }
 
-    public void StartUdpListener()
+    private void Broadcast(byte[] data, IPEndPoint senderEndpoint)
     {
-        try
+        foreach (var client in clients)
         {
-            udplistener = new UdpClient(new IPEndPoint(IPAddress.Any, listening_port));
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"Udp listener: failed to initialize - {ex.Message}");
+            //To test on the 1 client only, use this line of code instead
+            udp_server.Send(data, data.Length, client);
+
+            //if (!client.Equals(senderEndpoint)) // Don't send back to the sender
+            //{
+            //    Debug.Log($"This endpoint: {client} is different from {senderEndpoint}");
+            //    udp_server.Send(data, data.Length, client);
+            //}
+
         }
     }
 
-    public void Dispose()
+    public void Stop()
     {
-        client?.Close();
-        udplistener?.Close();
+        udp_server.Close();
+        clients.Clear();
+        Debug.Log("UDP Server stopped.");
     }
 }
