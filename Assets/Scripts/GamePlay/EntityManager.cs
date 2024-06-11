@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class EntityManager : MonoBehaviour
 {
@@ -32,7 +33,10 @@ public class EntityManager : MonoBehaviour
             instance = this;
     }
 
-    
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 
     // Start is called before the first frame update
     void Start()

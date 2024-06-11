@@ -11,7 +11,21 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager instance;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            InitializeMusic();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void InitializeMusic()
     {
         musicSource.clip = background;
         musicSource.loop = true;
@@ -22,22 +36,22 @@ public class SoundManager : MonoBehaviour
             volumeSlider.onValueChanged.AddListener(SetVolume);
         }
     }
-
-    private void Awake()
+    private void Start()
     {
-        if (instance == null)
+        if (volumeSlider != null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            volumeSlider.value = musicSource.volume;
+            volumeSlider.onValueChanged.AddListener(SetVolume);
         }
     }
-
     private void SetVolume(float volume)
     {
         musicSource.volume = volume;
+    }
+    public void SetVolumeSlider(Slider slider)
+    {
+        volumeSlider = slider;
+        volumeSlider.value = musicSource.volume;
+        volumeSlider.onValueChanged.AddListener(SetVolume);
     }
 }
