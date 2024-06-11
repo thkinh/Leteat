@@ -160,6 +160,14 @@ public class FriendList_Manager : MonoBehaviour
 
             GameObject friend = Instantiate(addfriendPrefab, addfriend_contenHolder);
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
+            Button friendButton = friend.GetComponent<Button>();
+            if (friendButton != null)
+            {
+                friendButton.onClick.AddListener(() => {
+                    PersonalPlayer(player.username);
+
+                });
+            }
             Button add_btn = friend.transform.GetChild(0).GetComponent<Button>();
             if (add_btn != null)
             {
