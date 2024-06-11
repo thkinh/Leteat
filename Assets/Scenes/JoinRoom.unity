@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6d41ec20fecab4a8794ab919859686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coderoom: 
 --- !u!1001 &169104800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2446,8 +2447,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5711e2738073e38459bcd7a81be15633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notloaded: 1
   loading_panel: {fileID: 503147906}
   ID: {fileID: 986349829}
+  joinbutton: {fileID: 469012385}
 --- !u!114 &997195472
 MonoBehaviour:
   m_ObjectHideFlags: 0

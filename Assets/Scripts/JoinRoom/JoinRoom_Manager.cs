@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using TMPro;
 
 public class JoinRoom_Manager : MonoBehaviour
 {
@@ -16,7 +18,6 @@ public class JoinRoom_Manager : MonoBehaviour
     public GameObject loading_panel;
     public GameObject ID;
     public GameObject joinbutton;
-
     public async void JoinClick()
     {
         string foodid = DropAreaManager.Instance.CodeJoinRoom();
@@ -32,7 +33,6 @@ public class JoinRoom_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -49,7 +49,21 @@ public class JoinRoom_Manager : MonoBehaviour
         {
             SceneManager.LoadSceneAsync("Playing");
         }
-    }
+        if (DropAreaManager.Instance.coderoom.Length == 5)
+        {
+            ChangeButtonColor("#00806C");
+        }    
 
+    }
+    private void ChangeButtonColor(string hexColor)
+    {
+        Image img = joinbutton.gameObject.GetComponent<Image>();
+        img.sprite = Resources.Load<Sprite>("Button/yellow");
+        TextMeshProUGUI buttonText = joinbutton.GetComponentInChildren<TextMeshProUGUI>();
+        if (UnityEngine.ColorUtility.TryParseHtmlString(hexColor, out Color newColor))
+        {
+            buttonText.color = newColor;
+        }
+    }
 
 }
