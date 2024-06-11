@@ -14,6 +14,8 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
+    public GameObject panel;
+    public TMP_Text text;
 
     Client client = new Client();
 
@@ -37,20 +39,29 @@ public class REG_UI_Manager : MonoBehaviour
 
         if (checkTask.Result)
         {
-            string mail = $"Hello {username.text}, this is your verification code: {verifi_Code}";
+            string mail = $"Let Eat Verification Code \n" +
+                $"Hello {username.text}, this is your verification code to verify: \n" +
+                $"{verifi_Code} \n" +
+                $"This code can only be used once and will expire in 5 minutes. Return to the app and enter this code to verify your email address. Please don’t share this code with others. " +
+                $"To get a new verification code, proceed to the app and enter your email again." +
+                $"This is an auto generated message. If you require assistance, please contact our support team through this email!";
 
             string email_tosend = email.text;
             client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
             SceneManager.LoadSceneAsync("Verification");
         }
+        if (checkTask.IsCompleted) 
+        {
+        }    
     }
 
-    private async Task<bool> Check_Password()
+    public async Task<bool> Check_Password()
     {
 
         //kiểm tra password phải đủ 8 kí tự trở lên
         if (!CheckFormatPassword.IsPasswordValid(password.text))
         {
+           
             return false;
         }
 
@@ -79,7 +90,8 @@ public class REG_UI_Manager : MonoBehaviour
 
         if (await FirestoreClient.fc_instance.IsUsernameExists(username.text))
         {
-            Debug.Log("Username already exists.");
+            text.text = "Username already exists.";
+           Debug.Log("Username already exists.");
             return false;
         }
 
@@ -89,5 +101,15 @@ public class REG_UI_Manager : MonoBehaviour
     public void Back()
     {
         SceneManager.LoadScene("Sign in");
+    }
+    public void Update()
+    {
+
+    }
+    private string Mess(string message)
+    {
+        panel.SetActive(true);
+        message += message;
+        return message;
     }
 }
