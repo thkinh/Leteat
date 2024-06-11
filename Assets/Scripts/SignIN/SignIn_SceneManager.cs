@@ -16,7 +16,8 @@ public class SignIn_SceneManager : MonoBehaviour
 
     public TMP_InputField email;
     public TMP_InputField password;
-
+    public GameObject panel;
+    public TMP_Text textComponent;
     private void Awake()
     {
         instance = this;
@@ -32,7 +33,7 @@ public class SignIn_SceneManager : MonoBehaviour
             SceneManager.LoadScene("Menu");
         }
         else {
-            email.text = "Nhap lai email hoac pass";
+            ShowError("Nhap lai email hoac pass");
         }
     }
 
@@ -62,7 +63,12 @@ public class SignIn_SceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-
+    private void ShowError(string text)
+    {
+        panel.SetActive(true);
+        textComponent.text = text;
+        text = string.Empty;
+    }
 }
 
 

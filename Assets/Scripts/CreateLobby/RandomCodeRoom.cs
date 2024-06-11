@@ -17,6 +17,7 @@ public class RandomCodeRoom : MonoBehaviour
     public static int number_of_player = 0;
     public List<int> TakeList = new List<int>();
     private int codeRoom;
+    private bool iscorrect = false;
     private void Start()
     {
         TakeList = new List<int>(new int[Position.Length]);
@@ -57,7 +58,10 @@ public class RandomCodeRoom : MonoBehaviour
     }
     public void Send_Code_Room()
     {
-        ClientManager.client.SendPacket(TakeList.ToArray());
+        if (iscorrect == true)
+        {
+            ClientManager.client.SendPacket(TakeList.ToArray());
+        }
     }
 
     private void Update()
@@ -69,6 +73,7 @@ public class RandomCodeRoom : MonoBehaviour
         if (number_of_player > 1)
         {
             ChangeButtonColor("#00806C");
+            iscorrect = true;
         }    
     }
     private void ChangeButtonColor(string hexColor)
