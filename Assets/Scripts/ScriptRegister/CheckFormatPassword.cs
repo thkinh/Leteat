@@ -17,7 +17,7 @@ public class CheckFormatPassword : MonoBehaviour
     {
         if (password.Length < 8)
         {
-            Debug.Log("Password must be at least 8 characters long.");
+            //Debug.Log("Password must be at least 8 characters long.");
             return false;
         }
         return true;
