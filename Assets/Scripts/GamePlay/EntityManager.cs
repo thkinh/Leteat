@@ -22,8 +22,9 @@ public class EntityManager : MonoBehaviour
     int current_food_count;
     public List<Food> foodlist = new List<Food>();
 
-    float minTrans = -300;
-    float maxTrans = 300;
+    readonly float minTrans = -200;
+    readonly float maxTrans = 400;
+    Vector2 left = new Vector2(-290, 290);
 
     private void Awake()
     {
@@ -60,8 +61,8 @@ public class EntityManager : MonoBehaviour
     
     private void Spawn_Food()
     {
-        var wanted_x = UnityEngine.Random.Range(minTrans, maxTrans);
-        var wanted_y = UnityEngine.Random.Range(minTrans, maxTrans);
+        var wanted_x = UnityEngine.Random.Range(253, 1625);
+        var wanted_y = UnityEngine.Random.Range(156, 783);
         var position = new Vector2(wanted_x, wanted_y);
 
         // Instantiate FoodPrefab và thiết lập parent của nó là foodParent
@@ -72,28 +73,24 @@ public class EntityManager : MonoBehaviour
         RectTransform rectTransform = nf.GetComponent<RectTransform>();
         if (rectTransform != null)
         {
-            rectTransform.anchoredPosition = position;
+            rectTransform.position = position;
         }
         else
         {
             Debug.LogWarning("The spawned food item does not have a RectTransform component.");
         }
         nf.name = nf.GetComponent<DragableItem>().idFood.ToString();
-        Debug.Log("Spawn: " + nf.name);
     }
 
 
     public void Spawn_Food(Food food)
     {
-        var wanted_x = UnityEngine.Random.Range(minTrans, maxTrans);
-        var wanted_y = UnityEngine.Random.Range(minTrans, maxTrans);
-        var position = new Vector2(wanted_x, wanted_y);
-        GameObject nf = Instantiate(FoodPrefab[foodlist.LastOrDefault().foodIndex], position, Quaternion.identity);
+        GameObject nf = Instantiate(FoodPrefab[foodlist.LastOrDefault().foodIndex], left, Quaternion.identity);
         Debug.Log($"instantiated {food.foodIndex}");
         nf.AddComponent<RectTransform>();
         nf.AddComponent<DragableItem>();
         var drag = nf.GetComponent<DragableItem>();
-        //drag= new DragableItem(new Vector2(960,540).normalized*2);
+        drag= new DragableItem(new Vector2(960,540).normalized*3);
         
     }
 

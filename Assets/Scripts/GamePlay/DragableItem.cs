@@ -33,7 +33,7 @@ public class DragableItem : MonoBehaviour
     void Update()
     {
         if (!dragging) return;
-        if (Vector2.Distance(this.transform.position, EntityManager.instance.transform.position) < 5 && spawned_by_server)
+        if (Vector2.Distance(this.transform.position, new Vector2(917,495)) < 5 && spawned_by_server)
         {
             this.transform.position += (Vector3)velo;
         }

@@ -43,10 +43,15 @@ public class Position : MonoBehaviour
             ChangeButtonColor("#00806C");
             
         }
+        if (!Server.server_instance.started)
+        {
+            OnDestroy();
+        }
     }
 
     public void Back_toPrevious()
     {
+        ClientManager.client?.Dispose();
         Server.server_instance?.EndServer();
         SceneManager.LoadScene("Choose cr or join");
     }
@@ -91,6 +96,13 @@ public class Position : MonoBehaviour
         {
             buttonText.color = newColor;
         }
-    }    
+    }
+
+    private void OnDestroy()
+    {
+        FoodList.Clear();
+        number_of_player = 0;
+        play = false;
+    }
 }
 

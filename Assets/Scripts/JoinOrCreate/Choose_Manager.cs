@@ -14,8 +14,9 @@ public class Choose_Manager : MonoBehaviour
     [SerializeField] private List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
     public void ChooseCreate()
     {
+        dropDown.options.Clear();
         //Server.server_instance.StartServer();
-
+        dropDown.options.Add(new TMP_Dropdown.OptionData(text: "127.0.0.1", image: null));
         foreach (var ip in Server.server_instance.GetLocalIPAddresses())
         {
             dropDown.options.Add(new TMP_Dropdown.OptionData(text: ip, image: null));
@@ -24,7 +25,11 @@ public class Choose_Manager : MonoBehaviour
         }
 
         chooseIPs.SetActive(true);
-        
+    }
+
+    public void Undo()
+    {
+        chooseIPs.SetActive(false);
     }
     public void ChooseJoin()
     {

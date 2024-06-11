@@ -81,5 +81,11 @@ public class RandomCodeRoom : MonoBehaviour
             buttonText.color = newColor;
         }
     }
+
+    public void OnDestroy()
+    {
+        m_created = false;
+    }
+
 }
 

@@ -24,6 +24,7 @@ public class Button_Clickable : MonoBehaviour
 
     public void Back_To_Previous()
     {
+        ClientManager.client?.Dispose();
         Server.server_instance?.EndServer();
         SceneManager.LoadScene(previous_Scene);
     }

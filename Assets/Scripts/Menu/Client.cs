@@ -16,8 +16,8 @@ namespace Assets.Scripts
     {
         public TcpClient tcpClient;
         public SmtpClient smtpClient;
-        public UdpClient udpClient;
-        public UdpClient udplistener;
+        //public UdpClient udpClient;
+        //public UdpClient udplistener;
 
         NetworkStream stream;
         public string address = "192.168.67.245";
@@ -86,17 +86,17 @@ namespace Assets.Scripts
         }
 
 
-        public void StartUdpClient()
-        {
-            udpClient = new UdpClient();
-            try {
+        //public void StartUdpClient()
+        //{
+        //    udpClient = new UdpClient();
+        //    try {
 
-                udpClient.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), udp_port));
-            }
-            catch {
-                Debug.Log("Udp client: falied to initialize");
-            }
-        }
+        //        udpClient.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), udp_port));
+        //    }
+        //    catch {
+        //        Debug.Log("Udp client: falied to initialize");
+        //    }
+        //}
 
 
         private void WelcomeReceived(byte[] data, int length)
@@ -118,6 +118,14 @@ namespace Assets.Scripts
                 //Debug.Log(ex.Message.ToString());
             }
         }
+        public void Dispose()
+        {
+            tcpClient?.Dispose();
+            smtpClient?.Dispose();
+            number_of_players = 0;
+            isHost = false;
+            isClient = false;
+    }
 
         private async void ListenToServer() 
         {
@@ -131,8 +139,9 @@ namespace Assets.Scripts
                 }
                 catch 
                 {
-                    Debug.Log("Loi khi nhan packet");
+                    Debug.Log("Loi khi nhan packet, server da dong");
                     tcpClient.Close();
+                    Dispose();
                     //Debug.Log(ex.Message.ToString());
                 }
             }

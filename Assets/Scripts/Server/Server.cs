@@ -86,6 +86,9 @@ public class Server : MonoBehaviour
         {
             client.Close();
         }
+        clients_Dict.Clear();
+        arranged_list.Clear();
+        attending = 0;
     }
 
     private async void HandleClient(TcpClient client)

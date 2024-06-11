@@ -44,6 +44,10 @@ public class ForgottenPass_Manager : MonoBehaviour
             Debug.Log("Please retry later!!");
         }
     }
+    public void Back()
+    {
+        SceneManager.LoadScene("Sign in");
+    }
 
     public async void Verify()
     {
