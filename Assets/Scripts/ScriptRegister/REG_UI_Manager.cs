@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using UnityEditor.VersionControl;
 
 public class REG_UI_Manager : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class REG_UI_Manager : MonoBehaviour
     public TMP_InputField password;
     public TMP_InputField repeat_pass;
     public GameObject panel;
-    public TMP_Text text;
+    public TMP_Text textComponent;
+    private string text;
+    public string message = string.Empty;
 
     Client client = new Client();
 
@@ -27,6 +30,10 @@ public class REG_UI_Manager : MonoBehaviour
         verifi_Code = Random.Range(1000, 10000);
     }
 
+    private void Update()
+    {
+        
+    }
     public void Register()
     {
         StartCoroutine(RegisterCoroutine());
@@ -36,7 +43,6 @@ public class REG_UI_Manager : MonoBehaviour
     {
         var checkTask = Check_Password();
         yield return new WaitUntil(() => checkTask.IsCompleted);
-
         if (checkTask.Result)
         {
             string mail = $"Let Eat Verification Code \n" +
@@ -50,48 +56,60 @@ public class REG_UI_Manager : MonoBehaviour
             client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
             SceneManager.LoadSceneAsync("Verification");
         }
-        if (checkTask.IsCompleted) 
+        else
         {
+            ShowError(message);
         }    
+ 
     }
 
     public async Task<bool> Check_Password()
     {
+        //if (await FirestoreClient.fc_instance.IsUsernameExists(username.text))
+        //{
+        //    text = "Username already exists.";
+        //    //Debug.Log(text);
+        //    message += text;
+        //    message += "\n";
+        //    return false;
+        //}
+       
+        //kiểm tra đúng format của email
+        if (!CheckFormatPassword.IsValidEmailFormat(email.text))
+        {
+            text = "Invalid email format.";
+            //Debug.Log(text);
+            message += text;
+            message += "\n";
+            return false;
+        }
+
+        //kiểm tra email đã tồn tại trên firestore hay chưa
+        //if (await FirestoreClient.fc_instance.IsEmailExists(email.text))
+        //{
+        //    text = "Email already exists.";
+        //    //Debug.Log(text);
+        //    message += text;
+        //    message += "\n";
+        //    return false;
+        //}
 
         //kiểm tra password phải đủ 8 kí tự trở lên
         if (!CheckFormatPassword.IsPasswordValid(password.text))
         {
-           
+            text = "Password must be at least 8 characters long.";
+            //Debug.Log(text);
+            message += text;
+            message += "\n";
             return false;
         }
-
-        //kiểm tra đúng format của email
-        if (!CheckFormatPassword.IsValidEmailFormat(email.text))
-        {
-            Debug.Log("Invalid email format.");
-            return false;
-        }
-
 
         //kiểm tra password = repeat password
         if (repeat_pass.text != password.text)
         {
-            Debug.Log($"Passwords do not match: {repeat_pass.text} != {password.text}");
-            return false;
-        }
-
-
-        //kiểm tra email đã tồn tại trên firestore hay chưa
-        if (await FirestoreClient.fc_instance.IsEmailExists(email.text))
-        {
-            Debug.Log("Email already exists.");
-            return false;
-        }
-
-        if (await FirestoreClient.fc_instance.IsUsernameExists(username.text))
-        {
-            text.text = "Username already exists.";
-           Debug.Log("Username already exists.");
+            text = "Passwords do not match.";
+            message += text;
+            message += "\n";
             return false;
         }
 
@@ -102,14 +120,10 @@ public class REG_UI_Manager : MonoBehaviour
     {
         SceneManager.LoadScene("Sign in");
     }
-    public void Update()
-    {
 
-    }
-    private string Mess(string message)
+    private void ShowError(string text)
     {
         panel.SetActive(true);
-        message += message;
-        return message;
+        textComponent.text = text;
     }
 }
