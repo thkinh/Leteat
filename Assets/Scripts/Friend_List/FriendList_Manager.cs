@@ -204,6 +204,14 @@ public class FriendList_Manager : MonoBehaviour
         foreach (Request request in requestlist)
         {
             GameObject r = Instantiate(requestPrefab, requestfriend_contentHolder);
+            Button friendButton = r.GetComponent<Button>();
+            if (friendButton != null)
+            {
+                friendButton.onClick.AddListener(() => {
+                    PersonalPlayer(request.from);
+
+                });
+            }
             TMP_Text friendText = r.GetComponentInChildren<TMP_Text>();
             if (friendText != null)
             {
@@ -216,7 +224,7 @@ public class FriendList_Manager : MonoBehaviour
                 add_btn.onClick.AddListener(() =>
                 {
                     Accept_btn(request.from);
-                    //Destroy(r.gameObject);
+                    Destroy(r.gameObject);
                 });
             }
         }
