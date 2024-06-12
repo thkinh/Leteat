@@ -115,6 +115,11 @@ public class Position : MonoBehaviour
         }
     }
 
+    public void OpenVoice()
+    {
+        Audio.instance.OpenMic();
+    }
+
     private void OnDestroy()
     {
         FoodList.Clear();

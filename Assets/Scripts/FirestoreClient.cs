@@ -533,7 +533,7 @@ public class FirestoreClient : MonoBehaviour
             Player player = await GetPlayer(relationship.playerID);
             friends.Add(player);
         }
-
+        friends.Add(thisPlayer);
         SortPlayersByExp(friends);
         return friends;
     }
@@ -545,7 +545,7 @@ public class FirestoreClient : MonoBehaviour
             Player player = await GetPlayer(relationship.playerID);
             friends.Add(player);
         }
-
+        friends.Add(thisPlayer);
         SortPlayersByExp(friends);
         return friends;
     }
