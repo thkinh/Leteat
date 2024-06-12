@@ -22,7 +22,7 @@ namespace Assets.Scripts
         NetworkStream stream;
         public string server_address = "127.0.0.1";
         private readonly int port = 9999;
-        private readonly int udp_port = 11333;
+        //private readonly int udp_port = 11333;
         public int id = 90;
         public bool isHost { get; set; }
         public bool isClient { get; set; }
@@ -47,7 +47,7 @@ namespace Assets.Scripts
                     stream = tcpClient.GetStream();
                     SendPacket("Hello server");
                     byte[] first_data = new byte[1024];
-                    await stream.ReadAsync(first_data,0,first_data.Length);
+                    await stream.ReadAsync(first_data, 0, first_data.Length);
                     SceneManager.LoadScene("CreateLobby");
                     isHost = true;
 
@@ -55,7 +55,7 @@ namespace Assets.Scripts
                     await Task.Run(() => { ListenToServer(); });
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Log(e.Message);
             }
@@ -80,7 +80,7 @@ namespace Assets.Scripts
                     await Task.Run(() => { ListenToServer(); });
                 }
             }
-            catch (Exception e )
+            catch (Exception e)
             {
                 Debug.Log(e.Message);
             }
@@ -128,11 +128,13 @@ namespace Assets.Scripts
             isClient = false;
         }
 
+
+        //Reset out khoi lobby
         public void Reset()
         {
             number_of_players = 1;
             isClient = false;
-            if(isHost)
+            if (isHost)
             {
                 SceneManager.LoadScene("CreateLobby");
                 return;
@@ -140,6 +142,24 @@ namespace Assets.Scripts
             tcpClient.Dispose();
         }
 
+        //Reset de choi them tran nua trong cung 1 lobby
+        public void OneMoreMatch()
+        {
+            if (isClient)
+            {
+                JoinRoom_Manager.Can_play = false;
+                JoinRoom_Manager.joined = true;
+                isHost = false;
+                SceneManager.LoadScene("JoinRoom");
+                return;
+            }
+            if (isHost)
+            {
+                isClient = false;
+                SceneManager.LoadScene("Arrange");
+                return;
+            }
+        }
 
         private async void ListenToServer() 
         {
@@ -173,6 +193,7 @@ namespace Assets.Scripts
                 {
                     Debug.Log("Connect stopped");
                     tcpClient.Close();
+                    EntityManager.instance.time_control.GetComponent<TimerCotroller>().isover = true;
                 }
 
                 if (lenght == 4) //received a packet of only data of food

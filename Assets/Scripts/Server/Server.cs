@@ -91,7 +91,7 @@ public class Server : MonoBehaviour
         attending = 0;
     }
 
-    public void Reset()
+    public void ResetLobby()
     {
         if(listener == null)
         {
@@ -110,6 +110,15 @@ public class Server : MonoBehaviour
         }
         arranged_list.Clear();
         attending = 1;
+    }
+
+    public void OneMoreMatch()
+    {
+        if (listener == null)
+        {
+            return;
+        }
+        arranged_list.Clear();
     }
 
 

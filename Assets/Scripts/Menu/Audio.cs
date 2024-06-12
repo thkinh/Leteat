@@ -23,10 +23,6 @@ public class Audio : MonoBehaviour
         InitializeAudio();
     }
 
-    public void StartListener()
-    {
-        StartVoiceListener();
-    }
 
     private void InitializeAudio()
     {
@@ -37,7 +33,11 @@ public class Audio : MonoBehaviour
                 WaveFormat = new WaveFormat(),
                 DeviceNumber = 0
             };
-
+            cts = new CancellationTokenSource();
+            waveOut = new WaveOutEvent();
+            waveProvider = new BufferedWaveProvider(new WaveFormat());
+            waveOut.Init(waveProvider);
+            waveOut.Play();
             var deviceCapabilities = WaveInEvent.GetCapabilities(waveIn.DeviceNumber);
             Debug.Log($"Selected Device: {deviceCapabilities.ProductName}");
 
@@ -50,16 +50,10 @@ public class Audio : MonoBehaviour
         }
     }
 
-    private void StartVoiceListener()
+    public void ConnectToServer()
     {
         try
         {
-            cts = new CancellationTokenSource();
-            waveOut = new WaveOutEvent();
-            waveProvider = new BufferedWaveProvider(new WaveFormat());
-            waveOut.Init(waveProvider);
-            waveOut.Play();
-
             ConnectVoice();
         }
         catch (Exception ex)

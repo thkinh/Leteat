@@ -13,12 +13,12 @@ public class UdpServer
 
     public UdpServer()
     {
-        udp_server = new UdpClient(new IPEndPoint(IPAddress.Any, listening_port));
         clients = new List<IPEndPoint>();
     }
 
     public void Start()
     {
+        udp_server = new UdpClient(new IPEndPoint(IPAddress.Any, listening_port));
         udp_server.BeginReceive(OnReceive, null);
         Debug.Log("UDP Server started.");
     }

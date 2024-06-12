@@ -42,13 +42,8 @@ public class TimerCotroller : MonoBehaviour
         }
         if (isover == true && Input.anyKeyDown)
         {
-            if (ClientManager.client.isClient)
-            {
-                SceneManager.LoadScene("Choose cr or join");
-            }
-            Server.server_instance.Reset();
-            ClientManager.client.Reset();
-
+            Server.server_instance.OneMoreMatch();
+            ClientManager.client.OneMoreMatch();
         }
     }
 
