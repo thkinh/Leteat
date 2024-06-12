@@ -43,9 +43,9 @@ public class SignIn_SceneManager : MonoBehaviour
 
     public async Task<bool> Check()
     {
-        string encrypt_password = Security.Encrypt(password.text);
+        string request_password = await FirestoreClient.fc_instance.ReadPassword_ByEmail(email.text);
 
-        if (encrypt_password != await FirestoreClient.fc_instance.GetEmailByPass(password.text))
+        if (password.text != Security.Decrypt(request_password) )
         {
             ShowError("The email or password you entered is incorrect. Please try again!");
             return false;
