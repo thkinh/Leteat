@@ -17,6 +17,7 @@ public class JoinRoom_Manager : MonoBehaviour
     public GameObject loading_panel;
     public GameObject ID;
     public GameObject joinbutton;
+
     public async void JoinClick()
     {
         ClientManager.client.lobbyId = DropAreaManager.Instance.CodeJoinRoom();
@@ -58,6 +59,7 @@ public class JoinRoom_Manager : MonoBehaviour
         }    
 
     }
+
     private void ChangeButtonColor(string hexColor)
     {
         Image img = joinbutton.gameObject.GetComponent<Image>();
