@@ -24,20 +24,13 @@ public class Udp_client
         string address = "26.67.70.107";
         serverEndpoint = new IPEndPoint(IPAddress.Parse(address), serverPort);
         Debug.Log($"Client connecting to {serverEndpoint}");
-        if (local_port > 12000)
-        {
-            return;
-        }
         try
         {
             client = new UdpClient(local_port);
-
-            // Increase the buffer size
-            client.Client.ReceiveBufferSize = 8192; // Adjust the size as needed
-
+            client.Client.ReceiveBufferSize = 65536; // Increase buffer size
             client.Connect(serverEndpoint);
-            ReceiveAsync(); // Start receiving asynchronously
             IsConnected = true;
+            ReceiveAsync(); // Start receiving asynchronously
         }
         catch
         {
@@ -60,9 +53,10 @@ public class Udp_client
             return;
         }
         await client.SendAsync(data, length);
+
     }
 
-    private async Task ReceiveAsync()
+    private async void ReceiveAsync()
     {
         try
         {
@@ -70,13 +64,13 @@ public class Udp_client
             {
                 UdpReceiveResult result = await client.ReceiveAsync();
                 byte[] data = result.Buffer;
-
                 // Process the data in a separate task to avoid blocking the receive loop
-                _ = Task.Run(() => ProcessReceivedData(data));
+                await Task.Run(() => ProcessReceivedData(data));
             }
         }
         catch (ObjectDisposedException)
         {
+            Debug.Log("ODE - ObjectDisposedException caught."); 
             // Ignore this exception, it occurs when the UdpClient is closed
         }
         catch (Exception ex)
@@ -89,6 +83,7 @@ public class Udp_client
     {
         try
         {
+            Debug.Log("Processing received data.");
             Audio.instance.waveProvider.AddSamples(data, 0, data.Length);
         }
         catch (Exception ex)
@@ -96,6 +91,7 @@ public class Udp_client
             Debug.Log($"Error processing received data: {ex.Message}");
         }
     }
+
 
     public void Stop()
     {
