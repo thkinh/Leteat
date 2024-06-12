@@ -60,6 +60,7 @@ public class RandomCodeRoom : MonoBehaviour
     {
         if (iscorrect == true)
         {
+            ClientManager.client.lobbyId = string.Join(",", TakeList);
             ClientManager.client.SendPacket(TakeList.ToArray());
         }
     }
