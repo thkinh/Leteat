@@ -626,7 +626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Audio
+  m_text: 'Voice '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94545532a797e4e4c844d22375d77f79, type: 2}
   m_sharedMaterial: {fileID: 938141250696205998, guid: 94545532a797e4e4c844d22375d77f79, type: 2}
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Exit_btn: {fileID: 1621951459}
   Audio_Toggle: {fileID: 1497297871}
-  ServerIP: {fileID: 0}
+  ChooseMic: {fileID: 1714652767}
   volumeSlider: {fileID: 81071885}
 --- !u!1 &1497297871
 GameObject:
@@ -1651,8 +1651,20 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 0
+      m_Calls:
+      - m_Target: {fileID: 1403897494}
+        m_TargetAssemblyTypeName: Setting_Manager, Assembly-CSharp
+        m_MethodName: ToggleAudio
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 1
 --- !u!1 &1515026193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2661,8 +2673,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2700,7 +2712,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0.26013184, z: 0, w: -5.851288}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1817550462

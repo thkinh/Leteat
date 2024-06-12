@@ -26,7 +26,7 @@ public class Audio : MonoBehaviour
         }
     }
 
-    void Start()
+    public void Start()
     {
         
         isCapturing = false;
@@ -58,6 +58,19 @@ public class Audio : MonoBehaviour
         {
             Debug.LogError($"Error initializing WaveInEvent: {ex.Message}");
         }
+    }
+    public string[] GetInputDevices()
+    {
+        int waveInDevices = WaveInEvent.DeviceCount;
+        string[] deviceNames = new string[waveInDevices];
+
+        for (int i = 0; i < waveInDevices; i++)
+        {
+            var capabilities = WaveInEvent.GetCapabilities(i);
+            deviceNames[i] = capabilities.ProductName;
+        }
+
+        return deviceNames;
     }
 
     public void ConnectToServer()
@@ -103,7 +116,7 @@ public class Audio : MonoBehaviour
         }
     }
 
-    private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
+    public void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
     {
         try
         {
@@ -123,7 +136,7 @@ public class Audio : MonoBehaviour
         }
     }
 
-    private void WaveIn_RecordingStopped(object sender, StoppedEventArgs e)
+    public void WaveIn_RecordingStopped(object sender, StoppedEventArgs e)
     {
         if (e.Exception != null)
         {
@@ -133,6 +146,13 @@ public class Audio : MonoBehaviour
         {
             Debug.Log("Recording stopped");
         }
+    }
+
+    public void End()
+    {
+        cts?.Cancel();
+        waveIn?.Dispose();
+        waveOut?.Dispose();
     }
 
     private void OnDestroy()
