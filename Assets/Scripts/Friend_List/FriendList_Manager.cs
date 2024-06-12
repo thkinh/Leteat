@@ -18,8 +18,6 @@ public class FriendList_Manager : MonoBehaviour
     public Transform addfriend_contenHolder;
     public Transform requestfriend_contentHolder;
 
-
-    private List<Relationship> friendlist = new List<Relationship>();
     private List<Request> requestlist = new List<Request>();
     private List<Player> playerlist = new List<Player>();
     public GameObject searchplayer;
@@ -107,7 +105,6 @@ public class FriendList_Manager : MonoBehaviour
             {
                 friendButton.onClick.AddListener(() => { 
                     PersonalPlayer(relationship.playerID);
-                
                 });
             }
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
@@ -224,6 +221,7 @@ public class FriendList_Manager : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
+
 
         requestlist = await FirestoreClient.fc_instance.RetrieveAllRequests();
 
