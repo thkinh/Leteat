@@ -549,4 +549,18 @@ public class FirestoreClient : MonoBehaviour
         SortPlayersByExp(friends);
         return friends;
     }
+    public async void UpdateDayCreateLobby(string serverip)
+    {
+        // Reference to the Firestore document for the specific lobby
+        DocumentReference docRef = db.Collection("Lobbies").Document(serverip);
+
+        // Create a dictionary with the field to update
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "Date_Lobby", Timestamp.FromDateTime(DateTime.UtcNow)}
+        };
+
+        // Update the document
+        await docRef.UpdateAsync(updates);
+    }
 }

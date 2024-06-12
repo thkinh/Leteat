@@ -41,7 +41,9 @@ public struct Match
 
     [FirestoreProperty]
     public int exp { get; set; }
-    
+    [FirestoreProperty]
+    public string PlayerId { get; set; }
+
 
 }
 

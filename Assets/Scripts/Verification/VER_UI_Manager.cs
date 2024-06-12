@@ -35,6 +35,15 @@ public class VER_UI_Manager : MonoBehaviour
         else
         {
             iscorrect = true;
+            string encryptedPassword = Security.Encrypt(REG_UI_Manager.instance.password.text);
+            Player player = new Player
+            {
+                email = REG_UI_Manager.instance.email.text,
+                username = REG_UI_Manager.instance.username.text,
+                password = encryptedPassword,
+                Create_Date = Timestamp.FromDateTime(DateTime.UtcNow),
+                exp = 0,
+            };
             return true;
         }
 
@@ -50,6 +59,7 @@ public class VER_UI_Manager : MonoBehaviour
                 email = REG_UI_Manager.instance.email.text,
                 username = REG_UI_Manager.instance.username.text,
                 password = encryptedPassword,
+                Create_Date = Timestamp.FromDateTime(DateTime.UtcNow),
             };
             FirestoreClient.fc_instance.Write(player);
             SceneManager.LoadScene("Sign In");
