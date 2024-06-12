@@ -11,6 +11,13 @@ public struct Player
     public string username { get; set; }
     [FirestoreProperty]
     public string password { get; set; }
+    [FirestoreProperty]
+    public Timestamp Create_Date { get; set; }
+    [FirestoreProperty]
+    public  int exp { get; set; }
+    [FirestoreProperty]
+    public Timestamp LastSignIn { get; set; }
+
 }
 
 
@@ -18,9 +25,9 @@ public struct Player
 public struct Match
 {
     [FirestoreProperty]
-    public int id { get; set; }
+    public string lobbyId { get; set; }
     [FirestoreProperty]
-    public string date { get; set; }
+    public Timestamp date { get; set; }
     
     [FirestoreProperty]
     public float time { get; set; }
@@ -30,6 +37,8 @@ public struct Match
 
     [FirestoreProperty]
     public int exp { get; set; }
+    
+
 }
 
 [FirestoreData]
@@ -44,7 +53,11 @@ public struct Lobby
 
     [FirestoreProperty]
     public bool isactive { get; set; }
-    
+    [FirestoreProperty]
+    public Timestamp Date_Lobby { get; set; }
+    [FirestoreProperty]
+    public int NumberOfPlayes {  get; set; }
+
 }
 
 

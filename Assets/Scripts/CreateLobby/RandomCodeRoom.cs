@@ -60,6 +60,7 @@ public class RandomCodeRoom : MonoBehaviour
     {
         if (iscorrect == true)
         {
+            ClientManager.client.lobbyId = string.Join(",", TakeList);
             ClientManager.client.SendPacket(TakeList.ToArray());
         }
     }
@@ -77,7 +78,8 @@ public class RandomCodeRoom : MonoBehaviour
         {
             ChangeButtonColor("#00806C");
             iscorrect = true;
-        }    
+        }   
+        
     }
     private void ChangeButtonColor(string hexColor)
     {

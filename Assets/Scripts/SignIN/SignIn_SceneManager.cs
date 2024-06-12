@@ -32,6 +32,7 @@ public class SignIn_SceneManager : MonoBehaviour
         {
             FirestoreClient.fc_instance.Reload();
             SceneManager.LoadScene("Menu");
+            FirestoreClient.fc_instance.UpdateDaySignIn();
         }
         else
         {

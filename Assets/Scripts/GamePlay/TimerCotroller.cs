@@ -1,3 +1,5 @@
+using Firebase.Firestore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -39,12 +41,32 @@ public class TimerCotroller : MonoBehaviour
             ScoreBoard.SetActive(true);
             isover = true;
             ClearFood();
+           
+
         }
         if (isover == true && Input.anyKeyDown)
         {
+            UpdateMatch();
+            FirestoreClient.fc_instance.UpdateExp(EntityManager.instance.score);
+
             Server.server_instance.OneMoreMatch();
             ClientManager.client.OneMoreMatch();
+
+
         }
+    }
+
+    private void UpdateMatch()
+    {
+        Match match = new Match
+        {
+            lobbyId = ClientManager.client.lobbyId,
+            date = Timestamp.FromDateTime(DateTime.UtcNow),
+            time = max_time,
+            result = true,
+            exp = EntityManager.instance.score,
+        };
+        FirestoreClient.fc_instance.AddMatch(match);
     }
 
     void ClearFood()

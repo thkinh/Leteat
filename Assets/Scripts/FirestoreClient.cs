@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase.Firestore;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 public class FirestoreClient : MonoBehaviour
 {
@@ -34,12 +35,14 @@ public class FirestoreClient : MonoBehaviour
         thisPlayerID = "r18lDv36Rzaynt5jyyp8";
     }
 
+
     public async void Write(Match match)
     {
-        DocumentReference matchRef = db.Collection("Matches").Document(match.id.ToString());
+        DocumentReference matchRef = db.Collection("Matches").Document(match.lobbyId.ToString());
         await matchRef.SetAsync(match);
         Debug.Log("Match added with ID: " + matchRef.Id);
     }
+
 
     public async void Write(Lobby lobby)
     {
@@ -55,6 +58,12 @@ public class FirestoreClient : MonoBehaviour
         Debug.Log("Player added with ID: " + docRef.Id);
     }
 
+    public async void AddMatch(Match match)
+    {
+        CollectionReference playerRef = db.Collection("Match");
+        DocumentReference docRef = await playerRef.AddAsync(match);
+        Debug.Log("Match added with ID: " + docRef.Id);
+    }
 
 
     public async Task<int> GetDocumentCount(string collectionName)
@@ -477,4 +486,35 @@ public class FirestoreClient : MonoBehaviour
         await docRef.UpdateAsync(updates);
     }
 
+    public async void UpdateDaySignIn()
+    {
+        // Reference to the Firestore document for the specific lobby
+        DocumentReference docRef = db.Collection("Players").Document(thisPlayerID);
+
+        // Create a dictionary with the field to update
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "LastSignIn", Timestamp.FromDateTime(DateTime.UtcNow)}
+        };
+
+        // Update the document
+        await docRef.UpdateAsync(updates);
+    }
+
+
+
+    public async void UpdateExp(int exp)
+    {
+        // Reference to the Firestore document for the specific lobby
+        DocumentReference docRef = db.Collection("Players").Document(thisPlayerID);
+
+        // Create a dictionary with the field to update
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+             { "exp", FieldValue.Increment(exp) }
+        };
+
+        // Update the document
+        await docRef.UpdateAsync(updates);
+    }
 }

@@ -27,7 +27,7 @@ namespace Assets.Scripts
         public bool isHost { get; set; }
         public bool isClient { get; set; }
         public int number_of_players = 0;
-
+        public string lobbyId ;
         public Client()
         {
             isHost = false;
@@ -121,6 +121,7 @@ namespace Assets.Scripts
         }
         public void Dispose()
         {
+            lobbyId = null;
             tcpClient?.Dispose();
             smtpClient?.Dispose();
             number_of_players = 0;
