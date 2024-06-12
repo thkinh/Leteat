@@ -124,7 +124,7 @@ public class REG_UI_Manager : MonoBehaviour
 
         if (await FirestoreClient.fc_instance.IsEmailExists(email.text))
         {
-            text = "Email already exists.";
+            text = "The email already exists.";
             //message += text + "\n";
             return false;
         }
