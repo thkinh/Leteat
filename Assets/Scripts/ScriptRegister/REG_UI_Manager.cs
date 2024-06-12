@@ -33,7 +33,7 @@ public class REG_UI_Manager : MonoBehaviour
         username.onEndEdit.AddListener(delegate { StartCoroutine(CheckUsername()); });
         email.onEndEdit.AddListener(delegate { StartCoroutine(CheckEmail()); });
         password.onEndEdit.AddListener(delegate { CheckPassword(); });
-        repeat_pass.onEndEdit.AddListener(delegate { CheckPassword(); });
+        repeat_pass.onEndEdit.AddListener(delegate { CheckConfirmPass(); });
         
     }
     private void Update()
@@ -54,7 +54,7 @@ public class REG_UI_Manager : MonoBehaviour
         var usernameCheck = Check_username();
         var emailCheck = Check_email();
         yield return new WaitUntil(() => usernameCheck.IsCompleted && emailCheck.IsCompleted);
-        if (usernameCheck.Result && emailCheck.Result && Check_Password() == true)
+        if (usernameCheck.Result && emailCheck.Result && Check_Password() == true && Check_ConfirmPass() == true)
         {
             iscorrect = true;
             yield return new WaitForSeconds(5);
@@ -137,25 +137,34 @@ public class REG_UI_Manager : MonoBehaviour
             ShowError(text);
         }
     }
+    private void CheckConfirmPass()
+    {
+
+        if (!Check_ConfirmPass())
+        {
+            ShowError(text);
+        }
+    }
     public bool Check_Password()
     {
         if (!CheckFormatPassword.IsPasswordValid(password.text))
         {
-            text = "Password must be at least 8 characters long.";
-            //message += text + "\n";
-            return false;
-        }
-
-        if (repeat_pass.text != password.text)
-        {
-            text = "The password do not match.";
-            //message += text + "\n";
+            text = "The password must be at least 8 characters long.";
             return false;
         }
 
         return true;
     }
+    public bool Check_ConfirmPass()
+    {
+        if (repeat_pass.text != password.text)
+        {
+            text = "The password do not match.";
+            return false;
+        }
 
+        return true;
+    }    
     public void Back()
     {
         SceneManager.LoadScene("Sign in");
