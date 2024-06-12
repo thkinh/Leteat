@@ -942,7 +942,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1386620350}
         m_TargetAssemblyTypeName: Audio, Assembly-CSharp
-        m_MethodName: StartListener
+        m_MethodName: ConnectToServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

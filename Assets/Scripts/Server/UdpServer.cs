@@ -18,9 +18,10 @@ public class UdpServer
 
     public void Start()
     {
-        udp_server = new UdpClient(new IPEndPoint(IPAddress.Any, listening_port));
+        var thisEndpoint = new IPEndPoint(IPAddress.Any, listening_port);
+        udp_server = new UdpClient(thisEndpoint);
         udp_server.BeginReceive(OnReceive, null);
-        Debug.Log("UDP Server started.");
+        Debug.Log($"UDP Server started on {thisEndpoint}.");
     }
 
     private void OnReceive(IAsyncResult ar)

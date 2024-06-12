@@ -68,8 +68,7 @@ public class JoinRoom_Manager : MonoBehaviour
     }
 
     public void EscapeLobby()
-    {
-        ClientManager.client.Dispose();
+    { 
         loading_panel.SetActive(false);
         joined = false;
         notloaded = true;

@@ -66,6 +66,7 @@ public class RandomCodeRoom : MonoBehaviour
 
     private void Update()
     {
+        number_of_player = ClientManager.client.number_of_players;
         if (m_created)
         {
             SceneManager.LoadSceneAsync("Arrange");
