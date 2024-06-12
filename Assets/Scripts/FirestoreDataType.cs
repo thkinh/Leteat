@@ -13,6 +13,8 @@ public struct Player
     public string password { get; set; }
     [FirestoreProperty]
     public Timestamp Create_Date { get; set; }
+    [FirestoreProperty]
+    public  int exp { get; set; }
 }
 
 
