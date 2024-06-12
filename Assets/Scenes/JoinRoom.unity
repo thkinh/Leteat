@@ -421,7 +421,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'LOADING...,
+  m_text: 'Waiting for your host to start the game
 
 
 

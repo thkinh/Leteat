@@ -29,6 +29,7 @@ public class Position : MonoBehaviour
 
     public void Update()
     {
+        number_of_player = ClientManager.client.number_of_players; //host included
         if (play)
         {
             SceneManager.LoadScene("Playing");

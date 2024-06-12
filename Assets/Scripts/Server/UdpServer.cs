@@ -13,7 +13,7 @@ public class UdpServer
 
     public UdpServer()
     {
-        udp_server = new UdpClient(new IPEndPoint(IPAddress.Any, listening_port));
+        udp_server = new UdpClient(new IPEndPoint(0, 9999));
         clients = new List<IPEndPoint>();
     }
 

@@ -70,12 +70,12 @@ public class Audio : MonoBehaviour
 
     public void StartVoiceChatServer()
     {
-        ClientManager.server.Start();
+       // ClientManager.server.Start();
     }
 
     public void ConnectVoice()
     {
-        ClientManager.udp_Client.Start();
+     //   ClientManager.udp_Client.Start();
     }
 
     public void OpenMic()
@@ -101,22 +101,22 @@ public class Audio : MonoBehaviour
 
     private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
     {
-        try
-        {
-            // Check if UDP client is connected before sending data
-            if (ClientManager.udp_Client.IsConnected)
-            {
-                ClientManager.udp_Client.Send(e.Buffer, e.BytesRecorded);
-            }
-            else
-            {
-                Debug.LogWarning("UDP client is not connected. Cannot send audio data.");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error in WaveIn_DataAvailable: {ex.Message}");
-        }
+        //try
+        //{
+        //    // Check if UDP client is connected before sending data
+        //    if (ClientManager.udp_Client.IsConnected)
+        //    {
+        //        ClientManager.udp_Client.Send(e.Buffer, e.BytesRecorded);
+        //    }
+        //    else
+        //    {
+        //        Debug.LogWarning("UDP client is not connected. Cannot send audio data.");
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    Debug.LogError($"Error in WaveIn_DataAvailable: {ex.Message}");
+        //}
     }
 
     private void WaveIn_RecordingStopped(object sender, StoppedEventArgs e)

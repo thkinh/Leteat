@@ -14,16 +14,11 @@ public class JoinRoom_Manager : MonoBehaviour
     public static bool joined = false;
     public static bool Can_play = false;
     public bool notloaded = true;
-    List<int> roomID = new List<int>();
     public GameObject loading_panel;
     public GameObject ID;
     public GameObject joinbutton;
     public async void JoinClick()
     {
-        if (ClientManager.client.tcpClient.Connected)
-        {
-            return;
-        }
         string foodid = DropAreaManager.Instance.CodeJoinRoom();
         string ipfound = await FirestoreClient.fc_instance.GetLoobyIP(foodid);
         ClientManager.client.server_address = ipfound;
@@ -70,6 +65,16 @@ public class JoinRoom_Manager : MonoBehaviour
         {
             buttonText.color = newColor;
         }
+    }
+
+    public void EscapeLobby()
+    {
+        ClientManager.client.Dispose();
+        loading_panel.SetActive(false);
+        joined = false;
+        notloaded = true;
+        Can_play = false;
+
     }
 
 }
