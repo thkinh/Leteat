@@ -28,6 +28,9 @@ public class FriendList_Manager : MonoBehaviour
     public TMP_InputField searchbar;
     private GameObject currentpanel;
 
+    public GameObject panel;
+    public TMP_Text textComponent;
+
     public void Start()
     {
         searchplayer.SetActive(false);
@@ -79,7 +82,7 @@ public class FriendList_Manager : MonoBehaviour
             }
             return;
         }
-        Debug.Log("Khong ton tai player");
+        ShowError("Invalid player. Please try again!");
     }
     
     public async void AllFriend()
@@ -262,5 +265,10 @@ public class FriendList_Manager : MonoBehaviour
     {
         Destroy(EventSystem.current.gameObject);
         SceneManager.LoadScene("Menu");
+    }
+    private void ShowError(string text)
+    {
+        panel.SetActive(true);
+        textComponent.text = text;
     }
 }
