@@ -28,7 +28,7 @@ public struct Player
 public struct Match
 {
     [FirestoreProperty]
-    public int id { get; set; }
+    public int LobbyId { get; set; }
     [FirestoreProperty]
     public string date { get; set; }
     
@@ -40,6 +40,7 @@ public struct Match
 
     [FirestoreProperty]
     public int exp { get; set; }
+
 }
 
 [FirestoreData]

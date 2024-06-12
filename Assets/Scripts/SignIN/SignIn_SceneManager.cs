@@ -31,6 +31,7 @@ public class SignIn_SceneManager : MonoBehaviour
             iscorrect = true;
             FirestoreClient.fc_instance.Reload();
             SceneManager.LoadScene("Menu");
+            FirestoreClient.fc_instance.UpdateDaySignIn();
         }
         else {
             iscorrect = false;
