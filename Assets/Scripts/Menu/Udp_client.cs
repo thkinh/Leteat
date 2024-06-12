@@ -15,7 +15,8 @@ public class Udp_client
     public bool IsConnected = false;
     public Udp_client()
     {
-        serverEndpoint = new IPEndPoint(IPAddress.Parse("26.67.70.107"), serverPort);
+        string address = ClientManager.client.server_address;
+        serverEndpoint = new IPEndPoint(IPAddress.Parse(address), serverPort);
     }
 
     public void Start()
