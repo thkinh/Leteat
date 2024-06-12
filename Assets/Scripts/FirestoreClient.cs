@@ -442,6 +442,24 @@ public class FirestoreClient : MonoBehaviour
         return false;
     }
 
+    public async Task<string> GetEmailByPass(string pass)
+    {
+        CollectionReference colRef = db.Collection("Players");
+        Query query = colRef.WhereEqualTo("password", pass);
+
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        var doc = snapshot.Documents.FirstOrDefault();
+        
+        if(doc != null)
+        {
+            Player player = doc.ConvertTo<Player>();
+            return player.email;
+        }
+
+        return null;
+    }
+
     public async void ChangePass(string userID, string newpass)
     {
         // Reference to the Firestore document for the specific user
