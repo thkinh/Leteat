@@ -2484,7 +2484,7 @@ MonoBehaviour:
   UserData: {fileID: 0}
   id: {fileID: 0}
   username: {fileID: 0}
-  email: {fileID: 0}
+  exp: {fileID: 0}
 --- !u!224 &1151743394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1502640797054533600, guid: 33d9bf1a431057e45882067446d154be, type: 3}

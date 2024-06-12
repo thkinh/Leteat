@@ -605,10 +605,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 985881793}
+        m_TargetAssemblyTypeName: Button_Clickable, Assembly-CSharp
+        m_MethodName: LoadRanking
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1181,7 +1181,7 @@ MonoBehaviour:
   UserData: {fileID: 1602720694}
   id: {fileID: 503917920}
   username: {fileID: 2112887671}
-  email: {fileID: 1286384842}
+  exp: {fileID: 1286384842}
 --- !u!1 &1235290975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1269,7 @@ GameObject:
   - component: {fileID: 1286384843}
   - component: {fileID: 1286384842}
   m_Layer: 5
-  m_Name: Email
+  m_Name: Exp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Email:'
+  m_text: 'Exp:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94545532a797e4e4c844d22375d77f79, type: 2}
   m_sharedMaterial: {fileID: 938141250696205998, guid: 94545532a797e4e4c844d22375d77f79, type: 2}

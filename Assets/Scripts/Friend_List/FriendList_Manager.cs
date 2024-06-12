@@ -18,8 +18,6 @@ public class FriendList_Manager : MonoBehaviour
     public Transform addfriend_contenHolder;
     public Transform requestfriend_contentHolder;
 
-
-    private List<Relationship> friendlist = new List<Relationship>();
     private List<Request> requestlist = new List<Request>();
     private List<Player> playerlist = new List<Player>();
     public GameObject searchplayer;
@@ -29,6 +27,9 @@ public class FriendList_Manager : MonoBehaviour
     public GameObject requestfriend;
     public TMP_InputField searchbar;
     private GameObject currentpanel;
+
+    public GameObject panel;
+    public TMP_Text textComponent;
 
     public void Start()
     {
@@ -81,7 +82,7 @@ public class FriendList_Manager : MonoBehaviour
             }
             return;
         }
-        Debug.Log("Khong ton tai player");
+        ShowError("Invalid player. Please try again!");
     }
     
     public async void AllFriend()
@@ -104,7 +105,6 @@ public class FriendList_Manager : MonoBehaviour
             {
                 friendButton.onClick.AddListener(() => { 
                     PersonalPlayer(relationship.playerID);
-                
                 });
             }
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
@@ -217,6 +217,11 @@ public class FriendList_Manager : MonoBehaviour
         currentpanel.SetActive(false);
         currentpanel = requestfriend;
         requestfriend.SetActive(true);
+        foreach (Transform transform in requestfriend_contentHolder)
+        {
+            Destroy(transform.gameObject);
+        }
+
 
         requestlist = await FirestoreClient.fc_instance.RetrieveAllRequests();
 
@@ -260,5 +265,10 @@ public class FriendList_Manager : MonoBehaviour
     {
         Destroy(EventSystem.current.gameObject);
         SceneManager.LoadScene("Menu");
+    }
+    private void ShowError(string text)
+    {
+        panel.SetActive(true);
+        textComponent.text = text;
     }
 }

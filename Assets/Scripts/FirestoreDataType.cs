@@ -18,6 +18,10 @@ public struct Player
     [FirestoreProperty]
     public Timestamp LastSignIn { get; set; }
 
+    public int CompareTo(Player other)
+    {
+        return other.exp.CompareTo(this.exp); // Sort in descending order of exp
+    }
 }
 
 
@@ -37,7 +41,9 @@ public struct Match
 
     [FirestoreProperty]
     public int exp { get; set; }
-    
+    [FirestoreProperty]
+    public string PlayerId { get; set; }
+
 
 }
 

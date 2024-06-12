@@ -442,6 +442,24 @@ public class FirestoreClient : MonoBehaviour
         return false;
     }
 
+    public async Task<string> GetEmailByPass(string pass)
+    {
+        CollectionReference colRef = db.Collection("Players");
+        Query query = colRef.WhereEqualTo("password", pass);
+
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+        var doc = snapshot.Documents.FirstOrDefault();
+        
+        if(doc != null)
+        {
+            Player player = doc.ConvertTo<Player>();
+            return player.email;
+        }
+
+        return null;
+    }
+
     public async void ChangePass(string userID, string newpass)
     {
         // Reference to the Firestore document for the specific user
@@ -501,8 +519,6 @@ public class FirestoreClient : MonoBehaviour
         await docRef.UpdateAsync(updates);
     }
 
-
-
     public async void UpdateExp(int exp)
     {
         // Reference to the Firestore document for the specific lobby
@@ -512,6 +528,54 @@ public class FirestoreClient : MonoBehaviour
         Dictionary<string, object> updates = new Dictionary<string, object>
         {
              { "exp", FieldValue.Increment(exp) }
+        };
+
+        // Update the document
+        await docRef.UpdateAsync(updates);
+    }
+
+    public static void SortPlayersByExp(List<Player> players)
+    {
+        players.Sort((player1, player2) => player2.exp.CompareTo(player1.exp));
+    }
+    public static void SortPlayersByLastSignIn(List<Player> players)
+    {
+        players.Sort((player1, player2) => player2.LastSignIn.CompareTo(player1.LastSignIn));
+    }
+
+    public async Task<List<Player>> GetFriendsOrderByExp()
+    {
+        List<Player> friends = new List<Player>();
+        foreach(Relationship relationship in friendlist)
+        {
+            Player player = await GetPlayer(relationship.playerID);
+            friends.Add(player);
+        }
+        friends.Add(thisPlayer);
+        SortPlayersByExp(friends);
+        return friends;
+    }
+    public async Task<List<Player>> GetFriendsOrderByLastSignIn()
+    {
+        List<Player> friends = new List<Player>();
+        foreach (Relationship relationship in friendlist)
+        {
+            Player player = await GetPlayer(relationship.playerID);
+            friends.Add(player);
+        }
+        friends.Add(thisPlayer);
+        SortPlayersByExp(friends);
+        return friends;
+    }
+    public async void UpdateDayCreateLobby(string serverip)
+    {
+        // Reference to the Firestore document for the specific lobby
+        DocumentReference docRef = db.Collection("Lobbies").Document(serverip);
+
+        // Create a dictionary with the field to update
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "Date_Lobby", Timestamp.FromDateTime(DateTime.UtcNow)}
         };
 
         // Update the document
