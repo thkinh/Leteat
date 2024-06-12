@@ -46,7 +46,6 @@ public class JoinRoom_Manager : MonoBehaviour
             int id = ClientManager.client.id;
             ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
             notloaded = false;
-            Audio.instance.OpenMic();
         }
         if (Can_play)
         {

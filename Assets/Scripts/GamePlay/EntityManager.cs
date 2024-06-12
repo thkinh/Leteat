@@ -41,6 +41,7 @@ public class EntityManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Audio.instance.OpenMic();
         current_food_count = foodlist.Count;
         Spawn_Food();
     }

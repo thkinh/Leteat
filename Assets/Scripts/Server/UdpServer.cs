@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UdpServer
@@ -9,7 +10,6 @@ public class UdpServer
     private const int listening_port = 10080;
     public UdpClient udp_server;
     private List<IPEndPoint> clients;
-
 
     public UdpServer()
     {
@@ -20,24 +20,32 @@ public class UdpServer
     {
         var thisEndpoint = new IPEndPoint(IPAddress.Any, listening_port);
         udp_server = new UdpClient(thisEndpoint);
-        udp_server.BeginReceive(OnReceive, null);
         Debug.Log($"UDP Server started on {thisEndpoint}.");
+        ReceiveAsync(); // Start receiving asynchronously
     }
 
-    private void OnReceive(IAsyncResult ar)
+    private async void ReceiveAsync()
     {
         try
         {
-            IPEndPoint clientEndpoint = new IPEndPoint(IPAddress.Any, 0);
-            byte[] data = udp_server.EndReceive(ar, ref clientEndpoint);
-            if (!clients.Contains(clientEndpoint))
+            while (true)
             {
-                clients.Add(clientEndpoint);
-                Debug.Log($"New client connected: {clientEndpoint}");
-            }
-            Broadcast(data, clientEndpoint);
+                UdpReceiveResult result = await udp_server.ReceiveAsync();
+                IPEndPoint clientEndpoint = result.RemoteEndPoint;
+                byte[] data = result.Buffer;
 
-            udp_server.BeginReceive(OnReceive, null); // Continue receiving
+                if (!clients.Contains(clientEndpoint))
+                {
+                    clients.Add(clientEndpoint);
+                    Debug.Log($"New client connected: {clientEndpoint}");
+                }
+
+                Broadcast(data, clientEndpoint);
+            }
+        }
+        catch (ObjectDisposedException)
+        {
+            // Ignore this exception, it occurs when the UdpClient is closed
         }
         catch (Exception ex)
         {
@@ -49,15 +57,10 @@ public class UdpServer
     {
         foreach (var client in clients)
         {
-            //To test on the 1 client only, use this line of code instead
-            //udp_server.Send(data, data.Length, client);
-
             if (!client.Equals(senderEndpoint)) // Don't send back to the sender
             {
-                Debug.Log($"This endpoint: {client} is different from {senderEndpoint}");
-                udp_server.Send(data, data.Length, client);
+                udp_server.SendAsync(data, data.Length, client);
             }
-
         }
     }
 
@@ -68,3 +71,4 @@ public class UdpServer
         Debug.Log("UDP Server stopped.");
     }
 }
+
