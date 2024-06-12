@@ -29,12 +29,11 @@ public class REG_UI_Manager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        verifi_Code = Random.Range(1000, 10000);
+        verifi_Code = Random.Range(10000, 100000);
         username.onEndEdit.AddListener(delegate { StartCoroutine(CheckUsername()); });
         email.onEndEdit.AddListener(delegate { StartCoroutine(CheckEmail()); });
         password.onEndEdit.AddListener(delegate { CheckPassword(); });
         repeat_pass.onEndEdit.AddListener(delegate { CheckConfirmPass(); });
-        
     }
     private void Update()
     {

@@ -13,7 +13,7 @@ public class Button_Clickable : MonoBehaviour
 
     public TMP_Text id;
     public TMP_Text username;
-    public TMP_Text email;
+    public TMP_Text exp;
 
 
     public void Play()
@@ -49,7 +49,7 @@ public class Button_Clickable : MonoBehaviour
         {
             id.text = "PlayerId: " + FirestoreClient.fc_instance.thisPlayerID;
             username.text = "Username: " + FirestoreClient.fc_instance.thisPlayer.username;
-            email.text = "Email: " + FirestoreClient.fc_instance.thisPlayer.email; 
+            exp.text = "Exp: " + FirestoreClient.fc_instance.thisPlayer.exp.ToString(); 
         }
     }
 
@@ -67,4 +67,9 @@ public class Button_Clickable : MonoBehaviour
     {
         SceneManager.LoadScene("Friends");
     } 
+
+    public void LoadRanking()
+    {
+        SceneManager.LoadScene("Ranking");
+    }
 }

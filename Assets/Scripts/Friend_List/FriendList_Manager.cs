@@ -102,7 +102,6 @@ public class FriendList_Manager : MonoBehaviour
             {
                 friendButton.onClick.AddListener(() => { 
                     PersonalPlayer(relationship.playerID);
-                
                 });
             }
             TMP_Text friendText = friend.GetComponentInChildren<TMP_Text>();
@@ -215,6 +214,11 @@ public class FriendList_Manager : MonoBehaviour
         currentpanel.SetActive(false);
         currentpanel = requestfriend;
         requestfriend.SetActive(true);
+        foreach (Transform transform in requestfriend_contentHolder)
+        {
+            Destroy(transform.gameObject);
+        }
+
 
         requestlist = await FirestoreClient.fc_instance.RetrieveAllRequests();
 
