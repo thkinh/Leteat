@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Udp_client
 {
-    private int local_port = 11500;
+    private int local_port = 11600;
     private const int serverPort = 10080;
     public UdpClient client;
     private IPEndPoint serverEndpoint;
@@ -21,6 +21,8 @@ public class Udp_client
 
     public void Start()
     {
+        string address = ClientManager.client.server_address;
+        serverEndpoint = new IPEndPoint(IPAddress.Parse(address), serverPort);
         if (local_port > 12000)
         {
             return;
@@ -30,12 +32,14 @@ public class Udp_client
             client = new UdpClient(local_port);
             client.Connect(serverEndpoint);
             client.BeginReceive(OnReceive, null);
+            Send("Hello server");
             IsConnected = true;
             Debug.Log($"Client connected to {serverEndpoint}");
         }
         catch
         {
             Debug.Log("This port is being used by some other udp client");
+            Stop();
         }
     }
 

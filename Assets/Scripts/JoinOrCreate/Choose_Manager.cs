@@ -52,7 +52,6 @@ public class Choose_Manager : MonoBehaviour
         {
             SceneManager.LoadScene("CreateLobby");
         }
-        Audio.instance.ConnectToServer();
         ClientManager.client.ConnectToServer();
     }
 
