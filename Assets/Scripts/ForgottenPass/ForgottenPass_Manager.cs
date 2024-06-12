@@ -66,7 +66,7 @@ public class ForgottenPass_Manager : MonoBehaviour
     {
         if (verifycode_input.text != null && verifycode_input.text != verifi_Code.ToString())
         {
-            ShowError("The verify code do not match.");
+            ShowError("The verify code you entered is incorrect. Please try again!");
             iscorrectpanel = false;
         }
         else
