@@ -15,25 +15,27 @@ public class SignIn_SceneManager : MonoBehaviour
     public static SignIn_SceneManager instance;
     public TMP_InputField email;
     public TMP_InputField password;
+    public GameObject signinbutton;
     public GameObject panel;
     public TMP_Text textComponent;
     private bool iscorrect = false;
     private void Awake()
     {
         instance = this;
+
     }
 
     public async void SignIN()
     {
         bool check = await Check();
-        if ( check )
+        if (check)
         {
-            iscorrect = true;
             FirestoreClient.fc_instance.Reload();
             SceneManager.LoadScene("Menu");
+            FirestoreClient.fc_instance.UpdateDaySignIn();
         }
-        else {
-            iscorrect = false;
+        else
+        {
             ShowError("The email or password you entered is incorrect. Please try again!");
         }
     }
@@ -42,14 +44,13 @@ public class SignIn_SceneManager : MonoBehaviour
     public async Task<bool> Check()
     {
         string request_password = await FirestoreClient.fc_instance.ReadPassword_ByEmail(email.text);
-        if (password.text == Security.Decrypt(request_password) )
+        if (password.text != Security.Decrypt(request_password) )
         {
-            iscorrect = true;
-            return true;
+            ShowError("The email or password you entered is incorrect. Please try again!");
+            return false;
         }
-        return false;
+        return true;
     }
-
 
     public void Button_Sign_Up()
     {
@@ -69,8 +70,8 @@ public class SignIn_SceneManager : MonoBehaviour
     {
         panel.SetActive(true);
         textComponent.text = text;
-        text = string.Empty;
     }
+    
 }
 
 

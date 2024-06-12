@@ -39,6 +39,8 @@ public class TimerCotroller : MonoBehaviour
             ScoreBoard.SetActive(true);
             isover = true;
             ClearFood();
+           
+
         }
         if (isover == true && Input.anyKeyDown)
         {

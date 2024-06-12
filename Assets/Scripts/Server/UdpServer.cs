@@ -18,10 +18,15 @@ public class UdpServer
 
     public void Start()
     {
+
         var thisEndpoint = new IPEndPoint(IPAddress.Any, listening_port);
         udp_server = new UdpClient(thisEndpoint);
         Debug.Log($"UDP Server started on {thisEndpoint}.");
+
+
+
         ReceiveAsync(); // Start receiving asynchronously
+
     }
 
     private async void ReceiveAsync()

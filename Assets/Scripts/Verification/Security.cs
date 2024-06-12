@@ -43,29 +43,45 @@ public class Security : MonoBehaviour
 
     public static string Decrypt(string encrypted)
     {
-        using (Aes aes = Aes.Create())
+        try
         {
-            // Đảm bảo khóa và IV có đủ độ dài
-            aes.Key = Encoding.UTF8.GetBytes("1234567890123456"); // 16 bytes cho khóa 128-bit
-            aes.IV = Encoding.UTF8.GetBytes("1234567890123456"); // 16 bytes cho IV 128-bit
-
-            // Tạo bộ mã hóa và giải mã
-            ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-            string decryptedText = null;
-
-            // Giải mã dữ liệu
-            using (var msDecrypt = new System.IO.MemoryStream(Convert.FromBase64String(encrypted)))
+            using (Aes aes = Aes.Create())
             {
-                using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                // Đảm bảo khóa và IV có đủ độ dài
+                aes.Key = Encoding.UTF8.GetBytes("1234567890123456"); // 16 bytes cho khóa 128-bit
+                aes.IV = Encoding.UTF8.GetBytes("1234567890123456"); // 16 bytes cho IV 128-bit
+
+                // Tạo bộ mã hóa và giải mã
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                string decryptedText = null;
+
+                // Giải mã dữ liệu
+                using (var msDecrypt = new System.IO.MemoryStream(Convert.FromBase64String(encrypted)))
                 {
-                    using (var srDecrypt = new System.IO.StreamReader(csDecrypt))
+                    using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
-                        decryptedText = srDecrypt.ReadToEnd();
+                        using (var srDecrypt = new System.IO.StreamReader(csDecrypt))
+                        {
+                            decryptedText = srDecrypt.ReadToEnd();
+                        }
                     }
                 }
-            }
 
-            return decryptedText;
+                return decryptedText;
+            }
+        }
+        catch (CryptographicException ex)
+        {
+            // Xử lý lỗi cụ thể liên quan đến padding
+            if (ex.Message.Contains("Bad PKCS7 padding"))
+            {
+                Console.WriteLine("Lỗi giải mã: Padding không hợp lệ.");
+            }
+            else
+            {
+                Console.WriteLine("Lỗi giải mã: " + ex.Message);
+            }
+            return null;
         }
     }
 

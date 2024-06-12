@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase.Firestore;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 public class FirestoreClient : MonoBehaviour
 {
@@ -53,6 +54,13 @@ public class FirestoreClient : MonoBehaviour
         CollectionReference playerRef = db.Collection("Players");
         DocumentReference docRef = await playerRef.AddAsync(player);
         Debug.Log("Player added with ID: " + docRef.Id);
+    }
+
+    public async void AddMatch(Match match)
+    {
+        CollectionReference playerRef = db.Collection("Match");
+        DocumentReference docRef = await playerRef.AddAsync(match);
+        Debug.Log("Match added with ID: " + docRef.Id);
     }
 
 
@@ -470,6 +478,21 @@ public class FirestoreClient : MonoBehaviour
         Dictionary<string, object> updates = new Dictionary<string, object>
         {
             { "isactive", state}
+        };
+
+        // Update the document
+        await docRef.UpdateAsync(updates);
+    }
+
+    public async void UpdateDaySignIn()
+    {
+        // Reference to the Firestore document for the specific lobby
+        DocumentReference docRef = db.Collection("Players").Document(thisPlayerID);
+
+        // Create a dictionary with the field to update
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "LastSignIn", Timestamp.FromDateTime(DateTime.UtcNow)}
         };
 
         // Update the document

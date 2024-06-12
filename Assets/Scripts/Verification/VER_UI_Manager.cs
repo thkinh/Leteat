@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
+using System;
 
 public class VER_UI_Manager : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class VER_UI_Manager : MonoBehaviour
             email = REG_UI_Manager.instance.email.text,
             username = REG_UI_Manager.instance.username.text,
             password = encryptedPassword,
+            Create_Date = Timestamp.FromDateTime(DateTime.UtcNow),
+            exp = 0,
+            TotalPlay = 0,
+
         };
         FirestoreClient.fc_instance.Write(player);
         SceneManager.LoadScene("Sign In");
