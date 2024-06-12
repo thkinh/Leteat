@@ -26,6 +26,8 @@ public class Button_Clickable : MonoBehaviour
     {
         ClientManager.client?.Dispose();
         Server.server_instance?.EndServer();
+        ClientManager.udp_Client.Stop();
+        ClientManager.server.Stop();
         SceneManager.LoadScene(previous_Scene);
     }
 

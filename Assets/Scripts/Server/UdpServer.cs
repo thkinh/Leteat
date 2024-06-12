@@ -50,13 +50,13 @@ public class UdpServer
         foreach (var client in clients)
         {
             //To test on the 1 client only, use this line of code instead
-            udp_server.Send(data, data.Length, client);
+            //udp_server.Send(data, data.Length, client);
 
-            //if (!client.Equals(senderEndpoint)) // Don't send back to the sender
-            //{
-            //    Debug.Log($"This endpoint: {client} is different from {senderEndpoint}");
-            //    udp_server.Send(data, data.Length, client);
-            //}
+            if (!client.Equals(senderEndpoint)) // Don't send back to the sender
+            {
+                Debug.Log($"This endpoint: {client} is different from {senderEndpoint}");
+                udp_server.Send(data, data.Length, client);
+            }
 
         }
     }

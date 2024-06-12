@@ -47,10 +47,12 @@ public class Choose_Manager : MonoBehaviour
     public void StartServer()
     {
         Server.server_instance.StartServer();
+        Audio.instance.StartVoiceChatServer();
         if (Server.server_instance.started)
         {
             SceneManager.LoadScene("CreateLobby");
         }
+        Audio.instance.ConnectToServer();
         ClientManager.client.ConnectToServer();
     }
 

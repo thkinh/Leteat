@@ -73,7 +73,9 @@ public class JoinRoom_Manager : MonoBehaviour
         joined = false;
         notloaded = true;
         Can_play = false;
-
+        ClientManager.client.Dispose();
+        ClientManager.udp_Client.Stop();
+        ClientManager.server.Stop();
     }
 
 }
