@@ -47,6 +47,11 @@ public class EntityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Audio.instance.OpenMic();
+        }
+
         if (foodlist.Count > current_food_count)
         {
             Spawn_Food(foodlist[current_food_count++]);

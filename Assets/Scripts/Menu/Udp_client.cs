@@ -15,9 +15,8 @@ public class Udp_client
     public bool IsConnected = false;
     public Udp_client()
     {
-
-        serverEndpoint = new IPEndPoint(IPAddress.Parse("26.67.70.107"), serverPort);
-
+        string address = ClientManager.client.server_address;
+        serverEndpoint = new IPEndPoint(IPAddress.Parse(address), serverPort);
     }
 
     public void Start()
@@ -53,7 +52,7 @@ public class Udp_client
             Debug.LogWarning("UDP client is not connected. Cannot send data.");
             return;
         }
-        client.SendAsync(data, length);
+        client.Send(data, length);
     }
 
     private void OnReceive(IAsyncResult ar)
@@ -62,6 +61,7 @@ public class Udp_client
         {
             IPEndPoint remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
             byte[] data = client.EndReceive(ar, ref remoteEndpoint);
+            Debug.Log("Received audio");
             Audio.instance.waveProvider.AddSamples(data, 0, data.Length);
             client.BeginReceive(OnReceive, null); // Continue receiving
         }
