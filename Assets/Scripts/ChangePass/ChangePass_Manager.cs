@@ -20,10 +20,10 @@ public class ChangePass_Manager : MonoBehaviour
     {
         if (Check_Password() == true)
         {
-            currentPanel.SetActive(false);
+            //currentPanel.SetActive(false);
             ChangeButtonColor("#00806C");
             FirestoreClient.fc_instance.ChangePass(FirestoreClient.fc_instance.thisPlayerID, Security.Encrypt(newpass.text));
-            SceneManager.LoadSceneAsync("Sign In");
+            SceneManager.LoadSceneAsync("Sign in");
         }
     }
 
@@ -58,4 +58,8 @@ public class ChangePass_Manager : MonoBehaviour
             buttonText.color = newColor;
         }
     }
+    public void Back()
+    {
+        SceneManager.LoadScene("Forgotten Password");
+    }    
 }
