@@ -14,12 +14,21 @@ public class Audio : MonoBehaviour
     private CancellationTokenSource cts;
     public bool isCapturing;
 
-    void Start()
+    private void Awake()
     {
         if (instance == null)
-        {
-            instance = this;
+        { instance = this; 
+            DontDestroyOnLoad(gameObject);
         }
+        if (instance!= this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void Start()
+    {
+        
         isCapturing = false;
         InitializeAudio();
     }
