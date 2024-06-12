@@ -35,6 +35,15 @@ public class VER_UI_Manager : MonoBehaviour
         else
         {
             iscorrect = true;
+            string encryptedPassword = Security.Encrypt(REG_UI_Manager.instance.password.text);
+            Player player = new Player
+            {
+                email = REG_UI_Manager.instance.email.text,
+                username = REG_UI_Manager.instance.username.text,
+                password = encryptedPassword,
+                Create_Date = Timestamp.FromDateTime(DateTime.UtcNow),
+                exp = 0,
+            };
             return true;
         }
 
