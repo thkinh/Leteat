@@ -65,6 +65,7 @@ public class TimerCotroller : MonoBehaviour
             time = max_time,
             result = true,
             exp = EntityManager.instance.score,
+            PlayerId = FirestoreClient.fc_instance.thisPlayerID,
         };
         FirestoreClient.fc_instance.AddMatch(match);
     }
