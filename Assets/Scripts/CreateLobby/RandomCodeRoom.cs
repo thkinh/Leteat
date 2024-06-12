@@ -70,6 +70,8 @@ public class RandomCodeRoom : MonoBehaviour
         if (m_created)
         {
             SceneManager.LoadSceneAsync("Arrange");
+            Audio.instance.ConnectToServer();
+            Audio.instance.OpenMic();
         }
         if (number_of_player > 1)
         {

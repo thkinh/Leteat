@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Udp_client
@@ -13,6 +12,7 @@ public class Udp_client
     public UdpClient client;
     private IPEndPoint serverEndpoint;
     public bool IsConnected = false;
+
     public Udp_client()
     {
         string address = ClientManager.client.server_address;
@@ -21,6 +21,9 @@ public class Udp_client
 
     public void Start()
     {
+        string address = "26.67.70.107";
+        serverEndpoint = new IPEndPoint(IPAddress.Parse(address), serverPort);
+        Debug.Log($"Client connecting to {serverEndpoint}");
         if (local_port > 12000)
         {
             return;
@@ -28,42 +31,53 @@ public class Udp_client
         try
         {
             client = new UdpClient(local_port);
+
+            // Increase the buffer size
+            client.Client.ReceiveBufferSize = 8192; // Adjust the size as needed
+
             client.Connect(serverEndpoint);
-            client.BeginReceive(OnReceive, null);
+            ReceiveAsync(); // Start receiving asynchronously
             IsConnected = true;
-            Debug.Log($"Client connected to {serverEndpoint}");
         }
         catch
         {
             Debug.Log("This port is being used by some other udp client");
+            Stop();
         }
     }
 
-    public void Send(string message)
+    public async void Send(string message)
     {
         byte[] data = Encoding.UTF8.GetBytes(message);
-        client.Send(data, data.Length, serverEndpoint);
+        await client.SendAsync(data, data.Length, serverEndpoint);
     }
 
-    public void Send(byte[] data, int length)
+    public async void Send(byte[] data, int length)
     {
         if (!IsConnected)
         {
             Debug.LogWarning("UDP client is not connected. Cannot send data.");
             return;
         }
-        client.Send(data, length);
+        await client.SendAsync(data, length);
     }
 
-    private void OnReceive(IAsyncResult ar)
+    private async Task ReceiveAsync()
     {
         try
         {
-            IPEndPoint remoteEndpoint = new IPEndPoint(IPAddress.Any, 0);
-            byte[] data = client.EndReceive(ar, ref remoteEndpoint);
-            Debug.Log("Received audio");
-            Audio.instance.waveProvider.AddSamples(data, 0, data.Length);
-            client.BeginReceive(OnReceive, null); // Continue receiving
+            while (IsConnected)
+            {
+                UdpReceiveResult result = await client.ReceiveAsync();
+                byte[] data = result.Buffer;
+
+                // Process the data in a separate task to avoid blocking the receive loop
+                _ = Task.Run(() => ProcessReceivedData(data));
+            }
+        }
+        catch (ObjectDisposedException)
+        {
+            // Ignore this exception, it occurs when the UdpClient is closed
         }
         catch (Exception ex)
         {
@@ -71,10 +85,21 @@ public class Udp_client
         }
     }
 
+    private void ProcessReceivedData(byte[] data)
+    {
+        try
+        {
+            Audio.instance.waveProvider.AddSamples(data, 0, data.Length);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"Error processing received data: {ex.Message}");
+        }
+    }
+
     public void Stop()
     {
         IsConnected = false;
-        client.Close();
+        client?.Close();
     }
 }
-

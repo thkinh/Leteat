@@ -25,6 +25,7 @@ public class JoinRoom_Manager : MonoBehaviour
         Debug.Log(ipfound);
         if (ipfound != null)
         {
+            Audio.instance.ConnectToServer();
             ClientManager.client.Join_ConnectToServer();
             return;
         }
