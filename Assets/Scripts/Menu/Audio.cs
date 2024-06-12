@@ -23,10 +23,6 @@ public class Audio : MonoBehaviour
         InitializeAudio();
     }
 
-    public void StartListener()
-    {
-        StartVoiceListener();
-    }
 
     private void InitializeAudio()
     {
@@ -37,7 +33,11 @@ public class Audio : MonoBehaviour
                 WaveFormat = new WaveFormat(),
                 DeviceNumber = 0
             };
-
+            cts = new CancellationTokenSource();
+            waveOut = new WaveOutEvent();
+            waveProvider = new BufferedWaveProvider(new WaveFormat());
+            waveOut.Init(waveProvider);
+            waveOut.Play();
             var deviceCapabilities = WaveInEvent.GetCapabilities(waveIn.DeviceNumber);
             Debug.Log($"Selected Device: {deviceCapabilities.ProductName}");
 
@@ -50,16 +50,10 @@ public class Audio : MonoBehaviour
         }
     }
 
-    private void StartVoiceListener()
+    public void ConnectToServer()
     {
         try
         {
-            cts = new CancellationTokenSource();
-            waveOut = new WaveOutEvent();
-            waveProvider = new BufferedWaveProvider(new WaveFormat());
-            waveOut.Init(waveProvider);
-            waveOut.Play();
-
             ConnectVoice();
         }
         catch (Exception ex)
@@ -70,12 +64,12 @@ public class Audio : MonoBehaviour
 
     public void StartVoiceChatServer()
     {
-       // ClientManager.server.Start();
+        ClientManager.server.Start();
     }
 
     public void ConnectVoice()
     {
-     //   ClientManager.udp_Client.Start();
+        ClientManager.udp_Client.Start();
     }
 
     public void OpenMic()
@@ -101,22 +95,22 @@ public class Audio : MonoBehaviour
 
     private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
     {
-        //try
-        //{
-        //    // Check if UDP client is connected before sending data
-        //    if (ClientManager.udp_Client.IsConnected)
-        //    {
-        //        ClientManager.udp_Client.Send(e.Buffer, e.BytesRecorded);
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("UDP client is not connected. Cannot send audio data.");
-        //    }
-        //}
-        //catch (Exception ex)
-        //{
-        //    Debug.LogError($"Error in WaveIn_DataAvailable: {ex.Message}");
-        //}
+        try
+        {
+            // Check if UDP client is connected before sending data
+            if (ClientManager.udp_Client.IsConnected)
+            {
+                ClientManager.udp_Client.Send(e.Buffer, e.BytesRecorded);
+            }
+            else
+            {
+                Debug.LogWarning("UDP client is not connected. Cannot send audio data.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in WaveIn_DataAvailable: {ex.Message}");
+        }
     }
 
     private void WaveIn_RecordingStopped(object sender, StoppedEventArgs e)

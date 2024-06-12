@@ -22,7 +22,7 @@ namespace Assets.Scripts
         NetworkStream stream;
         public string server_address = "127.0.0.1";
         private readonly int port = 9999;
-        private readonly int udp_port = 11333;
+        //private readonly int udp_port = 11333;
         public int id = 90;
         public bool isHost { get; set; }
         public bool isClient { get; set; }
