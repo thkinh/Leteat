@@ -17,10 +17,7 @@ public struct Player
     public  int exp { get; set; }
     [FirestoreProperty]
     public Timestamp LastSignIn { get; set; }
-    [FirestoreProperty]
-    public Timestamp End { get; set; }
-    [FirestoreProperty]
-    public double TotalPlay { get; set; }
+    
 }
 
 
@@ -40,6 +37,7 @@ public struct Match
 
     [FirestoreProperty]
     public int exp { get; set; }
+    
 
 }
 
@@ -55,7 +53,11 @@ public struct Lobby
 
     [FirestoreProperty]
     public bool isactive { get; set; }
-    
+    [FirestoreProperty]
+    public Timestamp Date_Lobby { get; set; }
+    [FirestoreProperty]
+    public int NumberOfPlayes {  get; set; }
+
 }
 
 

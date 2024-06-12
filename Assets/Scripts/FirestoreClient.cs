@@ -35,12 +35,12 @@ public class FirestoreClient : MonoBehaviour
         thisPlayerID = "r18lDv36Rzaynt5jyyp8";
     }
 
-    public async void Write(Match match)
-    {
-        DocumentReference matchRef = db.Collection("Matches").Document(match.id.ToString());
-        await matchRef.SetAsync(match);
-        Debug.Log("Match added with ID: " + matchRef.Id);
-    }
+    //public async void Write(Match match)
+    //{
+    //    DocumentReference matchRef = db.Collection("Matches").Document(match.id.ToString());
+    //    await matchRef.SetAsync(match);
+    //    Debug.Log("Match added with ID: " + matchRef.Id);
+    //}
 
     public async void Write(Lobby lobby)
     {

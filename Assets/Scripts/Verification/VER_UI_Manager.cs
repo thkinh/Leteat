@@ -32,7 +32,7 @@ public class VER_UI_Manager : MonoBehaviour
             password = encryptedPassword,
             Create_Date = Timestamp.FromDateTime(DateTime.UtcNow),
             exp = 0,
-            TotalPlay = 0,
+           
 
         };
         FirestoreClient.fc_instance.Write(player);
