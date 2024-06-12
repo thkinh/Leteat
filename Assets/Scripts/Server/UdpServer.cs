@@ -68,7 +68,7 @@ public class UdpServer
 
     public void Stop()
     {
-        udp_server.Close();
+        udp_server?.Close();
         clients.Clear();
         Debug.Log("UDP Server stopped.");
     }

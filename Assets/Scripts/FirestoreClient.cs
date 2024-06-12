@@ -56,7 +56,6 @@ public class FirestoreClient : MonoBehaviour
     }
 
 
-
     public async Task<int> GetDocumentCount(string collectionName)
     {
         QuerySnapshot snapshot = await db.Collection(collectionName).GetSnapshotAsync();

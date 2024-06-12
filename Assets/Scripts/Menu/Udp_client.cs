@@ -15,13 +15,12 @@ public class Udp_client
 
     public Udp_client()
     {
-        string address = ClientManager.client.server_address;
-        serverEndpoint = new IPEndPoint(IPAddress.Parse(address), serverPort);
+    
     }
 
     public void Start()
     {
-        string address = "26.67.70.107";
+        string address = ClientManager.client.server_address;
         serverEndpoint = new IPEndPoint(IPAddress.Parse(address), serverPort);
         Debug.Log($"Client connecting to {serverEndpoint}");
         try
