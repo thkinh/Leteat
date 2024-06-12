@@ -15,7 +15,9 @@ public class Udp_client
     public bool IsConnected = false;
     public Udp_client()
     {
-        serverEndpoint = new IPEndPoint(IPAddress.Parse("26.124.193.147"), serverPort);
+
+        serverEndpoint = new IPEndPoint(IPAddress.Parse("26.67.70.107"), serverPort);
+
     }
 
     public void Start()
@@ -27,17 +29,14 @@ public class Udp_client
         try
         {
             client = new UdpClient(local_port);
-            client.BeginReceive(OnReceive, null);
             client.Connect(serverEndpoint);
+            client.BeginReceive(OnReceive, null);
             IsConnected = true;
             Debug.Log($"Client connected to {serverEndpoint}");
         }
         catch
         {
             Debug.Log("This port is being used by some other udp client");
-            local_port++;
-            client.Close();
-            Start();
         }
     }
 

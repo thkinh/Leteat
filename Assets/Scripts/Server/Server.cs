@@ -146,6 +146,8 @@ public class Server : MonoBehaviour
         {
             clients_list.Remove(client);
             clients_Dict.Remove(clients_Dict.FirstOrDefault(x => x.Value == client).Key);
+            Position.number_of_player--;
+            Debug.Log("Remove a player from the list");
             client.Close();
         }
     }

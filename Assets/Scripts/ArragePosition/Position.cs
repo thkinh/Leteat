@@ -38,7 +38,10 @@ public class Position : MonoBehaviour
         if (number_of_player > i)
         {
             NewDisk();
-
+        }
+        if (number_of_player < i)
+        {
+            DestroyADisk();
         }
         if (FoodList.Count == number_of_player)
         {
@@ -65,6 +68,14 @@ public class Position : MonoBehaviour
         TakeList.Add(disks[i]);
         Debug.Log(disks[i].name);
         i++;
+    }
+    public void DestroyADisk()
+    {
+        disks[i].SetActive(false);
+        TakeList.Remove(disks[i]);
+        i--;
+        Debug.Log("A player disconnected");
+        
     }
 
     public void Send_StartPacket()
