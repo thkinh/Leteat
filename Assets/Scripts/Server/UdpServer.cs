@@ -62,6 +62,8 @@ public class UdpServer
     {
         foreach (var client in clients)
         {
+            //udp_server.SendAsync(data, data.Length, client);
+
             if (!client.Equals(senderEndpoint)) // Don't send back to the sender
             {
                 udp_server.SendAsync(data, data.Length, client);
