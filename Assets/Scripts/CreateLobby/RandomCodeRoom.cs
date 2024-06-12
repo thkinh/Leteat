@@ -66,6 +66,7 @@ public class RandomCodeRoom : MonoBehaviour
 
     private void Update()
     {
+        number_of_player = ClientManager.client.number_of_players;
         if (m_created)
         {
             SceneManager.LoadSceneAsync("Arrange");
@@ -74,7 +75,8 @@ public class RandomCodeRoom : MonoBehaviour
         {
             ChangeButtonColor("#00806C");
             iscorrect = true;
-        }    
+        }   
+        
     }
     private void ChangeButtonColor(string hexColor)
     {

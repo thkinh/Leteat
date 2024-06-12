@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase.Firestore;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 public class FirestoreClient : MonoBehaviour
 {
@@ -476,5 +477,20 @@ public class FirestoreClient : MonoBehaviour
         // Update the document
         await docRef.UpdateAsync(updates);
     }
+
+    //public async void UpdateDaySignIn(string playerid)
+    //{
+    //    // Reference to the Firestore document for the specific lobby
+    //    DocumentReference docRef = db.Collection("Players").Document(playerid);
+
+    //    // Create a dictionary with the field to update
+    //    Dictionary<Timestamp, object> updates = new Dictionary<Timestamp, object>
+    //    {
+    //        { "LastSignIn", Timestamp.FromDateTime(DateTime.UtcNow)}
+    //    };
+
+    //    // Update the document
+    //    await docRef.UpdateAsync(updates);
+    //}
 
 }

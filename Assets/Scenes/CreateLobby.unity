@@ -585,7 +585,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7c5449aaa939f4a45a32d764a45ad6fd, type: 3}
   - {fileID: 21300000, guid: 83983126a13c7444e860146524dacffb, type: 3}
   - {fileID: 21300000, guid: f61ded511cfb4614da425f170de4575c, type: 3}
-  nextbutton: {fileID: 0}
+  nextbutton: {fileID: 489078354}
   TakeList: 
 --- !u!4 &575986093
 Transform:

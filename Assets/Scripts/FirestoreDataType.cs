@@ -15,6 +15,12 @@ public struct Player
     public Timestamp Create_Date { get; set; }
     [FirestoreProperty]
     public  int exp { get; set; }
+    [FirestoreProperty]
+    public Timestamp LastSignIn { get; set; }
+    [FirestoreProperty]
+    public Timestamp End { get; set; }
+    [FirestoreProperty]
+    public double TotalPlay { get; set; }
 }
 
 

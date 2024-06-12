@@ -31,7 +31,9 @@ public class VER_UI_Manager : MonoBehaviour
             username = REG_UI_Manager.instance.username.text,
             password = encryptedPassword,
             Create_Date = Timestamp.FromDateTime(DateTime.UtcNow),
-            exp = 0
+            exp = 0,
+            TotalPlay = 0,
+
         };
         FirestoreClient.fc_instance.Write(player);
         SceneManager.LoadScene("Sign In");
