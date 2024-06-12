@@ -37,7 +37,7 @@ public class FirestoreClient : MonoBehaviour
 
     public async void Write(Match match)
     {
-        DocumentReference matchRef = db.Collection("Matches").Document(match.id.ToString());
+        DocumentReference matchRef = db.Collection("Matches").Document(match.lobbyId.ToString());
         await matchRef.SetAsync(match);
         Debug.Log("Match added with ID: " + matchRef.Id);
     }
