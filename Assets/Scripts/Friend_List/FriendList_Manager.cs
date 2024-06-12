@@ -18,8 +18,6 @@ public class FriendList_Manager : MonoBehaviour
     public Transform addfriend_contenHolder;
     public Transform requestfriend_contentHolder;
 
-
-    private List<Relationship> friendlist = new List<Relationship>();
     private List<Request> requestlist = new List<Request>();
     private List<Player> playerlist = new List<Player>();
     public GameObject searchplayer;
