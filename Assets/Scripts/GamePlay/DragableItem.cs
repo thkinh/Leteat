@@ -33,7 +33,7 @@ public class DragableItem : MonoBehaviour
     void Update()
     {
         if (!dragging) return;
-        if (Vector2.Distance(this.transform.position, EntityManager.instance.transform.position) < 5 && spawned_by_server)
+        if (Vector2.Distance(this.transform.position, new Vector2(917,495)) < 5 && spawned_by_server)
         {
             this.transform.position += (Vector3)velo;
         }
@@ -61,17 +61,17 @@ public class DragableItem : MonoBehaviour
             Debug.Log("Destroy food " + idFood);
             Destroy(gameObject);
         }
-        if (EntityManager.instance.sendnext.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
+        else if (EntityManager.instance.sendprevious.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
             Debug.Log("Send to next food " + idFood);
             Destroy(gameObject);
-            ClientManager.client.SendPacket(new Food(idFood), true);
+            ClientManager.client.SendPacket(new Food(idFood), false);
         }
-        if (EntityManager.instance.sendprevious.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
+        else if (EntityManager.instance.sendnext.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {
             Debug.Log("Send to previous food " + idFood);
             Destroy(gameObject);
-            ClientManager.client.SendPacket(new Food(idFood), false);
+            ClientManager.client.SendPacket(new Food(idFood), true);
         }
         if (EntityManager.instance.submit.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
         {

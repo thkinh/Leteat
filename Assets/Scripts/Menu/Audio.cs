@@ -1,0 +1,140 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using NAudio.Wave;
+using UnityEngine;
+
+public class Audio : MonoBehaviour
+{
+    public static Audio instance;
+    public WaveInEvent waveIn;
+    public WaveOutEvent waveOut;
+    public BufferedWaveProvider waveProvider;
+    private CancellationTokenSource cts;
+    public bool isCapturing;
+
+    void Start()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        isCapturing = false;
+        InitializeAudio();
+    }
+
+    public void StartListener()
+    {
+        StartVoiceListener();
+    }
+
+    private void InitializeAudio()
+    {
+        try
+        {
+            waveIn = new WaveInEvent
+            {
+                WaveFormat = new WaveFormat(),
+                DeviceNumber = 0
+            };
+
+            var deviceCapabilities = WaveInEvent.GetCapabilities(waveIn.DeviceNumber);
+            Debug.Log($"Selected Device: {deviceCapabilities.ProductName}");
+
+            waveIn.DataAvailable += WaveIn_DataAvailable;
+            waveIn.RecordingStopped += WaveIn_RecordingStopped;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error initializing WaveInEvent: {ex.Message}");
+        }
+    }
+
+    private void StartVoiceListener()
+    {
+        try
+        {
+            cts = new CancellationTokenSource();
+            waveOut = new WaveOutEvent();
+            waveProvider = new BufferedWaveProvider(new WaveFormat());
+            waveOut.Init(waveProvider);
+            waveOut.Play();
+
+            ConnectVoice();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error starting voice listener: {ex.Message}");
+        }
+    }
+
+    public void StartVoiceChatServer()
+    {
+        ClientManager.server.Start();
+    }
+
+    public void ConnectVoice()
+    {
+        ClientManager.udp_Client.Start();
+    }
+
+    public void OpenMic()
+    {
+        if (waveIn == null)
+        {
+            Debug.Log("WaveIn is not initialized.");
+            return;
+        }
+
+        isCapturing = !isCapturing;
+        if (isCapturing)
+        {
+            Debug.Log("Started recording");
+            waveIn.StartRecording();
+        }
+        else
+        {
+            Debug.Log("Stopped recording");
+            waveIn.StopRecording();
+        }
+    }
+
+    private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
+    {
+        try
+        {
+            // Check if UDP client is connected before sending data
+            if (ClientManager.udp_Client.IsConnected)
+            {
+                ClientManager.udp_Client.Send(e.Buffer, e.BytesRecorded);
+            }
+            else
+            {
+                Debug.LogWarning("UDP client is not connected. Cannot send audio data.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in WaveIn_DataAvailable: {ex.Message}");
+        }
+    }
+
+    private void WaveIn_RecordingStopped(object sender, StoppedEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            Debug.LogError($"Recording stopped due to an error: {e.Exception.Message}");
+        }
+        else
+        {
+            Debug.Log("Recording stopped");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        cts?.Cancel();
+        waveIn?.Dispose();
+        waveOut?.Dispose();
+    }
+}

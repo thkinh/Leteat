@@ -19,6 +19,7 @@ public class Position : MonoBehaviour
     public List<int> FoodList = new List<int>();
     public GameObject ID;
     public Button playbutton;
+    private bool iscorrect = false;
     private int i = 0;
     public void Start()
     {
@@ -41,12 +42,17 @@ public class Position : MonoBehaviour
         if (FoodList.Count == number_of_player)
         {
             ChangeButtonColor("#00806C");
-            
+            iscorrect = true;
+        }
+        if (!Server.server_instance.started)
+        {
+            OnDestroy();
         }
     }
 
     public void Back_toPrevious()
     {
+        ClientManager.client?.Dispose();
         Server.server_instance?.EndServer();
         SceneManager.LoadScene("Choose cr or join");
     }
@@ -74,13 +80,17 @@ public class Position : MonoBehaviour
 
     public void PlayClick()
     {
-        string id = DropAreaManagerArrange.Instance.IndexListofFood();
-        foreach (char number in id)
+        if(iscorrect == true)
         {
-            FoodList.Add(number.ConvertTo<int>());
+            string id = DropAreaManagerArrange.Instance.IndexListofFood();
+            foreach (char number in id)
+            {
+                FoodList.Add(number.ConvertTo<int>());
 
-        }
-        SendArrangeList();
+            }
+            SendArrangeList();
+        }    
+        
     }
     private void ChangeButtonColor(string hexColor)
     {
@@ -91,6 +101,13 @@ public class Position : MonoBehaviour
         {
             buttonText.color = newColor;
         }
-    }    
+    }
+
+    private void OnDestroy()
+    {
+        FoodList.Clear();
+        number_of_player = 0;
+        play = false;
+    }
 }
 

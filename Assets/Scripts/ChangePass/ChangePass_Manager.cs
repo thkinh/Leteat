@@ -5,23 +5,23 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class ChangePass_Manager : MonoBehaviour
 {
     public TMP_InputField newpass;
     public TMP_InputField confirm_newpass;
     public GameObject createbutton;
-    private void Update()
+    public GameObject panel;
+    public GameObject panel2;
+    private GameObject currentPanel;
+
+    public void Submit()
     {
         if (Check_Password() == true)
         {
+            currentPanel.SetActive(false);
             ChangeButtonColor("#00806C");
-        }
-    }
-    public void Submit()
-    {
-        if (Check_Password())
-        {
             FirestoreClient.fc_instance.ChangePass(FirestoreClient.fc_instance.thisPlayerID, Security.Encrypt(newpass.text));
             SceneManager.LoadSceneAsync("Sign In");
         }
@@ -33,11 +33,16 @@ public class ChangePass_Manager : MonoBehaviour
         //kiểm tra password phải đủ 8 kí tự trở lên
         if (!CheckFormatPassword.IsPasswordValid(newpass.text))
         {
+            panel.SetActive(true);
+            currentPanel = panel;
             return false;
         }
         //kiểm tra password = repeat password
         if (newpass.text != confirm_newpass.text)
         {
+            currentPanel.SetActive(false);
+            panel2.SetActive(true);
+            currentPanel = panel2;
             //Debug.Log($"Passwords do not match: {confirm_newpass.text} != {newpass.text}");
             return false;
         }

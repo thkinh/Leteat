@@ -135,7 +135,26 @@ public class FriendList_Manager : MonoBehaviour
         //TMP_Text personal_exp = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
         Debug.Log("ok");
     }
+    public async void PersonalPlayerByUserName(string username )
+    {
+        if (personalplayer.activeSelf)
+        {
+            personalplayer.SetActive(false);
+            return;
+        }
 
+
+        personalplayer.SetActive(true);
+
+        Player player = await FirestoreClient.fc_instance.FindPlayer_byName(username);
+        TMP_Text personal_username = personalplayer.transform.GetChild(2).GetComponent<TMP_Text>();
+        TMP_Text personal_email = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
+        personal_username.text = $"Username:  {player.username}";
+        personal_email.text = $"Email:  {player.email}";
+
+        //TMP_Text personal_exp = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
+        Debug.Log("ok");
+    }
 
     public async void AddFriend()
     {
@@ -164,7 +183,7 @@ public class FriendList_Manager : MonoBehaviour
             if (friendButton != null)
             {
                 friendButton.onClick.AddListener(() => {
-                    PersonalPlayer(player.username);
+                    PersonalPlayerByUserName(player.username);
 
                 });
             }

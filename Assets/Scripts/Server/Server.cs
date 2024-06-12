@@ -86,7 +86,33 @@ public class Server : MonoBehaviour
         {
             client.Close();
         }
+        clients_Dict.Clear();
+        arranged_list.Clear();
+        attending = 0;
     }
+
+    public void Reset()
+    {
+        if(listener == null)
+        {
+            return;
+        }
+        RandomCodeRoom.m_created = false;
+        foreach(var client in clients_list)
+        {
+            if(client == clients_Dict[0])
+            {
+                continue;
+            }
+            client.Close();
+            clients_Dict.Remove(clients_Dict.FirstOrDefault(x => x.Value == client).Key);
+            clients_list.Remove(client);
+        }
+        arranged_list.Clear();
+        attending = 1;
+    }
+
+
 
     private async void HandleClient(TcpClient client)
     {
@@ -285,7 +311,7 @@ public class Server : MonoBehaviour
             packet.Write(foodname);
             packet.WriteLength();
             this_client_position--;
-            if(this_client_position <= 0)
+            if(this_client_position < 0)
             {
                 this_client_position = arranged_list.Count - 1;
             }

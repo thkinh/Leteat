@@ -13,20 +13,17 @@ using System.Linq;
 public class SignIn_SceneManager : MonoBehaviour
 {
     public static SignIn_SceneManager instance;
-
     public TMP_InputField email;
     public TMP_InputField password;
-
+    public GameObject panel;
+    public TMP_Text textComponent;
     private void Awake()
     {
         instance = this;
     }
 
-
     public async void SignIN()
     {
-        Debug.Log($"email : {email.text}");
-
         bool check = await Check();
         if ( check )
         {
@@ -34,7 +31,7 @@ public class SignIn_SceneManager : MonoBehaviour
             SceneManager.LoadScene("Menu");
         }
         else {
-            email.text = "Nhap lai email hoac pass";
+            ShowError("Nhap lai email hoac pass");
         }
     }
 
@@ -60,7 +57,16 @@ public class SignIn_SceneManager : MonoBehaviour
         SceneManager.LoadScene("ForgottenPassword");
     }    
 
-
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+    private void ShowError(string text)
+    {
+        panel.SetActive(true);
+        textComponent.text = text;
+        text = string.Empty;
+    }
 }
 
 

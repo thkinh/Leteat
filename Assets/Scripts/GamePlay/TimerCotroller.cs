@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimerCotroller : MonoBehaviour
@@ -37,6 +39,16 @@ public class TimerCotroller : MonoBehaviour
             ScoreBoard.SetActive(true);
             isover = true;
             ClearFood();
+        }
+        if (isover == true && Input.anyKeyDown)
+        {
+            if (ClientManager.client.isClient)
+            {
+                SceneManager.LoadScene("Choose cr or join");
+            }
+            Server.server_instance.Reset();
+            ClientManager.client.Reset();
+
         }
     }
 

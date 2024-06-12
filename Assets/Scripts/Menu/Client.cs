@@ -16,21 +16,22 @@ namespace Assets.Scripts
     {
         public TcpClient tcpClient;
         public SmtpClient smtpClient;
-        public UdpClient udpClient;
-        public UdpClient udplistener;
+        //public UdpClient udpClient;
+        //public UdpClient udplistener;
 
         NetworkStream stream;
-        public string address = "192.168.67.245";
+        public string server_address = "127.0.0.1";
         private readonly int port = 9999;
         private readonly int udp_port = 11333;
         public int id = 90;
-        private bool isHost = false;
-        private bool isClient = false;
+        public bool isHost { get; set; }
+        public bool isClient { get; set; }
         public int number_of_players = 0;
 
         public Client()
         {
-
+            isHost = false;
+            isClient = false;
         }
 
         public async void ConnectToServer()
@@ -38,7 +39,7 @@ namespace Assets.Scripts
             try
             {
                 tcpClient = new TcpClient();
-                await tcpClient.ConnectAsync(IPAddress.Parse(address), port);
+                await tcpClient.ConnectAsync(IPAddress.Parse(server_address), port);
                 Debug.Log("Connecting to server...");
 
                 if (tcpClient.Connected)
@@ -62,11 +63,11 @@ namespace Assets.Scripts
 
         public async void Join_ConnectToServer()
         {
-            Debug.Log($"Connecting to {address}");
+            Debug.Log($"Connecting to {server_address}");
             try
             {
                 tcpClient = new TcpClient();
-                await tcpClient.ConnectAsync(IPAddress.Parse(address), port);
+                await tcpClient.ConnectAsync(IPAddress.Parse(server_address), port);
                 if (tcpClient.Connected)
                 {
                     stream = tcpClient.GetStream();
@@ -86,17 +87,17 @@ namespace Assets.Scripts
         }
 
 
-        public void StartUdpClient()
-        {
-            udpClient = new UdpClient();
-            try {
+        //public void StartUdpClient()
+        //{
+        //    udpClient = new UdpClient();
+        //    try {
 
-                udpClient.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), udp_port));
-            }
-            catch {
-                Debug.Log("Udp client: falied to initialize");
-            }
-        }
+        //        udpClient.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), udp_port));
+        //    }
+        //    catch {
+        //        Debug.Log("Udp client: falied to initialize");
+        //    }
+        //}
 
 
         private void WelcomeReceived(byte[] data, int length)
@@ -118,6 +119,27 @@ namespace Assets.Scripts
                 //Debug.Log(ex.Message.ToString());
             }
         }
+        public void Dispose()
+        {
+            tcpClient?.Dispose();
+            smtpClient?.Dispose();
+            number_of_players = 0;
+            isHost = false;
+            isClient = false;
+        }
+
+        public void Reset()
+        {
+            number_of_players = 1;
+            isClient = false;
+            if(isHost)
+            {
+                SceneManager.LoadScene("CreateLobby");
+                return;
+            }
+            tcpClient.Dispose();
+        }
+
 
         private async void ListenToServer() 
         {
@@ -131,8 +153,9 @@ namespace Assets.Scripts
                 }
                 catch 
                 {
-                    Debug.Log("Loi khi nhan packet");
+                    Debug.Log("Loi khi nhan packet, server da dong");
                     tcpClient.Close();
+                    Dispose();
                     //Debug.Log(ex.Message.ToString());
                 }
             }
