@@ -6,6 +6,8 @@ using UnityEngine.SocialPlatforms.Impl;
 using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using Firebase.Firestore;
+using System;
 
 public class EntityManager : MonoBehaviour
 {
@@ -32,11 +34,6 @@ public class EntityManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-    }
-
-    public void LoadMenu()
-    {
-        SceneManager.LoadScene("Menu");
     }
 
     // Start is called before the first frame update
@@ -73,7 +70,8 @@ public class EntityManager : MonoBehaviour
         }
         scoreText.text = "Score: " + score;
     }
-    
+
+
     private void Spawn_Food()
     {
         var wanted_x = UnityEngine.Random.Range(253, 1625);
