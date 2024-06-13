@@ -133,22 +133,43 @@ public class Server : MonoBehaviour
 
             while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
             {
-                int client_id = clients_Dict.FirstOrDefault(x => x.Value == client).Key;
                 string message = HandlePacket(buffer, bytesRead, client);
                 Debug.Log(message);
             }
         }
         catch (Exception ex)
         {
-            Debug.Log($"Error handling client: {ex.Message}");
+            Debug.LogError($"Error handling client: {ex.Message}");
         }
         finally
         {
+            HandleClientDisconnection(client);
+        }
+    }
+
+    private void HandleClientDisconnection(TcpClient client)
+    {
+        try
+        {
+            var clientKey = clients_Dict.FirstOrDefault(x => x.Value == client).Key;
+            if (clientKey == 0)
+            {
+                EndServer();
+            }
             clients_list.Remove(client);
-            clients_Dict.Remove(clients_Dict.FirstOrDefault(x => x.Value == client).Key);
-            Position.number_of_player--;
-            Debug.Log("Remove a player from the list");
             client.Close();
+
+            Position.number_of_player--;
+            Debug.Log("Removed a player from the list");
+
+            if (clients_Dict.Count > 0)
+            {
+                Send_Announce_for_quit(clients_Dict.First().Value); // send quit announce to host
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in HandleClientDisconnection: {ex.Message}");
         }
     }
 
@@ -220,28 +241,6 @@ public class Server : MonoBehaviour
             Debug.LogError($"Error handling packet: {ex.Message}");
             HandleClientDisconnection(this_client);
             return $"An error occurred while handling the packet: {ex.Message}";
-        }
-    }
-
-    private void HandleClientDisconnection(TcpClient client)
-    {
-        try
-        {
-            client.Close();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error closing client connection: {ex.Message}");
-        }
-
-        var clientKey = clients_Dict.FirstOrDefault(x => x.Value == client).Key;
-        clients_Dict.Remove(clientKey);
-
-        clients_list.Remove(client);
-        arranged_list.Remove(client);
-        if (clients_Dict.Count > 0)
-        {
-            Send_Announce_for_quit(clients_Dict[0]); // send quit announce to host
         }
     }
 

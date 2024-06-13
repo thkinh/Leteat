@@ -401,10 +401,24 @@ public class FirestoreClient : MonoBehaviour
 
     }
 
-    public async void Reject (string username)
+    public async Task<List<Match>> MatchesHistory()
     {
-        string from = await GetPlayerID(username);
-        Query query = db.Collection("Requests").WhereEqualTo("to", FirestoreClient.fc_instance.thisPlayerID).WhereEqualTo("from", from);
+        List<Match> matches = new List<Match>();
+        CollectionReference colref = db.Collection("Macth");
+        Query query = colref.WhereEqualTo("PlayerId", thisPlayerID);
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+        foreach(var doc in snapshot.Documents)
+        {
+            matches.Add(doc.ConvertTo<Match>());
+        }
+
+
+        return matches;
+    }
+
+    public async void Reject (string userID)
+    {
+        Query query = db.Collection("Requests").WhereEqualTo("to", FirestoreClient.fc_instance.thisPlayerID).WhereEqualTo("from", userID);
 
         QuerySnapshot snapshot = await query.GetSnapshotAsync();
 
@@ -412,6 +426,28 @@ public class FirestoreClient : MonoBehaviour
 
         await doc.Reference.DeleteAsync();
         Debug.Log("Deleted document with ID: " + doc.Id);
+    }
+
+    public async void Unfriend(string username)
+    {
+
+        Query query = db.Collection("Players").Document(thisPlayerID).Collection("Relationships").WhereEqualTo("username", username);
+        QuerySnapshot snapshot = await query.GetSnapshotAsync();
+        DocumentSnapshot doc = snapshot.FirstOrDefault();
+        if (doc != null)
+        {
+            await doc.Reference.DeleteAsync();
+        }
+        string id = await GetPlayerID(username);
+        Query reverse_query = db.Collection("Players").Document(id).Collection("Relationships").WhereEqualTo("username", thisPlayer.username);
+        QuerySnapshot snap2 = await query.GetSnapshotAsync();
+        DocumentSnapshot doc2 = snap2.FirstOrDefault();
+        if (doc2 != null)
+        {
+            await doc2.Reference.DeleteAsync();
+        }
+
+        Debug.Log($"Unfriended with {username}");
     }
 
     public bool IsFriended(string username)

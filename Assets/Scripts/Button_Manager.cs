@@ -72,4 +72,8 @@ public class Button_Clickable : MonoBehaviour
     {
         SceneManager.LoadScene("Ranking");
     }
+    public void LoadMatches()
+    {
+        SceneManager.LoadScene("MatchesHistory");
+    }
 }

@@ -16,13 +16,10 @@ namespace Assets.Scripts
     {
         public TcpClient tcpClient;
         public SmtpClient smtpClient;
-        //public UdpClient udpClient;
-        //public UdpClient udplistener;
 
         NetworkStream stream;
         public string server_address = "127.0.0.1";
         private readonly int port = 9999;
-        //private readonly int udp_port = 11333;
         public int id = 90;
         public bool isHost { get; set; }
         public bool isClient { get; set; }
@@ -85,19 +82,6 @@ namespace Assets.Scripts
                 Debug.Log(e.Message);
             }
         }
-
-
-        //public void StartUdpClient()
-        //{
-        //    udpClient = new UdpClient();
-        //    try {
-
-        //        udpClient.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), udp_port));
-        //    }
-        //    catch {
-        //        Debug.Log("Udp client: falied to initialize");
-        //    }
-        //}
 
 
         private void WelcomeReceived(byte[] data, int length)

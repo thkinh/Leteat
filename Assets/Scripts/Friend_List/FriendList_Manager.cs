@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -27,6 +28,9 @@ public class FriendList_Manager : MonoBehaviour
     public GameObject requestfriend;
     public TMP_InputField searchbar;
     private GameObject currentpanel;
+
+    private string current_playername;
+    private GameObject current_object;
 
     public GameObject panel;
     public TMP_Text textComponent;
@@ -70,6 +74,7 @@ public class FriendList_Manager : MonoBehaviour
             if (friendButton != null)
             {
                 friendButton.onClick.AddListener(() => { 
+                    current_object = friend;
                     PersonalPlayer(player.username);
                 
                 });
@@ -103,7 +108,8 @@ public class FriendList_Manager : MonoBehaviour
             Button friendButton = friend.GetComponent<Button>();
             if (friendButton != null)
             {
-                friendButton.onClick.AddListener(() => { 
+                friendButton.onClick.AddListener(() => {
+                    current_object = friend;
                     PersonalPlayer(relationship.playerID);
                 });
             }
@@ -129,13 +135,28 @@ public class FriendList_Manager : MonoBehaviour
         Player player = await FirestoreClient.fc_instance.GetPlayer(id);
         TMP_Text personal_username = personalplayer.transform.GetChild(2).GetComponent<TMP_Text>();
         TMP_Text personal_email = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
+        TMP_Text personal_exp = personalplayer.transform.GetChild(4).GetComponent<TMP_Text>();
+        current_playername = player.username; // get the current player name
         personal_username.text = $"Username:  {player.username}";
         personal_email.text = $"Email:  {player.email}";
+        personal_exp.text = $"Exp: {player.exp}";
+        if (currentpanel == allfriend)
+        {
+            var unfr_btn = personalplayer.transform.GetChild(6).GetComponent<Button>();
+            if (unfr_btn != null)
+            {
+                unfr_btn.onClick.AddListener(() =>
+                {
+                    Destroy(current_object);
+                    Unfriend(current_playername);
+                });
+            }
+        }
 
         //TMP_Text personal_exp = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
         Debug.Log("ok");
     }
-    public async void PersonalPlayerByUserName(string username )
+    public async void PersonalPlayerByUserName(string username)
     {
         if (personalplayer.activeSelf)
         {
@@ -149,8 +170,11 @@ public class FriendList_Manager : MonoBehaviour
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(username);
         TMP_Text personal_username = personalplayer.transform.GetChild(2).GetComponent<TMP_Text>();
         TMP_Text personal_email = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
+        TMP_Text personal_exp = personalplayer.transform.GetChild(4).GetComponent<TMP_Text>();
         personal_username.text = $"Username:  {player.username}";
         personal_email.text = $"Email:  {player.email}";
+        personal_exp.text = $"Exp: {player.exp}";
+
 
         //TMP_Text personal_exp = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
         Debug.Log("ok");
@@ -195,6 +219,7 @@ public class FriendList_Manager : MonoBehaviour
                     FriendRequest(player.username);
                     Image img = add_btn.gameObject.GetComponent<Image>();
                     img.sprite = Resources.Load<Sprite>("Button/x1");
+                    add_btn.interactable = false;
                 });
             }
             if (friendText != null)
@@ -203,6 +228,17 @@ public class FriendList_Manager : MonoBehaviour
             }
         }
 
+    }
+
+
+    public void Unfriend(string username)
+    {
+        FirestoreClient.fc_instance.Unfriend(username);
+        if (personalplayer.activeSelf)
+        {
+            personalplayer.SetActive(false);
+            return;
+        }
     }
 
     public void FriendRequest(string username)
@@ -233,6 +269,7 @@ public class FriendList_Manager : MonoBehaviour
             {
 
                 friendButton.onClick.AddListener(() => {
+                    current_object = r;
                     PersonalPlayer(request.from);
 
                 });
@@ -252,7 +289,18 @@ public class FriendList_Manager : MonoBehaviour
                     Destroy(r.gameObject);
                 });
             }
+
+            Button reject_btn = r.transform.GetChild(2).GetComponent<Button>();
+            if (add_btn != null)
+            {
+                add_btn.onClick.AddListener(() =>
+                {
+                        Reject_btn(request.from);
+                        Destroy(r.gameObject);
+                });
+            }
         }
+
     }
 
 
@@ -260,6 +308,12 @@ public class FriendList_Manager : MonoBehaviour
     {
         FirestoreClient.fc_instance.Accept(await FirestoreClient.fc_instance.ReadUsernameByID(userID));
     }
+
+    public void Reject_btn(string userID)
+    {
+        FirestoreClient.fc_instance.Reject(userID);
+    }
+
 
     public void Back()
     {
