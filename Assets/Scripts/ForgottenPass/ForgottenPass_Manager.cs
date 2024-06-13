@@ -45,7 +45,7 @@ public class ForgottenPass_Manager : MonoBehaviour
     }
     public void Exit()
     {
-        SceneManager.LoadScene("Forgotten Password");
+        SceneManager.LoadScene("ForgottenPassword");
 
     }
 
