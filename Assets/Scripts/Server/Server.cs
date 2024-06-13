@@ -190,6 +190,13 @@ public class Server : MonoBehaviour
                 }
                 return $"Sent a start signal to all player";
             }
+            if (signal == 505)
+            {
+                this_client.Close();
+                Send_Announce_for_quit(clients_Dict[0]); // send quit announce to host
+                return $"A player disconnected, sent a packet announce to host";
+            }
+
         }
         else if (packet.ReadString() == "Arranged")
         {
@@ -274,7 +281,14 @@ public class Server : MonoBehaviour
         client.GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
         packet.Dispose();
     }
-
+    public void Send_Announce_for_quit(TcpClient client)
+    {
+        Packet packet = new Packet();
+        packet.Write("Player Quit");
+        packet.WriteLength();
+        client.GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+        packet.Dispose();
+    }
     public void SendStartPacket(TcpClient client, bool canplay)
     {
         Packet packet = new Packet();

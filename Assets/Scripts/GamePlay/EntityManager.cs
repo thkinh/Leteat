@@ -1,8 +1,8 @@
 ﻿using Assets.Scripts.GamePlay;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UIElements;
 using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
@@ -15,6 +15,7 @@ public class EntityManager : MonoBehaviour
     public TMP_Text scoreText;
     public GameObject sendnext;
     public GameObject sendprevious;
+    public GameObject mic;
     [SerializeField] GameObject[] FoodPrefab;
     [SerializeField] private float timer = 0.0f, previous_time = 0.0f;
     public GameObject time_control;
@@ -41,9 +42,13 @@ public class EntityManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Audio.instance.OpenMic();
         current_food_count = foodlist.Count;
-        Spawn_Food();
+        bool isOn = mic.GetComponent<Toggle>().isOn;
+        isOn = Audio.instance.isCapturing;
+        if (isOn)
+        {
+            mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
+        }
     }
     // Update is called once per frame
     void Update()
@@ -121,4 +126,24 @@ public class EntityManager : MonoBehaviour
             score += 30;
         }
     }
+
+    public void MicEvent()
+    {
+        bool isOn = mic.GetComponent<Toggle>().isOn;   
+        isOn = !isOn;
+        if(isOn)
+        {
+            Debug.Log("Opening mic");
+            mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
+            Audio.instance?.OpenMic();
+        }
+        if(!isOn)
+        {
+            Debug.Log("Turned off mic");
+
+            mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-off");
+            Audio.instance?.OpenMic();
+        }
+    }
+
 }

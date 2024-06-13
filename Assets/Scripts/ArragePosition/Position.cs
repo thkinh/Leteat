@@ -30,7 +30,6 @@ public class Position : MonoBehaviour
 
     public void Update()
     {
-        number_of_player = ClientManager.client.number_of_players; //host included
         if (play)
         {
             SceneManager.LoadScene("Playing");
@@ -42,6 +41,7 @@ public class Position : MonoBehaviour
         if (number_of_player < i)
         {
             DestroyADisk();
+            TakeList.Clear();
         }
         if (FoodList.Count == number_of_player)
         {

@@ -61,7 +61,7 @@ public class SampleFood : MonoBehaviour
         {
             Position[index].GetComponent<SpriteRenderer>().sprite = Food[randomNumber].GetComponent<SpriteRenderer>().sprite;
         }
-        Debug.Log("Food " + randomNumber + " is in disk " + Position[index]);
+        //Debug.Log("Food " + randomNumber + " is in disk " + Position[index]);
     }
     public void SubmitFood(int positionIndex)
     {

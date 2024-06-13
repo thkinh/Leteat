@@ -17,6 +17,7 @@ public class JoinRoom_Manager : MonoBehaviour
     public GameObject loading_panel;
     public GameObject ID;
     public GameObject joinbutton;
+    public GameObject mic;
 
     public async void JoinClick()
     {
@@ -72,7 +73,8 @@ public class JoinRoom_Manager : MonoBehaviour
     }
 
     public void EscapeLobby()
-    { 
+    {
+        ClientManager.client.SendPacket(505);
         loading_panel.SetActive(false);
         joined = false;
         notloaded = true;
@@ -81,5 +83,22 @@ public class JoinRoom_Manager : MonoBehaviour
         ClientManager.udp_Client.Stop();
         ClientManager.server.Stop();
     }
+    public void MicEvent()
+    {
+        bool isOn = mic.GetComponent<Toggle>().isOn;
+        isOn = !isOn;
+        if (isOn)
+        {
+            Debug.Log("Opening mic");
+            mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
+            Audio.instance?.OpenMic();
+        }
+        if (!isOn)
+        {
+            Debug.Log("Turned off mic");
 
+            mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-off");
+            Audio.instance?.OpenMic();
+        }
+    }
 }
