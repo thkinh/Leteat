@@ -105,7 +105,7 @@ public class EntityManager : MonoBehaviour
         nf.AddComponent<RectTransform>();
         nf.AddComponent<DragableItem>();
         var drag = nf.GetComponent<DragableItem>();
-        drag= new DragableItem(new Vector2(960,540).normalized*3);
+        drag.SetVelo(new Vector2(960, 540).normalized * 3);
         
     }
 

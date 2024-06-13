@@ -156,65 +156,95 @@ public class Server : MonoBehaviour
     {
         Packet packet = new Packet(_packet);
         int len = packet.ReadInt();
-        Debug.Log($"Server received a packet have a len of {len}");
+        Debug.Log($"Server received a packet with a length of {len}");
 
-        if (len == 9) //packet of food delivery
+        try
         {
-            int player_id = packet.ReadInt();
-            int foodname = packet.ReadInt();
-            bool next_or_prev = packet.ReadBool();
-            SendPacket(foodname, this_client, next_or_prev);
-            packet.Dispose();
-            return $"{player_id} : {Food.getName(foodname)} / {next_or_prev} / data_len = {len}";
-        }
-        else if (len == 20) //packet of lobby creation
-        {
-            for (int i = 0; i < 5; i++)
+            if (len == 9) // packet of food delivery
             {
-                lobby_id[i] = packet.ReadInt();
-                Debug.Log($"lobby id {i} is : {Food.getName(lobby_id[i])}");
+                int player_id = packet.ReadInt();
+                int foodname = packet.ReadInt();
+                bool next_or_prev = packet.ReadBool();
+                SendPacket(foodname, this_client, next_or_prev);
+                packet.Dispose();
+                return $"{player_id} : {Food.getName(foodname)} / {next_or_prev} / data_len = {len}";
             }
-            //Send packet lobby acept
-            SendPacket(true, this_client);
-            return $"Lobby created, getting this player into lobby";
-        }
-        else if (len == 4) // packet of signal
-        {
-            int signal = packet.ReadInt();
-            if (signal == 100) //signal start
+            else if (len == 20) // packet of lobby creation
             {
+                for (int i = 0; i < 5; i++)
+                {
+                    lobby_id[i] = packet.ReadInt();
+                    Debug.Log($"Lobby ID {i} is: {Food.getName(lobby_id[i])}");
+                }
+                // Send packet lobby accept
+                SendPacket(true, this_client);
+                return $"Lobby created, getting this player into lobby";
+            }
+            else if (len == 4) // packet of signal
+            {
+                int signal = packet.ReadInt();
+                if (signal == 100) // signal start
+                {
+                    foreach (TcpClient client in clients_list)
+                    {
+                        SendStartPacket(client, true);
+                        // Send start packet to all clients
+                    }
+                    return $"Sent a start signal to all players";
+                }
+                if (signal == 505) // signal quit
+                {
+                    HandleClientDisconnection(this_client);
+                    return $"A player disconnected, sent a packet announce to host";
+                }
+            }
+            else if (packet.ReadString() == "Arranged")
+            {
+                for (int i = 0; i < attending; i++)
+                {
+                    int food = packet.ReadInt();
+                    arranged_list.Add(clients_Dict[food]);
+                }
+                Debug.Log("Arranged");
                 foreach (TcpClient client in clients_list)
                 {
-                    SendStartPacket(client,true);
-                    //Send start packet to all clients
+                    SendStartPacket(client, true);
+                    // Send start packet to all clients
                 }
-                return $"Sent a start signal to all player";
+                return $"Sent a start signal to all players";
             }
-            if (signal == 505)
-            {
-                this_client.Close();
-                Send_Announce_for_quit(clients_Dict[0]); // send quit announce to host
-                return $"A player disconnected, sent a packet announce to host";
-            }
-
+            return $"Packet's length is unknown {len}, this type of packet doesn't exist";
         }
-        else if (packet.ReadString() == "Arranged")
+        catch (Exception ex)
         {
-            for(int i = 0; i < attending; i ++)
-            {
-                int food = packet.ReadInt();
-                arranged_list.Add(clients_Dict[food]);
-            }
-            Debug.Log("Arranged");
-            foreach (TcpClient client in clients_list)
-            {
-                SendStartPacket(client, true);
-                //Send start packet to all clients
-            }
-            return $"Sent a start signal to all players";
+            Debug.LogError($"Error handling packet: {ex.Message}");
+            HandleClientDisconnection(this_client);
+            return $"An error occurred while handling the packet: {ex.Message}";
         }
-        return $"Packet's length is unknowed {len}, this type of packet doesn't exists";
     }
+
+    private void HandleClientDisconnection(TcpClient client)
+    {
+        try
+        {
+            client.Close();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error closing client connection: {ex.Message}");
+        }
+
+        var clientKey = clients_Dict.FirstOrDefault(x => x.Value == client).Key;
+        clients_Dict.Remove(clientKey);
+
+        clients_list.Remove(client);
+        arranged_list.Remove(client);
+        if (clients_Dict.Count > 0)
+        {
+            Send_Announce_for_quit(clients_Dict[0]); // send quit announce to host
+        }
+    }
+
 
     public async void Listen()
     {

@@ -12,10 +12,11 @@ public class DragableItem : MonoBehaviour
     public Vector2 velo;
     public bool spawned_by_server = false;
 
-    public DragableItem(Vector2 v)
+
+    public void SetVelo(Vector2 velocity)
     {
-        velo = v;
-        spawned_by_server=true;
+        velo = velocity;
+        spawned_by_server = true;
     }
 
     private void Awake()
