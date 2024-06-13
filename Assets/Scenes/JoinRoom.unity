@@ -741,7 +741,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a95b780735d65774c9d8bd2e959ab34c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.96981126, g: 0.8677444, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1681,7 +1681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &559417087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1759,6 +1759,7 @@ MonoBehaviour:
   loading_panel: {fileID: 559417086}
   ID: {fileID: 0}
   joinbutton: {fileID: 0}
+  mic: {fileID: 0}
 --- !u!1001 &654961605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2543,8 +2544,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notloaded: 1
   loading_panel: {fileID: 559417086}
-  ID: {fileID: 0}
+  ID: {fileID: 186848286}
   joinbutton: {fileID: 469012385}
+  mic: {fileID: 1707109418}
 --- !u!114 &997195472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3570,7 +3572,7 @@ GameObject:
   - component: {fileID: 1707109419}
   - component: {fileID: 1707109420}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: MicToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3593,7 +3595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -758, y: 413.4}
+  m_AnchoredPosition: {x: 513, y: -322}
   m_SizeDelta: {x: 29.8408, y: 20.7936}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1707109420
@@ -3642,7 +3644,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 997195471}
+        m_TargetAssemblyTypeName: JoinRoom_Manager, Assembly-CSharp
+        m_MethodName: MicEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1765530005
 GameObject:

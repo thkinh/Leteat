@@ -1,12 +1,8 @@
-using Assets.Scripts;
 using Assets.Scripts.GamePlay;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Linq;
 using TMPro;
 
 public class JoinRoom_Manager : MonoBehaviour
@@ -14,6 +10,7 @@ public class JoinRoom_Manager : MonoBehaviour
     public static bool joined = false;
     public static bool Can_play = false;
     public bool notloaded = true;
+    public bool color_changed = false;
     public GameObject loading_panel;
     public GameObject ID;
     public GameObject joinbutton;
@@ -45,18 +42,23 @@ public class JoinRoom_Manager : MonoBehaviour
     {
         if (joined && notloaded)
         {
+            notloaded = false;
             loading_panel.SetActive(true);
             int id = ClientManager.client.id;
+            Debug.Log($"This play id is {id}");
             ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
-            notloaded = false;
         }
         if (Can_play)
         {
             SceneManager.LoadSceneAsync("Playing");
         }
-        if (DropAreaManager.Instance.coderoom.Length == 5)
+        if (color_changed == false)
         {
-            ChangeButtonColor("#00806C");
+            if (DropAreaManager.Instance.coderoom.Length == 5)
+            {
+                ChangeButtonColor("#00806C");
+                color_changed = true;
+            }
         }    
 
     }
