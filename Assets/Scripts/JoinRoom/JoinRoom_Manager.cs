@@ -93,14 +93,14 @@ public class JoinRoom_Manager : MonoBehaviour
         {
             Debug.Log("Opening mic");
             mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
-            Audio.instance?.OpenMic();
+            Audio.instance?.TurnOnMic();
         }
         if (!isOn)
         {
             Debug.Log("Turned off mic");
 
             mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-off");
-            Audio.instance?.OpenMic();
+            Audio.instance?.TurnOffMic();
         }
     }
 }

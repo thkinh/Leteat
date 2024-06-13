@@ -95,7 +95,7 @@ public class Audio : MonoBehaviour
         ClientManager.udp_Client.Start();
     }
 
-    public void OpenMic()
+    public void TurnOnMic()
     {
         if (waveIn == null)
         {
@@ -103,17 +103,21 @@ public class Audio : MonoBehaviour
             return;
         }
 
-        isCapturing = !isCapturing;
-        if (isCapturing)
+        isCapturing = true;
+        Debug.Log("Started recording");
+        waveIn.StartRecording();
+    }
+    public void TurnOffMic()
+    {
+        if (waveIn == null)
         {
-            Debug.Log("Started recording");
-            waveIn.StartRecording();
+            Debug.Log("WaveIn is not initialized.");
+            return;
         }
-        else
-        {
-            Debug.Log("Stopped recording");
-            waveIn.StopRecording();
-        }
+
+        isCapturing = false;
+        Debug.Log("Started recording");
+        waveIn.StopRecording();
     }
 
     public void WaveIn_DataAvailable(object sender, WaveInEventArgs e)

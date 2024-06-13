@@ -50,10 +50,6 @@ public class EntityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Audio.instance.OpenMic();
-        }
 
         if (foodlist.Count > current_food_count)
         {
@@ -133,14 +129,14 @@ public class EntityManager : MonoBehaviour
         {
             Debug.Log("Opening mic");
             mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
-            Audio.instance?.OpenMic();
+            Audio.instance?.TurnOnMic();
         }
         if(!isOn)
         {
             Debug.Log("Turned off mic");
 
             mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-off");
-            Audio.instance?.OpenMic();
+            Audio.instance?.TurnOffMic();
         }
     }
 

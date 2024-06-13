@@ -21,6 +21,8 @@ public class Position : MonoBehaviour
     public Button playbutton;
     private bool iscorrect = false;
     private int i = 0;
+    public GameObject voiceToggle;
+
     public void Start()
     {
         int id = ClientManager.client.id;
@@ -117,7 +119,17 @@ public class Position : MonoBehaviour
 
     public void OpenVoice()
     {
-        Audio.instance.OpenMic();
+        bool isOn = voiceToggle.GetComponent<Toggle>().isOn;
+        isOn = !isOn;
+        if (isOn)
+        {
+            Audio.instance.TurnOnMic();
+        }
+        else 
+        {
+            Audio.instance.TurnOffMic();
+        }
+        
     }
 
     private void OnDestroy()
