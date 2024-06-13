@@ -291,9 +291,9 @@ public class FriendList_Manager : MonoBehaviour
             }
 
             Button reject_btn = r.transform.GetChild(2).GetComponent<Button>();
-            if (add_btn != null)
+            if (reject_btn != null)
             {
-                add_btn.onClick.AddListener(() =>
+                reject_btn.onClick.AddListener(() =>
                 {
                         Reject_btn(request.from);
                         Destroy(r.gameObject);

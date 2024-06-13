@@ -397,8 +397,6 @@ public class FirestoreClient : MonoBehaviour
         DocumentSnapshot doc = snapshot.FirstOrDefault();
 
         await doc.Reference.DeleteAsync();
-        Debug.Log("Deleted document with ID: " + doc.Id);
-
     }
 
     public async Task<List<Match>> MatchesHistory()
@@ -409,9 +407,10 @@ public class FirestoreClient : MonoBehaviour
         QuerySnapshot snapshot = await query.GetSnapshotAsync();
         foreach(var doc in snapshot.Documents)
         {
-            matches.Add(doc.ConvertTo<Match>());
+            Match match = doc.ConvertTo<Match>();
+            Debug.Log(match.exp);
+            matches.Add(match);
         }
-
 
         return matches;
     }
