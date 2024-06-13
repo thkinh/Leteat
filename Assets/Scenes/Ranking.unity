@@ -2700,7 +2700,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EXP: '
+  m_text: 'Exp: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0409afc52316a184badccdab909b3a2f, type: 2}
   m_sharedMaterial: {fileID: -508289952000032404, guid: 0409afc52316a184badccdab909b3a2f, type: 2}

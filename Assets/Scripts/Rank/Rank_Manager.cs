@@ -86,8 +86,10 @@ public class Rank_Manager : MonoBehaviour
         Player player = await FirestoreClient.fc_instance.GetPlayer(id);
         TMP_Text personal_username = personalplayer.transform.GetChild(2).GetComponent<TMP_Text>();
         TMP_Text personal_email = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
+        TMP_Text personal_exp = personalplayer.transform.GetChild(4).GetComponent<TMP_Text>();
         personal_username.text = $"Username:  {player.username}";
         personal_email.text = $"Email:  {player.email}";
+        personal_exp.text = $"Exp:  {player.exp}"; 
 
         //TMP_Text personal_exp = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
         Debug.Log("ok");
@@ -106,8 +108,11 @@ public class Rank_Manager : MonoBehaviour
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(username);
         TMP_Text personal_username = personalplayer.transform.GetChild(2).GetComponent<TMP_Text>();
         TMP_Text personal_email = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
+        TMP_Text personal_exp = personalplayer.transform.GetChild(4).GetComponent<TMP_Text>();
         personal_username.text = $"Username:  {player.username}";
         personal_email.text = $"Email:  {player.email}";
+        personal_exp.text = $"Exp:  {player.exp}";
+
 
         //TMP_Text personal_exp = personalplayer.transform.GetChild(3).GetComponent<TMP_Text>();
         Debug.Log("ok");
