@@ -401,19 +401,38 @@ public class FirestoreClient : MonoBehaviour
 
     public async Task<List<Match>> MatchesHistory()
     {
+        Debug.Log($"Searching for matches with PlayerId = {thisPlayerID}");
         List<Match> matches = new List<Match>();
-        CollectionReference colref = db.Collection("Macth");
-        Query query = colref.WhereEqualTo("PlayerId", thisPlayerID);
-        QuerySnapshot snapshot = await query.GetSnapshotAsync();
-        foreach(var doc in snapshot.Documents)
+
+        try
         {
-            Match match = doc.ConvertTo<Match>();
-            Debug.Log(match.exp);
-            matches.Add(match);
+            CollectionReference colref = db.Collection("Match");
+            Query query = colref.WhereEqualTo("PlayerId", thisPlayerID);
+            QuerySnapshot snapshot = await query.GetSnapshotAsync();
+
+            // Check if any documents were found
+            if (snapshot.Count == 0)
+            {
+                Debug.LogWarning("No matches found for the given PlayerId.");
+            }
+            else
+            {
+                Debug.Log($"Found {snapshot.Count} matches.");
+                foreach (var doc in snapshot.Documents)
+                {
+                    Match match = doc.ConvertTo<Match>();
+                    matches.Add(match);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error fetching match history: {ex.Message}");
         }
 
         return matches;
     }
+
 
     public async void Reject (string userID)
     {

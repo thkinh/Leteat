@@ -326,14 +326,9 @@ namespace Assets.Scripts
             smtpClient.Port = 587;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.Credentials = new NetworkCredential(from, pass);
-            try
-            {
-                smtpClient.Send(message);
-            }
-            catch (Exception ex)
-            {
-                Debug.Log(ex.Message);
-            }
+
+            smtpClient.Send(message);
+
         }
 
         public void SendForgetPassCode(string from, string to, string mail)

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using System;
 
 public class REG_UI_Manager : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class REG_UI_Manager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        verifi_Code = Random.Range(10000, 100000);
+        verifi_Code = UnityEngine.Random.Range(10000, 100000);
         username.onEndEdit.AddListener(delegate { StartCoroutine(CheckUsername()); });
         email.onEndEdit.AddListener(delegate { StartCoroutine(CheckEmail()); });
         password.onEndEdit.AddListener(delegate { CheckPassword(); });
@@ -77,8 +78,17 @@ public class REG_UI_Manager : MonoBehaviour
                           $"To get a new verification code, proceed to the app and enter your email again." +
                           $"This is an auto generated message. If you require assistance, please contact our support team through this email!";
         string email_tosend = email.text;
-        client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
-        SceneManager.LoadSceneAsync("Verification");
+        ShowError("Loading, please wait...");
+        try
+        {
+            client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
+            SceneManager.LoadSceneAsync("Verification");
+        }
+        catch (Exception ex)
+        {
+            ShowError(ex.Message);
+        }
+
     }
 
     private IEnumerator CheckUsername()
