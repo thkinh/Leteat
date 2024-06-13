@@ -35,6 +35,8 @@ public class JoinRoom_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ClientManager.udp_Client?.Start();
+        ClientManager.server?.Start();
         bool isOn = Audio.instance.isCapturing;
         if (isOn)
         {
