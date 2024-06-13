@@ -68,15 +68,13 @@ public class FriendList_Manager : MonoBehaviour
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
         if (player.username != null)
         {
-
-            //else, neu la friend roi
             GameObject friend = Instantiate(friendPrefab, contentHolder);
             Button friendButton = friend.GetComponent<Button>();
             if (friendButton != null)
             {
                 friendButton.onClick.AddListener(() => { 
                     current_object = friend;
-                    PersonalPlayer(player.username);
+                    PersonalPlayerByUserName(player.username);
                 
                 });
             }

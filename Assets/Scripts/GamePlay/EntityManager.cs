@@ -94,7 +94,6 @@ public class EntityManager : MonoBehaviour
 
     public void Spawn_Food(Food food)
     {
-        GameObject ne = Instantiate(Resources.Load<GameObject>(""), left, Quaternion.identity);
         GameObject nf = Instantiate(FoodPrefab[foodlist.LastOrDefault().foodIndex], left, Quaternion.identity);
         Debug.Log($"instantiated {food.foodIndex}");
         nf.AddComponent<RectTransform>();

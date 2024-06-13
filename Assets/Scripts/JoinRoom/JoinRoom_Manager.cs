@@ -35,6 +35,11 @@ public class JoinRoom_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bool isOn = Audio.instance.isCapturing;
+        if (isOn)
+        {
+            mic.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
+        }
     }
 
     // Update is called once per frame
