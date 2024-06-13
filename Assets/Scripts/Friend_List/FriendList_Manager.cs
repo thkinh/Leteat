@@ -64,6 +64,7 @@ public class FriendList_Manager : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
+        personalplayer.transform.GetChild(6).gameObject.SetActive(false);
         Player player = await FirestoreClient.fc_instance.FindPlayer_byName(searchbar.text);
         if (player.username != null)
         {
@@ -96,7 +97,7 @@ public class FriendList_Manager : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
-
+        personalplayer.transform.GetChild(6).gameObject.SetActive(false);
         currentpanel.SetActive(false);
         currentpanel = allfriend;
         allfriend.SetActive(true);
@@ -145,6 +146,7 @@ public class FriendList_Manager : MonoBehaviour
             var unfr_btn = personalplayer.transform.GetChild(6).GetComponent<Button>();
             if (unfr_btn != null)
             {
+                unfr_btn.gameObject.SetActive(true);
                 unfr_btn.onClick.AddListener(() =>
                 {
                     Destroy(current_object);
@@ -208,7 +210,7 @@ public class FriendList_Manager : MonoBehaviour
             {
                 friendButton.onClick.AddListener(() => {
                     PersonalPlayerByUserName(player.username);
-
+                    
                 });
             }
             Button add_btn = friend.transform.GetChild(0).GetComponent<Button>();
@@ -257,6 +259,8 @@ public class FriendList_Manager : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
+        personalplayer.transform.GetChild(6).gameObject.SetActive(false);
+
 
 
         requestlist = await FirestoreClient.fc_instance.RetrieveAllRequests();

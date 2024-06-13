@@ -155,6 +155,7 @@ public class Server : MonoBehaviour
             if (clientKey == 0)
             {
                 EndServer();
+                return;
             }
             clients_list.Remove(client);
             client.Close();
@@ -336,9 +337,10 @@ public class Server : MonoBehaviour
 
     //<sumary> Transfering food between players using ArrangedList
     public void SendPacket(int foodname, TcpClient this_client, bool next)
-    {
+    { 
+        
         int this_client_position = arranged_list.IndexOf(this_client);
-        if (this_client_position == -1)
+        if (this_client_position == -1 || clients_Dict[0] == null)
         {
             //Khong ton tai player
             return;
@@ -350,11 +352,11 @@ public class Server : MonoBehaviour
             packet.Write(foodname);
             packet.WriteLength();
             this_client_position++;
-            if(this_client_position >= arranged_list.Count)
+            if (this_client_position >= arranged_list.Count)
             {
                 this_client_position = 0;
             }
-            clients_list[this_client_position].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+            arranged_list[this_client_position].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
             packet.Dispose();
             return;
         }
@@ -365,11 +367,11 @@ public class Server : MonoBehaviour
             packet.Write(foodname);
             packet.WriteLength();
             this_client_position--;
-            if(this_client_position < 0)
+            if (this_client_position < 0)
             {
                 this_client_position = arranged_list.Count - 1;
             }
-            clients_list[this_client_position].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
+            arranged_list[this_client_position].GetStream().WriteAsync(packet.ToArray(), 0, packet.Length());
             packet.Dispose();
             return;
         }
