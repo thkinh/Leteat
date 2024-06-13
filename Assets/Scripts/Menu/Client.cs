@@ -223,6 +223,7 @@ namespace Assets.Scripts
             catch (Exception ex)
             {
                 Debug.Log(ex.Message);
+                tcpClient.Close();
                 //Debug.Log("Loi xu ly goi tin, khong the nhan dang packet");
             }
         }

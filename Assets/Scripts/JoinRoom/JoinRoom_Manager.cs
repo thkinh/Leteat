@@ -57,7 +57,6 @@ public class JoinRoom_Manager : MonoBehaviour
             if (DropAreaManager.Instance.coderoom.Length == 5)
             {
                 ChangeButtonColor("#00806C");
-                color_changed = true;
             }
         }    
 
@@ -65,6 +64,7 @@ public class JoinRoom_Manager : MonoBehaviour
 
     private void ChangeButtonColor(string hexColor)
     {
+        color_changed = true;
         Image img = joinbutton.gameObject.GetComponent<Image>();
         img.sprite = Resources.Load<Sprite>("Button/yellow");
         TextMeshProUGUI buttonText = joinbutton.GetComponentInChildren<TextMeshProUGUI>();

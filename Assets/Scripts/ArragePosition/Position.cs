@@ -43,16 +43,12 @@ public class Position : MonoBehaviour
         if (number_of_player < i)
         {
             DestroyADisk();
-            TakeList.Clear();
+            FoodList.Clear();
         }
         if (FoodList.Count == number_of_player)
         {
             ChangeButtonColor("#00806C");
             iscorrect = true;
-        }
-        if (!Server.server_instance.started)
-        {
-            OnDestroy();
         }
     }
 
@@ -123,10 +119,14 @@ public class Position : MonoBehaviour
         isOn = !isOn;
         if (isOn)
         {
+            voiceToggle.GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
+
+
             Audio.instance.TurnOnMic();
         }
         else 
         {
+            voiceToggle.GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-off");
             Audio.instance.TurnOffMic();
         }
         
