@@ -155,21 +155,37 @@ public class Server : MonoBehaviour
         try
         {
             var clientKey = clients_Dict.FirstOrDefault(x => x.Value == client).Key;
+
+            // Check if clientKey is default value (null for reference types, 0 for value types like int)
             if (clientKey == 0)
             {
+                Debug.Log("Client key is 0, ending server.");
                 EndServer();
                 return;
             }
-            clients_list.Remove(client);
-            clients_Dict.Remove(clientKey);
-            if(client != null)
+
+            // Close the client connection if it is still connected
+            if (client != null && client.Connected)
             {
                 client.Close();
             }
-            client.GetStream().Close();
+
+            // Remove the client from all lists and dictionaries
+            clients_list.Remove(client);
+            clients_Dict.Remove(clientKey);
+            arranged_list.Remove(client);
+
+            // Log the disconnection
+            Debug.Log($"Client {clientKey} disconnected. Removed from all lists.");
+
+            // Announce the quit to the host if there are remaining clients
             if (clients_Dict.Count > 0)
             {
-                Send_Announce_for_quit(clients_Dict.First().Value); // send quit announce to host
+                Send_Announce_for_quit(clients_Dict.First().Value);
+            }
+            else
+            {
+                Debug.Log("No remaining clients to announce.");
             }
         }
         catch (Exception ex)
@@ -177,6 +193,7 @@ public class Server : MonoBehaviour
             Debug.LogError($"Error in HandleClientDisconnection: {ex.Message}");
         }
     }
+
 
     private string HandlePacket(byte[] _packet, int length, TcpClient this_client)
     {
@@ -224,25 +241,27 @@ public class Server : MonoBehaviour
                     return $"A player disconnected, sent a packet announce to host";
                 }
             }
-            else if (packet.ReadString() == "Arranged")
+            else if (packet.ReadString() == "ArrangedList")
             {
+                Debug.Log("Arrange packet");
                 for (int i = 0; i < attending; i++)
                 {
                     int food = packet.ReadInt();
-                    if (clients_Dict[food] != null)
+                    Debug.Log($"Food {i} = {food}");
+                    if (clients_Dict[food] == null)
                     {
                         continue;
                     }
                     arranged_list.Add(clients_Dict[food]);
                 }
-                Debug.Log("Arranged");
                 foreach (TcpClient client in clients_list)
                 {
-                      SendStartPacket(client, true);
+                    SendStartPacket(client, true);
                     // Send start packet to all clients
                 }
                 return $"Sent a start signal to all players";
             }
+
             return $"Packet's length is unknown {len}, this type of packet doesn't exist";
         }
         catch (Exception ex)

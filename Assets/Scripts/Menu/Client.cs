@@ -106,9 +106,8 @@ namespace Assets.Scripts
         public void Dispose()
         {
             lobbyId = null;
-            tcpClient.Close();
-            tcpClient = null;
-            stream = null;
+            tcpClient?.Close();
+            stream?.Close();
             number_of_players = 0;
             isHost = false;
             isClient = false;
@@ -161,7 +160,6 @@ namespace Assets.Scripts
                 {
                     Debug.Log("Loi khi nhan packet, server da dong");
                     tcpClient.Close();
-                    Dispose();
                     //Debug.Log(ex.Message.ToString());
                 }
             }
@@ -231,6 +229,7 @@ namespace Assets.Scripts
             catch (Exception ex)
             {
                 Debug.Log(ex.Message);
+                Dispose();
                 //Debug.Log("Loi xu ly goi tin, khong the nhan dang packet");
             }
 
@@ -298,7 +297,7 @@ namespace Assets.Scripts
             {
                 using (Packet packet = new Packet())
                 {
-                    packet.Write("Arranged");
+                    packet.Write("ArrangedList");
                     foreach (int code in data)
                     {
                         packet.Write(code);

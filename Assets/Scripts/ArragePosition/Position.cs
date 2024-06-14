@@ -76,14 +76,6 @@ public class Position : MonoBehaviour
         Debug.Log(disks[i].name);
         i++;
     }
-    public void DestroyADisk()
-    {
-        disks[i].SetActive(false);
-        TakeList.Remove(disks[i]);
-        i--;
-        Debug.Log("A player disconnected");
-        
-    }
 
     public void Send_StartPacket()
     {
@@ -94,7 +86,12 @@ public class Position : MonoBehaviour
 
     public void SendArrangeList()
     {
-        ClientManager.client.SendPacket_of_Arrange(FoodList.ToArray());
+        List<int> arrangedList = new List<int>();
+        for(int k = 0; k < number_of_player; k++)
+        {
+            arrangedList.Add(FoodList[k]);
+        }
+        ClientManager.client.SendPacket_of_Arrange(arrangedList.ToArray());
     }
 
     public void PlayClick()

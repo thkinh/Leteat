@@ -82,12 +82,12 @@ public class JoinRoom_Manager : MonoBehaviour
     public void EscapeLobby()
     {
         Audio.instance.End();
-        ClientManager.client?.SendPacket(505);
+        //ClientManager.client?.SendPacket(505);
         loading_panel.SetActive(false);
         joined = false;
         notloaded = true;
         Can_play = false;
-        ClientManager.client?.Dispose();
+        ClientManager.client.Dispose();
         ClientManager.udp_Client?.Stop();
         ClientManager.server?.Stop();
     }
