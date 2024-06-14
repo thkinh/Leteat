@@ -178,7 +178,10 @@ namespace Assets.Scripts
                 {
                     Debug.Log("Connect stopped");
                     tcpClient.Close();
-                    EntityManager.instance.time_control.GetComponent<TimerCotroller>().isover = true;
+                    if(EntityManager.instance!=null)
+                    {
+                        EntityManager.instance.time_control.GetComponent<TimerCotroller>().isover = true;
+                    }
                 }
 
                 if (lenght == 4) //received a packet of only data of food
@@ -219,12 +222,17 @@ namespace Assets.Scripts
                     }
                 }
             }
+            catch (ObjectDisposedException)
+            {
+                Debug.Log("ODE - ObjectDisposedException caught.");
+                // Ignore this exception, it occurs when the UdpClient is closed
+            }
             catch (Exception ex)
             {
                 Debug.Log(ex.Message);
-                tcpClient.Close();
                 //Debug.Log("Loi xu ly goi tin, khong the nhan dang packet");
             }
+
         }
 
         public void SendPacket(string message)
@@ -273,7 +281,13 @@ namespace Assets.Scripts
             {
                 packet.Write(data);
                 packet.WriteLength();
-                stream.WriteAsync(packet.ToArray(), 0, packet.Length());
+                try {
+                    stream.WriteAsync(packet.ToArray(), 0, packet.Length());
+                }
+                catch {
+                    Debug.Log("Khong the gui packet");
+                }
+                
             }
         }
 
