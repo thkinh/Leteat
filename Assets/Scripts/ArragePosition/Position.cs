@@ -124,17 +124,18 @@ public class Position : MonoBehaviour
         isOn = !isOn;
         if (isOn)
         {
+            Debug.Log("Opening mic");
             voiceToggle.GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-on");
-
-
-            Audio.instance.TurnOnMic();
+            Audio.instance?.TurnOnMic();
         }
-        else 
+        if (!isOn)
         {
+            Debug.Log("Turned off mic");
+
             voiceToggle.GetComponent<Image>().sprite = Resources.Load<Sprite>("Button/mic-off");
-            Audio.instance.TurnOffMic();
+            Audio.instance?.TurnOffMic();
         }
-        
+
     }
 
     private void OnDestroy()

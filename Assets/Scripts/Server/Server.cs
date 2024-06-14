@@ -86,6 +86,7 @@ public class Server : MonoBehaviour
         {
             client.Close();
         }
+        clients_list.Clear();
         clients_Dict.Clear();
         arranged_list.Clear();
         attending = 0;
@@ -140,11 +141,14 @@ public class Server : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError($"Error handling client: {ex.Message}");
-            client.Close();
+            if (client != null)
+            {
+                client.Close();
+            }
         }
         finally
         {
-            HandleClientDisconnection(client);
+            Debug.LogError("This client disconnected unexpectedly");
         }
     }
 
@@ -159,7 +163,10 @@ public class Server : MonoBehaviour
                 return;
             }
             clients_list.Remove(client);
-            client.Close();
+            if(client != null)
+            {
+                client.Close();
+            }
             if (clients_Dict.Count > 0)
             {
                 Send_Announce_for_quit(clients_Dict.First().Value); // send quit announce to host
@@ -227,10 +234,7 @@ public class Server : MonoBehaviour
                 Debug.Log("Arranged");
                 foreach (TcpClient client in clients_list)
                 {
-                    if(client != null)
-                    {
-                        SendStartPacket(client, true);
-                    }
+                      SendStartPacket(client, true);
                     // Send start packet to all clients
                 }
                 return $"Sent a start signal to all players";

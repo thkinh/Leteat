@@ -82,7 +82,6 @@ public class Udp_client
     {
         try
         {
-            Debug.Log("Processing received data.");
             Audio.instance.waveProvider.AddSamples(data, 0, data.Length);
         }
         catch (Exception ex)

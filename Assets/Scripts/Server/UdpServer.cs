@@ -60,13 +60,15 @@ public class UdpServer
 
     private void Broadcast(byte[] data, IPEndPoint senderEndpoint)
     {
+        Debug.Log($"Processing received data from {senderEndpoint}");
         foreach (var client in clients)
         {
             //udp_server.SendAsync(data, data.Length, client);
 
             if (!client.Equals(senderEndpoint)) // Don't send back to the sender
             {
-                udp_server.SendAsync(data, data.Length, client);
+                
+                udp_server.SendAsync(data, data.Length, client);    
             }
         }
     }
