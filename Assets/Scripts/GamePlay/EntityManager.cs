@@ -53,7 +53,8 @@ public class EntityManager : MonoBehaviour
 
         if (foodlist.Count > current_food_count)
         {
-            Spawn_Food(foodlist[current_food_count++]);
+            Spawn_Food(foodlist[current_food_count]);
+            current_food_count++;
         }
         timer += Time.deltaTime;
         if (timer - previous_time > 3)
@@ -94,13 +95,12 @@ public class EntityManager : MonoBehaviour
 
     public void Spawn_Food(Food food)
     {
-        GameObject nf = Instantiate(FoodPrefab[foodlist.LastOrDefault().foodIndex], left, Quaternion.identity);
+        GameObject nf = Instantiate(FoodPrefab[food.foodIndex], left, Quaternion.identity);
         Debug.Log($"instantiated {food.foodIndex}");
         nf.AddComponent<RectTransform>();
-        nf.AddComponent<DragableItem>();
         var drag = nf.GetComponent<DragableItem>();
         drag.SetVelo(new Vector2(960, 540).normalized * 3);
-        
+        nf.GetComponent<DragableItem>().idFood = food.foodIndex;
     }
 
     public void UpdateScore()
