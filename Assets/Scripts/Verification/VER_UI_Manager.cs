@@ -17,8 +17,17 @@ public class VER_UI_Manager : MonoBehaviour
     public GameObject confirmbutton;
     public TMP_Text textComponent;
     private bool iscorrect = false;
+    public float time;
     private void Update()
     {
+        time += Time.deltaTime;
+        if (time > 120)
+        {
+            REG_UI_Manager.verifi_Code = UnityEngine.Random.Range(10000, 100000);
+            ShowError("Your verification code has been changed. Please try again!");
+            time = 0;
+        }
+
         if (iscorrect == true)
         {
             ChangeButtonColor("#00806C");
@@ -28,7 +37,7 @@ public class VER_UI_Manager : MonoBehaviour
     {
         if (verifi_Code.text != REG_UI_Manager.verifi_Code.ToString())
         {
-            ShowError("The verify code you entered is incorrect. Please try again!");
+            ShowError("The verify code you entered is invalid. Please try again!");
             iscorrect = false;
             return false;
         }

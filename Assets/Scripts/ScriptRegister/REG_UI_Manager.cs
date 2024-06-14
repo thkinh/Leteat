@@ -21,8 +21,7 @@ public class REG_UI_Manager : MonoBehaviour
     private string text;
     private string mail;
     private bool iscorrect = false;
-   // public string message = string.Empty;
-
+    // public string message = string.Empty;
     Client client = new Client();
 
     public static int verifi_Code = 0;
@@ -69,7 +68,7 @@ public class REG_UI_Manager : MonoBehaviour
     }
     private void Send()
     {
-
+        ShowError("Loading, please wait...");
         iscorrect = true;
          mail = $"Let Eat Verification Code \n" +
                           $"Hello {username.text}, this is your verification code to verify: \n" +
@@ -78,7 +77,6 @@ public class REG_UI_Manager : MonoBehaviour
                           $"To get a new verification code, proceed to the app and enter your email again." +
                           $"This is an auto generated message. If you require assistance, please contact our support team through this email!";
         string email_tosend = email.text;
-        ShowError("Loading, please wait...");
         try
         {
             client.SendRegisterCode("doanmangnhom12@gmail.com", email_tosend, mail);
