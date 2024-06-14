@@ -216,7 +216,6 @@ namespace Assets.Scripts
                     else if (signal == "Player Quit")
                     {
                         number_of_players--;
-                        Position.number_of_player = number_of_players;
                     }
                 }
             }

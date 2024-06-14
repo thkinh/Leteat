@@ -140,6 +140,7 @@ public class Server : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError($"Error handling client: {ex.Message}");
+            client.Close();
         }
         finally
         {
@@ -159,10 +160,6 @@ public class Server : MonoBehaviour
             }
             clients_list.Remove(client);
             client.Close();
-
-            Position.number_of_player--;
-            Debug.Log("Removed a player from the list");
-
             if (clients_Dict.Count > 0)
             {
                 Send_Announce_for_quit(clients_Dict.First().Value); // send quit announce to host
@@ -230,7 +227,10 @@ public class Server : MonoBehaviour
                 Debug.Log("Arranged");
                 foreach (TcpClient client in clients_list)
                 {
-                    SendStartPacket(client, true);
+                    if(client != null)
+                    {
+                        SendStartPacket(client, true);
+                    }
                     // Send start packet to all clients
                 }
                 return $"Sent a start signal to all players";
@@ -251,6 +251,13 @@ public class Server : MonoBehaviour
         while (true)
         {
             TcpClient client = await listener.AcceptTcpClientAsync();
+
+            if(attending == 5)
+            {
+                Debug.Log("Qua so nguoi choi");
+                return;
+            }
+
 
             //Ket noi xong, gui? goi tin hello den client
             if (client.Connected)

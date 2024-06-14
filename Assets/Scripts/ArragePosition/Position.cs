@@ -28,22 +28,27 @@ public class Position : MonoBehaviour
         int id = ClientManager.client.id;
         ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
         number_of_player = ClientManager.client.number_of_players; //host included
+        Debug.Log($"number of player is : {number_of_player}");
+        if( number_of_player < 2 )
+        {
+            Back_toPrevious();
+        }
+        for(int j = 0; j < number_of_player; j++)
+        {
+            NewDisk();
+        }
     }
 
     public void Update()
     {
+        number_of_player = ClientManager.client.number_of_players;
         if (play)
         {
             SceneManager.LoadScene("Playing");
         }
-        if (number_of_player > i)
+        if (number_of_player != i)
         {
-            NewDisk();
-        }
-        if (number_of_player < i)
-        {
-            DestroyADisk();
-            FoodList.Clear();
+            SceneManager.LoadScene("Arrange");
         }
         if (FoodList.Count == number_of_player)
         {

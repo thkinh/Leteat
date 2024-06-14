@@ -36,7 +36,6 @@ public class JoinRoom_Manager : MonoBehaviour
     void Start()
     {
         ClientManager.udp_Client?.Start();
-        ClientManager.server?.Start();
         bool isOn = Audio.instance.isCapturing;
         if (isOn)
         {
@@ -89,8 +88,8 @@ public class JoinRoom_Manager : MonoBehaviour
         notloaded = true;
         Can_play = false;
         ClientManager.client?.Dispose();
-        ClientManager.udp_Client.Stop();
-        ClientManager.server.Stop();
+        ClientManager.udp_Client?.Stop();
+        ClientManager.server?.Stop();
     }
     public void MicEvent()
     {
