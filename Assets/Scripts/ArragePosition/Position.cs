@@ -25,6 +25,8 @@ public class Position : MonoBehaviour
 
     public void Start()
     {
+        FoodList.Clear();
+        TakeList.ForEach(t => { t.GetComponent<Image>().sprite = null; });
         int id = ClientManager.client.id;
         ID.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Food/{new Food(id).fname}");
         number_of_player = ClientManager.client.number_of_players; //host included
@@ -60,6 +62,8 @@ public class Position : MonoBehaviour
     public void Back_toPrevious()
     {
         ClientManager.client?.Dispose();
+        ClientManager.udp_Client.Stop();
+        ClientManager.server.Stop();
         Server.server_instance?.EndServer();
         SceneManager.LoadScene("Choose cr or join");
     }

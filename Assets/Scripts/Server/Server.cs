@@ -141,14 +141,12 @@ public class Server : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError($"Error handling client: {ex.Message}");
-            if (client != null)
-            {
-                client.Close();
-            }
+            HandleClientDisconnection(client);
         }
         finally
         {
             Debug.LogError("This client disconnected unexpectedly");
+            HandleClientDisconnection(client);
         }
     }
 
@@ -163,10 +161,12 @@ public class Server : MonoBehaviour
                 return;
             }
             clients_list.Remove(client);
+            clients_Dict.Remove(clientKey);
             if(client != null)
             {
                 client.Close();
             }
+            client.GetStream().Close();
             if (clients_Dict.Count > 0)
             {
                 Send_Announce_for_quit(clients_Dict.First().Value); // send quit announce to host
@@ -229,6 +229,10 @@ public class Server : MonoBehaviour
                 for (int i = 0; i < attending; i++)
                 {
                     int food = packet.ReadInt();
+                    if (clients_Dict[food] != null)
+                    {
+                        continue;
+                    }
                     arranged_list.Add(clients_Dict[food]);
                 }
                 Debug.Log("Arranged");

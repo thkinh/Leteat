@@ -106,8 +106,9 @@ namespace Assets.Scripts
         public void Dispose()
         {
             lobbyId = null;
-            tcpClient?.Dispose();
-            smtpClient?.Dispose();
+            tcpClient.Close();
+            tcpClient = null;
+            stream = null;
             number_of_players = 0;
             isHost = false;
             isClient = false;
@@ -124,7 +125,7 @@ namespace Assets.Scripts
                 SceneManager.LoadScene("CreateLobby");
                 return;
             }
-            tcpClient.Dispose();
+            tcpClient.Close();
         }
 
         //Reset de choi them tran nua trong cung 1 lobby

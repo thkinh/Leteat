@@ -81,7 +81,7 @@ public class JoinRoom_Manager : MonoBehaviour
 
     public void EscapeLobby()
     {
-        Audio.instance.TurnOffMic();
+        Audio.instance.End();
         ClientManager.client?.SendPacket(505);
         loading_panel.SetActive(false);
         joined = false;
