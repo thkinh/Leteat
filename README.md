@@ -1,7 +1,7 @@
 # Leteat
 [Đọc bằng tiếng Việt](README_vi.md)
 ## Overview
-Leteat is a student project developed by Đinh Vũ Tiến Thịnh, Phạm Gia Linh, Đoàn Thị Khánh Linh, and Trần Văn Thuận. This project is part of a course assignment, showcasing skills in C# .NET socket programming.
+Leteat is a student project developed by Đinh Vũ Tiến Thịnh, Phạm Gia Linh, Đoàn Thị Khánh Linh, and Trần Văn Thuận. This project is part of a course assignment, showcasing skills in C# .NET socket programming and Unity.
 
 ## Features
 - **Gameplay**: Based on a mobile game named Family Style.
